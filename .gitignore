@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+instagram2027/
+
+# Secrets
+.env
+.env.*
+*.session
+*.session-*
+session-*
+cookies*
+secrets*
+
+# Crawler backups
+*.bak
+*.backup
+*.patch_backup
+*.pre_main_patch
+*.before_resume_patch
+*.session_backup
+*.auth_backup
+
+# Logs
+*.log
+data/crawl_log.txt
+
+# Model binaries
+*.joblib
+*.pkl
+*.pickle
+*.safetensors
+*.pt
+*.pth
+
+# Generated outputs
+output/
+models/
+shap/
+network/
+
+# Python cache anywhere
+**/__pycache__/
+**/*.pyc
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
