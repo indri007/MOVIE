@@ -59,3 +59,34 @@ models/viral_model/*
 .DS_Store
 .vscode/
 .idea/
+
+# ─────────────────────────────────────────────
+# LARGE DATA & BINARY ASSETS  (not tracked in git)
+# ─────────────────────────────────────────────
+
+# External datasets (9.7GB – use Git LFS or DVC if needed)
+data/external/
+
+# Output parquets & heavy files (keep only sample CSVs)
+output/*.parquet
+output/*.joblib
+output/*.pkl
+
+# Scrapers (cloned repos – install via requirements.txt / separate clone)
+scrapers/
+
+# Reference repos
+repos/
+
+# Video / image / archive assets
+*.mp4
+*.avi
+*.mov
+*.zip
+*.7z
+*.tar.gz
+*.xlsx
+*.ipynb
+
+# Parquet files anywhere (keep code, not binaries)
+*.parquet
