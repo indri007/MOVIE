@@ -1,0 +1,164 @@
+{
+  "status": "AVAILABLE",
+  "input_records": 1000,
+  "engineered_feature_columns": [
+    "char_count",
+    "word_count",
+    "avg_word_length",
+    "exclamation_count",
+    "question_count",
+    "digit_count",
+    "uppercase_count",
+    "uppercase_ratio",
+    "lexical_diversity",
+    "pos_word_count",
+    "neg_word_count",
+    "net_sentiment_score"
+  ],
+  "tfidf_vocabulary_size": 3000,
+  "summary_statistics": {
+    "char_count": {
+      "count": 1000.0,
+      "mean": 246.269,
+      "std": 96.298,
+      "min": 90.0,
+      "25%": 176.0,
+      "50%": 222.5,
+      "75%": 285.0,
+      "max": 500.0
+    },
+    "word_count": {
+      "count": 1000.0,
+      "mean": 39.177,
+      "std": 15.414,
+      "min": 13.0,
+      "25%": 28.0,
+      "50%": 35.5,
+      "75%": 47.0,
+      "max": 87.0
+    },
+    "avg_word_length": {
+      "count": 1000.0,
+      "mean": 6.326,
+      "std": 0.603,
+      "min": 4.82,
+      "25%": 5.89,
+      "50%": 6.29,
+      "75%": 6.73,
+      "max": 8.32
+    },
+    "exclamation_count": {
+      "count": 1000.0,
+      "mean": 0.364,
+      "std": 1.21,
+      "min": 0.0,
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 0.0,
+      "max": 13.0
+    },
+    "question_count": {
+      "count": 1000.0,
+      "mean": 0.31,
+      "std": 0.88,
+      "min": 0.0,
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 0.0,
+      "max": 10.0
+    },
+    "digit_count": {
+      "count": 1000.0,
+      "mean": 0.635,
+      "std": 1.578,
+      "min": 0.0,
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 1.0,
+      "max": 20.0
+    },
+    "uppercase_count": {
+      "count": 1000.0,
+      "mean": 4.452,
+      "std": 9.929,
+      "min": 0.0,
+      "25%": 1.0,
+      "50%": 2.0,
+      "75%": 4.0,
+      "max": 113.0
+    },
+    "uppercase_ratio": {
+      "count": 1000.0,
+      "mean": 0.017,
+      "std": 0.033,
+      "min": 0.0,
+      "25%": 0.004,
+      "50%": 0.009,
+      "75%": 0.018,
+      "max": 0.325
+    },
+    "lexical_diversity": {
+      "count": 1000.0,
+      "mean": 0.856,
+      "std": 0.082,
+      "min": 0.557,
+      "25%": 0.8,
+      "50%": 0.857,
+      "75%": 0.917,
+      "max": 1.0
+    },
+    "pos_word_count": {
+      "count": 1000.0,
+      "mean": 0.447,
+      "std": 0.668,
+      "min": 0.0,
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 1.0,
+      "max": 3.0
+    },
+    "neg_word_count": {
+      "count": 1000.0,
+      "mean": 0.613,
+      "std": 0.752,
+      "min": 0.0,
+      "25%": 0.0,
+      "50%": 0.0,
+      "75%": 1.0,
+      "max": 4.0
+    },
+    "net_sentiment_score": {
+      "count": 1000.0,
+      "mean": -0.166,
+      "std": 1.037,
+      "min": -4.0,
+      "25%": -1.0,
+      "50%": 0.0,
+      "75%": 0.0,
+      "max": 3.0
+    }
+  },
+  "sample_top_terms": [
+    "10",
+    "100",
+    "11",
+    "15",
+    "15 detik",
+    "16",
+    "18",
+    "1x",
+    "2024",
+    "90",
+    "abis",
+    "abis itu",
+    "acc",
+    "account",
+    "ad",
+    "ad fitur",
+    "ada",
+    "ada arsip",
+    "ada bacaan",
+    "ada beberapa"
+  ],
+  "output_file": "/Users/jevin/instagramindonesia/output/features_engineered.csv"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "MISSING",
+  "exists": true,
+  "path": "/Users/jevin/instagramindonesia/models/indobert",
+  "files_count": 0,
+  "artifacts_found": [],
+  "target_architecture": "indobenchmark/indobert-base-p1",
+  "reason": "Local model weights not found in models/indobert/. Automatic heavy downloads are disabled to preserve data fidelity.",
+  "deployment_guide": "To deploy IndoBERT: place fine-tuned weights or run offline checkpoint extraction into models/indobert/ with config.json and pytorch_model.bin / model.safetensors."
+}

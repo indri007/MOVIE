@@ -10,7 +10,7 @@ venv/
 env/
 instagram2027/
 
-# Secrets
+# Secrets & Sessions
 .env
 .env.*
 *.session
@@ -18,8 +18,10 @@ instagram2027/
 session-*
 cookies*
 secrets*
+*credential*
+*token*
 
-# Crawler backups
+# Crawler backups & temp files
 *.bak
 *.backup
 *.patch_backup
@@ -27,24 +29,27 @@ secrets*
 *.before_resume_patch
 *.session_backup
 *.auth_backup
+API
+Create
+Settings
+ganti
 
 # Logs
 *.log
 data/crawl_log.txt
 
-# Model binaries
+# Large Model Binaries & Checkpoints (preserves repository speed)
 *.joblib
 *.pkl
 *.pickle
 *.safetensors
 *.pt
 *.pth
-
-# Generated outputs
-output/
-models/
-shap/
-network/
+output/bertopic_model
+models/indobert/*
+!models/indobert/.gitkeep
+models/viral_model/*
+!models/viral_model/.gitkeep
 
 # Python cache anywhere
 **/__pycache__/
