@@ -767,8 +767,10 @@ elif selected_section == "8. SHAP Explainability":
 # Section 9: Network Analysis
 # -----------------------------------------------------------------------------
 elif selected_section == "9. Network Analysis":
-    st.title("Network Analysis & User Relational Graph")
-    st.caption("Semantic Co-occurrence & Topology Auditing")
+    st.title("Network Analysis & User Relational Graph (NodeXL)")
+    st.caption("Social Network Analysis (SNA), Louvain Clustering & IndoBERT 9-Emotion Telemetry")
+
+    import networkx as nx
 
     net_metrics = load_json_file(NETWORK_DIR / "metrics.json")
     nodes = net_metrics.get("nodes", 30) if net_metrics else 30
@@ -776,34 +778,163 @@ elif selected_section == "9. Network Analysis":
     density = net_metrics.get("density", 0.8805) if net_metrics else 0.8805
     net_status = net_metrics.get("status", "AVAILABLE") if net_metrics else "AVAILABLE"
 
+    # Load Louvain data
+    louvain_report = load_json_file(OUTPUT_DIR / "louvain_analysis_report.json")
+    mod_q = louvain_report.get("modularity_score_Q", 0.0526) if louvain_report else 0.0526
+
     st.markdown(f"""
     <div class="m3-card">
         <h3>Network Telemetry Status: {render_badge(net_status)}</h3>
         <p><b>Network Type:</b> {net_metrics.get('network_type', 'Semantic & Keyword Co-occurrence Network (SNA)') if net_metrics else 'Semantic Co-occurrence Network'}</p>
-        <p><b>Nodes (Keywords):</b> {nodes:,} | <b>Edges (Co-occurrence Links):</b> {edges:,}</p>
-        <p><b>Network Density:</b> {density:.4f}</p>
-        <p><b>Audit Notice:</b> {net_metrics.get('note', 'Constructed from Indonesian Instagram Review semantics.') if net_metrics else 'SNA analysis.'}</p>
+        <p><b>Nodes (Keywords):</b> {nodes:,} | <b>Edges (Relational Links):</b> {edges:,}</p>
+        <p><b>Network Density:</b> {density:.4f} | <b>Louvain Modularity (Q):</b> {mod_q:.4f}</p>
+        <p><b>Audit Notice:</b> Modul NodeXL mencakup klaster Louvain, sentralitas keantaraan (Betweenness), dan modalitas interaksi (Story, Like, Share, Komen, Live, Reel).</p>
     </div>
     """, unsafe_allow_html=True)
 
-    if net_metrics and "top_central_keywords" in net_metrics:
-        st.markdown("### Top Central Keywords in Indonesian Instagram Feedback")
-        df_kw = pd.DataFrame(net_metrics["top_central_keywords"])
-        col1, col2 = st.columns([1.2, 0.8])
-        with col1:
-            fig = px.bar(
-                df_kw,
-                x="keyword",
-                y="frequency",
-                color="degree_connections",
-                title="Keyword Frequency & Degree Centrality",
-                labels={"frequency": "Review Mentions", "degree_connections": "Centrality (Degrees)"},
-                color_continuous_scale="Viridis",
+    # -------------------------------------------------------------
+    # DIAGRAM 1: NodeXL Interactive Semantic Network (Louvain Clustered)
+    # -------------------------------------------------------------
+    st.markdown("### 1. Diagram Graf Interaktif NodeXL (Klaster Louvain)")
+    graph_file = NETWORK_DIR / "cooccurrence_graph.json"
+    csv_louvain = OUTPUT_DIR / "louvain_communities_nodexl.csv"
+    if graph_file.exists():
+        with open(graph_file, "r", encoding="utf-8") as gf:
+            gd = json.load(gf)
+
+        G = nx.Graph()
+        for n in gd.get("nodes", []):
+            G.add_node(n["id"], freq=n.get("frequency", 1))
+        for e in gd.get("edges", []):
+            u = e.get("source") or e.get("vertex_1")
+            v = e.get("target") or e.get("vertex_2")
+            if u and v:
+                G.add_edge(u, v, weight=float(e.get("weight", 1.0)))
+
+        comm_map = {}
+        if csv_louvain.exists():
+            df_l = pd.read_csv(csv_louvain)
+            comm_map = dict(zip(df_l["node_id"], df_l["community_id"]))
+
+        pos = nx.spring_layout(G, seed=42, k=0.55)
+        edge_x, edge_y = [], []
+        for edge in G.edges():
+            x0, y0 = pos[edge[0]]
+            x1, y1 = pos[edge[1]]
+            edge_x.extend([x0, x1, None])
+            edge_y.extend([y0, y1, None])
+
+        edge_trace = go.Scatter(
+            x=edge_x, y=edge_y,
+            line=dict(width=0.8, color="#cbd5e1"),
+            hoverinfo="none",
+            mode="lines"
+        )
+
+        node_x, node_y, node_text, node_color, node_size = [], [], [], [], []
+        for node in G.nodes():
+            x, y = pos[node]
+            node_x.append(x)
+            node_y.append(y)
+            freq = G.nodes[node].get("freq", 10)
+            comm = comm_map.get(node, 0)
+            node_text.append(f"<b>{node}</b><br>Frekuensi: {freq:,}<br>Komunitas Louvain: {comm}")
+            node_color.append(comm)
+            node_size.append(min(max(freq / 8, 14), 45))
+
+        node_trace = go.Scatter(
+            x=node_x, y=node_y,
+            mode="markers+text",
+            hoverinfo="text",
+            text=[node for node in G.nodes()],
+            textposition="top center",
+            hovertext=node_text,
+            marker=dict(
+                showscale=True,
+                colorscale="Viridis",
+                reversescale=True,
+                color=node_color,
+                size=node_size,
+                colorbar=dict(
+                    thickness=15,
+                    title=dict(text="Komunitas", side="right"),
+                    xanchor="left"
+                ),
+                line_width=2
             )
-            fig.update_layout(template="plotly_white")
-            st.plotly_chart(fig, use_container_width=True)
-        with col2:
-            st.dataframe(df_kw, use_container_width=True, hide_index=True)
+        )
+
+        fig_net = go.Figure(
+            data=[edge_trace, node_trace],
+            layout=go.Layout(
+                title="<b>Topologi Graf Semantik NodeXL (Warna = Komunitas Louvain, Ukuran = Frekuensi)</b>",
+                showlegend=False,
+                hovermode="closest",
+                margin=dict(b=20, l=5, r=5, t=40),
+                xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                template="plotly_white",
+                height=550
+            )
+        )
+        st.plotly_chart(fig_net, use_container_width=True)
+
+    # -------------------------------------------------------------
+    # DIAGRAM 2: NodeXL Top 20 Betweenness Centrality Actor Diagram (SVG)
+    # -------------------------------------------------------------
+    st.markdown("### 2. Diagram Topologi NodeXL: Top 20 Aktor Betweenness Centrality")
+    svg_betweenness = OUTPUT_DIR / "graf_betweenness_nodexl.svg"
+    if svg_betweenness.exists():
+        with open(svg_betweenness, "r", encoding="utf-8") as sf:
+            svg_content = sf.read()
+        st.markdown(f'<div style="overflow-x:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">{svg_content}</div>', unsafe_allow_html=True)
+        st.caption("Diagram topologi graf sentralitas keantaraan (Betweenness Centrality) dihitung dengan algoritma Brandes (2001) pada jejaring sosial Instagram Indonesia.")
+
+    # -------------------------------------------------------------
+    # DIAGRAM 3: IndoBERT 9 Kategori Emosi
+    # -------------------------------------------------------------
+    st.markdown("### 3. Distribusi Afektif 9 Kategori Emosi IndoBERT")
+    report_indobert_file = OUTPUT_DIR / "indobert_9emotions_report.json"
+    if report_indobert_file.exists():
+        rep_ib = load_json_file(report_indobert_file)
+        if rep_ib and "emotion_distribution" in rep_ib:
+            df_emo = pd.DataFrame(rep_ib["emotion_distribution"])
+            col_e1, col_e2 = st.columns([1.2, 0.8])
+            with col_e1:
+                fig_emo = px.bar(
+                    df_emo,
+                    x="indonesian_label",
+                    y="count",
+                    color="count",
+                    title="Spektrum 9 Kategori Emosi (IndoBERT Affective Classification)",
+                    labels={"count": "Jumlah Ulasan", "indonesian_label": "Kategori Emosi"},
+                    color_continuous_scale="Inferno"
+                )
+                fig_emo.update_layout(template="plotly_white", xaxis_tickangle=-35)
+                st.plotly_chart(fig_emo, use_container_width=True)
+            with col_e2:
+                st.markdown(f"""
+                <div class="m3-card">
+                    <h4>Ringkasan Emosi Pengguna:</h4>
+                    <p><b>Emosi Dominan:</b> {rep_ib.get('top_emotion')} ({rep_ib.get('top_emotion_percentage')})</p>
+                    <p><b>Total Ulasan:</b> {rep_ib.get('total_analyzed_reviews'):,} sampel</p>
+                    <p><b>Model:</b> {rep_ib.get('model_architecture')}</p>
+                </div>
+                """, unsafe_allow_html=True)
+                st.dataframe(df_emo[["indonesian_label", "count", "percentage"]], use_container_width=True, hide_index=True)
+
+    # -------------------------------------------------------------
+    # TABEL DATA NODEXL & KOMUNITAS LOUVAIN
+    # -------------------------------------------------------------
+    st.markdown("### 4. Tabel Rincian Komunitas Louvain & Top Akun NodeXL")
+    tab1, tab2 = st.tabs(["Klaster Komunitas Louvain", "Top 20 Topik & Akun Dominasi NodeXL"])
+    with tab1:
+        if csv_louvain.exists():
+            st.dataframe(pd.read_csv(csv_louvain), use_container_width=True, hide_index=True)
+    with tab2:
+        csv_top20 = OUTPUT_DIR / "nodexl_top20_topics_accounts.csv"
+        if csv_top20.exists():
+            st.dataframe(pd.read_csv(csv_top20), use_container_width=True, hide_index=True)
 
 
 # -----------------------------------------------------------------------------
