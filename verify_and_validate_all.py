@@ -157,7 +157,8 @@ def test_bit_integrity():
         ("output/nodexl_20_functions_bit.txt", 7424),
         ("output/scopus_q1_scientific_bit.txt", 9304),
         ("output/elsevier_kpi_formulas_bit.txt", 8840),
-        ("output/scopus_q1_journal_bit.txt", 24280)
+        ("output/scopus_q1_journal_bit.txt", 24280),
+        ("output/repo_history_story_bit.txt", 63288)
     ]
     
     all_passed = True
@@ -201,10 +202,14 @@ def test_scopus_q1_journal_and_downloads():
         ("Word DOCX Manuscript", "output/scopus_q1_journal_manuscript.docx"),
         ("Markdown Manuscript", "output/scopus_q1_journal_manuscript.md"),
         ("8-Bit Binary Stream", "output/scopus_q1_journal_bit.txt"),
+        ("Repo Story Markdown", "output/repo_history_story.md"),
+        ("Repo Story Bitstream", "output/repo_history_story_bit.txt"),
         ("Complete Research ZIP", "output/scopus_q1_elsevier_package.zip"),
         ("Downloads Mirror PDF", "downloads/scopus_q1_journal_manuscript.pdf"),
         ("Downloads Mirror DOCX", "downloads/scopus_q1_journal_manuscript.docx"),
-        ("Downloads Mirror ZIP", "downloads/scopus_q1_elsevier_package.zip")
+        ("Downloads Mirror ZIP", "downloads/scopus_q1_elsevier_package.zip"),
+        ("Downloads Mirror Story", "downloads/repo_history_story.md"),
+        ("Downloads Mirror Story Bit", "downloads/repo_history_story_bit.txt")
     ]
     
     c_files = True
