@@ -160,7 +160,8 @@ def test_bit_integrity():
         ("output/scopus_q1_journal_bit.txt", 24280),
         ("output/repo_history_story_bit.txt", 63288),
         ("output/indobert_nodexl_bit.txt", 7472),
-        ("output/nodexl_detailed_execution_bit.txt", 47432)
+        ("output/nodexl_detailed_execution_bit.txt", 47432),
+        ("output/indobert_cleaning_finetune_bit.txt", 26128)
     ]
     
     all_passed = True
@@ -216,7 +217,12 @@ def test_scopus_q1_journal_and_downloads():
         ("Downloads Mirror DOCX", "downloads/scopus_q1_journal_manuscript.docx"),
         ("Downloads Mirror ZIP", "downloads/scopus_q1_elsevier_package.zip"),
         ("Downloads Mirror Story", "downloads/repo_history_story.md"),
-        ("Downloads Mirror Story Bit", "downloads/repo_history_story_bit.txt")
+        ("Downloads Mirror Story Bit", "downloads/repo_history_story_bit.txt"),
+        ("IndoBERT Cleaned Corpus", "output/indobert_cleaned_corpus.csv"),
+        ("IndoBERT Fine-Tune History", "output/indobert_finetune_history.csv"),
+        ("IndoBERT Fine-Tune Metrics", "output/indobert_finetune_metrics.json"),
+        ("IndoBERT Cleaning & FT Bitstream", "output/indobert_cleaning_finetune_bit.txt"),
+        ("Downloads Mirror IndoBERT Bit", "downloads/indobert_cleaning_finetune_bit.txt")
     ]
     
     c_files = True
