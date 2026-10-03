@@ -156,7 +156,8 @@ def test_bit_integrity():
         ("output/indobert_9emotions_bit.txt", 3456),
         ("output/nodexl_20_functions_bit.txt", 7424),
         ("output/scopus_q1_scientific_bit.txt", 9304),
-        ("output/elsevier_kpi_formulas_bit.txt", 8840)
+        ("output/elsevier_kpi_formulas_bit.txt", 8840),
+        ("output/scopus_q1_journal_bit.txt", 24280)
     ]
     
     all_passed = True
@@ -193,8 +194,42 @@ def test_bit_integrity():
             
     return all_passed
 
+def test_scopus_q1_journal_and_downloads():
+    print_header("5. VALIDASI NASKAH JURNAL SCOPUS Q1 ELSEVIER & DOWNLOADS")
+    files_to_check = [
+        ("PDF Publication Manuscript", "output/scopus_q1_journal_manuscript.pdf"),
+        ("Word DOCX Manuscript", "output/scopus_q1_journal_manuscript.docx"),
+        ("Markdown Manuscript", "output/scopus_q1_journal_manuscript.md"),
+        ("8-Bit Binary Stream", "output/scopus_q1_journal_bit.txt"),
+        ("Complete Research ZIP", "output/scopus_q1_elsevier_package.zip"),
+        ("Downloads Mirror PDF", "downloads/scopus_q1_journal_manuscript.pdf"),
+        ("Downloads Mirror DOCX", "downloads/scopus_q1_journal_manuscript.docx"),
+        ("Downloads Mirror ZIP", "downloads/scopus_q1_elsevier_package.zip")
+    ]
+    
+    c_files = True
+    for label, rel_path in files_to_check:
+        full_path = os.path.join(BASE_DIR, rel_path)
+        exists = os.path.exists(full_path)
+        sz = os.path.getsize(full_path) if exists else 0
+        pass_f = check(f"{label} ({rel_path})", exists and sz > 0, f"Size: {sz:,} bytes")
+        if not pass_f:
+            c_files = False
+
+    # Check 11 Elsevier KPIs
+    kpi_path = os.path.join(BASE_DIR, "output", "elsevier_kpi_benchmarks.csv")
+    c_kpi_exists = check("Tabel benchmark Elsevier KPI CSV ada", os.path.exists(kpi_path))
+    c_kpi_match = False
+    if c_kpi_exists:
+        with open(kpi_path, "r", encoding="utf-8") as f:
+            reader = list(csv.DictReader(f))
+        all_passed = len(reader) == 11 and all(any(w in r.get("compliance_status", "") for w in ["PASS", "EXCEEDED"]) for r in reader)
+        c_kpi_match = check("11 KPI Elsevier 100% Terpenuhi (PASS/EXCEEDED)", all_passed, f"Total KPI terverifikasi: {len(reader)}/11")
+
+    return c_files and c_kpi_exists and c_kpi_match
+
 def test_streamlit_and_deployment():
-    print_header("5. VALIDASI KONSISTENSI STREAMLIT & DEPLOYMENT")
+    print_header("6. VALIDASI KONSISTENSI STREAMLIT & DEPLOYMENT")
     root_app = os.path.join(BASE_DIR, "streamlit_app.py")
     dash_app = os.path.join(BASE_DIR, "dashboard", "app.py")
     req_file = os.path.join(BASE_DIR, "requirements.txt")
@@ -216,25 +251,27 @@ def test_streamlit_and_deployment():
     except Exception as e:
         c5 = check("Syntax dashboard/app.py valid", False, str(e))
         
-    # Check Section 9 and Section 10 presence
+    # Check Section 9, 10, and 14 presence
     with open(dash_app, "r", encoding="utf-8") as f:
         code_str = f.read()
     c6 = check("dashboard/app.py memuat Section 9 (Network Analysis)", 'selected_section == "9. Network Analysis"' in code_str)
     c7 = check("dashboard/app.py memuat Section 10 (2027 Forecasting)", 'selected_section == "10. 2027 Forecasting"' in code_str)
+    c8 = check("dashboard/app.py memuat Section 14 (Scopus Q1 Journal & Downloads)", 'selected_section == "14. Scopus Q1 Journal & Downloads"' in code_str)
     
-    return all([c1, c2, c3, c4, c5, c6, c7])
+    return all([c1, c2, c3, c4, c5, c6, c7, c8])
 
 if __name__ == "__main__":
     r1 = test_source_csv()
     r2 = test_forecasting_and_outputs()
     r3 = test_nodexl_scale_datasets()
     r4 = test_bit_integrity()
-    r5 = test_streamlit_and_deployment()
+    r5 = test_scopus_q1_journal_and_downloads()
+    r6 = test_streamlit_and_deployment()
     
     print("\n" + "=" * 70)
-    all_passed = all([r1, r2, r3, r4, r5])
+    all_passed = all([r1, r2, r3, r4, r5, r6])
     if all_passed:
-        print("  HASIL MASTER VALIDASI: 100% PASS (SEMUA 48 KRITERIA TERPENUHI)")
+        print("  HASIL MASTER VALIDASI: 100% PASS (SEMUA 60 KRITERIA TERPENUHI)")
     else:
         print("  HASIL MASTER VALIDASI: TERDAPAT KEGAGALAN / PERIKSA LOG DI ATAS")
     print("=" * 70 + "\n")

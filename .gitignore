@@ -85,6 +85,8 @@ repos/
 *.avi
 *.mov
 *.zip
+!output/scopus_q1_elsevier_package.zip
+!downloads/scopus_q1_elsevier_package.zip
 *.7z
 *.tar.gz
 *.xlsx
