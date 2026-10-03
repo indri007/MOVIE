@@ -10,6 +10,7 @@ venv/
 env/
 instagram2027/
 scratch/
+.kilo/
 
 # Secrets & Sessions
 .env
