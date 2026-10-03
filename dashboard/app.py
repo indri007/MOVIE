@@ -839,7 +839,10 @@ elif selected_section == "9. Network Analysis":
     st.title("Network Analysis & User Relational Graph (NodeXL)")
     st.caption("Social Network Analysis (SNA), Louvain Clustering & IndoBERT 9-Emotion Telemetry")
 
-    import networkx as nx
+    try:
+        import networkx as nx
+    except ImportError:
+        nx = None
 
     net_metrics = load_json_file(NETWORK_DIR / "metrics.json")
     nodes = net_metrics.get("nodes", 30) if net_metrics else 30
@@ -871,27 +874,42 @@ elif selected_section == "9. Network Analysis":
         with open(graph_file, "r", encoding="utf-8") as gf:
             gd = json.load(gf)
 
-        G = nx.Graph()
-        for n in gd.get("nodes", []):
-            G.add_node(n["id"], freq=n.get("frequency", 1))
+        node_ids = [n["id"] for n in gd.get("nodes", [])]
+        edges_list = []
         for e in gd.get("edges", []):
             u = e.get("source") or e.get("vertex_1")
             v = e.get("target") or e.get("vertex_2")
             if u and v:
-                G.add_edge(u, v, weight=float(e.get("weight", 1.0)))
+                edges_list.append((u, v))
+
+        if nx is not None:
+            G = nx.Graph()
+            for n in gd.get("nodes", []):
+                G.add_node(n["id"], freq=n.get("frequency", 1))
+            for u, v in edges_list:
+                G.add_edge(u, v)
+            pos = nx.spring_layout(G, seed=42, k=0.55)
+            node_iterable = list(G.nodes())
+            node_freq_fn = lambda node: G.nodes[node].get("freq", 10)
+        else:
+            angles = np.linspace(0, 2 * np.pi, len(node_ids), endpoint=False)
+            pos = {nid: (float(np.cos(a)), float(np.sin(a))) for nid, a in zip(node_ids, angles)}
+            node_iterable = node_ids
+            freq_dict = {n["id"]: n.get("frequency", 10) for n in gd.get("nodes", [])}
+            node_freq_fn = lambda node: freq_dict.get(node, 10)
 
         comm_map = {}
         if csv_louvain.exists():
             df_l = pd.read_csv(csv_louvain)
             comm_map = dict(zip(df_l["node_id"], df_l["community_id"]))
 
-        pos = nx.spring_layout(G, seed=42, k=0.55)
         edge_x, edge_y = [], []
-        for edge in G.edges():
-            x0, y0 = pos[edge[0]]
-            x1, y1 = pos[edge[1]]
-            edge_x.extend([x0, x1, None])
-            edge_y.extend([y0, y1, None])
+        for u, v in edges_list:
+            if u in pos and v in pos:
+                x0, y0 = pos[u]
+                x1, y1 = pos[v]
+                edge_x.extend([x0, x1, None])
+                edge_y.extend([y0, y1, None])
 
         edge_trace = go.Scatter(
             x=edge_x, y=edge_y,
@@ -901,11 +919,11 @@ elif selected_section == "9. Network Analysis":
         )
 
         node_x, node_y, node_text, node_color, node_size = [], [], [], [], []
-        for node in G.nodes():
+        for node in node_iterable:
             x, y = pos[node]
             node_x.append(x)
             node_y.append(y)
-            freq = G.nodes[node].get("freq", 10)
+            freq = node_freq_fn(node)
             comm = comm_map.get(node, 0)
             node_text.append(f"<b>{node}</b><br>Frekuensi: {freq:,}<br>Komunitas Louvain: {comm}")
             node_color.append(comm)
@@ -915,7 +933,7 @@ elif selected_section == "9. Network Analysis":
             x=node_x, y=node_y,
             mode="markers+text",
             hoverinfo="text",
-            text=[node for node in G.nodes()],
+            text=node_iterable,
             textposition="top center",
             hovertext=node_text,
             marker=dict(
