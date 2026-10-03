@@ -9,6 +9,7 @@ __pycache__/
 venv/
 env/
 instagram2027/
+scratch/
 
 # Secrets & Sessions
 .env

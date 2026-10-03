@@ -1,0 +1,11 @@
+{
+  "daemon_name": "BIT_STREAM_DAEMON_V1",
+  "state": "ACTIVE",
+  "protocol": "UTF-8_8BIT_OCTET",
+  "last_heartbeat": "2026-10-03T20:51:01.802138",
+  "pid": 26673,
+  "status_message": "NodeXL file archived; Bit daemon standby for network/data payloads.",
+  "sha256": "56265b17effe2cd6d79e5afebe071049c4c414e8dd25028d23f93e2798e5bff3",
+  "total_bits": 2040,
+  "total_bytes": 255
+}

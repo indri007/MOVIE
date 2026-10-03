@@ -1,0 +1,11 @@
+kategori,tahun,metrik,nilai_juta,pertumbuhan_persen,keterangan
+Historis,2020,Rata-rata Konsensus,82.3,0.0,Berdasarkan 1 sumber
+Historis,2021,Rata-rata Konsensus,91.0,10.57,Berdasarkan 1 sumber
+Historis,2022,Rata-rata Konsensus,100.2,10.11,Berdasarkan 2 sumber
+Historis,2023,Rata-rata Konsensus,110.2,9.98,Berdasarkan 2 sumber
+Historis,2024,Rata-rata Konsensus,96.05,-12.84,Berdasarkan 2 sumber
+Historis,2025,Rata-rata Konsensus,104.15,8.43,Berdasarkan 4 sumber
+Historis,2026,Rata-rata Konsensus,120.75,15.94,Berdasarkan 2 sumber
+Proyeksi 2027,2027,Rendah (Konservatif / Saturasi),124.37,3.0,"Saturasi pengguna aktif tercapai, pembersihan akun pasif oleh Meta, adopsi melambat ke +3.0%"
+Proyeksi 2027,2027,Sedang (Baseline / Moderat),128.0,6.0,Tren pemulihan pasca-2024 berlanjut stabil dengan laju pertumbuhan wajar (+6.0%)
+Proyeksi 2027,2027,Tinggi (Optimis / Ekspansi),132.83,10.0,"Akselerasi adopsi Reels, penetrasi agresif luar pulau Jawa, dan belanja iklan digital (+10.0%)"

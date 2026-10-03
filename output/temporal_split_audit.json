@@ -1,45 +1,21 @@
 {
-  "temporal_status": "MISSING",
-  "detected_temporal_columns": [],
-  "checked_candidate_columns": [
+  "temporal_status": "INSUFFICIENT_TEMPORAL_DATA",
+  "detected_date_columns": [],
+  "candidate_columns_checked": [
     "timestamp",
     "created_at",
     "date",
     "post_date",
     "review_date",
-    "published_at",
-    "time",
     "datetime",
-    "crawl_timestamp"
+    "date_time",
+    "published_at",
+    "time"
   ],
-  "explanation": "Dataset does NOT contain genuine post timestamps or date metadata. Per research guidelines, synthetic timestamps are strictly prohibited. Temporal split status is marked as MISSING.",
-  "required_metadata_for_2027_forecasting": [
-    "post_timestamp (ISO 8601 UTC timestamp)",
-    "crawl_timestamp (Data ingestion time)",
-    "account_creation_date (User tenure)",
-    "engagement_delta_t (Time elapsed between post and metric snapshot)"
-  ],
-  "fallback_strategy": "Stratified cross-sectional split (preserving rating distribution)",
-  "split_execution": {
-    "split_type": "stratified_cross_sectional_fallback",
-    "temporal_status": "MISSING",
-    "total_records": 1000,
-    "train_records": 800,
-    "test_records": 200,
-    "test_ratio": 0.2,
-    "target_distribution_train": {
-      "1": 385,
-      "2": 125,
-      "3": 107,
-      "4": 66,
-      "5": 117
-    },
-    "target_distribution_test": {
-      "1": 96,
-      "2": 31,
-      "3": 27,
-      "4": 16,
-      "5": 30
-    }
-  }
+  "explanation": "Dataset does NOT contain genuine post timestamps or date metadata. Per research integrity guidelines, synthetic date fabrication is prohibited. Temporal status is marked as INSUFFICIENT_TEMPORAL_DATA.",
+  "required_for_time_series": [
+    "Post creation timestamp (ISO 8601 UTC+7)",
+    "Minimum continuous 24-month observation window",
+    "Periodic longitudinal sampling frequency (hourly/daily)"
+  ]
 }
