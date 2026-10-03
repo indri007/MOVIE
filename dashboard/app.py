@@ -680,6 +680,56 @@ elif selected_section == "3. NLP / IndoBERT":
         st.subheader("🔍 Sampel Prediksi Afektif IndoBERT 9-Emosi")
         st.dataframe(df_9emo.head(15), use_container_width=True)
 
+    st.markdown("---")
+
+    # -------------------------------------------------------------
+    # DIAGRAM DETAIL INDOBERT DALAM NODEXL (TOPOLOGI AFEKTIF)
+    # -------------------------------------------------------------
+    st.subheader("🕸️ Diagram Detail Topologi IndoBERT dalam NodeXL (9 Emosi & 6 Modalitas)")
+    st.caption("Visualisasi Relasional Semantic Affective Graph: 9 Hub Emosi, 6 Modalitas Interaksi (WER Simplex), dan 45 Token Pemicu")
+
+    indobert_svg_p = OUTPUT_DIR / "graf_indobert_nodexl.svg"
+    indobert_v_p = OUTPUT_DIR / "indobert_nodexl_vertices.csv"
+    indobert_bit_p = OUTPUT_DIR / "indobert_nodexl_bit.txt"
+    indobert_graphml_p = OUTPUT_DIR / "indobert_nodexl_graph.graphml"
+
+    if indobert_svg_p.exists():
+        with open(indobert_svg_p, "r", encoding="utf-8") as f:
+            svg_code = f.read()
+        st.markdown(f'<div style="text-align:center; margin-bottom:20px;">{svg_code}</div>', unsafe_allow_html=True)
+
+    # NodeXL Vertices Metrics Table
+    if indobert_v_p.exists():
+        st.markdown("### 📊 Matriks Sentralitas & Metrik NodeXL IndoBERT")
+        df_indov = pd.read_csv(indobert_v_p)
+        st.dataframe(df_indov, use_container_width=True)
+
+    # Download Buttons for IndoBERT NodeXL
+    b_col1, b_col2, b_col3 = st.columns(3)
+    with b_col1:
+        if indobert_bit_p.exists():
+            with open(indobert_bit_p, "rb") as f:
+                st.download_button("💾 Unduh IndoBERT NodeXL (Bahasa Bit / Biner TXT)", f.read(), "indobert_nodexl_bit.txt", "text/plain", use_container_width=True)
+    with b_col2:
+        if indobert_graphml_p.exists():
+            with open(indobert_graphml_p, "rb") as f:
+                st.download_button("📥 Unduh IndoBERT GraphML (NodeXL XML)", f.read(), "indobert_nodexl_graph.graphml", "application/xml", use_container_width=True)
+    with b_col3:
+        if indobert_v_p.exists():
+            with open(indobert_v_p, "rb") as f:
+                st.download_button("📊 Unduh Metrik Simpul NodeXL (CSV)", f.read(), "indobert_nodexl_vertices.csv", "text/csv", use_container_width=True)
+
+    # Bitstream Realtime Inspection for IndoBERT NodeXL
+    if indobert_bit_p.exists():
+        with open(indobert_bit_p, "r", encoding="utf-8") as f:
+            raw_indobit = f.read()
+        with st.expander("🔬 Intip Representasi Biner IndoBERT NodeXL (Bahasa Bit Lossless)", expanded=False):
+            st.markdown(f"**Ukuran Stream:** `{len(raw_indobit):,} karakter` | `{len(raw_indobit.split()):,} octets (bytes)` | `7,472 bits`")
+            st.code(raw_indobit[:500] + " ... [TRUNCATED FOR DISPLAY]", language="text")
+            octets_indobit = raw_indobit.strip().split()
+            decoded_indobit = bytes([int(b, 2) for b in octets_indobit]).decode("utf-8")
+            st.text_area("Hasil Dekode Teks Asli dari Biner (100% Lossless):", decoded_indobit, height=180)
+
 
 
 # -----------------------------------------------------------------------------
