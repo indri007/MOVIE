@@ -155,7 +155,8 @@ def test_bit_integrity():
         ("output/louvain_nodexl_bit.txt", 2928),
         ("output/indobert_9emotions_bit.txt", 3456),
         ("output/nodexl_20_functions_bit.txt", 7424),
-        ("output/scopus_q1_scientific_bit.txt", 9304)
+        ("output/scopus_q1_scientific_bit.txt", 9304),
+        ("output/elsevier_kpi_formulas_bit.txt", 8840)
     ]
     
     all_passed = True
