@@ -161,7 +161,8 @@ def test_bit_integrity():
         ("output/repo_history_story_bit.txt", 63288),
         ("output/indobert_nodexl_bit.txt", 7472),
         ("output/nodexl_detailed_execution_bit.txt", 47432),
-        ("output/indobert_cleaning_finetune_bit.txt", 26128)
+        ("output/indobert_cleaning_finetune_bit.txt", 26128),
+        ("output/louvain_convergence_resolution_bit.txt", 19024)
     ]
     
     all_passed = True
@@ -222,7 +223,9 @@ def test_scopus_q1_journal_and_downloads():
         ("IndoBERT Fine-Tune History", "output/indobert_finetune_history.csv"),
         ("IndoBERT Fine-Tune Metrics", "output/indobert_finetune_metrics.json"),
         ("IndoBERT Cleaning & FT Bitstream", "output/indobert_cleaning_finetune_bit.txt"),
-        ("Downloads Mirror IndoBERT Bit", "downloads/indobert_cleaning_finetune_bit.txt")
+        ("Downloads Mirror IndoBERT Bit", "downloads/indobert_cleaning_finetune_bit.txt"),
+        ("Louvain Convergence Bitstream", "output/louvain_convergence_resolution_bit.txt"),
+        ("Downloads Mirror Louvain Bit", "downloads/louvain_convergence_resolution_bit.txt")
     ]
     
     c_files = True
