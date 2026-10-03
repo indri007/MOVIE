@@ -2,20 +2,10 @@
   "daemon_name": "BIT_STREAM_DAEMON_V1",
   "state": "ACTIVE",
   "protocol": "UTF-8_8BIT_OCTET",
-  "last_heartbeat": "2026-10-03T21:35:21.805313",
-  "status_message": "NodeXL 10M multimodal dataset synchronized, all 48 test assertions PASS, Streamlit Cloud and GitHub main in sync.",
-  "validation_summary": {
-    "tests_run": 48,
-    "tests_passed": 48,
-    "pass_rate": "100%",
-    "datasets_verified": [
-      "20k",
-      "200k",
-      "1M",
-      "10M_multimodal_chunk01"
-    ]
-  },
-  "sha256": "48faf9f8f3483ea49ff9c8caf5642d4275fe1873b16c7201bb300fd89eb709a5",
-  "total_bytes": 489,
-  "total_bits": 3912
+  "last_heartbeat": "2026-10-03T21:40:21.101074",
+  "pid": 36307,
+  "status_message": "NodeXL file archived; Bit daemon standby for network/data payloads.",
+  "sha256": "abd6f8f189de5a7ce0c3c358dad5dbe6ffe15d674b8a6662be5d8bc4d2613e07",
+  "total_bits": 2040,
+  "total_bytes": 255
 }
