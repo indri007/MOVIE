@@ -50,6 +50,7 @@ data/crawl_log.txt
 output/bertopic_model
 models/indobert/*
 !models/indobert/.gitkeep
+!models/indobert/*.json
 models/viral_model/*
 !models/viral_model/.gitkeep
 
