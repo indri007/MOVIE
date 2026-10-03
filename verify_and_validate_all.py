@@ -153,7 +153,8 @@ def test_bit_integrity():
         ("output/graf_betweenness_bit.txt", 6424),
         ("output/deployment_push_github_streamlit_bit.txt", 10352),
         ("output/louvain_nodexl_bit.txt", 2928),
-        ("output/indobert_9emotions_bit.txt", 3456)
+        ("output/indobert_9emotions_bit.txt", 3456),
+        ("output/nodexl_20_functions_bit.txt", 7424)
     ]
     
     all_passed = True
