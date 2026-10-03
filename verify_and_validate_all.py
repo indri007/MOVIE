@@ -159,7 +159,8 @@ def test_bit_integrity():
         ("output/elsevier_kpi_formulas_bit.txt", 8840),
         ("output/scopus_q1_journal_bit.txt", 24280),
         ("output/repo_history_story_bit.txt", 63288),
-        ("output/indobert_nodexl_bit.txt", 7472)
+        ("output/indobert_nodexl_bit.txt", 7472),
+        ("output/nodexl_detailed_execution_bit.txt", 47432)
     ]
     
     all_passed = True
@@ -208,6 +209,8 @@ def test_scopus_q1_journal_and_downloads():
         ("IndoBERT NodeXL SVG", "output/graf_indobert_nodexl.svg"),
         ("IndoBERT NodeXL GraphML", "output/indobert_nodexl_graph.graphml"),
         ("IndoBERT NodeXL Bitstream", "output/indobert_nodexl_bit.txt"),
+        ("NodeXL Detailed Report", "output/nodexl_detailed_execution_report.md"),
+        ("NodeXL Detailed Bit", "output/nodexl_detailed_execution_bit.txt"),
         ("Complete Research ZIP", "output/scopus_q1_elsevier_package.zip"),
         ("Downloads Mirror PDF", "downloads/scopus_q1_journal_manuscript.pdf"),
         ("Downloads Mirror DOCX", "downloads/scopus_q1_journal_manuscript.docx"),
