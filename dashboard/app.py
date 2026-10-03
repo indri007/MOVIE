@@ -1421,6 +1421,62 @@ elif selected_section == "9. Network Analysis":
             decoded_node = bytes([int(b, 2) for b in octets_node]).decode("utf-8")
             st.text_area("Hasil Dekode Teks Asli 100% Lossless:", decoded_node[:1200] + "\n\n... [LIHAT FILE LENGKAP DI OUTPUT/NODEXL_DETAILED_EXECUTION_REPORT.MD]", height=200)
 
+    st.markdown("---")
+
+    # -------------------------------------------------------------
+    # 6. TOPOLOGI NODEXL: KONVERGENSI LOUVAIN TANPA EPOCH & RESOLUSI MULTI-SKALA
+    # -------------------------------------------------------------
+    st.markdown("### 6. Topologi NodeXL: Konvergensi Modularity Louvain Tanpa Epoch & Resolusi Multi-Skala")
+    st.caption("Visualisasi Graf Relasional NodeXL: Core Optimasi dQ <= 0, Arc Resolusi gamma=0.5..1.5, dan Stabilitas Partisi (ARI = 0.9738)")
+
+    gl_svg_p = OUTPUT_DIR / "graf_louvain_nodexl.svg"
+    gl_bit_p = OUTPUT_DIR / "graf_louvain_nodexl_bit.txt"
+    gl_graphml_p = OUTPUT_DIR / "louvain_nodexl_graph.graphml"
+    gl_vert_p = OUTPUT_DIR / "louvain_nodexl_vertices.csv"
+    gl_res_bit_p = OUTPUT_DIR / "louvain_convergence_resolution_bit.txt"
+
+    if gl_svg_p.exists():
+        with open(gl_svg_p, "r", encoding="utf-8") as f:
+            svg_louvain_code = f.read()
+        st.markdown(f'<div style="text-align:center; margin-bottom:20px;">{svg_louvain_code}</div>', unsafe_allow_html=True)
+
+    # Louvain NodeXL Vertices Table
+    if gl_vert_p.exists():
+        st.markdown("#### 📊 Matriks Simpul NodeXL: Modularity Class & Sentralitas")
+        df_glv = pd.read_csv(gl_vert_p)
+        st.dataframe(df_glv, use_container_width=True)
+
+    # Download Buttons for Louvain NodeXL
+    g_col1, g_col2, g_col3, g_col4 = st.columns(4)
+    with g_col1:
+        if gl_bit_p.exists():
+            with open(gl_bit_p, "rb") as f:
+                st.download_button("💾 Unduh Topologi Bit (TXT)", f.read(), "graf_louvain_nodexl_bit.txt", "text/plain", use_container_width=True)
+    with g_col2:
+        if gl_res_bit_p.exists():
+            with open(gl_res_bit_p, "rb") as f:
+                st.download_button("⚡ Unduh Konvergensi Bit (TXT)", f.read(), "louvain_convergence_resolution_bit.txt", "text/plain", use_container_width=True)
+    with g_col3:
+        if gl_graphml_p.exists():
+            with open(gl_graphml_p, "rb") as f:
+                st.download_button("📥 Unduh NodeXL GraphML", f.read(), "louvain_nodexl_graph.graphml", "application/xml", use_container_width=True)
+    with g_col4:
+        if gl_svg_p.exists():
+            with open(gl_svg_p, "rb") as f:
+                st.download_button("🖼️ Unduh Diagram SVG", f.read(), "graf_louvain_nodexl.svg", "image/svg+xml", use_container_width=True)
+
+    # Bitstream Realtime Inspection for Louvain NodeXL
+    if gl_bit_p.exists():
+        with open(gl_bit_p, "r", encoding="utf-8") as f:
+            raw_glbit = f.read()
+        with st.expander("🔬 Intip Representasi Biner Topologi Louvain NodeXL (Bahasa Bit)", expanded=False):
+            st.markdown(f"**Ukuran Stream:** `{len(raw_glbit):,} karakter` | `{len(raw_glbit.split()):,} octets (bytes)` | `4,496 bits`")
+            st.code(raw_glbit[:500] + " ... [TRUNCATED FOR DISPLAY]", language="text")
+            octets_glbit = raw_glbit.strip().split()
+            decoded_glbit = bytes([int(b, 2) for b in octets_glbit]).decode("utf-8")
+            st.text_area("Hasil Dekode Teks Asli dari Biner (100% Lossless Roundtrip):", decoded_glbit, height=160)
+
+
 
 # -----------------------------------------------------------------------------
 # Section 10: 2027 Forecasting

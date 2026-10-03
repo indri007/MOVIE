@@ -162,7 +162,8 @@ def test_bit_integrity():
         ("output/indobert_nodexl_bit.txt", 7472),
         ("output/nodexl_detailed_execution_bit.txt", 47432),
         ("output/indobert_cleaning_finetune_bit.txt", 26128),
-        ("output/louvain_convergence_resolution_bit.txt", 19024)
+        ("output/louvain_convergence_resolution_bit.txt", 19024),
+        ("output/graf_louvain_nodexl_bit.txt", 4496)
     ]
     
     all_passed = True
@@ -225,7 +226,13 @@ def test_scopus_q1_journal_and_downloads():
         ("IndoBERT Cleaning & FT Bitstream", "output/indobert_cleaning_finetune_bit.txt"),
         ("Downloads Mirror IndoBERT Bit", "downloads/indobert_cleaning_finetune_bit.txt"),
         ("Louvain Convergence Bitstream", "output/louvain_convergence_resolution_bit.txt"),
-        ("Downloads Mirror Louvain Bit", "downloads/louvain_convergence_resolution_bit.txt")
+        ("Downloads Mirror Louvain Bit", "downloads/louvain_convergence_resolution_bit.txt"),
+        ("Louvain NodeXL SVG", "output/graf_louvain_nodexl.svg"),
+        ("Louvain NodeXL GraphML", "output/louvain_nodexl_graph.graphml"),
+        ("Louvain NodeXL Vertices", "output/louvain_nodexl_vertices.csv"),
+        ("Louvain NodeXL Edges", "output/louvain_nodexl_edges.csv"),
+        ("Louvain NodeXL Bitstream", "output/graf_louvain_nodexl_bit.txt"),
+        ("Downloads Mirror Louvain NodeXL Bit", "downloads/graf_louvain_nodexl_bit.txt")
     ]
     
     c_files = True
