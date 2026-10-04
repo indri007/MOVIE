@@ -163,7 +163,8 @@ def test_bit_integrity():
         ("output/nodexl_detailed_execution_bit.txt", 47432),
         ("output/indobert_cleaning_finetune_bit.txt", 26128),
         ("output/louvain_convergence_resolution_bit.txt", 19024),
-        ("output/graf_louvain_nodexl_bit.txt", 4496)
+        ("output/graf_louvain_nodexl_bit.txt", 4496),
+        ("output/proyeksi_2027_bit.txt", 5512)
     ]
     
     all_passed = True
@@ -232,7 +233,11 @@ def test_scopus_q1_journal_and_downloads():
         ("Louvain NodeXL Vertices", "output/louvain_nodexl_vertices.csv"),
         ("Louvain NodeXL Edges", "output/louvain_nodexl_edges.csv"),
         ("Louvain NodeXL Bitstream", "output/graf_louvain_nodexl_bit.txt"),
-        ("Downloads Mirror Louvain NodeXL Bit", "downloads/graf_louvain_nodexl_bit.txt")
+        ("Downloads Mirror Louvain NodeXL Bit", "downloads/graf_louvain_nodexl_bit.txt"),
+        ("Proyeksi 2027 CSV", "output/proyeksi_2027.csv"),
+        ("Proyeksi 2027 PNG Chart", "output/proyeksi_2027.png"),
+        ("Proyeksi 2027 Bitstream", "output/proyeksi_2027_bit.txt"),
+        ("Downloads Mirror Proyeksi Bit", "downloads/proyeksi_2027_bit.txt")
     ]
     
     c_files = True
