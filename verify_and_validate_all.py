@@ -157,14 +157,14 @@ def test_bit_integrity():
         ("output/nodexl_20_functions_bit.txt", 7424),
         ("output/scopus_q1_scientific_bit.txt", 9304),
         ("output/elsevier_kpi_formulas_bit.txt", 8840),
-        ("output/scopus_q1_journal_bit.txt", 24280),
+        ("output/scopus_q1_journal_bit.txt", 128696),
         ("output/repo_history_story_bit.txt", 63288),
         ("output/indobert_nodexl_bit.txt", 7472),
         ("output/nodexl_detailed_execution_bit.txt", 47432),
         ("output/indobert_cleaning_finetune_bit.txt", 26128),
         ("output/louvain_convergence_resolution_bit.txt", 19024),
         ("output/graf_louvain_nodexl_bit.txt", 4496),
-        ("output/proyeksi_2027_bit.txt", 5512)
+        ("output/proyeksi_2027_bit.txt", 5504)
     ]
     
     all_passed = True

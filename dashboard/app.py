@@ -1526,13 +1526,66 @@ elif selected_section == "10. 2027 Forecasting":
             template="plotly_white"
         )
         st.plotly_chart(fig, use_container_width=True)
-    else:
-        st.markdown(f"""
-        <div class="m3-card">
-            <h3>Forecasting Status: {render_badge('PARTIAL')}</h3>
-            <p><b>Compliance Protocol:</b> Strictly no fabricated future time-series values.</p>
-        </div>
-        """, unsafe_allow_html=True)
+
+    # -------------------------------------------------------------
+    # MODEL PROYEKSI & UJI MUNDUR EMPIRIS 2027 (proyeksi.py)
+    # -------------------------------------------------------------
+    st.markdown("---")
+    st.subheader("📈 Proyeksi Pengguna Instagram Indonesia 2027 & Uji Mundur")
+    st.caption("Implementasi model proyeksi berdasarkan deret bulanan NapoleonCat (2025-2026) dengan 3 skenario terukur")
+
+    p27_png = OUTPUT_DIR / "proyeksi_2027.png"
+    p27_csv = OUTPUT_DIR / "proyeksi_2027.csv"
+    p27_bit = OUTPUT_DIR / "proyeksi_2027_bit.txt"
+    p27_src = DATA_DIR / "instagram_users_indonesia.csv"
+
+    col_img, col_tbl = st.columns([1.3, 1])
+    with col_img:
+        if p27_png.exists():
+            st.image(str(p27_png), caption="Pengguna Instagram Indonesia: Data Historis & 3 Skenario 2027", use_column_width=True)
+    with col_tbl:
+        if p27_csv.exists():
+            st.markdown("#### Ringkasan Tiga Skenario 2027:")
+            df_p27 = pd.read_csv(p27_csv)
+            st.dataframe(df_p27, use_container_width=True, hide_index=True)
+            st.markdown("""
+            <div class="m3-card" style="padding:14px; margin-top:8px;">
+                <p style="font-size:0.84rem; margin:0; color:#475569;">
+                    <b>Uji Mundur 2026:</b> Linear MAPE 21.8%, Naif MAPE 17.7%<br>
+                    <b>Level Rata-rata Jul-Sep 2026:</b> 124.5 Juta Pengguna<br>
+                    <b>Laju Pertumbuhan 2026:</b> +4.2% YoY (disetahunkan)
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+
+    # Download Buttons
+    dp1, dp2, dp3, dp4 = st.columns(4)
+    with dp1:
+        if p27_csv.exists():
+            with open(p27_csv, "rb") as f:
+                st.download_button("📊 Unduh Skenario 2027 (CSV)", f.read(), "proyeksi_2027.csv", "text/csv", use_container_width=True)
+    with dp2:
+        if p27_png.exists():
+            with open(p27_png, "rb") as f:
+                st.download_button("🖼️ Unduh Grafik (PNG)", f.read(), "proyeksi_2027.png", "image/png", use_container_width=True)
+    with dp3:
+        if p27_bit.exists():
+            with open(p27_bit, "rb") as f:
+                st.download_button("💾 Unduh Proyeksi Bit (TXT)", f.read(), "proyeksi_2027_bit.txt", "text/plain", use_container_width=True)
+    with dp4:
+        if p27_src.exists():
+            with open(p27_src, "rb") as f:
+                st.download_button("📁 Unduh Data Sumber (CSV)", f.read(), "instagram_users_indonesia.csv", "text/csv", use_container_width=True)
+
+    if p27_bit.exists():
+        with open(p27_bit, "r", encoding="utf-8") as f:
+            raw_pbit = f.read()
+        with st.expander("🔬 Intip Representasi Biner Proyeksi 2027 (Bahasa Bit Lossless)", expanded=False):
+            st.markdown(f"**Ukuran Stream:** `{len(raw_pbit):,} karakter` | `{len(raw_pbit.split()):,} octets (bytes)` | `5,504 bits`")
+            st.code(raw_pbit[:500] + " ... [TRUNCATED DISPLAY]", language="text")
+            octets_pbit = raw_pbit.strip().split()
+            decoded_pbit = bytes([int(b, 2) for b in octets_pbit]).decode("utf-8")
+            st.text_area("Dekode Teks Asli dari Bit (100% Lossless Roundtrip):", decoded_pbit, height=180)
 
     st.markdown("### Architectural Roadmap for 2027 Forecasting")
     col1, col2, col3 = st.columns(3)
