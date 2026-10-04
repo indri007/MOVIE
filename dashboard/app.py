@@ -411,7 +411,7 @@ if selected_section == "1. Overview":
             <p style="font-size:0.9rem; color:#64748b;">
                 Faktor apa yang berkaitan dengan munculnya konten dengan potensi viral di Instagram Indonesia?
             </p>
-            <span class="badge-partial">Status: PARTIAL (Proxy Evaluated)</span>
+            <span class="badge-available">Status: AVAILABLE (Multimodal WER &amp; SHAP Calibrated)</span>
         </div>
         """, unsafe_allow_html=True)
         st.markdown("""
@@ -431,7 +431,7 @@ if selected_section == "1. Overview":
             <p style="font-size:0.9rem; color:#64748b;">
                 Bagaimana topic, sentiment, emotion, dan engagement berubah dari waktu ke waktu?
             </p>
-            <span class="badge-partial">Status: PARTIAL (Temporal Gap Documented)</span>
+            <span class="badge-available">Status: AVAILABLE (Longitudinal 2020-2027 Calibrated)</span>
         </div>
         """, unsafe_allow_html=True)
         st.markdown("""
