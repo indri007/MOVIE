@@ -9,6 +9,7 @@ sehingga kolom "Status" dan "Baseline hari ini" selalu dihitung ulang dari data,
   ./bit prd --md            tulis juga docs/PRD_SANTET.md (versi dokumen, angka terbaru)
   ./bit prd --json          cetak JSON (untuk dashboard / CI)
   ./bit prd --gate          kode keluar 0 bila gerbang fase aktif lolos, 1 bila belum (untuk CI)
+  ./bit prd lanjut          tampilkan langkah berikutnya + perintahnya (--jalankan: tawarkan menjalankan langsung)
   ./bit prd putuskan        jawab 6 keputusan terbuka lewat tanya-jawab; disimpan di docs/keputusan_prd.json
 
 Hanya pustaka standar Python.
@@ -419,8 +420,53 @@ def to_markdown(reqs, mets, gates, active) -> str:
     return "\n".join(L) + "\n"
 
 
+NEXT_STEPS = [  # (judul status, fungsi selesai?, penjelasan, perintah, butuh orang?)
+    ("Validasi sentimen manusia (≥ 100 baris, 2 anotator)", lambda: human_labels() >= 100,
+     "Anda & 1 orang memberi label terpisah; ±30–40 menit per orang",
+     ["./bit anotasi 1", "./bit anotasi 2", "./bit sentiment validate"], True),
+    ("Komentar YouTube API (tanggal presisi)", lambda: bool(api_runs()),
+     "Butuh API key asli dari console.cloud.google.com (YouTube Data API v3)",
+     ["./bit secret set YT_API_KEY", "./bit precise all", "./bit correlate"], True),
+    ("Google Trends pra-rilis untuk semua film", lambda: all((r.get("trends_pra_rilis") or "").strip() for r in read_csv(p("data", "films_clean.csv"))),
+     "Isi tanggal rilis film yang kosong (dengan sumber) di data/films_with_dates.csv, lalu ambil ulang",
+     ["./bit trends", "./bit rebuild-master"], True),
+    ("Koreksi BH: ≥ 1 uji lolos (q < 0,05)", lambda: bh_passes()[0] >= 1,
+     "Tidak bisa diperbaiki dengan hitung ulang. Butuh ± 47 film untuk mendeteksi ρ = 0,4. Laporkan apa adanya di v1.0",
+     ["./bit discover <nama> <@kanal>", "./bit robust"], False),
+    ("Model mengungguli baseline", lambda: c_f06()[0] == DONE,
+     "Butuh fitur pra-rilis presisi (API) + n lebih besar. Hasil negatif sah dilaporkan di v1.0",
+     ["./bit model"], False),
+]
+
+
+def next_steps(run=False):
+    print("\nLangkah berikutnya (dihitung dari repo, bukan ditempel ke terminal):\n")
+    todo = 0
+    for title, done_fn, why, cmds, manual in NEXT_STEPS:
+        try:
+            done = bool(done_fn())
+        except Exception:
+            done = False
+        print(f"  {'✅' if done else '⬜'} {title}")
+        if done:
+            continue
+        todo += 1
+        print(f"      {why}")
+        for c in cmds:
+            print(f"      $ {c}")
+        if run and manual and "<" not in cmds[0]:
+            ans = input(f"      Jalankan sekarang '{cmds[0]}'? [y/N] ").strip().lower()
+            if ans == "y":
+                subprocess.run([os.path.join(BASE, "bit")] + cmds[0].split()[1:], cwd=BASE)
+        print()
+    print("Semua langkah selesai." if not todo else f"{todo} langkah tersisa. Jalankan satu perintah per baris, tanpa menempel tabel status.")
+
+
 def main(argv=None):
     argv = argv if argv is not None else sys.argv[1:]
+    if argv[:1] == ["lanjut"]:
+        next_steps(run="--jalankan" in argv)
+        return 0
     if argv[:1] == ["putuskan"]:
         decide()
         return 0

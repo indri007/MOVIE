@@ -72,6 +72,7 @@ Penggunaan:
   --- PRD hidup ---
   ./bit prd [--md] [--json] [--gate]         PRD SANTET: status kebutuhan, metrik & gerbang rilis dihitung dari repo
                                              --md: tulis docs/PRD_SANTET.md · --gate: keluar 1 bila fase aktif belum lolos
+  ./bit prd lanjut [--jalankan]              Langkah berikutnya untuk tiap status ⏳/⚠️ + perintahnya
   ./bit prd putuskan                         Jawab 6 keputusan terbuka PRD (tanya-jawab, tersimpan)
 
   --- Rahasia (token / API key) ---
