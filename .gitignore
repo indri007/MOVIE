@@ -86,3 +86,6 @@ repos/
 
 # Berkas sementara dari audit
 _to_delete/
+
+# Laporan audit lokal (dibuat ulang tiap ./bit audit)
+results/audit_*/
