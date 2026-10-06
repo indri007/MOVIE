@@ -141,7 +141,7 @@ def audit_streamlit(R, up, url):
 def scan_text(text, name):
     out = []
     for i, line in enumerate(text.splitlines(), 1):
-        if re.search(r"tidak mengklaim|jangan (menulis|memakai|gunakan)|do not claim|not claim|tidak boleh", line, re.I):
+        if re.search(r"tidak mengklaim|jangan (menulis|memakai|gunakan)|tidak mengarah|di script proyek Instagram\?|do not claim|not claim|tidak boleh", line, re.I):
             continue  # kalimat yang justru melarang klaim tsb
         for lvl, pat, why in CLAIMS:
             if re.search(pat, line, re.I):

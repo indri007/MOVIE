@@ -74,7 +74,7 @@ The relational topologies were computed using Brandes betweenness centrality and
 ## CHAPTER 4: AFFECTIVE COMPUTING & INDOBERT 9-EMOTIONS CLASSIFICATION
 Natural language processing was elevated using fine-tuned IndoBERT (indobenchmark/indobert-base-p1) combined with contextual 768-dimensional embeddings:
 - Emotion Distribution: Joy 24.5%, Anticipation 18.2%, Trust 16.1%, Optimism 12.4%, Surprise 9.8%, Love 7.6%, Sadness 5.1%, Anger 3.8%, Fear 2.5%.
-- Inter-Annotator Agreement (Cohen's Kappa): kappa = 0.8342 (Landis & Koch "Almost Perfect Agreement").
+- Inter-Annotator Agreement (Cohen's Kappa): kappa belum diukur (label manusia belum ada).
 - One-Way Inferential ANOVA: F(2, 27) = 69.74, p = 3.50e-69 (p < 0.0001).
 - Effect Size: Eta-squared = 0.1043 (exceeding Cohen's 0.060 large-effect threshold).
 
@@ -87,7 +87,7 @@ Under a 10,000-iteration Monte Carlo simulation:
 - Mean Expectation: 128.03 Million.
 - 95% Confidence Interval: [123.02 Million, 133.07 Million].
 - Standard Deviation: 2.56 Million.
-- Forecasting Accuracy: MAPE = 1.55% (Lewis 1982 benchmark < 10%), RMSE = 1.404M, Theil's Inequality U = 0.0074 (< 0.2000).
+- Forecasting Accuracy: MAPE belum diverifikasi (Lewis 1982 benchmark < 10%), RMSE = 1.404M, Theil's Inequality U = 0.0074 (< 0.2000).
 
 ## CHAPTER 6: ELSEVIER SCOPUS Q1 CERTIFICATION & INSTANT DOWNLOAD HUB
 The formal academic manuscript was written and compiled into:
@@ -95,7 +95,7 @@ The formal academic manuscript was written and compiled into:
 - Word Editable Document: output/scopus_q1_journal_manuscript.docx
 - Academic Markdown: output/scopus_q1_journal_manuscript.md
 - Full Research Bundle: output/scopus_q1_elsevier_package.zip
-All 11 Scopus Q1 KPIs achieved 100% PASS / EXCEEDED status.
+KPI di atas belum diverifikasi out-of-sample dan belum ditelaah reviewer.
 
 ## CHAPTER 7: COMPLETE CHRONOLOGICAL GIT LEDGER
 {commit_history_text}

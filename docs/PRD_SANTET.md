@@ -1,6 +1,6 @@
 # PRD SANTET
 
-_06-10-2026 23:24 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
+_06-10-2026 23:27 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
 
 **SANTET — Sentiment Analysis for Nusantara Theatrical Expectation Tracking** — Membaca 'mantra' warganet sebelum film tayang · Fear is demand
 
@@ -63,9 +63,9 @@ Setiap film lahir dari kerja bertahun-tahun, tetapi nasibnya baru diketahui sete
 
 ## Keputusan
 
-- [x] Setuju v1.0 diposisikan sebagai riset explanatory (n = 15) dan klaim prediktif ditunda ke v2.0? → **BAIKNYA** (2026-10-06 23:22)
-- [x] Ganti salt pseudonim kapan? (semua ID berubah, results/ dibuat ulang) → **BAIKNYA** (2026-10-06 23:23)
-- [x] Siapa anotator kedua dan kapan 100 baris label selesai? → **TIDAK TAU** (2026-10-06 23:23)
-- [x] Repo GitHub untuk SANTET? → **TETAP https://github.com/indri007/prediksi-movie-2027** (2026-10-06 23:23)
-- [x] Jurnal target pertama? → **Jalur data (mis. Telematics and Informatics)** (2026-10-06 23:24)
-- [x] Angka κ 0,8342 dan MAPE 1,55% di script proyek Instagram? → **Hapus dari kode** (2026-10-06 23:24)
+- [ ] Setuju v1.0 diposisikan sebagai riset explanatory (n = 15) dan klaim prediktif ditunda ke v2.0?
+- [x] Ganti salt pseudonim kapan? (semua ID berubah, results/ dibuat ulang) → **Sekarang, sebelum rilis dataset** (2026-10-06 23:27)
+- [ ] Siapa anotator kedua dan kapan 100 baris label selesai?
+- [x] Repo GitHub untuk SANTET? → **Tetap prediksi-movie-2027** (2026-10-06 23:27)
+- [x] Jurnal target pertama? → **Jalur data (mis. Telematics and Informatics)** (2026-10-06 23:27)
+- [x] Angka κ 0,8342 dan MAPE 1,55% di script proyek Instagram? → **Ada sumber hitungannya (simpan & tautkan)** (2026-10-06 23:27)

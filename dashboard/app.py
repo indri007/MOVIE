@@ -312,7 +312,7 @@ if selected_section == "1. Overview":
         </h3>
         <p style="font-size:0.9rem; color:#475569; margin-bottom:12px;">
             <b>Target Jurnal:</b> Elsevier <i>Information Processing & Management</i> / <i>Computers in Human Behavior</i> (CiteScore 14.8 | IF 8.6)<br/>
-            <b>Metrik Kunci:</b> MAPE 1.55% | Theil's U 0.0074 | Louvain Q 0.0526 | Density 0.8805 | Cohen's Kappa κ 0.8342 | Monte Carlo 95% CI [123.02M - 133.07M]
+            <b>Metrik Kunci:</b> MAPE belum diverifikasi | Theil's U 0.0074 | Louvain Q 0.0526 | Density 0.8805 | Cohen's Kappa κ belum diukur | Monte Carlo 95% CI [123.02M - 133.07M]
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -586,7 +586,7 @@ elif selected_section == "3. NLP / IndoBERT":
         st.markdown("""
         <div class="metric-pill">
             <span class="metric-label">Cohen's Kappa (κ)</span>
-            <span class="metric-val" style="color:#10b981;">0.8342</span>
+            <span class="metric-val" style="color:#10b981;">–</span>
             <span class="badge-available" style="font-size:0.7rem;">Almost Perfect</span>
         </div>
         """, unsafe_allow_html=True)
@@ -1846,7 +1846,7 @@ elif selected_section == "14. Naskah Jurnal (Working Paper) & Downloads":
             <p style="font-size:0.85rem; color:#64748b;">Bounded inequality ratio and relative percentage error:</p>
         </div>
         """, unsafe_allow_html=True)
-        st.latex(r"\text{MAPE} = \frac{100\%}{n} \sum_{t=1}^n \left| \frac{y_t - \hat{y}_t}{y_t} \right| = 1.55\% \quad (< 10.0\% \text{ Lewis})")
+        st.latex(r"\text{MAPE} = \frac{100\%}{n} \sum_{t=1}^n \left| \frac{y_t - \hat{y}_t}{y_t} \right|")
         st.latex(r"U = \frac{\text{RMSE}}{\sqrt{\text{mean}(y_t^2)} + \sqrt{\text{mean}(\hat{y}_t^2)}} = 0.0074 \quad (< 0.2000 \text{ Bliemel})")
 
     # KPI Table

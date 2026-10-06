@@ -336,7 +336,15 @@ DECISIONS_FILE = os.path.join(BASE, "docs", "keputusan_prd.json")
 
 
 def load_decisions() -> dict:
-    return read_json(DECISIONS_FILE)
+    """Jawaban tersimpan; jawaban yang bukan salah satu pilihan dianggap belum diputuskan."""
+    out = {}
+    for key, q, opts in DECISION_SPECS:
+        a = read_json(DECISIONS_FILE).get(key, {})
+        ans = (a.get("jawaban") or "").strip()
+        if not ans or (opts and ans not in opts) or (not opts and ans.lower() in ("tidak tau", "tidak tahu")):
+            continue
+        out[key] = a
+    return out
 
 
 def decide():
@@ -348,12 +356,17 @@ def decide():
         print(f"{i}. {q}" + (f"\n   (sekarang: {old})" if old else ""))
         for j, o in enumerate(opts, 1):
             print(f"   [{j}] {o}")
-        ans = input("   jawab" + (" nomor" if opts else "") + ": ").strip()
-        if not ans:
-            print()
+        while True:
+            ans = input("   jawab" + (" nomor" if opts else "") + ": ").strip()
+            if not ans or not opts:
+                break
+            if ans.isdigit() and 1 <= int(ans) <= len(opts):
+                ans = opts[int(ans) - 1]
+                break
+            print(f"   ⚠️  ketik nomor 1–{len(opts)}, atau Enter untuk melewati")
+        if not ans or (not opts and ans.lower() in ("tidak tau", "tidak tahu", "belum tahu")):
+            print("   ⏭️  dilewati (tetap terbuka)\n")
             continue
-        if opts and ans.isdigit() and 1 <= int(ans) <= len(opts):
-            ans = opts[int(ans) - 1]
         saved[key] = {"pertanyaan": q, "jawaban": ans, "tanggal": f"{dt.datetime.now():%Y-%m-%d %H:%M}"}
         print(f"   ✅ {ans}\n")
     os.makedirs(os.path.dirname(DECISIONS_FILE), exist_ok=True)
