@@ -1,6 +1,6 @@
 # PRD SANTET
 
-_06-10-2026 23:27 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
+_06-10-2026 23:31 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
 
 **SANTET — Sentiment Analysis for Nusantara Theatrical Expectation Tracking** — Membaca 'mantra' warganet sebelum film tayang · Fear is demand
 
@@ -18,18 +18,18 @@ Setiap film lahir dari kerja bertahun-tahun, tetapi nasibnya baru diketahui sete
 
 | ID | Kebutuhan | Prioritas | Kriteria terima | Status | Bukti |
 |---|---|---|---|---|---|
-| F-01 | ./bit scrape/convert: metadata & komentar trailer, akun dipseudonimkan | Must | Tidak ada nama akun asli; salt sama = ID sama | ✅ Ada | 4 set, akun terpseudonim · ⚠️ salt default masih tertulis di kode |
+| F-01 | ./bit scrape/convert: metadata & komentar trailer, akun dipseudonimkan | Must | Tidak ada nama akun asli; salt sama = ID sama | ✅ Ada | 4 set, akun terpseudonim |
 | F-02 | ./bit precise: komentar via YouTube Data API dengan tanggal tepat | Must | Timestamp asli; jendela H-14/H-7/H-1 terisi | ⏳ Menunggu | API key belum ada: ./bit secret set YT_API_KEY · 6 folder kosong (run gagal) |
 | F-03 | ./bit sentiment validate: κ & F1 terhadap label manusia | Must | ≥ 100 baris dua anotator; laporan κ dan F1 | ⏳ Menunggu | 0 baris berlabel dua anotator (target ≥ 100) |
 | F-04 | Watch Intent Index per komentar | Must | Tervalidasi label manusia, κ ≥ 0,80 | ⬜ Belum | hanya kategori kata kunci (sna 04_warna-niat), belum tervalidasi |
 | F-05 | ./bit correlate/robust: Spearman eksak, bootstrap, Bonferroni, BH, parsial | Must | Semua uji dilaporkan, termasuk yang tidak signifikan | ✅ Ada | results/robust_20261006_1252/robustness.csv · lolos BH 0/10 |
 | F-06 | ./bit model: LOOCV vs baseline naif dengan CI MAPE | Must | Laporan menyatakan model menang/kalah | 🟡 Sebagian | MAPE model 85.8% vs baseline 70.3% · belum mengalahkan baseline |
-| F-07 | ./bit sna: 20 analisis jaringan + ekspor NodeXL | Should | edges/vertices terbuka di NodeXL Pro | ✅ Ada | results/sna_20261006_2128/nodexl/edges.csv |
-| F-08 | ./bit package: paket rilis tanpa teks + MANIFEST SHA-256 | Must | Checksum cocok; tanpa kolom teks | ✅ Ada | release/paper_package_20261006_1252/MANIFEST.sha256 |
+| F-07 | ./bit sna: 20 analisis jaringan + ekspor NodeXL | Should | edges/vertices terbuka di NodeXL Pro | ✅ Ada | results/sna_20261006_2331/nodexl/edges.csv |
+| F-08 | ./bit package: paket rilis tanpa teks + MANIFEST SHA-256 | Must | Checksum cocok; tanpa kolom teks | ✅ Ada | release/paper_package_20261006_2331/MANIFEST.sha256 |
 | F-09 | ./bit audit: git, Streamlit, klaim, angka, rahasia | Must | 0 kritis sebelum setiap rilis | ✅ Ada | audit terakhir: ⚠️  ADA PERINGATAN (0 kritis) |
 | F-10 | ./bit secret: Keychain + blokir commit berisi token | Must | scan bersih; hook aktif | ✅ Ada | pre-commit hook aktif |
 | F-11 | Dashboard Streamlit SANTET membaca results/ terbaru | Should | Angka dashboard = results/ | 🟡 Sebagian | streamlit_app/app.py ada · cek tampilan live & Reboot app |
-| F-12 | ./bit intro: draf Introduction dengan angka otomatis | Could | Angka ikut berubah saat pipeline diulang | ✅ Ada | diperbarui 06-10-2026 20:48 |
+| F-12 | ./bit intro: draf Introduction dengan angka otomatis | Could | Angka ikut berubah saat pipeline diulang | ✅ Ada | diperbarui 06-10-2026 23:31 |
 | F-13 | Kalkulator prediksi untuk produser | Won't (v1.0) | Setelah model mengalahkan baseline | ➖ Ditunda | dibuka hanya setelah gerbang v2.0 lolos |
 
 ## Metrik keberhasilan
@@ -50,7 +50,7 @@ Setiap film lahir dari kerja bertahun-tahun, tetapi nasibnya baru diketahui sete
 - [x] ./bit audit: 0 kritis
 - [ ] ≥ 100 label manusia
 - [ ] κ antar-anotator manusia ≥ 0,80
-- [ ] Salt default tidak lagi tertulis di kode
+- [x] Salt default tidak lagi tertulis di kode
 
 **v1.1 · Data presisi** — Komentar via YouTube API · Jendela H-14 / H-7 / H-1 · Watch Intent Index tervalidasi
 - [ ] Data YouTube API presisi tersedia
