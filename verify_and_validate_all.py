@@ -202,7 +202,7 @@ def test_bit_integrity():
     return all_passed
 
 def test_scopus_q1_journal_and_downloads():
-    print_header("5. VALIDASI NASKAH JURNAL SCOPUS Q1 ELSEVIER & DOWNLOADS")
+    print_header("5. VALIDASI NASKAH JURNAL TARGET: JURNAL ELSEVIER (BELUM TERBIT) & DOWNLOADS")
     files_to_check = [
         ("PDF Publication Manuscript", "output/scopus_q1_journal_manuscript.pdf"),
         ("Word DOCX Manuscript", "output/scopus_q1_journal_manuscript.docx"),
@@ -289,7 +289,7 @@ def test_streamlit_and_deployment():
         code_str = f.read()
     c6 = check("dashboard/app.py memuat Section 9 (Network Analysis)", 'selected_section == "9. Network Analysis"' in code_str)
     c7 = check("dashboard/app.py memuat Section 10 (2027 Forecasting)", 'selected_section == "10. 2027 Forecasting"' in code_str)
-    c8 = check("dashboard/app.py memuat Section 14 (Scopus Q1 Journal & Downloads)", 'selected_section == "14. Scopus Q1 Journal & Downloads"' in code_str)
+    c8 = check("dashboard/app.py memuat Section 14 (Scopus Q1 Journal & Downloads)", 'selected_section == "14. Naskah Jurnal (Working Paper) & Downloads"' in code_str)
     
     return all([c1, c2, c3, c4, c5, c6, c7, c8])
 

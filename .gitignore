@@ -1,16 +1,26 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-
-# Virtual environments
+# Python & Virtual environments
 .venv/
 venv/
 env/
 instagram2027/
 scratch/
 .kilo/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Raw Scraped Dumps & PII Protection (UU PDP No. 27/2022)
+yt_*/
+yt_hitmaker/
+yt_ivanna/
+yt_md/
+yt_soraya/
+*.info.json
+
+# Manual Annotation Raw Sample (Privasi Anotator)
+annotation/annotation_sample.csv
+annotation/_model_labels_hidden.csv
 
 # Secrets & Sessions
 .env
@@ -23,21 +33,17 @@ secrets*
 *credential*
 *token*
 
-# Crawler backups & temp files
+# Backups & Logs
+_backup/
+*.log
 *.bak
 *.backup
+*.swp
 *.patch_backup
 *.pre_main_patch
 *.before_resume_patch
 *.session_backup
 *.auth_backup
-API
-Create
-Settings
-ganti
-
-# Logs
-*.log
 data/crawl_log.txt
 
 # Large Model Binaries & Checkpoints (preserves repository speed)
@@ -48,40 +54,25 @@ data/crawl_log.txt
 *.pt
 *.pth
 output/bertopic_model
+models/indobert-horror/
 models/indobert/*
 !models/indobert/.gitkeep
 !models/indobert/*.json
 models/viral_model/*
 !models/viral_model/.gitkeep
 
-# Python cache anywhere
-**/__pycache__/
-**/*.pyc
-
 # OS / IDE
 .DS_Store
 .vscode/
 .idea/
 
-# ─────────────────────────────────────────────
-# LARGE DATA & BINARY ASSETS  (not tracked in git)
-# ─────────────────────────────────────────────
-
-# External datasets (9.7GB – use Git LFS or DVC if needed)
+# Large External Datasets & Media
 data/external/
-
-# Output parquets & heavy files (keep only sample CSVs)
 output/*.parquet
 output/*.joblib
 output/*.pkl
-
-# Scrapers (cloned repos – install via requirements.txt / separate clone)
 scrapers/
-
-# Reference repos
 repos/
-
-# Video / image / archive assets
 *.mp4
 *.avi
 *.mov
@@ -91,7 +82,7 @@ repos/
 *.7z
 *.tar.gz
 *.xlsx
-*.ipynb
-
-# Parquet files anywhere (keep code, not binaries)
 *.parquet
+
+# Berkas sementara dari audit
+_to_delete/

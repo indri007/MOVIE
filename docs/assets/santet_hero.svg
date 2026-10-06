@@ -1,0 +1,343 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" role="img" aria-labelledby="t d">
+  <title id="t">SANTET — Fear is demand (animasi 6 babak, Material 3)</title>
+  <desc id="d">Prolog: komentar melayang dari layar trailer. Babak I: 3.346.216 vs 525.034 penonton (6,4x). Babak II: model standar 51,2% negatif vs leksikon horor 10,0%. Babak III: peta riset dunia, Indonesia hanya titik kecil. Babak IV: huruf S-A-N-T-E-T mengorbit, terbentuk TIKET H-7. Epilog: jaringan komentator membentuk tiga komunitas.</desc>
+  <!--
+    Material 3 dark scheme (seed #B3263C, tertiary harmonised to teal)
+    primary #FFB2B7 · on-primary #67001D · primary-container #91002D · on-primary-container #FFDADB
+    secondary-container #5D3F41 · tertiary #4FDBC4 · tertiary-container #005045 · on-tertiary-container #71F8E0
+    surface #1A1112 · s-container-low #22191A · s-container #271D1E · s-container-high #322828 · s-container-highest #3D3233
+    on-surface #F0DEDF · on-surface-variant #D7C1C2 · outline #A08C8D · outline-variant #524344
+  -->
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="20%" r="80%">
+      <stop offset="0" stop-color="#3a1a20"/>
+      <stop offset=".5" stop-color="#1a1112"/>
+      <stop offset="1" stop-color="#120b0c"/>
+    </radialGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffdadb"/>
+      <stop offset="1" stop-color="#ffb2b7"/>
+    </linearGradient>
+    <linearGradient id="cone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb2b7" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#ffb2b7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="pri" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb2b7"/>
+      <stop offset="1" stop-color="#91002d"/>
+    </linearGradient>
+    <linearGradient id="sec" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e6bdbe"/>
+      <stop offset="1" stop-color="#5d3f41"/>
+    </linearGradient>
+    <linearGradient id="neu" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a08c8d"/>
+      <stop offset="1" stop-color="#3d3233"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="elev" x="-10%" y="-20%" width="120%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity=".35"/>
+    </filter>
+    <style>
+      text{font-family:"Roboto Flex","Roboto","Google Sans",-apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;fill:#f0dedf}
+      /* M3 type scale */
+      .label{font-size:14px;font-weight:500;letter-spacing:.1px}
+      .headline{font-size:32px;font-weight:500}
+      .body{font-size:16px;fill:#d7c1c2;letter-spacing:.5px}
+      .bodyS{font-size:14px;fill:#d7c1c2;letter-spacing:.25px}
+      .title{font-size:22px;font-weight:500}
+      .display{font-size:64px;font-weight:500}
+      .on-pc{fill:#ffdadb}.on-tc{fill:#71f8e0}.pri{fill:#ffb2b7}.ter{fill:#4fdbc4}
+
+      .act{opacity:0;animation:act 36s infinite both}
+      .d0{animation-delay:0s}.d1{animation-delay:6s}.d2{animation-delay:12s}
+      .d3{animation-delay:18s}.d4{animation-delay:24s}.d5{animation-delay:30s}
+      @keyframes act{0%{opacity:0}1.6%{opacity:1}15.2%{opacity:1}16.66%{opacity:0}100%{opacity:0}}
+
+      /* M3 segmented linear progress */
+      .seg{animation:seg 36s infinite both}
+      @keyframes seg{0%{fill:#5d3f41}1%{fill:#ffb2b7}16%{fill:#ffb2b7}16.66%{fill:#5d3f41}100%{fill:#5d3f41}}
+
+      .grow{transform-box:fill-box;transform-origin:50% 100%;animation:grow 36s infinite both;animation-timing-function:cubic-bezier(.2,0,0,1)}
+      @keyframes grow{0%,1.5%{transform:scaleY(0)}7%{transform:scaleY(1)}100%{transform:scaleY(1)}}
+      .pop{transform-box:fill-box;transform-origin:50% 50%;animation:pop 36s infinite both}
+      @keyframes pop{0%,6%{opacity:0;transform:scale(.6)}8.5%{opacity:1;transform:scale(1.06)}9.5%{transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+      .popL{transform-box:fill-box;transform-origin:50% 50%;animation:popL 36s infinite both}
+      @keyframes popL{0%,10%{opacity:0;transform:scale(.5)}12%{opacity:1;transform:scale(1.08)}13%{transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+      .float{animation:float 36s infinite both}
+      @keyframes float{0%{opacity:0;transform:translate(0,70px) scale(.9)}2.5%{opacity:1}13%{opacity:1;transform:translate(0,-36px) scale(1)}16%{opacity:0;transform:translate(0,-60px)}100%{opacity:0}}
+
+      .ringA{animation:ringA 36s infinite both}
+      @keyframes ringA{0%,1.5%{stroke-dashoffset:565.5}8%{stroke-dashoffset:276}100%{stroke-dashoffset:276}}
+      .ringB{animation:ringB 36s infinite both}
+      @keyframes ringB{0%,1.5%{stroke-dashoffset:565.5}8%{stroke-dashoffset:509}100%{stroke-dashoffset:509}}
+      .scan{animation:scan 36s infinite both}
+      @keyframes scan{0%,2%{transform:translate(0,0)}14%{transform:translate(0,270px)}100%{transform:translate(0,270px)}}
+      @keyframes redA{0%,2%{fill:#322828}4%{fill:#91002d}100%{fill:#91002d}}
+      @keyframes redB{0%,4%{fill:#322828}6%{fill:#91002d}100%{fill:#91002d}}
+      @keyframes redC{0%,6.5%{fill:#322828}8.5%{fill:#91002d}100%{fill:#91002d}}
+      @keyframes redD{0%,9%{fill:#322828}11%{fill:#91002d}100%{fill:#91002d}}
+      @keyframes redE{0%,11.5%{fill:#322828}13.5%{fill:#91002d}100%{fill:#91002d}}
+
+      .pulse{transform-box:fill-box;transform-origin:50% 50%;animation:pulse 1.6s ease-in-out infinite}
+      @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
+      .ripple{transform-box:fill-box;transform-origin:50% 50%;animation:ripple 1.6s ease-out infinite}
+      @keyframes ripple{0%{transform:scale(.4);opacity:.9}100%{transform:scale(3.2);opacity:0}}
+
+      .orbit{transform-origin:600px 262px;animation:orbit 36s linear infinite both}
+      @keyframes orbit{0%{transform:rotate(0)}16.66%{transform:rotate(240deg)}100%{transform:rotate(240deg)}}
+      .counter{transform-box:fill-box;transform-origin:50% 50%;animation:counter 36s linear infinite both}
+      @keyframes counter{0%{transform:rotate(0)}16.66%{transform:rotate(-240deg)}100%{transform:rotate(-240deg)}}
+      .spin{transform-origin:600px 262px;animation:spin 14s linear infinite}
+      @keyframes spin{to{transform:rotate(-360deg)}}
+      .toTeal{animation:toTeal 36s infinite both}
+      @keyframes toTeal{0%,3%{fill:#91002d}9%{fill:#005045}100%{fill:#005045}}
+
+      .draw{stroke-dasharray:400;animation:draw 36s infinite both}
+      @keyframes draw{0%,3%{stroke-dashoffset:400}10%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+      .node{transform-box:fill-box;transform-origin:50% 50%;animation:node 36s infinite both}
+      @keyframes node{0%,.5%{transform:scale(0)}4%{transform:scale(1.2)}5%{transform:scale(1)}100%{transform:scale(1)}}
+
+      @media (prefers-reduced-motion:reduce){
+        *{animation:none!important}
+        .act{opacity:0}.d4{opacity:1}
+      }
+    </style>
+  </defs>
+
+  <rect width="1200" height="520" fill="url(#bg)"/>
+
+  <!-- M3 bottom bar (surface-container) -->
+  <rect x="0" y="460" width="1200" height="60" fill="#22191a"/>
+  <rect x="24" y="474" width="32" height="32" rx="16" fill="#91002d"/>
+  <text x="40" y="496" text-anchor="middle" font-size="16">🕯</text>
+  <text x="68" y="488" class="label" style="font-size:16px;font-weight:700">SANTET</text>
+  <text x="68" y="505" class="bodyS" style="font-size:12px">Sentiment Analysis for Nusantara Theatrical Expectation Tracking</text>
+  <!-- segmented linear progress (M3) -->
+  <g transform="translate(856 487)">
+    <rect class="seg d0" x="0"   width="50" height="6" rx="3"/>
+    <rect class="seg d1" x="54"  width="50" height="6" rx="3"/>
+    <rect class="seg d2" x="108" width="50" height="6" rx="3"/>
+    <rect class="seg d3" x="162" width="50" height="6" rx="3"/>
+    <rect class="seg d4" x="216" width="50" height="6" rx="3"/>
+    <rect class="seg d5" x="270" width="50" height="6" rx="3"/>
+    <circle cx="326" cy="3" r="2" fill="#ffb2b7"/>
+  </g>
+
+  <!-- ===================== PROLOG ===================== -->
+  <g class="act d0">
+    <rect x="40" y="28" width="92" height="32" rx="8" fill="none" stroke="#524344"/>
+    <text x="86" y="49" text-anchor="middle" class="label pri">Prolog</text>
+    <text x="40" y="100" class="headline">Malam sebelum tayang</text>
+    <polygon points="440,240 760,240 1000,460 200,460" fill="url(#cone)"/>
+    <rect x="440" y="70" width="320" height="170" rx="28" fill="url(#screen)" filter="url(#glow)"/>
+    <circle cx="600" cy="150" r="30" fill="#91002d"/>
+    <polygon points="590,135 590,165 615,150" fill="#ffdadb"/>
+    <text x="600" y="218" text-anchor="middle" class="label" style="fill:#67001d;letter-spacing:2px">TRAILER RESMI</text>
+    <g fill="#271d1e">
+      <rect x="150" y="380" width="76" height="40" rx="16"/><rect x="236" y="380" width="76" height="40" rx="16"/><rect x="322" y="380" width="76" height="40" rx="16"/><rect x="408" y="380" width="76" height="40" rx="16"/><rect x="716" y="380" width="76" height="40" rx="16"/><rect x="802" y="380" width="76" height="40" rx="16"/><rect x="888" y="380" width="76" height="40" rx="16"/><rect x="974" y="380" width="76" height="40" rx="16"/>
+      <rect x="110" y="424" width="84" height="40" rx="16"/><rect x="204" y="424" width="84" height="40" rx="16"/><rect x="298" y="424" width="84" height="40" rx="16"/><rect x="392" y="424" width="84" height="40" rx="16"/><rect x="724" y="424" width="84" height="40" rx="16"/><rect x="818" y="424" width="84" height="40" rx="16"/><rect x="912" y="424" width="84" height="40" rx="16"/><rect x="1006" y="424" width="84" height="40" rx="16"/>
+    </g>
+    <!-- M3 filled cards (comment list items) -->
+    <g class="float" style="animation-delay:.2s" filter="url(#elev)">
+      <rect x="70" y="230" width="330" height="64" rx="12" fill="#322828"/>
+      <circle cx="102" cy="262" r="16" fill="#5d3f41"/><text x="102" y="268" text-anchor="middle" class="label">A</text>
+      <text x="128" y="256" class="bodyS" style="font-size:12px">@penonton_1 · trailer</text>
+      <text x="128" y="278" class="label">Serem banget anjir, merinding parah.</text>
+    </g>
+    <g class="float" style="animation-delay:.9s" filter="url(#elev)">
+      <rect x="455" y="270" width="290" height="64" rx="12" fill="#322828"/>
+      <circle cx="487" cy="302" r="16" fill="#5d3f41"/><text x="487" y="308" text-anchor="middle" class="label">B</text>
+      <text x="513" y="296" class="bodyS" style="font-size:12px">@penonton_2 · trailer</text>
+      <text x="513" y="318" class="label">Gas nonton hari pertama! 🔥</text>
+    </g>
+    <g class="float" style="animation-delay:1.6s" filter="url(#elev)">
+      <rect x="790" y="230" width="350" height="64" rx="12" fill="#322828"/>
+      <circle cx="822" cy="262" r="16" fill="#5d3f41"/><text x="822" y="268" text-anchor="middle" class="label">C</text>
+      <text x="848" y="256" class="bodyS" style="font-size:12px">@penonton_3 · trailer</text>
+      <text x="848" y="278" class="label">Ga berani nonton sendirian, ajak bestie 😭</text>
+    </g>
+  </g>
+
+  <!-- ===================== BABAK I ===================== -->
+  <g class="act d1">
+    <rect x="40" y="28" width="92" height="32" rx="8" fill="none" stroke="#524344"/>
+    <text x="86" y="49" text-anchor="middle" class="label pri">Babak I</text>
+    <text x="40" y="100" class="headline">Kutukan yang sebenarnya</text>
+    <text x="40" y="128" class="body">Studio sama, genre sama — hasil berbeda enam kali lipat.</text>
+    <g class="grow" style="animation-delay:6s">
+      <rect x="460" y="140" width="110" height="300" rx="6" fill="url(#pri)"/>
+      <polygon points="570,436 600,418 600,122 570,144" fill="#67001d"/>
+      <polygon points="466,140 570,140 600,122 496,122" fill="#ffdadb"/>
+    </g>
+    <g class="grow" style="animation-delay:6s">
+      <rect x="720" y="393" width="110" height="47" rx="6" fill="url(#sec)"/>
+      <polygon points="830,436 860,418 860,375 830,397" fill="#3d2829"/>
+      <polygon points="726,393 830,393 860,375 756,375" fill="#ffdadb" opacity=".8"/>
+    </g>
+    <g class="pop" style="animation-delay:6s">
+      <text x="530" y="106" text-anchor="middle" class="title" style="font-size:28px;font-weight:600">3.346.216</text>
+      <text x="790" y="362" text-anchor="middle" class="title" style="font-size:28px;font-weight:600">525.034*</text>
+    </g>
+    <!-- M3 suggestion chips as labels -->
+    <rect x="420" y="446" width="220" height="28" rx="8" fill="#271d1e" stroke="#524344"/>
+    <text x="530" y="465" text-anchor="middle" class="bodyS" style="font-size:12px">Suzzanna: Bernapas dalam Kubur (2018)</text>
+    <rect x="680" y="446" width="220" height="28" rx="8" fill="#271d1e" stroke="#524344"/>
+    <text x="790" y="465" text-anchor="middle" class="bodyS" style="font-size:12px">Racun Sangga (2024) · *sementara</text>
+    <g class="popL" style="animation-delay:6s">
+      <rect x="920" y="190" width="200" height="120" rx="28" fill="#91002d"/>
+      <text x="1020" y="262" text-anchor="middle" class="display on-pc">6,4×</text>
+      <text x="1020" y="292" text-anchor="middle" class="bodyS on-pc" style="font-size:12px">baru ketahuan setelah tayang</text>
+    </g>
+  </g>
+
+  <!-- ===================== BABAK II ===================== -->
+  <g class="act d2">
+    <rect x="40" y="28" width="92" height="32" rx="8" fill="none" stroke="#524344"/>
+    <text x="86" y="49" text-anchor="middle" class="label pri">Babak II</text>
+    <text x="40" y="100" class="headline">Mesin yang tuli</text>
+    <text x="40" y="128" class="body">9.840 komentar trailer — “takut” dibaca sebagai “benci”.</text>
+    <!-- M3 circular progress indicators -->
+    <circle cx="250" cy="290" r="90" fill="none" stroke="#3d3233" stroke-width="16"/>
+    <circle cx="250" cy="290" r="90" fill="none" stroke="#ffb2b7" stroke-width="16" stroke-linecap="round" stroke-dasharray="565.5" transform="rotate(-90 250 290)" class="ringA" style="animation-delay:12s"/>
+    <text x="250" y="300" text-anchor="middle" class="headline">51,2%</text>
+    <text x="250" y="324" text-anchor="middle" class="bodyS">negatif</text>
+    <text x="250" y="418" text-anchor="middle" class="label">Model standar (IndoBERT)</text>
+
+    <circle cx="520" cy="290" r="90" fill="none" stroke="#3d3233" stroke-width="16"/>
+    <circle cx="520" cy="290" r="90" fill="none" stroke="#4fdbc4" stroke-width="16" stroke-linecap="round" stroke-dasharray="565.5" transform="rotate(-90 520 290)" class="ringB" style="animation-delay:12s"/>
+    <text x="520" y="300" text-anchor="middle" class="headline">10,0%</text>
+    <text x="520" y="324" text-anchor="middle" class="bodyS">negatif</text>
+    <text x="520" y="418" text-anchor="middle" class="label">Leksikon sadar-horor</text>
+
+    <g>
+      <rect x="760" y="150" width="340" height="44" rx="12" fill="#322828" style="animation:redA 36s 12s infinite both"/>
+      <rect x="760" y="204" width="340" height="44" rx="12" fill="#322828" style="animation:redB 36s 12s infinite both"/>
+      <rect x="760" y="258" width="340" height="44" rx="12" fill="#322828" style="animation:redC 36s 12s infinite both"/>
+      <rect x="760" y="312" width="340" height="44" rx="12" fill="#322828" style="animation:redD 36s 12s infinite both"/>
+      <rect x="760" y="366" width="340" height="44" rx="12" fill="#322828" style="animation:redE 36s 12s infinite both"/>
+      <text x="780" y="177" class="label">“serem banget 😱”</text>
+      <text x="780" y="231" class="label">“merinding parah”</text>
+      <text x="780" y="285" class="label">“takut tapi pengen nonton”</text>
+      <text x="780" y="339" class="label">“ngeri bgt sumpah”</text>
+      <text x="780" y="393" class="label">“horor terbaik tahun ini!”</text>
+      <g class="bodyS" style="font-size:12px">
+        <text x="1084" y="177" text-anchor="end" class="on-pc">negatif</text>
+        <text x="1084" y="231" text-anchor="end" class="on-pc">negatif</text>
+        <text x="1084" y="285" text-anchor="end" class="on-pc">negatif</text>
+        <text x="1084" y="339" text-anchor="end" class="on-pc">negatif</text>
+        <text x="1084" y="393" text-anchor="end" class="on-pc">negatif</text>
+      </g>
+    </g>
+    <g class="scan" style="animation-delay:12s">
+      <rect x="744" y="140" width="372" height="3" rx="1.5" fill="#ffb2b7" filter="url(#glow)"/>
+    </g>
+  </g>
+
+  <!-- ===================== BABAK III ===================== -->
+  <g class="act d3">
+    <rect x="40" y="28" width="100" height="32" rx="8" fill="none" stroke="#524344"/>
+    <text x="90" y="49" text-anchor="middle" class="label pri">Babak III</text>
+    <text x="40" y="100" class="headline">Bangsa yang tak tercatat</text>
+    <text x="40" y="128" class="body">Riset prediksi box office di jurnal dunia.</text>
+    <g class="grow" style="animation-delay:18s">
+      <rect x="150" y="160" width="90" height="280" rx="6" fill="url(#neu)"/><polygon points="240,436 264,422 264,146 240,164" fill="#271d1e"/><polygon points="156,160 240,160 264,146 180,146" fill="#d7c1c2"/>
+    </g>
+    <g class="grow" style="animation-delay:18.3s">
+      <rect x="320" y="230" width="90" height="210" rx="6" fill="url(#neu)"/><polygon points="410,436 434,422 434,216 410,234" fill="#271d1e"/><polygon points="326,230 410,230 434,216 350,216" fill="#d7c1c2"/>
+    </g>
+    <g class="grow" style="animation-delay:18.6s">
+      <rect x="490" y="280" width="90" height="160" rx="6" fill="url(#neu)"/><polygon points="580,436 604,422 604,266 580,284" fill="#271d1e"/><polygon points="496,280 580,280 604,266 520,266" fill="#d7c1c2"/>
+    </g>
+    <g class="grow" style="animation-delay:18.9s">
+      <rect x="660" y="260" width="90" height="180" rx="6" fill="url(#neu)"/><polygon points="750,436 774,422 774,246 750,264" fill="#271d1e"/><polygon points="666,260 750,260 774,246 690,246" fill="#d7c1c2"/>
+    </g>
+    <text x="198" y="452" text-anchor="middle" class="label" style="fill:#d7c1c2">Hollywood</text>
+    <text x="368" y="452" text-anchor="middle" class="label" style="fill:#d7c1c2">China</text>
+    <text x="538" y="452" text-anchor="middle" class="label" style="fill:#d7c1c2">Korea</text>
+    <text x="708" y="452" text-anchor="middle" class="label" style="fill:#d7c1c2">India</text>
+    <circle cx="960" cy="425" r="8" fill="#ffb2b7" class="ripple"/>
+    <circle cx="960" cy="425" r="7" fill="#ffb2b7" class="pulse" filter="url(#glow)"/>
+    <text x="960" y="452" text-anchor="middle" class="label pri">Indonesia</text>
+    <g class="popL" style="animation-delay:18s">
+      <rect x="840" y="290" width="240" height="88" rx="16" fill="#322828"/>
+      <text x="960" y="328" text-anchor="middle" class="title" style="font-size:18px">“Seolah selera kita</text>
+      <text x="960" y="354" text-anchor="middle" class="title" style="font-size:18px">tak cukup penting.”</text>
+    </g>
+  </g>
+
+  <!-- ===================== BABAK IV ===================== -->
+  <g class="act d4">
+    <rect x="40" y="28" width="96" height="32" rx="8" fill="#005045"/>
+    <text x="88" y="49" text-anchor="middle" class="label on-tc">Babak IV</text>
+    <text x="40" y="100" class="headline">Lahirnya SANTET</text>
+    <text x="40" y="128" class="body">Penonton sudah berbicara. Kita hanya perlu belajar mendengar.</text>
+    <g class="spin">
+      <circle cx="600" cy="262" r="168" fill="none" stroke="#4fdbc4" stroke-opacity=".4" stroke-dasharray="4 10"/>
+      <circle cx="600" cy="262" r="128" fill="none" stroke="#ffb2b7" stroke-opacity=".3" stroke-dasharray="18 8"/>
+    </g>
+    <g class="orbit" style="animation-delay:24s">
+      <g class="counter" style="animation-delay:24s"><circle cx="600" cy="114" r="26" fill="#005045"/><text x="600" y="127" text-anchor="middle" class="headline on-tc" style="font-weight:700">S</text></g>
+      <g class="counter" style="animation-delay:24s"><circle cx="730" cy="189" r="26" fill="#005045"/><text x="730" y="202" text-anchor="middle" class="headline on-tc" style="font-weight:700">A</text></g>
+      <g class="counter" style="animation-delay:24s"><circle cx="730" cy="339" r="26" fill="#005045"/><text x="730" y="352" text-anchor="middle" class="headline on-tc" style="font-weight:700">N</text></g>
+      <g class="counter" style="animation-delay:24s"><circle cx="600" cy="414" r="26" fill="#005045"/><text x="600" y="427" text-anchor="middle" class="headline on-tc" style="font-weight:700">T</text></g>
+      <g class="counter" style="animation-delay:24s"><circle cx="470" cy="339" r="26" fill="#005045"/><text x="470" y="352" text-anchor="middle" class="headline on-tc" style="font-weight:700">E</text></g>
+      <g class="counter" style="animation-delay:24s"><circle cx="470" cy="189" r="26" fill="#005045"/><text x="470" y="202" text-anchor="middle" class="headline on-tc" style="font-weight:700">T</text></g>
+    </g>
+    <g>
+      <rect x="80" y="190" width="240" height="44" rx="12" class="toTeal" style="animation-delay:24s"/>
+      <text x="200" y="217" text-anchor="middle" class="label">“serem banget” → minat ✓</text>
+      <rect x="80" y="300" width="240" height="44" rx="12" class="toTeal" style="animation-delay:24.4s"/>
+      <text x="200" y="327" text-anchor="middle" class="label">“merinding” → minat ✓</text>
+      <rect x="880" y="190" width="240" height="44" rx="12" class="toTeal" style="animation-delay:24.8s"/>
+      <text x="1000" y="217" text-anchor="middle" class="label">“gas nonton” → niat ✓</text>
+      <rect x="880" y="300" width="240" height="44" rx="12" class="toTeal" style="animation-delay:25.2s"/>
+      <text x="1000" y="327" text-anchor="middle" class="label">“ajak bestie” → niat ✓</text>
+    </g>
+    <!-- M3 extended FAB style ticket -->
+    <g class="popL" style="animation-delay:24s" filter="url(#elev)">
+      <rect x="515" y="234" width="170" height="56" rx="16" fill="#71f8e0"/>
+      <text x="547" y="269" text-anchor="middle" font-size="20">🎟</text>
+      <text x="618" y="270" text-anchor="middle" class="title" style="fill:#00201b;font-weight:700">TIKET H-7</text>
+    </g>
+  </g>
+
+  <!-- ===================== EPILOG ===================== -->
+  <g class="act d5">
+    <rect x="40" y="28" width="84" height="32" rx="8" fill="#005045"/>
+    <text x="82" y="49" text-anchor="middle" class="label on-tc">Epilog</text>
+    <text x="40" y="100" class="headline">Untuk siapa SANTET dibuat</text>
+    <g stroke-width="1.6" fill="none">
+      <path class="draw" style="animation-delay:30s" stroke="#4fdbc4" stroke-opacity=".55" d="M330 270L270 220M330 270L390 215M330 270L250 300M330 270L410 310M330 270L300 345M330 270L370 350M330 270L330 190M330 270L240 250M330 270L420 260M270 220L330 190L390 215M250 300L300 345L370 350L410 310"/>
+      <path class="draw" style="animation-delay:30.3s" stroke="#ffb2b7" stroke-opacity=".55" d="M700 230L650 190M700 230L750 190M700 230L660 280M700 230L745 275M700 230L700 160M650 190L700 160L750 190"/>
+      <path class="draw" style="animation-delay:30.6s" stroke="#e6bdbe" stroke-opacity=".55" d="M950 320L900 280M950 320L1000 280M950 320L910 370M950 320L990 370M950 320L950 250M900 280L950 250L1000 280"/>
+      <path stroke="#a08c8d" stroke-opacity=".35" stroke-dasharray="3 5" d="M410 310L660 280M745 275L900 280M390 215L650 190"/>
+    </g>
+    <g fill="#4fdbc4">
+      <circle class="node" style="animation-delay:30s" cx="330" cy="270" r="13"/>
+      <circle class="node" style="animation-delay:30.1s" cx="270" cy="220" r="7"/><circle class="node" style="animation-delay:30.15s" cx="390" cy="215" r="7"/><circle class="node" style="animation-delay:30.2s" cx="250" cy="300" r="7"/><circle class="node" style="animation-delay:30.25s" cx="410" cy="310" r="7"/><circle class="node" style="animation-delay:30.3s" cx="300" cy="345" r="7"/><circle class="node" style="animation-delay:30.35s" cx="370" cy="350" r="7"/><circle class="node" style="animation-delay:30.4s" cx="330" cy="190" r="7"/><circle class="node" style="animation-delay:30.45s" cx="240" cy="250" r="7"/><circle class="node" style="animation-delay:30.5s" cx="420" cy="260" r="7"/>
+    </g>
+    <g fill="#ffb2b7">
+      <circle class="node" style="animation-delay:30.3s" cx="700" cy="230" r="11"/>
+      <circle class="node" style="animation-delay:30.4s" cx="650" cy="190" r="6"/><circle class="node" style="animation-delay:30.45s" cx="750" cy="190" r="6"/><circle class="node" style="animation-delay:30.5s" cx="660" cy="280" r="6"/><circle class="node" style="animation-delay:30.55s" cx="745" cy="275" r="6"/><circle class="node" style="animation-delay:30.6s" cx="700" cy="160" r="6"/>
+    </g>
+    <g fill="#e6bdbe">
+      <circle class="node" style="animation-delay:30.6s" cx="950" cy="320" r="11"/>
+      <circle class="node" style="animation-delay:30.7s" cx="900" cy="280" r="6"/><circle class="node" style="animation-delay:30.75s" cx="1000" cy="280" r="6"/><circle class="node" style="animation-delay:30.8s" cx="910" cy="370" r="6"/><circle class="node" style="animation-delay:30.85s" cx="990" cy="370" r="6"/><circle class="node" style="animation-delay:30.9s" cx="950" cy="250" r="6"/>
+    </g>
+    <g class="pop" style="animation-delay:30s">
+      <rect x="240" y="374" width="180" height="28" rx="8" fill="#005045"/>
+      <text x="330" y="393" text-anchor="middle" class="label on-tc" style="font-size:13px">Fans waralaba Suzzanna</text>
+      <rect x="650" y="124" width="100" height="24" rx="8" fill="none" stroke="#524344"/>
+      <text x="700" y="141" text-anchor="middle" class="bodyS" style="font-size:12px">Komunitas 2</text>
+      <rect x="900" y="390" width="100" height="24" rx="8" fill="none" stroke="#524344"/>
+      <text x="950" y="407" text-anchor="middle" class="bodyS" style="font-size:12px">Komunitas 3</text>
+    </g>
+    <g class="popL" style="animation-delay:30s">
+      <text x="600" y="440" text-anchor="middle" class="title" style="font-size:19px;font-style:italic">“Mereka menjerit karena ingin datang. SANTET hadir agar jeritan itu akhirnya didengar.”</text>
+    </g>
+  </g>
+</svg>

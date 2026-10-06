@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SANTET — Animasi 3D: Rasa Takut adalah Permintaan</title>
+<meta name="description" content="Animasi 3D enam babak SANTET (Sentiment Analysis for Nusantara Theatrical Expectation Tracking): membaca niat menonton penonton horor Indonesia sebelum film tayang.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+} }
+</script>
+<script type="module" src="https://esm.run/@material/web/all.js"></script>
+<style>
+  /* Material 3 dark scheme — seed #B3263C, tertiary harmonised teal */
+  :root{
+    --md-sys-color-primary:#FFB2B7; --md-sys-color-on-primary:#67001D;
+    --md-sys-color-primary-container:#91002D; --md-sys-color-on-primary-container:#FFDADB;
+    --md-sys-color-secondary:#E6BDBE; --md-sys-color-on-secondary:#44292B;
+    --md-sys-color-secondary-container:#5D3F41; --md-sys-color-on-secondary-container:#FFDADB;
+    --md-sys-color-tertiary:#4FDBC4; --md-sys-color-on-tertiary:#00382F;
+    --md-sys-color-tertiary-container:#005045; --md-sys-color-on-tertiary-container:#71F8E0;
+    --md-sys-color-surface:#1A1112; --md-sys-color-on-surface:#F0DEDF;
+    --md-sys-color-surface-container-low:#22191A; --md-sys-color-surface-container:#271D1E;
+    --md-sys-color-surface-container-high:#322828; --md-sys-color-surface-container-highest:#3D3233;
+    --md-sys-color-on-surface-variant:#D7C1C2; --md-sys-color-outline:#A08C8D; --md-sys-color-outline-variant:#524344;
+    --md-ref-typeface-brand:"Roboto Flex",Roboto,system-ui,sans-serif;
+    --md-ref-typeface-plain:"Roboto Flex",Roboto,system-ui,sans-serif;
+    --emph:cubic-bezier(.2,0,0,1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--md-sys-color-surface);color:var(--md-sys-color-on-surface);
+    font-family:var(--md-ref-typeface-plain);overflow:hidden}
+  #stage{position:fixed;inset:0;width:100%;height:100%;display:block}
+  #veil{position:fixed;inset:0;background:var(--md-sys-color-surface);pointer-events:none;opacity:1;transition:opacity .45s var(--emph)}
+  .material-symbols-rounded{font-family:"Material Symbols Rounded";font-weight:normal;font-style:normal;font-size:24px;line-height:1;
+    display:inline-block;-webkit-font-smoothing:antialiased;font-feature-settings:"liga"}
+
+  /* Top app bar */
+  .topbar{position:fixed;top:0;left:0;right:0;height:64px;display:flex;align-items:center;gap:12px;padding:0 16px;
+    background:linear-gradient(var(--md-sys-color-surface) 0%,transparent 100%)}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand .logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+    background:var(--md-sys-color-primary-container);color:var(--md-sys-color-on-primary-container)}
+  .brand b{font-size:22px;font-weight:500;letter-spacing:0}
+  .brand small{display:block;font-size:12px;color:var(--md-sys-color-on-surface-variant);letter-spacing:.4px}
+  .spacer{flex:1}
+
+  /* Caption card (M3 filled card) */
+  .caption{position:fixed;left:24px;top:84px;max-width:min(460px,calc(100% - 48px));padding:20px 24px 22px;border-radius:28px;
+    background:color-mix(in srgb,var(--md-sys-color-surface-container) 82%,transparent);backdrop-filter:blur(14px);
+    box-shadow:0 1px 3px rgba(0,0,0,.3),0 4px 8px 3px rgba(0,0,0,.15);
+    transition:transform .5s var(--emph),opacity .5s var(--emph)}
+  .caption.out{opacity:0;transform:translateY(12px)}
+  .caption md-assist-chip{--md-assist-chip-label-text-color:var(--md-sys-color-primary)}
+  .caption h1{font-size:36px;line-height:44px;font-weight:500;margin:12px 0 8px}
+  .caption p{font-size:16px;line-height:24px;letter-spacing:.5px;margin:0;color:var(--md-sys-color-on-surface-variant)}
+  .caption.teal md-assist-chip{--md-assist-chip-label-text-color:var(--md-sys-color-tertiary)}
+
+  /* Bottom controls (M3 toolbar) */
+  .controls{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:8px;
+    padding:8px 12px;border-radius:999px;background:var(--md-sys-color-surface-container-high);
+    box-shadow:0 1px 3px rgba(0,0,0,.3),0 4px 8px 3px rgba(0,0,0,.15)}
+  .dots{display:flex;gap:4px;padding:0 8px}
+  .dots button{all:unset;cursor:pointer;width:36px;height:8px;border-radius:4px;background:var(--md-sys-color-secondary-container);
+    position:relative;overflow:hidden;transition:width .4s var(--emph)}
+  .dots button.on{width:56px}
+  .dots button i{position:absolute;inset:0;width:0;background:var(--md-sys-color-primary);border-radius:4px}
+  .dots button.done i{width:100%}
+  .dots button:focus-visible{outline:2px solid var(--md-sys-color-primary);outline-offset:2px}
+  .counter{font-size:12px;font-weight:500;letter-spacing:.5px;color:var(--md-sys-color-on-surface-variant);min-width:36px;text-align:center}
+  noscript{position:fixed;inset:auto 24px 100px;padding:16px;border-radius:16px;background:var(--md-sys-color-surface-container-high)}
+
+  .disclaimer{position:fixed;left:16px;right:16px;bottom:2px;margin:0;text-align:center;font-size:10.5px;line-height:14px;letter-spacing:.2px;color:var(--md-sys-color-outline);pointer-events:none}
+  @media (max-width:640px){
+    .caption{top:72px;left:12px;padding:16px 18px}
+    .caption h1{font-size:26px;line-height:32px}
+    .brand small{display:none}
+    .dots button{width:18px}.dots button.on{width:30px}
+  }
+</style>
+</head>
+<body>
+<canvas id="stage" aria-label="Animasi 3D SANTET"></canvas>
+<div id="veil"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="logo"><span class="material-symbols-rounded">local_fire_department</span></div>
+    <div><b>SANTET</b><small>Sentiment Analysis for Nusantara Theatrical Expectation Tracking</small></div>
+  </div>
+  <div class="spacer"></div>
+  <md-text-button id="btn-repo" href="https://github.com/indri007/prediksi-movie-2027">
+    Repositori <span slot="icon" class="material-symbols-rounded">code</span>
+  </md-text-button>
+</header>
+
+<p class="disclaimer">Visual ilustratif · angka dari data proyek · Racun Sangga = angka sementara · Riset independen, tidak berafiliasi dengan Soraya Intercine Films, Hitmaker Studios, atau MD Pictures</p>
+
+<section class="caption" id="caption" aria-live="polite">
+  <md-assist-chip id="act-chip" label="Prolog"></md-assist-chip>
+  <h1 id="act-title">Malam sebelum tayang</h1>
+  <p id="act-text"></p>
+</section>
+
+<nav class="controls" aria-label="Kontrol animasi">
+  <md-icon-button id="btn-prev" aria-label="Babak sebelumnya"><span class="material-symbols-rounded">skip_previous</span></md-icon-button>
+  <md-filled-tonal-icon-button id="btn-play" aria-label="Jeda / putar"><span class="material-symbols-rounded" id="play-ic">pause</span></md-filled-tonal-icon-button>
+  <md-icon-button id="btn-next" aria-label="Babak berikutnya"><span class="material-symbols-rounded">skip_next</span></md-icon-button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter">1/6</span>
+</nav>
+
+<noscript>Animasi ini membutuhkan JavaScript dan WebGL.</noscript>
+
+<script type="module">
+import * as THREE from 'three';
+
+const ACT_SEC = 7;
+const M3 = { primary:0xFFB2B7, primaryC:0x91002D, onPrimaryC:'#FFDADB', secondary:0xE6BDBE, secondaryC:0x5D3F41,
+  tertiary:0x4FDBC4, tertiaryC:0x005045, surface:0x1A1112, sch:0x322828, outline:0xA08C8D, amber:0xFFB86B };
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canvas = document.getElementById('stage');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(M3.surface);
+scene.fog = new THREE.Fog(M3.surface, 16, 38);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+
+scene.add(new THREE.HemisphereLight(0xffdadb, 0x1a1112, 0.9));
+const key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(4, 8, 6); scene.add(key);
+const rim = new THREE.PointLight(M3.tertiary, 30, 30); rim.position.set(-6, 4, -3); scene.add(rim);
+const grid = new THREE.GridHelper(40, 40, 0x524344, 0x2a2122); grid.position.y = -0.01; scene.add(grid);
+
+/* ---------- helpers ---------- */
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+  t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const rand = rng(42);
+const ease = t => 1 - Math.pow(1 - Math.min(Math.max(t,0),1), 3);
+const back = t => { t = Math.min(Math.max(t,0),1); const c = 1.70158; return 1 + (c+1)*Math.pow(t-1,3) + c*Math.pow(t-1,2); };
+
+function label(text, { size=48, color='#F0DEDF', weight=500, pad=20, bg=null, radius=null, scale=1 } = {}){
+  const c = document.createElement('canvas'), x = c.getContext('2d');
+  const font = `${weight} ${size}px "Roboto Flex", Roboto, sans-serif`;
+  x.font = font; const w = Math.ceil(x.measureText(text).width) + pad*2, h = Math.ceil(size*1.25) + pad*2;
+  c.width = w; c.height = h; x.font = font;
+  if (bg){ x.fillStyle = bg; const r = radius ?? h/2; x.beginPath(); x.roundRect(0,0,w,h,r); x.fill(); }
+  x.fillStyle = color; x.textBaseline = 'middle'; x.fillText(text, pad, h/2 + size*0.04);
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 4;
+  const s = new THREE.Sprite(new THREE.SpriteMaterial({ map:tex, transparent:true, depthWrite:false }));
+  const k = 0.01 * scale; s.scale.set(w*k, h*k, 1); s.userData.base = s.scale.clone(); return s;
+}
+function card(text, color){
+  const g = new THREE.Group();
+  const t = label(text, { size:38, pad:26, color:'#F0DEDF' });
+  const mat = new THREE.MeshStandardMaterial({ color, emissive:color, emissiveIntensity:.25, roughness:.5 });
+  const m = new THREE.Mesh(new THREE.BoxGeometry(t.scale.x, t.scale.y, .08), mat);
+  t.position.z = .06; t.renderOrder = 2; g.add(m, t); g.userData.mat = mat; return g;
+}
+function bar(w, d, color){
+  const geo = new THREE.BoxGeometry(w, 1, d); geo.translate(0, .5, 0);
+  return new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color, roughness:.35, metalness:.1 }));
+}
+function popScale(s, t){ const k = back(t); s.scale.copy(s.userData.base).multiplyScalar(Math.max(k, 0.0001)); s.visible = t > 0; }
+const cRed = new THREE.Color(M3.primaryC), cTeal = new THREE.Color(M3.tertiaryC), cNeutral = new THREE.Color(M3.sch);
+
+/* ---------- acts ---------- */
+const acts = [];
+function act(chip, title, text, teal, build){ const g = new THREE.Group(); g.visible = false; scene.add(g);
+  const a = { chip, title, text, teal, g, update:()=>{} }; build(a, g); acts.push(a); }
+
+await document.fonts.ready;
+
+act('Prolog', 'Malam sebelum tayang',
+  'Poster sudah tercetak, jadwal sudah dikunci. Jawabannya sudah ditulis ribuan kali di kolom komentar trailer.', false, (a, g) => {
+  const screenTex = (() => { const c = document.createElement('canvas'); c.width = 800; c.height = 360; const x = c.getContext('2d');
+    const gr = x.createLinearGradient(0,0,0,360); gr.addColorStop(0,'#FFDADB'); gr.addColorStop(1,'#FFB2B7'); x.fillStyle = gr; x.fillRect(0,0,800,360);
+    x.fillStyle = '#91002D'; x.beginPath(); x.arc(400,170,64,0,7); x.fill(); x.fillStyle = '#FFDADB'; x.beginPath(); x.moveTo(380,135); x.lineTo(380,205); x.lineTo(436,170); x.fill();
+    x.fillStyle = '#67001D'; x.font = '500 30px "Roboto Flex"'; x.textAlign = 'center'; x.fillText('TRAILER RESMI', 400, 300);
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(8, 3.6), new THREE.MeshBasicMaterial({ map:screenTex }));
+  screen.position.set(0, 3.4, -6); g.add(screen);
+  const glow = new THREE.PointLight(M3.primary, 40, 18); glow.position.set(0, 3, -4); g.add(glow);
+  const seatMat = new THREE.MeshStandardMaterial({ color:0x2b2022, roughness:.8 });
+  for (let r = 0; r < 3; r++) for (let i = -6; i <= 6; i++){ if (Math.abs(i) < 1) continue;
+    const s = new THREE.Mesh(new THREE.BoxGeometry(.8, .9 + r*.0, .7), seatMat); s.position.set(i*1.05, .45 + r*.35, 2 + r*1.4); g.add(s); }
+  const texts = ['"Serem banget anjir, merinding parah."', '"Gas nonton hari pertama!" 🔥', '"Ga berani nonton sendirian, ajak bestie" 😭'];
+  const cards = texts.map((t, i) => { const c = card(t, M3.sch); g.add(c); return c; });
+  a.update = (t) => cards.forEach((c, i) => {
+    const p = ((t * 0.22) + i / 3) % 1, e = ease(p);
+    c.position.set((i - 1) * 3.4 * e, 3.2 + e * 1.6 - Math.sin(p * Math.PI) * .2, -5.6 + e * 9);
+    c.scale.setScalar(.55 + e * .6); c.visible = p < .97; });
+});
+
+act('Babak I', 'Kutukan yang sebenarnya',
+  'Studio sama, genre sama, mesin promosi sama. Satu film ditonton 3.346.216 orang, yang lain 525.034. Bedanya baru ketahuan setelah tayang.', false, (a, g) => {
+  const A = bar(1.8, 1.8, M3.primary), B = bar(1.8, 1.8, M3.secondary);
+  A.position.x = -2.2; B.position.x = 2.2; g.add(A, B);
+  const hA = 6, hB = 6 * 525034 / 3346216;
+  const lA = label('3.346.216', { size:64, weight:700 }), lB = label('525.034*', { size:64, weight:700 });
+  const nA = label('Suzzanna: Bernapas dalam Kubur (2018)', { size:30, bg:'#271D1E', color:'#D7C1C2', radius:16 });
+  const nB = label('Racun Sangga (2024) · *sementara', { size:30, bg:'#271D1E', color:'#D7C1C2', radius:16 });
+  nA.position.set(-2.2, -.6, 1.4); nB.position.set(2.2, -.6, 1.4);
+  const x6 = label('6,4×', { size:140, weight:700, bg:'#91002D', color:'#FFDADB', radius:48, pad:40 });
+  x6.position.set(5.6, 4.2, 0); g.add(lA, lB, nA, nB, x6);
+  a.update = (t) => { const e = ease(t / 1.8);
+    A.scale.y = Math.max(hA * e, .001); B.scale.y = Math.max(hB * e, .001);
+    lA.position.set(-2.2, hA * e + .7, 0); lB.position.set(2.2, hB * e + .7, 0);
+    popScale(lA, (t - 1.4) / .5); popScale(lB, (t - 1.4) / .5); popScale(x6, (t - 2.6) / .6); };
+});
+
+act('Babak II', 'Mesin yang tuli',
+  'Dari 9.840 komentar trailer, model sentimen standar menilai 51,2% negatif. Leksikon yang paham horor hanya 10,0%.', false, (a, g) => {
+  const mk = (x, color, frac, num, name) => {
+    const track = new THREE.Mesh(new THREE.TorusGeometry(1.6, .16, 16, 96), new THREE.MeshStandardMaterial({ color:0x3D3233 }));
+    track.position.set(x, 3, 0); g.add(track);
+    const arc = new THREE.Mesh(new THREE.TorusGeometry(1.6, .2, 16, 96, .001), new THREE.MeshStandardMaterial({ color, emissive:color, emissiveIntensity:.5 }));
+    arc.position.set(x, 3, .02); arc.rotation.z = Math.PI / 2; g.add(arc);
+    const n = label(num, { size:72, weight:700 }); n.position.set(x, 3.1, .1);
+    const s = label('negatif', { size:30, color:'#D7C1C2' }); s.position.set(x, 2.45, .1);
+    const nm = label(name, { size:30, bg:'#271D1E', color:'#D7C1C2', radius:16 }); nm.position.set(x, .7, .1);
+    g.add(n, s, nm); return { arc, frac };
+  };
+  const rings = [mk(-4.6, M3.primary, .512, '51,2%', 'Model standar (IndoBERT)'), mk(-.6, M3.tertiary, .10, '10,0%', 'Leksikon sadar-horor')];
+  const words = ['"serem banget" 😱', '"merinding parah"', '"takut tapi pengen nonton"', '"ngeri bgt sumpah"', '"horor terbaik tahun ini!"'];
+  const cards = words.map((w, i) => { const c = card(w, M3.sch); c.position.set(4.4, 5 - i * 1.05, 0); g.add(c); return c; });
+  const scan = new THREE.Mesh(new THREE.BoxGeometry(4.6, .05, .2), new THREE.MeshBasicMaterial({ color:M3.primary }));
+  scan.position.x = 4.4; g.add(scan);
+  let last = -1;
+  a.update = (t) => {
+    const e = ease(t / 2.2);
+    rings.forEach(r => { const arcLen = Math.max(r.frac * e * Math.PI * 2, .001);
+      if (Math.abs(arcLen - (r.arc.userData.l || 0)) > .002){ r.arc.geometry.dispose(); r.arc.geometry = new THREE.TorusGeometry(1.6, .2, 16, 96, arcLen); r.arc.userData.l = arcLen; }
+      r.arc.rotation.z = Math.PI / 2; r.arc.scale.x = -1; });
+    const y = 5.6 - Math.min(t / 4.5, 1) * 5.6; scan.position.y = y;
+    cards.forEach(c => c.userData.mat.color.copy(c.position.y > y ? cRed : cNeutral) && c.userData.mat.emissive.copy(c.userData.mat.color));
+  };
+});
+
+act('Babak III', 'Bangsa yang tak tercatat',
+  'Prediksi box office sudah mapan untuk Hollywood, China, Korea, dan India. Indonesia, dengan horor sejak era Suzzanna, hampir tidak tercatat.', false, (a, g) => {
+  const data = [['Hollywood', 6.2], ['China', 4.6], ['Korea', 3.5], ['India', 4.0]];
+  const pillars = data.map(([n, h], i) => { const b = bar(1.5, 1.5, 0x8a7778); const x = -6 + i * 2.6; b.position.x = x; g.add(b);
+    const l = label(n, { size:32, bg:'#271D1E', color:'#D7C1C2', radius:16 }); l.position.set(x, -.55, 1.2); g.add(l); return { b, h }; });
+  const dot = new THREE.Mesh(new THREE.SphereGeometry(.22, 32, 16), new THREE.MeshStandardMaterial({ color:M3.primary, emissive:M3.primary, emissiveIntensity:1 }));
+  dot.position.set(5.4, .3, 0); g.add(dot);
+  const ripple = new THREE.Mesh(new THREE.TorusGeometry(.3, .03, 8, 48), new THREE.MeshBasicMaterial({ color:M3.primary, transparent:true }));
+  ripple.rotation.x = -Math.PI / 2; ripple.position.copy(dot.position); g.add(ripple);
+  const lid = label('Indonesia', { size:34, color:'#FFB2B7', weight:700 }); lid.position.set(5.4, -.5, 1); g.add(lid);
+  const q = label('"Seolah selera kita tak cukup penting."', { size:34, bg:'#322828', radius:24, pad:28 }); q.position.set(4.6, 3.6, 0); g.add(q);
+  a.update = (t) => {
+    pillars.forEach((p, i) => p.b.scale.y = Math.max(p.h * ease((t - i * .25) / 1.6), .001));
+    const s = 1 + Math.sin(t * 4) * .3; dot.scale.setScalar(s);
+    const r = (t * .7) % 1; ripple.scale.setScalar(1 + r * 5); ripple.material.opacity = 1 - r;
+    popScale(q, (t - 2.4) / .6); };
+});
+
+act('Babak IV', 'Lahirnya SANTET',
+  'Penonton Indonesia sudah berbicara. Kita hanya perlu belajar mendengar — dan membaca niat menonton sebelum tayang.', true, (a, g) => {
+  const letters = 'SANTET'.split('').map(ch => { const s = label(ch, { size:110, weight:700, color:'#71F8E0', bg:'#005045', radius:80, pad:30 }); g.add(s); return s; });
+  const ring1 = new THREE.Mesh(new THREE.TorusGeometry(3.4, .025, 8, 160), new THREE.MeshBasicMaterial({ color:M3.tertiary, transparent:true, opacity:.5 }));
+  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.6, .02, 8, 160), new THREE.MeshBasicMaterial({ color:M3.primary, transparent:true, opacity:.35 }));
+  ring1.position.y = ring2.position.y = 3; g.add(ring1, ring2);
+  const words = ['"serem banget" → minat', '"merinding" → minat', '"gas nonton" → niat', '"ajak bestie" → niat'];
+  const cards = words.map((w, i) => { const c = card(w, M3.primaryC); const ang = (i / 4) * Math.PI * 2 + Math.PI / 4;
+    c.position.set(Math.cos(ang) * 6.4, 3 + Math.sin(ang) * 2.6, -1); g.add(c); return c; });
+  const ticket = label('🎟  TIKET H-7', { size:84, weight:700, color:'#00201B', bg:'#71F8E0', radius:36, pad:40 });
+  ticket.position.set(0, 3, .5); g.add(ticket);
+  a.update = (t) => {
+    const ang0 = t * .55;
+    letters.forEach((s, i) => { const ang = ang0 + i / 6 * Math.PI * 2; s.position.set(Math.cos(ang) * 3.4, 3 + Math.sin(ang) * 3.4, 0); });
+    ring1.rotation.z = t * .2; ring2.rotation.z = -t * .3;
+    cards.forEach((c, i) => { const k = ease((t - 1 - i * .35) / .8); c.userData.mat.color.copy(cRed).lerp(cTeal, k); c.userData.mat.emissive.copy(c.userData.mat.color); });
+    popScale(ticket, (t - 3.4) / .7); };
+});
+
+act('Epilog', 'Untuk siapa SANTET dibuat',
+  'Untuk produser, sineas, penonton, dan ilmu pengetahuan. "Mereka menjerit karena ingin datang. SANTET hadir agar jeritan itu akhirnya didengar."', true, (a, g) => {
+  const clusters = [
+    { c:new THREE.Vector3(-4.2, 2.6, 0), n:14, color:M3.tertiary, name:'Fans waralaba Suzzanna', bg:'#005045', fg:'#71F8E0' },
+    { c:new THREE.Vector3(1.2, 4.2, -1.5), n:9, color:M3.primary, name:'Komunitas 2', bg:'#322828', fg:'#D7C1C2' },
+    { c:new THREE.Vector3(4.8, 1.8, 0), n:9, color:M3.secondary, name:'Komunitas 3', bg:'#322828', fg:'#D7C1C2' } ];
+  const nodes = [], edges = [];
+  clusters.forEach((cl, ci) => {
+    const mat = new THREE.MeshStandardMaterial({ color:cl.color, emissive:cl.color, emissiveIntensity:.45 });
+    const first = nodes.length;
+    for (let i = 0; i < cl.n; i++){
+      const m = new THREE.Mesh(new THREE.SphereGeometry(i === 0 ? .26 : .13, 24, 12), mat);
+      const u = rand() * Math.PI * 2, v = Math.acos(2 * rand() - 1), r = i === 0 ? 0 : 0.7 + rand() * 0.9;
+      const target = cl.c.clone().add(new THREE.Vector3(Math.sin(v) * Math.cos(u) * r * 1.3, Math.cos(v) * r, Math.sin(v) * Math.sin(u) * r));
+      const start = new THREE.Vector3((rand() - .5) * 22, rand() * 9, (rand() - .5) * 14);
+      m.userData = { target, start, delay:rand() * .6 }; g.add(m); nodes.push(m);
+      if (i > 0){ edges.push([first, nodes.length - 1, ci]); if (i > 1 && rand() < .6) edges.push([nodes.length - 2, nodes.length - 1, ci]); }
+    }
+    const l = label(cl.name, { size:30, bg:cl.bg, color:cl.fg, radius:16 }); l.position.copy(cl.c).add(new THREE.Vector3(0, -1.9, .6)); g.add(l); cl.label = l;
+  });
+  edges.push([3, 16, -1], [20, 28, -1], [5, 25, -1]);
+  const pos = new Float32Array(edges.length * 6), col = new Float32Array(edges.length * 6);
+  const palette = clusters.map(c => new THREE.Color(c.color)); const grey = new THREE.Color(M3.outline);
+  edges.forEach(([, , ci], k) => { const c = ci < 0 ? grey : palette[ci]; for (let j = 0; j < 2; j++) col.set([c.r, c.g, c.b], k * 6 + j * 3); });
+  const lg = new THREE.BufferGeometry(); lg.setAttribute('position', new THREE.BufferAttribute(pos, 3)); lg.setAttribute('color', new THREE.BufferAttribute(col, 3));
+  const lines = new THREE.LineSegments(lg, new THREE.LineBasicMaterial({ vertexColors:true, transparent:true, opacity:.55 })); g.add(lines);
+  a.update = (t) => {
+    nodes.forEach(n => n.position.lerpVectors(n.userData.start, n.userData.target, ease((t - n.userData.delay) / 2.2)));
+    edges.forEach(([i, j], k) => { pos.set([...nodes[i].position.toArray(), ...nodes[j].position.toArray()], k * 6); });
+    lg.attributes.position.needsUpdate = true; lines.material.opacity = .55 * ease((t - 1.6) / 1);
+    clusters.forEach((cl, i) => popScale(cl.label, (t - 2.4 - i * .2) / .5));
+    g.rotation.y = Math.sin(t * .25) * .12; };
+});
+
+/* ---------- UI + loop ---------- */
+const $ = id => document.getElementById(id);
+const dots = acts.map((a, i) => { const b = document.createElement('button'); b.id = `dot-${i}`; b.setAttribute('aria-label', a.chip);
+  b.innerHTML = '<i></i>'; b.onclick = () => go(i); $('dots').appendChild(b); return b; });
+let cur = -1, local = 0, playing = !reduce;
+function go(i){
+  cur = (i + acts.length) % acts.length; local = 0;
+  acts.forEach((a, k) => a.g.visible = k === cur);
+  const a = acts[cur], cap = $('caption');
+  cap.classList.add('out');
+  setTimeout(() => { $('act-chip').label = a.chip; $('act-title').textContent = a.title; $('act-text').textContent = a.text;
+    cap.classList.toggle('teal', a.teal); cap.classList.remove('out'); }, 220);
+  dots.forEach((d, k) => { d.classList.toggle('on', k === cur); d.classList.toggle('done', k < cur); d.firstChild.style.width = k < cur ? '100%' : '0'; });
+  $('counter').textContent = `${cur + 1}/${acts.length}`;
+}
+$('btn-prev').onclick = () => go(cur - 1);
+$('btn-next').onclick = () => go(cur + 1);
+$('btn-play').onclick = () => { playing = !playing; $('play-ic').textContent = playing ? 'pause' : 'play_arrow'; };
+$('play-ic').textContent = playing ? 'pause' : 'play_arrow';
+addEventListener('keydown', e => { if (e.key === 'ArrowRight') go(cur + 1); if (e.key === 'ArrowLeft') go(cur - 1); if (e.key === ' ') { e.preventDefault(); $('btn-play').click(); } });
+
+function resize(){ const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false); camera.aspect = w / h;
+  camera.fov = w < h ? 62 : 45; camera.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+
+go(0);
+const clock = new THREE.Clock(); let time = 0;
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), .05); time += dt;
+  if (playing) local += dt;
+  else local = Math.max(local, 4.5);              // paused: show the act fully formed
+  if (playing && local > ACT_SEC) go(cur + 1);
+  acts[cur].update(local);
+  const veil = Math.max(0, 1 - local / .5, (local - (ACT_SEC - .45)) / .45);
+  $('veil').style.opacity = playing ? Math.min(veil, 1) : 0;
+  dots[cur].firstChild.style.width = `${Math.min(local / ACT_SEC, 1) * 100}%`;
+  const orbit = reduce ? 0 : Math.sin(time * .1) * 2.4;
+  camera.position.set(orbit, 3.6, 14); camera.lookAt(0, 2.4, 0);
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

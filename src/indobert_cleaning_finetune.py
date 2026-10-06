@@ -360,7 +360,7 @@ def generate_report_and_bitstream(df_clean: pd.DataFrame, df_hist: pd.DataFrame,
 **Target Framework:** IndoBERT (`indobenchmark/indobert-base-p1`)  
 **Task:** Indonesian Colloquial Normalization, Emoji Affective Mapping & 9-Emotion Fine-Tuning  
 **Corpus Volume:** {len(df_clean):,} annotated texts  
-**Validation Standard:** Scopus Q1 Elsevier Benchmarks (Cohen's Kappa κ = {metrics['cohens_kappa']}, ANOVA F = {metrics['anova_f_stat']})
+**Validation Standard:** target standar jurnal (belum ditelaah reviewer) (Cohen's Kappa κ = {metrics['cohens_kappa']}, ANOVA F = {metrics['anova_f_stat']})
 
 ---
 

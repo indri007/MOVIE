@@ -234,14 +234,14 @@ with st.sidebar:
         "11. Research Pipeline",
         "12. 10 Research Directions",
         "13. Documentation",
-        "14. Scopus Q1 Journal & Downloads",
+        "14. Naskah Jurnal (Working Paper) & Downloads",
     ]
 
     selected_section = st.radio("Navigation Menu", sections, index=0)
 
     st.markdown("---")
     st.markdown("**Platform Status Matrix:**")
-    st.markdown(f"- Scopus Q1 Journal: {render_badge('AVAILABLE')}", unsafe_allow_html=True)
+    st.markdown(f"- Naskah jurnal: {render_badge('WORKING PAPER')}", unsafe_allow_html=True)
     st.markdown(f"- Elsevier KPI Match: {render_badge('AVAILABLE')}", unsafe_allow_html=True)
     st.markdown(f"- Bitstream Verified: {render_badge('AVAILABLE')}", unsafe_allow_html=True)
     st.markdown(f"- Dataset (10M Multimodal): {render_badge('AVAILABLE')}", unsafe_allow_html=True)
@@ -295,17 +295,17 @@ if selected_section == "1. Overview":
     st.markdown("<br>", unsafe_allow_html=True)
 
     # -------------------------------------------------------------
-    # FEATURED: Scopus Q1 Elsevier Academic Journal & Instant Download Hub
+    # FEATURED: Naskah Jurnal (Working Paper) & Download Hub
     # -------------------------------------------------------------
     st.markdown("""
     <div class="m3-card" style="border-left: 5px solid #002B49; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
             <div>
-                <span class="badge-available">SCOPUS Q1 ELSEVIER</span>
-                <span class="badge-available">100% KPI MATCHED</span>
+                <span class="badge-available">TARGET: JURNAL ELSEVIER (BELUM TERBIT)</span>
+                <span class="badge-available">WORKING PAPER</span>
                 <span class="badge-available">8-BIT UTF-8 LOSSLESS</span>
             </div>
-            <code style="font-size:0.8rem; background:#e2e8f0; padding:2px 8px; border-radius:4px;">DOI: 10.1016/j.ipm.2026.103982</code>
+            <code style="font-size:0.8rem; background:#e2e8f0; padding:2px 8px; border-radius:4px;">Working paper (belum terbit)</code>
         </div>
         <h3 style="color:#002B49; margin-top:10px; margin-bottom:6px;">
             Multimodal Affective Topology and Explainable Forecasting of Instagram Engagement in Indonesia (2020–2027)
@@ -1731,22 +1731,22 @@ streamlit run dashboard/app.py
 
 
 # -----------------------------------------------------------------------------
-# Section 14: Scopus Q1 Elsevier Journal & Downloads
+# Section 14: Naskah Jurnal (Working Paper) & Downloads
 # -----------------------------------------------------------------------------
-elif selected_section == "14. Scopus Q1 Journal & Downloads":
-    st.title("Scopus Q1 Elsevier Academic Journal & Download Hub")
+elif selected_section == "14. Naskah Jurnal (Working Paper) & Downloads":
+    st.title("Naskah Jurnal (Working Paper) & Download Hub")
     st.caption("Peer-Reviewed Scientific Specification & Lossless Bitstream Distribution")
 
     st.markdown("""
     <div class="m3-card" style="border-left: 4px solid #002B49;">
         <span class="badge-available">SCOPUS Q1 VERIFIED</span>
-        <span class="badge-available">100% KPI MATCHED</span>
+        <span class="badge-available">WORKING PAPER</span>
         <span class="badge-available">8-BIT UTF-8 LOSSLESS</span>
         <h3 style="color:#002B49; margin-top:8px;">Multimodal Affective Topology and Explainable Forecasting of Instagram Engagement in Indonesia (2020–2027)</h3>
         <p style="font-size:0.9rem; color:#475569;">
             <b>Target Publication:</b> Elsevier: <i>Information Processing & Management</i> / <i>Computers in Human Behavior</i><br/>
             <b>Indexed Metrics:</b> CiteScore 14.8 | Impact Factor 8.6 | SJR Q1 Top 5%<br/>
-            <b>DOI Registered:</b> <code>10.1016/j.ipm.2026.103982</code> | <b>Local Laptop Path:</b> <code>/Users/jevin/instagramindonesia/downloads/</code>
+            <b>Status:</b> <code>working paper, belum terbit</code> | <b>Unduhan:</b> <code>downloads/</code>
         </p>
     </div>
     """, unsafe_allow_html=True)

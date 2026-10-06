@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SANTET 3D Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,300..900&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one cinematic 3D stage (Material 3 dark scheme, seed = candle amber) with M3 app bar, act chips, FAB and caption card; story notes below. */
+:root{
+  color-scheme: dark;
+  --surface:#19120D; --surface-lo:#140E0A; --surface-c:#261E18; --surface-ch:#31281F; --surface-chh:#3C3229;
+  --on-surface:#F0DFD5; --on-variant:#D6C3B6; --outline:#9F8D82; --outline-v:#52443B;
+  --primary:#FFB77C; --on-primary:#4D2700; --primary-c:#6D3A00; --on-primary-c:#FFDCC3;
+  --tertiary:#8BD0C5; --on-tertiary-c:#A7EDE1; --tertiary-c:#00504A;
+  --error:#FFB4AB; --error-c:#93000A;
+  --f-display:"Roboto Flex", "Roboto", system-ui, sans-serif;
+  --f-body:"Roboto Flex", "Roboto", system-ui, sans-serif;
+  --f-mono:"Roboto Mono", ui-monospace, "SFMono-Regular", monospace;
+  --r-xl:28px; --r-l:16px; --r-full:999px;
+}
+*{box-sizing:border-box}
+html,body{background:var(--surface);color:var(--on-surface);margin:0}
+body{font-family:var(--f-body);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:16px 40px}
+.wrap{max-width:1280px;margin-inline:auto;display:flex;flex-direction:column;gap:20px}
+
+/* ---------- stage ---------- */
+.stage{position:relative;height:clamp(460px,74vh,780px);border-radius:var(--r-xl);overflow:hidden;background:radial-gradient(120% 90% at 50% 20%,#2a1c12 0%,var(--surface-lo) 70%);isolation:isolate}
+#gl{position:absolute;inset:0;width:100%;height:100%;display:block}
+.appbar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:14px;padding:16px 20px;z-index:2;background:linear-gradient(var(--surface-lo) 0%,transparent 100%)}
+.mark{width:40px;height:40px;border-radius:12px;background:var(--primary-c);color:var(--on-primary-c);display:grid;place-items:center;font:800 18px/1 var(--f-display);font-variation-settings:"wdth" 125;flex:none}
+.brand{min-width:0}
+.brand h1{margin:0;font:700 22px/1.1 var(--f-display);font-variation-settings:"wdth" 130,"opsz" 40;letter-spacing:.06em}
+.brand p{margin:2px 0 0;font-size:12.5px;color:var(--on-variant);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.illus{margin-left:auto;flex:none;font:500 11px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--on-variant);border:1px solid var(--outline-v);border-radius:8px;padding:6px 8px}
+
+.chips{position:absolute;left:20px;right:20px;top:76px;z-index:2;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;height:32px;padding:0 14px;border-radius:8px;border:1px solid var(--outline-v);background:color-mix(in srgb,var(--surface-c) 80%,transparent);color:var(--on-variant);font:500 13px/1 var(--f-body);cursor:pointer;display:inline-flex;align-items:center;gap:6px;backdrop-filter:blur(8px);transition:background .25s,color .25s,border-color .25s}
+.chip:hover{background:var(--surface-ch);color:var(--on-surface)}
+.chip[aria-pressed="true"]{background:var(--primary-c);border-color:var(--primary-c);color:var(--on-primary-c)}
+.chip .n{font-family:var(--f-mono);font-size:11px;opacity:.8}
+.chip:focus-visible,.fab:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+.caption{position:absolute;left:20px;bottom:20px;z-index:2;width:min(460px,calc(100% - 112px));background:color-mix(in srgb,var(--surface-ch) 88%,transparent);backdrop-filter:blur(14px);border-radius:var(--r-xl);padding:20px 22px 18px;display:flex;flex-direction:column;gap:8px;transition:opacity .45s, transform .45s}
+.caption.swap{opacity:0;transform:translateY(10px)}
+.eyebrow{font:500 11.5px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--primary)}
+.caption h2{margin:0;font:700 clamp(22px,2.6vw,30px)/1.12 var(--f-display);font-variation-settings:"wdth" 112,"opsz" 48;text-wrap:balance}
+.caption p{margin:0;color:var(--on-variant);font-size:14.5px;max-width:62ch}
+.stat{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:4px}
+.stat span{font:500 13px/1.3 var(--f-mono);color:var(--on-surface);font-variant-numeric:tabular-nums}
+.stat b{color:var(--primary);font-weight:500}
+.stat .neg b{color:var(--error)}
+.stat .pos b{color:var(--tertiary)}
+
+.fab{position:absolute;right:20px;bottom:20px;z-index:3;width:56px;height:56px;border-radius:var(--r-l);border:0;background:var(--primary-c);color:var(--on-primary-c);display:grid;place-items:center;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35);transition:border-radius .3s,background .3s}
+.fab:hover{border-radius:22px;background:#7d4400}
+.fab svg{width:24px;height:24px;fill:currentColor}
+.progress{position:absolute;left:0;right:0;bottom:0;height:4px;z-index:3;background:var(--outline-v)}
+.progress i{display:block;height:100%;width:0;background:var(--primary);border-radius:0 4px 4px 0}
+.fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--on-variant)}
+
+/* ---------- notes ---------- */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.note{background:var(--surface-c);border-radius:var(--r-l);padding:18px 20px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.note h3{margin:0;font:600 15px/1.3 var(--f-display);font-variation-settings:"wdth" 110}
+.note p{margin:0;color:var(--on-variant);font-size:13.5px}
+.note code{font-family:var(--f-mono);font-size:12px;color:var(--on-surface)}
+.quote{margin:4px 0 0;font:600 clamp(18px,2.2vw,24px)/1.3 var(--f-display);font-variation-settings:"wdth" 108;color:var(--on-surface);text-wrap:balance;max-width:40ch}
+.quote em{color:var(--primary);font-style:normal}
+
+@media (max-width:640px){
+  .stage{height:auto;aspect-ratio:auto;display:flex;flex-direction:column}
+  #gl{position:relative;height:420px}
+  .appbar{padding:12px 14px}
+  .chips{top:64px;left:14px;right:14px}
+  .caption{position:relative;left:auto;bottom:auto;width:auto;margin:0;border-radius:0 0 var(--r-xl) var(--r-xl);background:var(--surface-ch)}
+  .fab{top:350px;bottom:auto;right:14px;width:48px;height:48px}
+  .illus{display:none}
+}
+@media (prefers-reduced-motion:reduce){.caption,.chip,.fab{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <section class="stage" id="stage" aria-label="Animasi 3D kisah SANTET">
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <header class="appbar">
+      <div class="mark" aria-hidden="true">S</div>
+      <div class="brand">
+        <h1>SANTET</h1>
+        <p>Sentiment Analysis for Nusantara Theatrical Expectation Tracking</p>
+      </div>
+      <span class="illus">Visual ilustratif</span>
+    </header>
+    <nav class="chips" id="chips" aria-label="Babak cerita"></nav>
+    <article class="caption" id="caption" aria-live="polite">
+      <div class="eyebrow" id="cEyebrow"></div>
+      <h2 id="cTitle"></h2>
+      <p id="cBody"></p>
+      <div class="stat" id="cStat"></div>
+    </article>
+    <button class="fab" id="fab" type="button" aria-label="Jeda animasi">
+      <svg viewBox="0 0 24 24" id="fabIcon"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+    </button>
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+  </section>
+
+  <section class="notes" aria-label="Catatan">
+    <div class="note">
+      <h3>Membaca 'mantra' warganet sebelum film tayang</h3>
+      <p class="quote">Mereka menjerit karena ingin datang. <em>SANTET</em> hadir agar jeritan itu akhirnya didengar.</p>
+    </div>
+    <div class="note">
+      <h3>Angka yang dipakai</h3>
+      <p>Penonton: <code>data/films_clean.csv</code> (Racun Sangga masih angka sementara). Sentimen: 9.840 komentar, model <code>w11wo/indonesian-roberta-base-sentiment-classifier</code> vs leksikon horor, dari <code>results/sentiment_*</code>.</p>
+    </div>
+    <div class="note">
+      <h3>Yang ilustratif</h3>
+      <p>Isi kartu komentar adalah contoh gaya bahasa. Tinggi pilar peta riset dan bentuk jaringan komunitas hanya ilustrasi, bukan hasil pengukuran. Klaim bias horor masih menunggu validasi label manusia.</p>
+    </div>
+    <div class="note">
+      <h3>Pernyataan independensi</h3>
+      <p>SANTET adalah proyek riset akademik independen, tidak berafiliasi dengan, didukung, atau disponsori oleh Soraya Intercine Films, Hitmaker Studios, maupun MD Pictures.</p>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+const ACTS = [
+  {chip:"Prolog", eyebrow:"Prolog · Malam sebelum tayang", title:"Penonton sudah menjawab, sebelum film tayang",
+   body:"Kolom komentar trailer penuh 'mantra': serem banget, merinding parah, gas nonton hari pertama. Bukan kutukan, tapi doa dari penonton yang tak sabar.",
+   stat:[["Komentar dianalisis","9.840",""]]},
+  {chip:"Babak I", eyebrow:"Babak I · Kutukan yang sebenarnya", title:"Studio sama, genre sama, hasil timpang 6,4×",
+   body:"Suzzanna: Bernapas dalam Kubur (2018) dan Racun Sangga (2024) lahir dari studio yang sama. Bedanya baru terlihat setelah semuanya terlambat.",
+   stat:[["Suzzanna 2018","3.346.216",""],["Racun Sangga 2024*","525.034",""]]},
+  {chip:"Babak II", eyebrow:"Babak II · Mesin yang tuli", title:"Mesin mendengar 'takut' dan menyimpulkan 'benci'",
+   body:"Model sentimen standar menilai lebih dari separuh komentar trailer sebagai negatif. Leksikon yang paham horor hanya menemukan sepersepuluhnya.",
+   stat:[["Model standar","51,2% negatif","neg"],["Leksikon horor","10,0% negatif","pos"]]},
+  {chip:"Babak III", eyebrow:"Babak III · Bangsa yang tak tercatat", title:"Peta riset box office belum mencatat Indonesia",
+   body:"Literatur prediksi box office berpusat di Hollywood, China, Korea, dan India. Pasar yang hidup dari horor ini hampir tak terlihat di jurnal bereputasi.",
+   stat:[["Tinggi pilar","ilustrasi",""]]},
+  {chip:"Babak IV", eyebrow:"Babak IV · Lahirnya SANTET", title:"Rasa takut dibaca sebagai permintaan",
+   body:"Enam huruf, enam janji: rasa, ketelitian, akar Nusantara, layar bioskop, harapan menonton, dan waktu, karena semuanya dibaca sebelum tayang.",
+   stat:[["Sentiment · Analysis · Nusantara","",""],["Theatrical · Expectation · Tracking","",""]]},
+  {chip:"Epilog", eyebrow:"Epilog · Penonton yang terlihat", title:"Basis fans yang tak terlihat, akhirnya terpetakan",
+   body:"Komentator yang saling terhubung membentuk komunitas, termasuk penggemar waralaba yang setia datang ke bioskop. Mereka menjerit karena ingin datang.",
+   stat:[["Bentuk jaringan","ilustrasi",""]]}
+];
+const ACT_SEC = 7.5, N = ACTS.length, TOTAL = ACT_SEC*N;
+let t=0;
+const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ---------- UI ---------- */
+const chipsEl = document.getElementById("chips");
+ACTS.forEach((a,i)=>{
+  const b=document.createElement("button");b.type="button";b.className="chip";b.id="chip"+i;
+  b.innerHTML='<span class="n">0'+(i+1)+'</span>'+a.chip;
+  b.addEventListener("click",()=>{ t = i*ACT_SEC + 0.6; showCaption(i,true); });
+  chipsEl.appendChild(b);
+});
+const cap=document.getElementById("caption"), cE=document.getElementById("cEyebrow"), cT=document.getElementById("cTitle"), cB=document.getElementById("cBody"), cS=document.getElementById("cStat");
+let shownAct=-1;
+function fillCaption(i){
+  const a=ACTS[i]; cE.textContent=a.eyebrow; cT.textContent=a.title; cB.textContent=a.body;
+  cS.innerHTML=a.stat.map(s=>'<span class="'+s[2]+'">'+s[0]+(s[1]?' <b>'+s[1]+'</b>':'')+'</span>').join("");
+  ACTS.forEach((_,k)=>document.getElementById("chip"+k).setAttribute("aria-pressed",k===i?"true":"false"));
+  const c=document.getElementById("chip"+i); if(c&&c.scrollIntoView&&shownAct!==-1) c.scrollIntoView({block:"nearest",inline:"nearest",behavior:reduce?"auto":"smooth"});
+}
+function showCaption(i,instant){
+  if(i===shownAct) return;
+  if(instant||shownAct===-1){fillCaption(i);shownAct=i;return;}
+  shownAct=i; cap.classList.add("swap");
+  setTimeout(()=>{fillCaption(i);cap.classList.remove("swap");},260);
+}
+showCaption(0,true);
+
+let playing=!reduce;
+const fab=document.getElementById("fab"), fabIcon=document.getElementById("fabIcon");
+function syncFab(){
+  fabIcon.innerHTML = playing ? '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>';
+  fab.setAttribute("aria-label", playing ? "Jeda animasi" : "Putar animasi");
+}
+syncFab();
+fab.addEventListener("click",()=>{playing=!playing;syncFab();});
+const bar=document.getElementById("bar");
+
+/* ---------- WebGL guard ---------- */
+const canvas=document.getElementById("gl"), stage=document.getElementById("stage");
+if(!window.THREE){ fail(); return; }
+let renderer;
+try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }catch(e){ fail(); return; }
+function fail(){ const d=document.createElement("div");d.className="fallback";d.textContent="Browser ini tidak mendukung WebGL, jadi animasi 3D tidak bisa ditampilkan. Ceritanya tetap bisa dibaca lewat babak di atas.";stage.appendChild(d);canvas.remove(); }
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+
+const C = { primary:0xFFB77C, primaryC:0x6D3A00, tertiary:0x8BD0C5, error:0xFF8A7E, errorC:0x93000A,
+            neutral:0xE8D7CC, outlineV:0x52443B, surface:0x31281F, hot:0xFFDCC3 };
+
+const scene=new THREE.Scene();
+scene.fog=new THREE.Fog(0x140E0A,14,34);
+const camera=new THREE.PerspectiveCamera(42,1,0.1,100);
+camera.position.set(0,1,13);
+scene.add(new THREE.AmbientLight(0xffe6d0,0.55));
+const key=new THREE.PointLight(C.primary,1.4,40); key.position.set(4,6,8); scene.add(key);
+const rim=new THREE.PointLight(C.tertiary,0.9,40); rim.position.set(-7,3,-4); scene.add(rim);
+
+/* floor dust */
+(function(){
+  const g=new THREE.BufferGeometry(), n=reduce?300:900, p=new Float32Array(n*3);
+  for(let i=0;i<n;i++){p[i*3]=(Math.random()-.5)*40;p[i*3+1]=(Math.random()-.2)*16;p[i*3+2]=(Math.random()-.5)*30;}
+  g.setAttribute("position",new THREE.BufferAttribute(p,3));
+  const m=new THREE.PointsMaterial({color:C.primary,size:0.05,transparent:true,opacity:0.45,depthWrite:false});
+  const pts=new THREE.Points(g,m); pts.name="dust"; scene.add(pts);
+})();
+
+/* ---------- helpers ---------- */
+function rr(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function tex(cv){const t=new THREE.CanvasTexture(cv);t.encoding=THREE.sRGBEncoding;t.anisotropy=4;return t;}
+function label(text,{size=44,color="#F0DFD5",weight=600,mono=false,pad=22,bg=null,scale=0.0105}={}){
+  const cv=document.createElement("canvas"),ctx=cv.getContext("2d");
+  const font=(mono?"500 ":weight+" ")+size+"px "+(mono?'"Roboto Mono", monospace':'"Roboto Flex", Roboto, sans-serif');
+  ctx.font=font; const w=Math.ceil(ctx.measureText(text).width)+pad*2, h=Math.ceil(size*1.5)+pad;
+  cv.width=w;cv.height=h; ctx.font=font;
+  if(bg){ctx.fillStyle=bg;rr(ctx,0,0,w,h,h/2);ctx.fill();}
+  ctx.fillStyle=color;ctx.textBaseline="middle";ctx.fillText(text,pad,h/2+1);
+  const m=new THREE.SpriteMaterial({map:tex(cv),transparent:true,depthWrite:false});
+  const s=new THREE.Sprite(m); s.scale.set(w*scale,h*scale,1); s.userData.base=1; return s;
+}
+function group(name){const g=new THREE.Group();g.name=name;scene.add(g);return g;}
+function setOpacity(obj,a){
+  obj.visible=a>0.003;
+  obj.traverse(o=>{ const ms=o.material?(Array.isArray(o.material)?o.material:[o.material]):[];
+    ms.forEach(m=>{ if(m.userData.base===undefined){m.userData.base=m.opacity;m.transparent=true;} m.opacity=m.userData.base*a; }); });
+}
+const ss=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t);};
+function weight(actF,i){ // cross-fade window around act i
+  let l=actF-i; if(l<-1)l+=N; if(l>N-1)l-=N;
+  return ss(-0.12,0.1,l)*(1-ss(0.9,1.12,l));
+}
+const lerp=(a,b,t)=>a+(b-a)*t;
+
+function build(){
+/* ---------- trailer screen ---------- */
+const screenG=group("screen");
+(function(){
+  const cv=document.createElement("canvas");cv.width=1024;cv.height=440;const x=cv.getContext("2d");
+  const g=x.createRadialGradient(512,200,40,512,220,560);g.addColorStop(0,"#5a2f12");g.addColorStop(1,"#120b07");
+  x.fillStyle=g;rr(x,0,0,1024,440,44);x.fill();
+  x.fillStyle="rgba(255,183,124,.9)";x.font='800 92px "Roboto Flex", sans-serif';x.textAlign="center";x.textBaseline="middle";
+  x.fillText("TRAILER",512,190);
+  x.font='500 30px "Roboto Mono", monospace';x.fillStyle="rgba(240,223,213,.75)";x.fillText("▶  02:14  ·  RESMI",512,280);
+  const m=new THREE.MeshBasicMaterial({map:tex(cv),transparent:true});
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(9.2,3.95),m);p.position.set(0,1.6,-6);screenG.add(p);
+  const glow=new THREE.Mesh(new THREE.PlaneGeometry(13,6.5),new THREE.MeshBasicMaterial({color:C.primary,transparent:true,opacity:0.08,depthWrite:false}));
+  glow.position.set(0,1.6,-6.2);screenG.add(glow);
+  // seats
+  const seatM=new THREE.MeshStandardMaterial({color:0x3a2418,roughness:.8});
+  for(let r=0;r<3;r++)for(let c=-6;c<=6;c++){const s=new THREE.Mesh(new THREE.BoxGeometry(.7,.55,.6),seatM);s.position.set(c*.95,-2.2-r*.35,2+r*1.3);screenG.add(s);}
+})();
+
+/* ---------- comment cards ---------- */
+const comments=["serem banget anjir 😱","merinding parah","gas nonton hari pertama!","ga berani nonton sendirian","ajak bestie 🔥","auto beli tiket 🎟️","trailernya bikin takut","ngeri sih ini","Lebaran nonton ini","jumpscare-nya gila","sumpah takut tapi penasaran","tiket aman 🎟️","bulu kuduk berdiri","wajib nonton di bioskop","horor lokal makin keren","serem tapi pengen nonton"];
+const cardsG=group("cards"); const cards=[];
+const NC=reduce?18:30;
+for(let i=0;i<NC;i++){
+  const text=comments[i%comments.length];
+  const cv=document.createElement("canvas");cv.width=560;cv.height=150;const x=cv.getContext("2d");
+  x.fillStyle="#ffffff";rr(x,4,4,552,142,40);x.fill();
+  x.fillStyle="#2a1f19";x.beginPath();x.arc(64,75,26,0,Math.PI*2);x.fill();
+  x.fillStyle="#ffffff";x.font='700 24px "Roboto Flex", sans-serif';x.textAlign="center";x.textBaseline="middle";x.fillText(String.fromCharCode(65+(i*7)%26),64,76);
+  x.textAlign="left";x.fillStyle="#2a1f19";x.font='600 30px "Roboto Flex", sans-serif';
+  let s=text; while(x.measureText(s).width>440&&s.length>4) s=s.slice(0,-2);
+  x.fillText(s,106,77);
+  const m=new THREE.MeshBasicMaterial({map:tex(cv),transparent:true,side:THREE.DoubleSide,depthWrite:false,color:C.neutral});
+  const mesh=new THREE.Mesh(new THREE.PlaneGeometry(2.2,0.59),m);
+  const a=i/NC*Math.PI*2*2.3, rad=3.2+((i*37)%10)/10*3.2;
+  mesh.userData={home:new THREE.Vector3(Math.cos(a)*rad, ((i*53)%11)/11*5.2-1.8, Math.sin(a)*rad*0.55+1.0), neg:((i*61)%100)<51, seed:i*1.37, phase:(i%NC)/NC};
+  cardsG.add(mesh);cards.push(mesh);
+}
+
+/* ---------- act I: bars ---------- */
+const barsG=group("bars");
+const barData=[{v:3346216,label:"Suzzanna 2018",num:"3.346.216",x:-2.2,col:C.primary},{v:525034,label:"Racun Sangga 2024*",num:"525.034",x:2.2,col:C.outlineV}];
+const unit=5.4/3346216;
+barData.forEach(d=>{
+  const h=d.v*unit;
+  const m=new THREE.MeshStandardMaterial({color:d.col,roughness:.35,metalness:.1,emissive:d.col,emissiveIntensity:.06});
+  const b=new THREE.Mesh(new THREE.BoxGeometry(2.2,1,2.2),m);b.userData={h};b.position.set(d.x,-2.4,0);barsG.add(b);
+  const l1=label(d.num,{size:46,mono:true,color:"#F0DFD5"});l1.userData.anchor={x:d.x,h};barsG.add(l1);
+  const l2=label(d.label,{size:34,color:"#D6C3B6",weight:500});l2.position.set(d.x,-3.15,1.4);barsG.add(l2);
+  b.userData.label=l1;
+});
+const base=new THREE.Mesh(new THREE.CylinderGeometry(6.5,6.5,.08,64),new THREE.MeshStandardMaterial({color:0x261E18,roughness:.9}));base.position.y=-2.45;barsG.add(base);
+const ratio=label("6,4×",{size:72,weight:800,color:"#FFB77C"});ratio.position.set(0,1.2,-1.6);barsG.add(ratio);
+
+/* ---------- act II: rings ---------- */
+const ringsG=group("rings");
+function ring(x,frac,col,title,val){
+  const g=new THREE.Group();g.position.set(x,1.1,0);
+  g.add(new THREE.Mesh(new THREE.TorusGeometry(1.7,.16,16,96),new THREE.MeshStandardMaterial({color:0x3C3229,roughness:.6})));
+  const arc=new THREE.Mesh(new THREE.TorusGeometry(1.7,.2,16,128,Math.PI*2*frac),new THREE.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:.45,roughness:.3}));
+  arc.rotation.z=Math.PI/2; g.add(arc);
+  const v=label(val,{size:64,weight:800,color:col===C.error?"#FFB4AB":"#8BD0C5"});v.position.set(0,0.12,0);g.add(v);
+  const t=label(title,{size:30,weight:500,color:"#D6C3B6"});t.position.set(0,-2.45,0);g.add(t);
+  g.userData.arc=arc; g.userData.frac=frac; ringsG.add(g); return g;
+}
+const r1=ring(-2.7,0.512,C.error,"Model standar · negatif","51,2%");
+const r2=ring(2.7,0.10,C.tertiary,"Leksikon horor · negatif","10,0%");
+const scan=new THREE.Mesh(new THREE.PlaneGeometry(.06,9),new THREE.MeshBasicMaterial({color:C.error,transparent:true,opacity:.7,depthWrite:false}));
+scan.position.set(-7,1,2.5);ringsG.add(scan);
+
+/* ---------- act III: pillars ---------- */
+const pillarsG=group("pillars");
+const disc=new THREE.Mesh(new THREE.CircleGeometry(7,72),new THREE.MeshStandardMaterial({color:0x221A14,roughness:1}));disc.rotation.x=-Math.PI/2;disc.position.y=-1.6;pillarsG.add(disc);
+const gridLines=new THREE.LineSegments((function(){const g=new THREE.BufferGeometry(),p=[];for(let i=-6;i<=6;i+=1.5){p.push(i,-1.58,-6.5,i,-1.58,6.5,-6.5,-1.58,i,6.5,-1.58,i);}g.setAttribute("position",new THREE.Float32BufferAttribute(p,3));return g;})(),new THREE.LineBasicMaterial({color:C.outlineV,transparent:true,opacity:.5}));pillarsG.add(gridLines);
+const markets=[["Hollywood",-4.2,-1.5,4.6],["China",3.6,-2.4,3.4],["Korea",4.4,1.6,2.6],["India",-1.2,-3.8,2.9],["Indonesia",0.6,2.6,0.25]];
+markets.forEach(([n,x,z,h],i)=>{
+  const isID=n==="Indonesia";
+  const col=isID?C.primary:0x8C7A6E;
+  const m=new THREE.MeshStandardMaterial({color:col,emissive:col,emissiveIntensity:isID?.6:.12,roughness:.4,transparent:true,opacity:isID?1:.85});
+  const p=new THREE.Mesh(new THREE.CylinderGeometry(.42,.42,1,32),m);p.position.set(x,-1.6,z);p.userData={h,isID};pillarsG.add(p);
+  const l=label(n,{size:32,weight:isID?700:500,color:isID?"#FFB77C":"#D6C3B6"});l.userData.anchor={x,z,h};pillarsG.add(l);p.userData.label=l;
+  if(isID){const halo=new THREE.Mesh(new THREE.RingGeometry(.6,.75,48),new THREE.MeshBasicMaterial({color:C.primary,transparent:true,opacity:.8,side:THREE.DoubleSide,depthWrite:false}));halo.rotation.x=-Math.PI/2;halo.position.set(x,-1.55,z);halo.userData.halo=true;pillarsG.add(halo);}
+});
+
+/* ---------- act IV: letters ---------- */
+const lettersG=group("letters");
+const words=[["S","Sentiment"],["A","Analysis"],["N","Nusantara"],["T","Theatrical"],["E","Expectation"],["T","Tracking"]];
+const shapes=[(x)=>{x.beginPath();x.arc(150,140,118,0,7);}, (x)=>rr(x,32,22,236,236,70), (x)=>{x.beginPath();for(let k=0;k<12;k++){const a=k/12*Math.PI*2,r=k%2?104:126;x.lineTo(150+Math.cos(a)*r,140+Math.sin(a)*r);}x.closePath();}];
+const letterSprites=[];
+words.forEach(([L,w],i)=>{
+  const cv=document.createElement("canvas");cv.width=300;cv.height=340;const x=cv.getContext("2d");
+  x.fillStyle=i%2?"#00504A":"#6D3A00"; shapes[i%3](x); x.fill();
+  x.fillStyle=i%2?"#A7EDE1":"#FFDCC3";x.font='800 150px "Roboto Flex", sans-serif';x.textAlign="center";x.textBaseline="middle";x.fillText(L,150,148);
+  x.font='600 30px "Roboto Flex", sans-serif';x.fillStyle="#F0DFD5";x.fillText(w,150,312);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(cv),transparent:true,depthWrite:false}));s.scale.set(1.9,2.15,1);
+  s.userData={i};lettersG.add(s);letterSprites.push(s);
+});
+const circle=new THREE.Mesh(new THREE.TorusGeometry(3.9,.025,8,160),new THREE.MeshBasicMaterial({color:C.primary,transparent:true,opacity:.6}));circle.rotation.x=Math.PI/2;circle.position.y=-.2;lettersG.add(circle);
+const circle2=new THREE.Mesh(new THREE.TorusGeometry(2.4,.02,8,120),new THREE.MeshBasicMaterial({color:C.tertiary,transparent:true,opacity:.5}));circle2.rotation.x=Math.PI/2;circle2.position.y=-.2;lettersG.add(circle2);
+const ticket=(function(){
+  const cv=document.createElement("canvas");cv.width=520;cv.height=240;const x=cv.getContext("2d");
+  x.fillStyle="#8BD0C5";rr(x,0,0,520,240,36);x.fill();
+  x.globalCompositeOperation="destination-out";x.beginPath();x.arc(0,120,30,0,7);x.arc(520,120,30,0,7);x.fill();x.globalCompositeOperation="source-over";
+  x.setLineDash([10,10]);x.strokeStyle="#00504A";x.lineWidth=4;x.beginPath();x.moveTo(380,24);x.lineTo(380,216);x.stroke();
+  x.fillStyle="#00201D";x.font='800 64px "Roboto Flex", sans-serif';x.textBaseline="middle";x.fillText("TIKET",48,100);
+  x.font='500 26px "Roboto Mono", monospace';x.fillText("niat menonton",50,160);
+  x.font='800 54px "Roboto Flex", sans-serif';x.textAlign="center";x.fillText("H-7",452,122);
+  const s=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(cv),transparent:true,depthWrite:false}));s.scale.set(2.8,1.3,1);return s;
+})();
+ticket.position.set(0,-.1,0);lettersG.add(ticket);
+
+/* ---------- act V: network ---------- */
+const netG=group("network");
+const NN=reduce?60:120, clusters=[{c:new THREE.Vector3(-3,1.3,0),col:C.primary,name:"Fans waralaba"},{c:new THREE.Vector3(3,1.9,-1),col:C.tertiary,name:"Pencinta horor"},{c:new THREE.Vector3(0.4,-1.3,1.6),col:0xE8C08E,name:"Penonton musiman"}];
+const nodes=[];
+const sphere=new THREE.SphereGeometry(.09,12,12);
+for(let i=0;i<NN;i++){
+  const k=i%3, cl=clusters[k];
+  const v=new THREE.Vector3((Math.random()-.5),(Math.random()-.5),(Math.random()-.5)).normalize().multiplyScalar(Math.pow(Math.random(),.6)*(k===0?1.9:1.5));
+  const p=cl.c.clone().add(v);
+  const m=new THREE.Mesh(sphere,new THREE.MeshStandardMaterial({color:cl.col,emissive:cl.col,emissiveIntensity:.22,roughness:.5}));
+  m.position.copy(p);m.userData={k,p0:p.clone(),s:Math.random()*6};netG.add(m);nodes.push(m);
+}
+const ep=[];
+nodes.forEach((a,i)=>{ for(let t=0;t<3;t++){ const j=(i+3*(1+Math.floor(Math.random()*8)))%NN; const b=nodes[j]; if(a.userData.k===b.userData.k&&a.position.distanceTo(b.position)<2.2) ep.push(a.position.x,a.position.y,a.position.z,b.position.x,b.position.y,b.position.z);} });
+for(let t=0;t<6;t++){const a=nodes[t*3],b=nodes[t*3+1+(t%2)];ep.push(a.position.x,a.position.y,a.position.z,b.position.x,b.position.y,b.position.z);}
+const eg=new THREE.BufferGeometry();eg.setAttribute("position",new THREE.Float32BufferAttribute(ep,3));
+const edges=new THREE.LineSegments(eg,new THREE.LineBasicMaterial({color:0xD6C3B6,transparent:true,opacity:.28,depthWrite:false}));netG.add(edges);
+edges.userData.count=ep.length/3;
+clusters.forEach(cl=>{const l=label(cl.name,{size:30,weight:600,color:"#F0DFD5",bg:"rgba(49,40,31,.85)",pad:20});l.position.copy(cl.c).add(new THREE.Vector3(0,cl===clusters[0]?2.4:2.0,0));netG.add(l);});
+
+return {screenG,cardsG,cards,barsG,ringsG,r1,r2,scan,pillarsG,lettersG,letterSprites,ticket,netG,nodes,edges,circle,circle2};
+}
+
+/* ---------- camera shots ---------- */
+const shots=[
+  {p:[0,1.2,12.5],l:[0,1,-1]},
+  {p:[5.5,2.6,11.5],l:[0,0.9,0]},
+  {p:[0,1.0,10.5],l:[0,0.9,0]},
+  {p:[0,7.5,10],l:[0,-0.6,0]},
+  {p:[0,2.6,11],l:[0,0,0]},
+  {p:[0,1.2,12.5],l:[0,0.6,0]}
+];
+const camTarget=new THREE.Vector3(), lookAt=new THREE.Vector3(0,1,0), tmp=new THREE.Vector3();
+
+function resize(){
+  const w=canvas.clientWidth,h=canvas.clientHeight; if(!w||!h) return;
+  renderer.setSize(w,h,false); camera.aspect=w/h;
+  camera.fov = w/h<0.9 ? 62 : (w/h<1.3?52:42);
+  camera.updateProjectionMatrix();
+}
+window.addEventListener("resize",resize);
+
+let last=performance.now(),S;
+const fonts = (document.fonts&&document.fonts.ready)? Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,2500))]) : Promise.resolve();
+fonts.then(()=>{ S=build(); resize(); requestAnimationFrame(loop); });
+
+function loop(now){
+  const dt=Math.min(.05,(now-last)/1000); last=now;
+  if(playing) t=(t+dt)%TOTAL;
+  const actF=t/ACT_SEC, act=Math.floor(actF)%N, loc=actF-act;
+  showCaption(act);
+  bar.style.width=((t/TOTAL)*100).toFixed(2)+"%";
+  const time=now/1000;
+  const W=ACTS.map((_,i)=>weight(actF,i));
+
+  /* camera */
+  const sh=shots[act], nx=shots[(act+1)%N];
+  const k=ss(0.82,1.0,loc);
+  camTarget.set(lerp(sh.p[0],nx.p[0],k),lerp(sh.p[1],nx.p[1],k),lerp(sh.p[2],nx.p[2],k));
+  if(act===5||act===4){ const ang=(reduce?0:time*0.12)+(act===4?0.3:0); const r=Math.hypot(sh.p[0],sh.p[2]); camTarget.x=lerp(Math.sin(ang)*r*0.5,camTarget.x,k); }
+  else if(!reduce){ camTarget.x+=Math.sin(time*.25)*.5; camTarget.y+=Math.sin(time*.18)*.2; }
+  camera.position.lerp(camTarget, reduce?1:0.045);
+  tmp.set(lerp(sh.l[0],nx.l[0],k),lerp(sh.l[1],nx.l[1],k),lerp(sh.l[2],nx.l[2],k));
+  lookAt.lerp(tmp, reduce?1:0.06); camera.lookAt(lookAt);
+
+  /* screen */
+  setOpacity(S.screenG, Math.max(W[0], W[2]*0.25));
+
+  /* cards: prolog emerge, babak II scan, babak IV converge */
+  const wc=Math.max(W[0],W[2],W[4]);
+  setOpacity(S.cardsG,wc);
+  const scanX = -7 + ss(0.08,0.8,act===2?loc:0)*14;
+  S.cards.forEach((c,i)=>{
+    const u=c.userData, h=u.home;
+    let x=h.x,y=h.y,z=h.z, col=C.neutral, sc=1;
+    const back=(act===2?ss(0,0.25,loc):0)*(1-(act===2?ss(0.9,1,loc):0));
+    x=lerp(x,h.x*1.6,back); y=lerp(y,h.y*1.15+0.6,back); z=lerp(z,h.z-6.5,back); sc=lerp(1,0.8,back);
+    if(act===0||(act===5&&loc>0.9)){ const e=ss(u.phase*0.55,u.phase*0.55+0.4,act===0?loc:0); x=lerp(0,h.x,e);y=lerp(1.6,h.y,e);z=lerp(-6,h.z,e); }
+    if(act===2){ if(u.neg && x<scanX) col=C.error; }
+    if(act===3&&loc<0.15){ col=u.neg?C.error:C.neutral; }
+    if(act===4||(act===3&&loc>0.85)){
+      const e=act===4?ss(0.05,0.7,loc):0;
+      const ang=Math.atan2(h.z-1,h.x)+e*Math.PI*1.4+(reduce?0:time*0.15*e);
+      const rad=lerp(Math.hypot(h.x,(h.z-1)/0.55),1.2+((i*13)%7)/7*1.0,e);
+      x=Math.cos(ang)*rad; z=Math.sin(ang)*rad*0.9; y=lerp(h.y,-0.2+Math.sin(i)*0.9,e);
+      col= e>0.35 ? C.tertiary : (u.neg?C.error:C.neutral); sc=lerp(1,0.55,e); y-=0.9*e;
+    }
+    if(!reduce){ y+=Math.sin(time*0.8+u.seed)*0.08; }
+    c.position.set(x,y,z); c.scale.setScalar(sc);
+    c.material.color.lerp(new THREE.Color(col),0.12);
+    c.lookAt(camera.position);
+  });
+
+  /* bars */
+  setOpacity(S.barsG,W[1]);
+  if(W[1]>0){ S.barsG.children.forEach(o=>{ if(o.userData.h){ const g=ss(0.05,0.6,act===1?loc:1); const h=Math.max(.02,o.userData.h*g); o.scale.y=h; o.position.y=-2.4+h/2; const l=o.userData.label; l.position.set(o.position.x,-2.4+h+0.55,1.15);} }); }
+
+  /* rings */
+  setOpacity(S.ringsG,W[2]);
+  if(W[2]>0){ const g=ss(0.1,0.7,act===2?loc:1);
+    [S.r1,S.r2].forEach((r,i)=>{ r.userData.arc.scale.setScalar(1); r.userData.arc.rotation.z=Math.PI/2; r.userData.arc.material.emissiveIntensity=.25+.35*g; r.rotation.y=reduce?0:Math.sin(time*.4+i)*0.18; r.userData.arc.visible=g>0.02; r.userData.arc.scale.set(1,1,1); r.userData.arc.geometry.setDrawRange(0, Math.floor(r.userData.arc.geometry.index.count*g)); });
+    S.scan.position.x=scanX; }
+
+  /* pillars */
+  setOpacity(S.pillarsG,W[3]);
+  if(W[3]>0){ S.pillarsG.children.forEach(o=>{ if(o.userData.h){ const g=ss(0.05,0.55,act===3?loc:1); const h=Math.max(.05,o.userData.h*g); o.scale.y=h; o.position.y=-1.6+h/2; const l=o.userData.label; l.position.set(o.position.x,-1.6+h+0.45,o.position.z);
+        if(o.userData.isID){ o.material.emissiveIntensity=.4+.4*(0.5+0.5*Math.sin(time*3)); } }
+      if(o.userData.halo){ const p=(time*0.6)%1; o.scale.setScalar(1+p*2.2); o.material.opacity=.8*(1-p)*W[3]; } }); }
+
+  /* letters */
+  setOpacity(S.lettersG,W[4]);
+  if(W[4]>0){ const g=ss(0.0,0.45,act===4?loc:1);
+    S.letterSprites.forEach((s,i)=>{ const a=i/6*Math.PI*2+(reduce?0:time*0.35)+Math.PI/2; const r=3.9*g; s.position.set(Math.cos(a)*r,0.9+Math.sin(time*1.2+i)*0.12*(reduce?0:1),Math.sin(a)*r); s.material.opacity=Math.min(1,g*1.4)*W[4]; });
+    S.circle.scale.setScalar(Math.max(.01,g)); S.circle2.rotation.z=time*.3;
+    const tg=ss(0.55,0.85,act===4?loc:1); S.ticket.material.opacity=tg*W[4]; S.ticket.scale.set(2.8*(0.6+0.4*tg),1.3*(0.6+0.4*tg),1); }
+
+  /* network */
+  setOpacity(S.netG,W[5]);
+  if(W[5]>0){ const g=ss(0.05,0.6,act===5?loc:1);
+    S.nodes.forEach(n=>{ const u=n.userData; n.position.copy(u.p0); if(!reduce) n.position.y+=Math.sin(time*1.4+u.s)*0.05; n.scale.setScalar(g*(1+0.25*Math.sin(time*2+u.s))); });
+    S.edges.geometry.setDrawRange(0, Math.floor(S.edges.userData.count*ss(0.25,0.85,act===5?loc:1))); }
+
+  const dust=scene.getObjectByName("dust"); if(dust&&!reduce) dust.rotation.y=time*0.01;
+  renderer.render(scene,camera);
+  requestAnimationFrame(loop);
+}
+})();
+</script>
+</body>
+</html>

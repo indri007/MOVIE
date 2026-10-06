@@ -47,7 +47,7 @@ MANUSCRIPT_MD = f"""# {TITLE}
 **Target Publication:** {JOURNAL_TARGET}  
 **Authors:** {AUTHORS}  
 **Correspondence:** {CORRESPONDING}  
-**Artifact Digital Identifier:** DOI: 10.1016/j.ipm.2026.103982 | Scopus ID: 8518920194  
+**Artifact Digital Identifier:** Status: working paper (belum terbit; DOI & Scopus ID belum ada)  
 
 ---
 
@@ -242,7 +242,7 @@ def generate_pdf():
                 40, 810,
                 "Elsevier Scopus Q1 Benchmark | Information Processing & Management / Computers in Human Behavior"
             )
-            self.drawRightString(555, 810, "DOI: 10.1016/j.ipm.2026.103982")
+            self.drawRightString(555, 810, "Working paper (belum terbit)")
             self.setStrokeColor(colors.HexColor("#cbd5e1"))
             self.setLineWidth(0.5)
             self.line(40, 804, 555, 804)
@@ -709,11 +709,11 @@ generate_docx()
 def generate_bitstream():
     # Construct comprehensive academic bitstream payload
     bit_text = (
-        f"=== SCOPUS Q1 ELSEVIER ACADEMIC MANUSCRIPT & KPI AUDIT (BAHASA BIT) ===\n"
+        f"=== WORKING PAPER ACADEMIC MANUSCRIPT & KPI AUDIT (BAHASA BIT) ===\n"
         f"TITLE: {TITLE}\n"
         f"TARGET: {JOURNAL_TARGET}\n"
         f"AUTHORS: {AUTHORS}\n"
-        f"DOI: 10.1016/j.ipm.2026.103982\n"
+        f"Working paper (belum terbit)\n"
         f"ABSTRACT: {ABSTRACT.strip()}\n"
         f"MATHEMATICAL AXIOMS:\n"
         f"1. WER = [ sum(w_k * Interaction_k) / Followers ] * 100%\n"
@@ -772,8 +772,8 @@ create_zip_package()
 manifest = {
     "title": TITLE,
     "target_journal": JOURNAL_TARGET,
-    "doi": "10.1016/j.ipm.2026.103982",
-    "status": "100% KPI MATCHED AND VERIFIED",
+    "doi": None,
+    "status": "KPI internal (belum ditelaah reviewer)",
     "files": {
         "pdf": "output/scopus_q1_journal_manuscript.pdf",
         "docx": "output/scopus_q1_journal_manuscript.docx",

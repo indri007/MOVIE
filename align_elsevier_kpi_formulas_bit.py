@@ -176,7 +176,7 @@ def compute_elsevier_kpis():
             "Decision Support Systems (Elsevier)"
         ],
         "total_kpis": len(kpi_records),
-        "compliance_summary": "100% KPI MATCHED AND VERIFIED",
+        "compliance_summary": "KPI internal (belum ditelaah reviewer)",
         "kpi_matrix": kpi_records
     }
     json_file = OUTPUT_DIR / "elsevier_kpi_formulas_mapping.json"

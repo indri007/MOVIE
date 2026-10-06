@@ -1,773 +1,163 @@
-# 🚀 Instagram Reels Indonesia — Viral Prediction 2027
+# 🕯️ SANTET
+### Sentiment Analysis for Nusantara Theatrical Expectation Tracking
 
 <div align="center">
 
-**Prediksi Potensi Viral Instagram Reels Indonesia Tahun 2027**  
-*Berdasarkan Data Historis 2020–2026*
+[![GitHub](https://img.shields.io/badge/GitHub-indri007%2Fprediksi--movie--2027-181717?logo=github)](https://github.com/indri007/prediksi-movie-2027)
+[![Status](https://img.shields.io/badge/Status-Riset%20Berjalan-orange)](results/paper_status.md)
+[![Lisensi](https://img.shields.io/badge/Lisensi-MIT-green)](LICENSE)
+[![UU PDP](https://img.shields.io/badge/Kepatuhan-UU%20PDP%20No.%2027%2F2022-blue)](docs/DESIGN.md#etika)
 
-[![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Conda Env](https://img.shields.io/badge/Env-instagram2027-44A833?logo=anaconda&logoColor=white)](https://docs.conda.io/)
-[![LightGBM](https://img.shields.io/badge/Model-LightGBM%20%7C%20XGBoost-brightgreen)](https://lightgbm.readthedocs.io/)
-[![IndoBERT](https://img.shields.io/badge/NLP-IndoBERT-FF6B6B)](https://huggingface.co/indobenchmark/indobert-base-p1)
-[![SHAP](https://img.shields.io/badge/XAI-SHAP-orange)](https://shap.readthedocs.io/)
-[![Status](https://img.shields.io/badge/Status-Active%20Research-success)]()
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+<a href="docs/santet/index.html">
+  <img src="docs/assets/santet_hero.svg" width="100%" alt="Animasi SANTET 6 babak — ilustratif: Prolog, Kutukan, Mesin yang tuli, Bangsa tak tercatat, Lahirnya SANTET, Epilog. Label: ilustratif.">
+</a>
 
----
+*Animasi di atas bersifat ilustratif. Klik untuk membuka narasi 3D interaktif.*
 
-*"Dari 17 juta post Instagram → pola viral yang bisa diprediksi untuk 2027"*
+**"Membaca 'mantra' warganet sebelum film tayang."**  
+*Fear is demand · Rasa takut adalah permintaan*
 
 </div>
 
 ---
 
-## 📌 Product Overview
+## Kenapa SANTET ada
 
-**Instagram Reels Viral Predictor 2027** adalah platform riset ML end-to-end yang mempelajari pola konten Instagram Indonesia dari tahun 2020 hingga 2026, kemudian membangun model prediktif untuk mengidentifikasi karakteristik konten berpotensi viral di tahun 2027.
-
-### Problem Statement
-
-> Dari sekian banyak konten yang diposting di Instagram Indonesia setiap hari, **mengapa sebagian konten menjadi viral sementara konten lain tidak** — dan apakah pola ini bisa dipelajari dan diprediksi?
-
-### Goal
-
-Membangun sistem yang mampu menjawab:
-> *"Berdasarkan pola 2020–2026, konten dengan karakteristik apa yang memiliki probabilitas viral tinggi di 2027?"*
+Film horor Indonesia dari studio yang sama bisa berbeda perolehan penonton hingga enam kali lipat — namun selisih itu baru terlihat setelah film tutup layar. Komentar trailer di YouTube sudah memuatnya lebih awal: kata *"serem banget"* dan *"gas nonton"* adalah sinyal niat menonton, bukan keluhan, tetapi model sentimen standar membacanya sebagai negatif. SANTET membangun pipeline analisis sentimen, jaringan komentar, dan korelasi YouTube–box office yang sadar konteks budaya Nusantara, dengan standar reproduktifitas dan etika data yang ketat. Tujuannya bukan hanya riset — melainkan agar keputusan praproduksi dan distribusi bisa bersandar pada sinyal yang lebih jujur.
 
 ---
 
-## 🎯 Research Questions
+## Status Riset (per 06-10-2026)
 
-| # | Research Question | Status |
-|---|---|---|
-| RQ1 | Faktor apa yang paling berkorelasi dengan konten viral di Instagram Indonesia? | 🔬 In Progress |
-| RQ2 | Bagaimana pola engagement berubah dari 2020 → 2026? | 🔬 In Progress |
-| RQ3 | Apakah IndoBERT caption embeddings meningkatkan prediksi viral? | 🔬 In Progress |
-| RQ4 | Seberapa akurat LightGBM/XGBoost memprediksi `viral_label`? | 🔬 In Progress |
-| RQ5 | Feature apa yang paling berpengaruh menurut SHAP? | 🔬 In Progress |
-| RQ6 | Bagaimana pola 2026 dapat diproyeksikan ke 2027? | 📋 Planned |
+> Angka-angka ini adalah hasil aktual. Tidak ada angka yang dibulatkan atau dipercantik.
 
----
-
-## 🔬 Transparansi Data Pipeline: Volume, Cleaning, Training, & Fine-Tuning IndoBERT
-
-Untuk menjamin standar integritas riset ilmiah dan keterbukaan metodologi (*reproducible science*), berikut adalah rincian lengkap alur data dari sumber mentah, pembersihan, partisi training, hingga kalibrasi fine-tuning model:
-
-```
-┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                   RINGKASAN DATA PIPELINE                                       │
-├──────────────────────┬──────────────────────┬──────────────────────┬────────────────────────────┤
-│ 1. TOTAL DATA        │ 2. DATA DICLEANING   │ 3. PARTISI TRAINING  │ 4. FINE-TUNING INDOBERT    │
-│ • 1.000 Teks Review  │ • 5.166 Slang Normal │ • 800 Train (80%)    │ • indobert-base-p1 (124.5M)│
-│ • 10M Multimodal Edge│ • 288 Emoji Injeksi  │ • 200 Test (20%)     │ • Akurasi: 88.64%          │
-│ • Deret NapoleonCat  │ • Stopword & Elongasi│ • 100 Gold Benchmark │ • Cohen's Kappa: 0.8342    │
-└──────────────────────┴──────────────────────┴──────────────────────┴────────────────────────────┘
-```
-
-### 1. Dari Berapa Data? (Volume & Sumber Data)
-Riset ini mengintegrasikan 3 tingkatan dataset yang diaudit secara ketat tanpa fabrikasi data sintetis:
-1. **Corpus Teks Ulasan Mikro (NLP & IndoBERT):**
-   - **Total:** **1.000 ulasan riil** pengguna Instagram Indonesia (`data/Review Instagram.csv` $\rightarrow$ `output/master_instagram_10000.csv`).
-   - **Atribut:** `UserName`, `Review Text`, dan `Rating` (skala 1 hingga 5).
-   - **Tujuan:** Analisis sentimen, ekstraksi afektif 9 dimensi emosi, dan representasi kontekstual vektor 768 dimensi.
-2. **Jaringan Topologi Multimodal (SNA & NodeXL):**
-   - **Total:** **10.000.000 edge interaksi** terbobot (*Weighted Engagement Rate* / WER simplex):
-     - Reels: 42% ($w_1 = 0.42$)
-     - Stories: 28% ($w_2 = 0.28$)
-     - Likes: 14% ($w_3 = 0.14$)
-     - Comments: 8% ($w_4 = 0.08$)
-     - Shares: 6% ($w_5 = 0.06$)
-     - Live Broadcasts: 2% ($w_6 = 0.02$)
-3. **Deret Makro Penetrasi Pengguna Instagram Indonesia (2018–2026):**
-   - **Data Tahunan:** 2018 (57,9M), 2022 (101,3M), 2023 (111,1M), 2024 (91,2M — anomali metode hitung Meta Ads), 2025 (100,8M).
-   - **Data Bulanan Terverifikasi:** Oktober 2025 s.d. September 2026 dari NapoleonCat (berkisar antara 99,8M hingga 124,9M; rata-rata 9 bulan 2026 = **122,5 Juta**; level terkini Jul–Sep 2026 = **124,5 Juta**).
+| Komponen | Status | Keterangan |
+|---|:---:|---|
+| Dataset box office terverifikasi (15 film, URL resmi) | ✅ | `data/films_clean.csv` |
+| Scrape komentar YouTube (9.840 komentar, 4 set) | ✅ | `yt_soraya/`, `yt_md/`, `yt_hitmaker/`, `yt_ivanna/` |
+| Korelasi Spearman: `likes_total` vs penonton | ✅ | ρ = 0,571 · p = 0,026 · CI 95% [0,05 – 0,86] |
+| Koreksi multi-testing Benjamini–Hochberg | ⚠️ | q = 0,26 — tidak lolos koreksi BH; butuh n lebih besar |
+| Sentimen IndoBERT (belum tervalidasi manual) | ⚠️ | 0 dari ≥30 label manusia terkumpul |
+| Model prediktif LOOCV (n = 14) | ⚠️ | MAPE 85,8% vs baseline 70,3% — model belum mengungguli baseline |
+| Anotasi Google Trends pra-rilis | ⏳ | `trends_pra_rilis` tersedia untuk 13/15 film |
+| Komentar YouTube API (tanggal presisi) | ⏳ | Butuh `YT_API_KEY` |
+| Validasi sentimen oleh manusia (≥30 baris) | ⏳ | Lembar anotasi siap di `annotation/` |
+| 20 analisis SNA Louvain | ✅ | `results/sna_*/` · Q = 0,810 (13 komunitas) |
 
 ---
 
-### 2. Dicleaning Berapa? (Pembersihan, Normalisasi & Ekstraksi Afektif)
-Proses pembersihan teks dijalankan melalui [src/indobert_cleaning_finetune.py](file:///Users/jevin/instagramindonesia/src/indobert_cleaning_finetune.py) menghasilkan dataset bersih di `output/indobert_cleaned_corpus.csv`:
-- **Normalisasi Slang / Bahasa Gaul:** Sebanyak **5.166 kata/token slang** berhasil dinormalisasi ke Bahasa Indonesia baku (EYD/KBBI) menggunakan kamus 200+ lema gaul:
-  - *Singkatan & Kata Ganti:* `yg` $\rightarrow$ `yang`, `dgn` $\rightarrow$ `dengan`, `utk` $\rightarrow$ `untuk`, `sy/gw` $\rightarrow$ `saya`, `lu/km` $\rightarrow$ `kamu`.
-  - *Negasi Krusial Sentimen:* `ga/gak/ngga/nggak` $\rightarrow$ `tidak`, `bkn` $\rightarrow$ `bukan`, `jgn` $\rightarrow$ `jangan` (diawetkan agar polaritas sentimen tidak terbalik).
-  - *Intensitas & Adverbia:* `bgt/bngt` $\rightarrow$ `banget`, `beneran` $\rightarrow$ `benar-benar`, `emg` $\rightarrow$ `memang`.
-  - *Istilah Teknis & Slang Media:* `ngelag/lemot` $\rightarrow$ `kinerja lambat atau macet`, `baper` $\rightarrow$ `bawa perasaan`, `gemoy` $\rightarrow$ `sangat menggemaskan`, `pargoy` $\rightarrow$ `tarian partai goyang`, `fyp` $\rightarrow$ `masuk beranda rekomendasi`.
-- **Ekstraksi & Pemetaan Emoji Afektif:** Sebanyak **288 token emoji** dipetakan secara terarah menjadi token afektif representatif:
-  - `❤️`, `🥰` $\rightarrow$ `[EMO_LOVE]`
-  - `🔥`, `⚡` $\rightarrow$ `[EMO_HYPE]`
-  - `😭`, `😢` $\rightarrow$ `[EMO_SADNESS]`
-  - `😡`, `🤬` $\rightarrow$ `[EMO_ANGER]`
-  - `👍`, `👏` $\rightarrow$ `[EMO_LIKE]`
-  - `😱`, `🤯` $\rightarrow$ `[EMO_SURPRISE]`
-- **Reduksi Elongasi & Karakter Berulang:** Kata dengan pengulangan huruf ekstrem dipangkas (`kerennnn` $\rightarrow$ `keren`, `baguuuus` $\rightarrow$ `bagus`, `paraaah` $\rightarrow$ `parah`).
-- **Pembersihan Noise:** Penghapusan karakter kontrol Unicode tersembunyi, URL, handle mention, dan simbol yang tidak memuat makna semantik.
-
----
-
-### 3. Ditraining Rinciannya Apa Aja? (Partisi Latih-Uji & 100 Sampel Benchmark Emas)
-
-#### A. Pembagian Data Klasik (Train-Test Split 80:20)
-Pada pelatihan model *baseline* machine learning (`Logistic Regression`, `Random Forest`, `XGBoost`, `LightGBM`):
-- **Data Latih (Train Set):** **800 data (80%)**
-- **Data Uji (Test Set):** **200 data (20%)**
-- **Distribusi Rating pada Data Uji (200 sampel):**
-  - Rating 1: 96 sampel (48.0%)
-  - Rating 2: 31 sampel (15.5%)
-  - Rating 3: 27 sampel (13.5%)
-  - Rating 4: 16 sampel (8.0%)
-  - Rating 5: 30 sampel (15.0%)
-
-#### B. Rincian 100 Sampel Acuan Emas (Gold Standard Annotation Set)
-Untuk menguji reliabilitas komputasi NLP terhadap pemahaman manusia, diekstraksi **100 sampel acuan emas** yang dianotasi ganda secara independen:
-- **Distribusi Sentimen 100 Sampel:**
-  - Sentimen Positif: **45 sampel**
-  - Sentimen Negatif: **35 sampel**
-  - Sentimen Netral: **20 sampel**
-- **Distribusi 9 Dimensi Emosi Afektif pada 100 Sampel:**
-  - `Joy` (Kegembiraan/Kepuasan): **25 sampel**
-  - `Anticipation` (Antisipasi/Harapan): **18 sampel**
-  - `Trust` (Kepercayaan/Rekomendasi): **16 sampel**
-  - `Optimism` (Optimisme/Motivasi): **12 sampel**
-  - `Surprise` (Keterkejutan/Viral Hook): **10 sampel**
-  - `Love` (Afeksi/Kecintaan Produk): **8 sampel**
-  - `Sadness` (Kekecewaan/Keluhan): **5 sampel**
-  - `Anger` (Kemarahan/Kekesalan Bug): **4 sampel**
-  - `Fear` (Kekhawatiran/Keamanan Akun): **2 sampel**
-- **Hasil Inter-Annotator Agreement:**
-  - **Cohen's Kappa ($\kappa$):** **0.8342** ($p < 0.0001$), melampaui batas superior Landis & Koch ($\ge 0.81$, kategori *Almost Perfect Agreement*).
-
----
-
-### 4. Rincian Fine-Tuning IndoBERT & Arsitektur Model
-
-Fine-tuning model transformer dilakukan pada arsitektur berbahasa Indonesia resmi:
-- **Backbone Base:** `indobenchmark/indobert-base-p1` (124.500.000 parameter, 12 transformer encoder layers, 768 hidden dimension, 12 attention heads).
-- **Classification Head:** Linear Projection (768 $\rightarrow$ 9 kelas emosi) + Dropout ($p = 0.3$) + Cross-Entropy Loss.
-- **Hyperparameter:**
-  - Optimizer: `AdamW`
-  - Learning Rate: `2e-5` (dengan linear decay scheduler)
-  - Warmup Ratio: `10%`
-  - Weight Decay: `0.01`
-  - Batch Size: `32`
-  - Max Sequence Length: `128` token
-  - Epochs: `5`
-
-#### Progres Konvergensi Fine-Tuning Tiap Epoch:
-| Epoch | Train Loss | Validation Loss | Validation Accuracy | Macro F1 | Weighted F1 | Learning Rate |
-|:-----:|:----------:|:---------------:|:-------------------:|:--------:|:-----------:|:-------------:|
-| **1** | 1.8421     | 1.7954          | 54.20%              | 0.5123   | 0.5380      | 2.0e-5        |
-| **2** | 1.2148     | 1.1802          | 68.72%              | 0.6651   | 0.6845      | 1.6e-5        |
-| **3** | 0.7842     | 0.7521          | 79.40%              | 0.7714   | 0.7918      | 1.2e-5        |
-| **4** | 0.5124     | 0.4983          | 85.31%              | 0.8240   | 0.8512      | 0.8e-5        |
-| **5** | **0.3685** | **0.4120**      | **88.64%**          | **0.8642**| **0.8849** | **0.4e-5**    |
-
-#### Verifikasi Inferensial & Standar Elsevier Scopus Q1:
-- **One-Way ANOVA Omnibus:** $F(8, 9991) = 69.74, \quad p = 3.50 \times 10^{-69} < 0.0001$ (signifikan secara statistik tinggi).
-- **Effect Size ($\eta^2$):** **0.1043** (menunjukkan pemisahan representasi afektif yang kuat antar cluster emosi).
-- **Preservasi Bitstream:** Seluruh hasil kalibrasi, bobot, dan matriks dienkode ke aliran biner 8-bit UTF-8 (`output/indobert_cleaning_finetune_bit.txt`, 26.128 bits) untuk reproduktibilitas 100% *lossless*.
-
----
-
-### 5. Proyeksi Pengguna Instagram Indonesia 2027 (Data Terverifikasi Opsi B)
-Berdasarkan eksekusi [proyeksi.py](file:///Users/jevin/instagramindonesia/proyeksi.py) dari data historis NapoleonCat (level terkini Jul–Sep 2026: **124,5 Juta**; pertumbuhan tahunan 2026: **+4,2%**):
-1. **Skenario Rendah (Stagnan):** **124,5 Juta** (Asumsi: Adopsi mencapai saturasi di level rata-rata kuartal III 2026).
-2. **Skenario Sedang (Laju 2026 Berlanjut):** **129,7 Juta** (Asumsi: Laju pertumbuhan tahunan 2026 sebesar +4,2% berlanjut stabil).
-3. **Skenario Tinggi (Laju 2026 Dua Kali Lipat):** **134,9 Juta** (Asumsi: Akselerasi pertumbuhan hingga 2x lipat menjadi +8,4%).
-- **Uji Mundur 2026 (Out-of-Sample Backtesting):** Model Naif galat **17,7%**, Model Linier galat **21,8%** (secara transparan mendokumentasikan guncangan metode hitung Meta Ads pada 2024 yang turun -17,9%).
-
----
-
-## 📊 Dataset Architecture
-
-### Primary Dataset: `private_instagram` (HuggingFace)
-
-| Atribut | Nilai |
-|---|---|
-| **Total baris** | ~17.2 juta post |
-| **Shards** | 15 × Parquet files |
-| **Periode** | 2010–2019 (subset difilter 2020–2026) |
-| **Key columns** | `post_id`, `date`, `post_type`, `description`, `likes`, `comments`, `followers`, `lang`, `category` |
-
-### Supporting Datasets
-
-| Dataset | Rows | Konten |
-|---|---|---|
-| `instagram-engagement-eda` | 29,999 | post analytics + media type + viral label |
-| `eldersantos-instagram` | 542,481 | Instagram dengan geo-tag |
-| `instagram_influencer_and_brand` | 37,787 | caption, comment, bio influencer Indonesia |
-| `IndoDiscourse` | annotated | toxicity & discourse dataset Bahasa Indonesia |
-| `cyberbullying-indonesia` | annotated | cyberbullying dataset Instagram Indonesia |
-| `brain-virality-dataset` | JSON | viral/neutral/bad outlier markers |
-
-### Target Schema (Master Dataset)
-
-```
-reel_id, username, date, year, caption, hashtags, followers,
-views, likes, comments, shares, saves, reach, duration,
-audio, transcript, topic, emotion, sentiment,
-engagement_rate, viral_score, viral_label
-```
-
----
-
-## 🏗️ Pipeline Architecture
-
-```
-17+ Juta Post Instagram (2020–2026)
-             │
-             ▼
-┌─────────────────────────────┐
-│  01. Data Discovery & Audit │  ← audit semua sumber, no synthetic data
-└──────────────┬──────────────┘
-               │
-               ▼
-┌─────────────────────────────┐
-│  02. Master ETL Builder     │  ← build_master_instagram_dataset.py
-│  (shard-by-shard, chunk)    │  ← filter lang=id, 2020–2026
-└──────────────┬──────────────┘
-               │
-               ▼
-┌─────────────────────────────────────────────────────┐
-│              FEATURE EXTRACTION                      │
-│  ┌─────────────┐  ┌──────────────┐  ┌────────────┐ │
-│  │ VIDEO/CLIP  │  │ TEXT/NLP     │  │ ENGAGEMENT │ │
-│  │ frame       │  │ IndoBERT     │  │ views      │ │
-│  │ duration    │  │ emotion      │  │ likes      │ │
-│  │ audio feat  │  │ sentiment    │  │ viral_score│ │
-│  └─────────────┘  └──────────────┘  └────────────┘ │
-└──────────────┬──────────────────────────────────────┘
-               │
-               ▼
-┌─────────────────────────────┐
-│  03. Viral Label Engine     │  ← percentile-based, no leakage
-│  viral_score → viral_label  │  ← top 20% = viral (1), else 0
-└──────────────┬──────────────┘
-               │
-               ▼
-┌──────────────────────────────────────────────┐
-│           TEMPORAL SPLIT                      │
-│  2020–2023 → TRAIN                           │
-│  2024–2025 → VALIDATION                      │
-│  2026      → TEMPORAL TEST                   │
-│  2027      → PREDICTION TARGET               │
-└──────────────┬───────────────────────────────┘
-               │
-               ▼
-┌─────────────────────────────┐
-│  04. ML Training            │  ← LightGBM, XGBoost, Random Forest
-│      + SHAP Explainability  │  ← TreeExplainer global + local
-└──────────────┬──────────────┘
-               │
-               ▼
-┌─────────────────────────────┐
-│  05. 2027 Forecast          │  ← trend extrapolation + SARIMAX
-└──────────────┬──────────────┘
-               │
-               ▼
-         Dashboard / Report
-```
-
----
-
-## 📁 Repository Structure
-
-```
-projectityu/
-├── 📜 Core Scripts
-│   ├── build_master_instagram_dataset.py   # ETL: 17M rows → master schema
-│   ├── audit_dataset.py                    # Audit & validasi semua dataset
-│   ├── reels_multimodal_pipeline.py        # Multimodal: CLIP + IndoBERT
-│   ├── instagram_pipeline_10steps.py       # Full 10-step research pipeline
-│   ├── ml_benchmark.py                     # ML benchmark runner
-│   ├── shap_analysis.py                    # SHAP explainability
-│   └── instagram_crawler.py               # Data collection utilities
-│
-├── 📂 src/                                 # Modular pipeline steps
-│   ├── 01_cleaning.py
-│   ├── 02_viral_score.py
-│   ├── 03_indobert.py
-│   ├── 04_feature_engineering.py
-│   ├── 05_temporal_split.py
-│   ├── 06_train_models.py
-│   ├── 07_evaluate.py
-│   ├── 08_trend_momentum.py
-│   ├── 09_forecast_2027.py
-│   └── 10_explainability.py
-│
-├── 📂 dashboard/                           # Streamlit Research Dashboard
-│   └── app.py
-│
-├── 📂 output/                              # Pipeline outputs
-│   ├── master_instagram_dataset_sample.csv  # 50K sample rows (tracked)
-│   └── [large parquets gitignored]
-│
-├── 📂 models/                              # Model artifacts (gitignored)
-│   ├── indobert/
-│   └── viral_model/
-│
-├── 📂 docs/
-│   └── papers/
-│       └── 2004.12226_Instagram_COVID19.pdf
-│
-├── 📂 data/
-│   ├── Review Instagram.csv               # 1K review dataset
-│   └── external/                          # 9.7GB datasets (gitignored)
-│
-├── requirements.txt
-└── README.md
-```
-
----
-
-## ⚙️ Setup & Installation
-
-### Prerequisites
-
-- macOS / Linux
-- [Miniconda](https://docs.conda.io/en/latest/miniconda.html)
-- Python **3.11**
-
-### Quick Start
+## Quick Start
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/indri007/projectityu.git
-cd projectityu
+# 1. Pasang dependensi
+pip install -r requirements.txt        # atau: ./bit install
 
-# 2. Create conda environment
-conda create -n instagram2027 python=3.11 -y
-conda activate instagram2027
+# 2. Unduh komentar trailer (yt-dlp, tanpa API key)
+./bit scrape all --max 500
 
-# 3. Install dependencies
-python -m pip install -r requirements.txt
-
-# 4. Verify environment
-which python  # must point to instagram2027 env
-python --version  # Python 3.11.x
+# 3. Jalankan semua analisis: sentimen → SNA → korelasi
+./bit finish
 ```
 
-### Run Pipeline
-
-```bash
-# Step 1 – Audit datasets
-python audit_dataset.py
-
-# Step 2 – Build master dataset (dari parquet shards)
-python build_master_instagram_dataset.py
-
-# Step 3 – Full 10-step research pipeline
-python instagram_pipeline_10steps.py
-
-# Step 4 – SHAP explainability
-python shap_analysis.py
-
-# Step 5 – Launch dashboard
-streamlit run dashboard/app.py
-```
+Butuh data pra-rilis presisi? `export YT_API_KEY="..." && ./bit precise all`
 
 ---
 
-## 🔬 Methodology
+## Peta Fitur
 
-### Viral Score Formula
-
-```
-viral_score = (
-    0.35 × (likes / followers) +
-    0.30 × (views / reach)     +
-    0.20 × (saves / reach)     +
-    0.10 × (comments / reach)  +
-    0.05 × e^(-λ × Δt)
-)
-
-viral_label = 1  if viral_score >= P80  (top 20%)
-            = 0  otherwise
-```
-
-### NLP Stack
-
-| Komponen | Tool |
-|---|---|
-| Sentiment | IndoBERT + lexicon Indonesia |
-| Emotion | Multi-label (joy, anger, fear, sadness, surprise) |
-| Topic Modeling | BERTopic / LDA |
-| Toxicity | IndoDiscourse classifier |
-| Caption Embedding | `indobenchmark/indobert-base-p1` |
-
-### ML Models
-
-| Model | Task |
-|---|---|
-| **LightGBM** | Viral classification (primary) |
-| **XGBoost** | Viral classification (ensemble) |
-| **Random Forest** | Baseline + feature importance |
-| **SARIMAX / Prophet** | 2027 trend forecasting |
-| **SHAP TreeExplainer** | Model explainability |
-
-### Temporal Split (No Leakage)
-
-```
-TRAIN      : 2020 – 2023  (learning pola historis)
-VALIDATION : 2024 – 2025  (hyperparameter tuning)
-TEST       : 2026          (evaluasi temporal realistis)
-PREDICT    : 2027          (target prediksi)
-```
+| Modul | Perintah | Output |
+|---|---|---|
+| **CLI terpadu** | `./bit help` | Semua 30+ perintah dalam satu entrypoint |
+| **Scrape trailer** | `./bit scrape [soraya\|md\|hitmaker\|all]` | `yt_*/comments.csv`, `videos.csv`, `edges.csv` |
+| **Sentimen IndoBERT** | `./bit sentiment predict` | Label + skor per komentar |
+| **20 analisis SNA** | `./bit sna all` | Graf, tabel, `ringkasan.md`, NodeXL export |
+| **Korelasi & model** | `./bit correlate` · `./bit model` | Spearman, bootstrap, LOOCV, BH |
+| **Dashboard web** | `./bit dashboard` | `dashboard/index.html` (dark glassmorphism) |
+| **Streamlit SNA** | `streamlit run streamlit_app/app.py` | Semua 20 grafik SNA interaktif |
+| **Narasi 3D** | [docs/santet/](docs/santet/index.html) | Six-act story · Material 3 · Three.js |
 
 ---
 
-## 🧪 Data Integrity Rules
+## Data & Etika
 
-> Integritas data adalah prinsip non-negotiable dalam riset ini.
+**Independensi.** SANTET adalah riset akademik independen. Tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Soraya Intercine Films, Hitmaker Studios, atau MD Pictures. Judul film, metadata trailer, dan angka penonton dikutip semata untuk tujuan ilmiah dan pendidikan.
 
-- ❌ **DILARANG**: membuat data sintetis / fabricate engagement metrics
-- ❌ **DILARANG**: memasukkan data 2027 ke dalam training set (future leakage)
-- ❌ **DILARANG**: mengasumsikan `post_type` tanpa bukti dari data
-- ✅ **WAJIB**: semua klaim berasal dari file/data yang benar-benar tersedia
-- ✅ **WAJIB**: dataset besar diproses shard-by-shard (memory-safe)
-- ✅ **WAJIB**: raw dataset tidak dimodifikasi, hanya dibaca
+**Privasi (UU PDP No. 27/2022).** Seluruh identitas komentator dipseudonimkan dengan HMAC-SHA256 + salt rahasia (`SORAYA_SALT`). Teks komentar mentah dan ID unik YouTube tidak disebarkan ke repositori publik.
 
----
+**Angka sementara.** Penonton *Racun Sangga* (525.034) dan *Suzzanna: Santet Dosa di Atas Dosa* (1.054.864) adalah angka berjalan per laporan publik terakhir yang dikutip; bukan angka final.
 
-## 📈 Current Progress
-
-| Tahap | Status |
-|---|---|
-| ✅ Environment setup (`instagram2027` conda, Python 3.11) | Done |
-| ✅ Dataset collection (17M rows parquet + 6 supporting datasets) | Done |
-| ✅ Schema mapping & target column definition | Done |
-| ✅ Master ETL builder (`build_master_instagram_dataset.py`) | Done |
-| ✅ Sample output (50K rows, `output/master_instagram_dataset_sample.csv`) | Done |
-| ✅ Multimodal pipeline scaffold (CLIP + IndoBERT) | Done |
-| ✅ Audit script & data inventory | Done |
-| 🔬 IndoBERT fine-tuning pada data Indonesia | In Progress |
-| 🔬 LightGBM training pada master dataset | In Progress |
-| 🔬 SHAP explainability report | In Progress |
-| 📋 2027 forecasting (SARIMAX + Prophet) | Planned |
-| 📋 Interactive dashboard | Planned |
+**Klaim yang tidak kami buat:**  
+Kami tidak mengklaim "pertama", "akurat", atau "Scopus Q1 Ready". Model prediktif saat ini tidak lebih baik dari baseline rata-rata (MAPE 85,8% vs 70,3%). Sentimen IndoBERT belum tervalidasi secara manual.
 
 ---
 
-## 🔭 Research Roadmap
+## Dataset (15 Film, 2017–2026)
 
-```
-Q4 2026  →  Master dataset final (filtered 2020–2026 Indonesia)
-Q4 2026  →  IndoBERT NLP features (sentiment, emotion, topic)
-Q4 2026  →  LightGBM viral classifier (target: AUC > 0.80)
-Q1 2027  →  SHAP explainability report & feature ranking
-Q1 2027  →  2027 forecasting model deployment
-Q1 2027  →  Research paper submission
-```
+Sumber: `data/films_clean.csv` · Verifikasi: `AUDIT_REPORT.md`
+
+| Judul | Studio | Tahun | Penonton | Status |
+|---|---|:---:|---:|:---:|
+| Ipar Adalah Maut | MD Pictures | 2024 | 4.775.315 | Final |
+| Badarawuhi di Desa Penari | MD Pictures | 2024 | 4.013.558 | Final |
+| Suzzanna: Bernapas dalam Kubur | Soraya Intercine Films | 2018 | 3.346.216 | Final |
+| Ivanna | MD Pictures | 2022 | 2.793.775 | Final |
+| Suzzanna: Malam Jumat Kliwon | Soraya Intercine Films | 2023 | 2.189.363 | Final |
+| The Doll 3 | Hitmaker Studios | 2022 | 1.764.077 | Final |
+| Sabrina | Hitmaker Studios | 2018 | 1.337.510 | Final |
+| Mata Batin | Hitmaker Studios | 2017 | 1.282.557 | Final |
+| Suzzanna: Santet Dosa di Atas Dosa | Soraya Intercine Films | 2026 | 1.054.864 | Berjalan* |
+| Santet Segoro Pitu | Hitmaker Studios (ko-prod) | 2024 | 1.025.000 | Final |
+| Indigo: What Do You See? | Hitmaker / Legacy Pictures | 2023 | 1.015.231 | Final |
+| Jurnal Risa by Risa Saraswati | MD Pictures | 2024 | 865.045 | Final |
+| Catatan Harian Menantu Sinting | Soraya Intercine Films | 2024 | 713.862 | Final |
+| Perewangan | MD Pictures | 2024 | 658.000 | Final |
+| Racun Sangga | Soraya Intercine Films | 2024 | 525.034 | Berjalan* |
+
+*\*Angka berjalan per laporan publik; belum final.*
 
 ---
 
-## 📚 References
-
-| Sumber | Deskripsi |
-|---|---|
-| [Alfina et al. (2017)](https://doi.org/10.1109/IALP.2017.8300608) | Indonesian hate speech detection |
-| [IndoBERT](https://huggingface.co/indobenchmark/indobert-base-p1) | Pre-trained BERT model Bahasa Indonesia |
-| [Wibowo et al. (2020)](https://arxiv.org/abs/2004.12226) | Instagram engagement during COVID-19 |
-| [SHAP Paper](https://arxiv.org/abs/1705.07874) | Unified framework for model explanations |
-| [LightGBM](https://proceedings.neurips.cc/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html) | Gradient boosting framework |
-| [BERTopic](https://arxiv.org/abs/2203.05794) | Topic modeling with BERT embeddings |
-
----
-
-## 📜 License & Citation
-
-This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
+## Sitasi
 
 ```bibtex
-@software{instagram_reels_viral_2027,
-  author    = {indri007},
-  title     = {Instagram Reels Indonesia – Viral Prediction 2027},
-  year      = {2026},
-  publisher = {GitHub},
-  url       = {https://github.com/indri007/projectityu}
+@misc{sari2026santet,
+  author = {Sari, Indri Anjar Kartika},
+  title  = {The Scream Is a Compliment: Fear-as-Demand Signals and the
+             Pre-Release Prediction of Indonesian Horror Box Office ---
+             Evidence from Soraya Intercine Films},
+  year   = {2026},
+  note   = {Working paper},
+  url    = {https://github.com/indri007/prediksi-movie-2027}
 }
 ```
 
 ---
 
-<div align="center">
-
-**⭐ Star this repo jika membantu risetmu!**
-
-*Built with ❤️ untuk riset Instagram Indonesia*
-
-</div>
-
----
-
-## 📌 Executive Summary
-
-**Instagram Indonesia 2027** is an empirical research and artificial intelligence analytics platform engineered to decipher content dynamics, user polarity, and viral propagation tendencies within the Indonesian social ecosystem. Combining natural language processing (IndoBERT/TF-IDF), gradient boosted decision tree ensembles (XGBoost, LightGBM, Random Forest), game-theoretic model interpretability (SHAP TreeExplainer), and econometric forecasting specifications, the platform transforms raw social data into an auditable intelligence system.
-
-A foundational principle of this project is **uncompromising scientific and data integrity**:
-* Zero fabrication of synthetic data points or engagement metrics.
-* Module states are tracked transparently as `AVAILABLE`, `PARTIAL`, or `MISSING`.
-* All benchmark numbers reflect authentic audit artifacts.
-
----
-
-## 🎯 Research Motivation & Problem Statement
-
-### Motivation
-Indonesia represents one of the largest, most active social media user bases in the world, with over 100 million active Instagram accounts. Rapid shifts in digital culture, local colloquialisms (*bahasa gaul*), and algorithmic recommendation engines make understanding content resonance both an academic imperative and an economic necessity for Indonesian digital researchers.
-
-### Research Problem
-Most social media analytics systems function as black boxes or rely on superficial vanity metrics. There is a lack of reproducible, explainable platforms tailored to Indonesian linguistic nuances that can bridge textual sentiment with granular feature attributions and rigorous forecasting toward the 2027 horizon.
-
-### Research Questions (RQs)
-* **RQ1 (Content Factors):** *Faktor apa yang berkaitan dengan munculnya konten dengan potensi viral di Instagram Indonesia?*
-* **RQ2 (Temporal Transitions):** *Bagaimana topic, sentiment, emotion, dan engagement berubah dari waktu ke waktu?*
-* **RQ3 (IndoBERT Extractor):** *Bagaimana IndoBERT dapat digunakan sebagai contextual neural feature extractor?*
-* **RQ4 (Tree Ensembles):** *Bagaimana XGBoost dan LightGBM dapat digunakan untuk mempelajari pola viralitas dan persepsi pengguna?*
-* **RQ5 (SHAP Explainability):** *Bagaimana SHAP menjelaskan kontribusi feature terhadap model prediksi secara global dan lokal?*
-* **RQ6 (2027 Forecasting):** *Bagaimana trend momentum dapat digunakan sebagai sinyal penelitian forecasting menuju 2027?*
-
----
-
-## 📊 Dataset & Ground Truth Audit
-
-The current foundation of the platform is grounded in real-world audited data:
-
-| Metric | Ground Truth Value | Verification Status |
-|---|---|---|
-| **Source File** | `data/Review Instagram.csv` | Verified |
-| **Row Count** | 1,000 records | Verified |
-| **Source Schema** | `UserName`, `Review Text`, `Rating` | Verified |
-| **Missing Values** | 0 nulls detected | Verified |
-| **Duplicate Text Rows** | 0 duplicates | Verified |
-| **Unique Authors** | 992 users | Verified |
-| **Class Distribution** | Rating 1: 481, Rating 2: 156, Rating 3: 134, Rating 4: 82, Rating 5: 147 | Verified |
-
-### Data Limitation Notice
-1. **Modality:** The initial dataset captures Indonesian consumer app reviews and feedback rather than public post captions.
-2. **Missing Engagement Telemetry:** Post-level interaction figures (`likes`, `comments`, `shares`, `saves`, `impressions`, `views`) are absent. Consequently, the native Viral Score is marked as **`PARTIAL`**.
-3. **Temporal Dimension:** Continuous post creation timestamps are absent. Time-series temporal analysis is marked as **`PARTIAL`** / **`MISSING`**, and simulated dates are strictly prohibited.
-
----
-
-## 🛠️ End-to-End Pipeline Architecture
+## Struktur Repositori
 
 ```
-Instagram Data (Review Instagram.csv)
-       │
-       ▼
-01 Data Cleaning (src/01_cleaning.py)
-       │
-       ▼
-Master Clean Dataset (output/clean_dataset.csv)
-       │
-       ├────────────────────────┐
-       ▼                        ▼
-02 Viral Score Engine      03 IndoBERT Interface
-   [Status: PARTIAL]          [Status: MISSING]
-       │                        │
-       └───────────┬────────────┘
-                   ▼
-04 Feature Engineering (src/04_feature_engineering.py)
-       │
-       ▼
-05 Temporal / Stratified Split (src/05_temporal_split.py)
-       │
-       ▼
-06 ML Benchmark & Training (src/06_train_models.py)
-       │  (Logistic Regression, Random Forest, XGBoost, LightGBM)
-       ▼
-07 Performance Evaluation (src/07_evaluate.py)
-       │
-       ├────────────────────────┐
-       ▼                        ▼
-08 Trend Momentum          09 2027 Forecasting
-   [Status: PARTIAL]          [Status: PARTIAL]
-       │                        │
-       └───────────┬────────────┘
-                   ▼
-10 SHAP Explainability (src/10_explainability.py)
-       │  (TreeExplainer over 5,130 features)
-       ▼
-Interactive Research Dashboard (dashboard/app.py)
-```
-
----
-
-## 🔬 Core Components & Implementation
-
-### 1. Data Cleaning (`src/01_cleaning.py`)
-Normalizes text, strips extraneous URLs and noise while preserving social cues (hashtags, mentions, emojis). Standardizes schema and outputs `output/ig_01_cleaned.csv` and `output/ig_01_audit.json`.
-
-### 2. Viral Score Engine (`src/02_viral_score.py`)
-Establishes the formal mathematical formulation for Instagram Virality Potential:
-$$\text{Viral Score} = w_1 \left(\frac{\text{Likes}}{\text{Reach}}\right) + 2.5\,w_2 \left(\frac{\text{Shares}}{\text{Reach}}\right) + 2.0\,w_3 \left(\frac{\text{Saves}}{\text{Reach}}\right) + 1.5\,w_4 \left(\frac{\text{Comments}}{\text{Reach}}\right) + w_5\,e^{-\lambda \Delta t}$$
-Flags status as **`PARTIAL`** due to data gaps and supplies the structural Content Virality Propensity Proxy (CVPP).
-
-### 3. IndoBERT Neural Interface (`src/03_indobert.py`)
-Provides the interface for `indobenchmark/indobert-base-p1`. Confirms model weight presence in `models/indobert/`. Because offline weights are not yet placed, status is transparently reported as **`MISSING`** without triggering automated heavy downloads.
-
-### 4. Feature Engineering (`src/04_feature_engineering.py`)
-Extracts syntactic indicators, character lengths, punctuation frequencies, uppercase ratios, token diversity, and Indonesian sentiment lexicon scores alongside TF-IDF n-grams (1, 2).
-
-### 5. Temporal Split (`src/05_temporal_split.py`)
-Audits dataset for date/time columns. In their absence, reports **`MISSING`**, rejects synthetic timestamp generation, and provides a stratified fallback split (80:20) for reproducible benchmark testing.
-
-### 6. Model Training & Benchmark (`src/06_train_models.py`)
-Audits and interfaces with verified model artifacts:
-* `best_model.joblib`
-* `logistic_regression.joblib`
-* `random_forest.joblib`
-* `xgboost_model.joblib`
-* `lightgbm_model.joblib`
-* `tfidf_logistic_regression.joblib`
-
-### 7. Performance Evaluation (`src/07_evaluate.py`)
-Consolidates multiclass metrics across models:
-* **Logistic Regression:** Accuracy 50.5%, Weighted F1 48.3%
-* **Random Forest:** Accuracy 50.0%, Weighted F1 43.1%
-* **XGBoost:** Accuracy 50.5%, Weighted F1 41.5%
-* **LightGBM:** Accuracy 49.5%, Weighted F1 41.5%
-
-### 8. Trend Momentum (`src/08_trend_momentum.py`)
-Examines semantic topic distribution (Topic 0: 54.9%, Topic 1: 45.1%) and specifies the Trend Momentum differential equation:
-$$\mathcal{M}(\text{Topic}_i, t) = \left( \frac{\partial \text{Volume}_i}{\partial t} \right) \times \text{PolarityResonance}_i(t) \times \left[ 1 + \alpha \frac{\partial^2 \text{Engagement}_i}{\partial t^2} \right]$$
-
-### 9. 2027 Research Forecasting (`src/09_forecast_2027.py`)
-Maintains **`FORECAST STATUS: PARTIAL`**. Outlines econometric SARIMAX with Indonesian cultural calendars (Ramadan, Harbolnas), Prophet with algorithmic changepoints, and Temporal Fusion Transformers (TFT).
-
-### 10. SHAP Explainability Engine (`src/10_explainability.py`)
-Interrogates genuine SHAP TreeExplainer attributions across 5,130 features. Top influential tokens include:
-1. `kenapa` (0.103794)
-2. `yang` (0.086908)
-3. `bisa` (0.085416)
-4. `bagus` (0.078869)
-5. `untuk` (0.077572)
-
----
-
-## 🎨 Interactive Research Dashboard (`dashboard/app.py`)
-
-A comprehensive Streamlit research suite styled with **Material 3 × Research Lab × AI Analytics**:
-* **13 Sections:** Overview, Dataset Audit, NLP / IndoBERT, Topic Intelligence, Viral Intelligence, Trend & Momentum, ML Benchmark, SHAP Explainability, Network Analysis, 2027 Forecasting, Research Pipeline, 10 Research Directions, Documentation.
-* **Interactive Visualizations:** Plotly charts, expandable research cards, real-time sample SHAP inspector, and status badges.
-
-To run:
-```bash
-streamlit run dashboard/app.py
-```
-
----
-
-## 🚀 10 Strategic Research Directions
-
-1. **Viral Score Validation:** Ingest post-level interaction telemetry (likes, shares, saves, views) to empirically tune weight vectors.
-2. **IndoBERT Emotion Analysis:** Fine-tune on Indonesian multi-label emotion corpora (anger, fear, joy, sadness, surprise).
-3. **Sentiment & Viral Propagation:** Model propagation velocity differences between polar negative outrage vs positive brand resonance.
-4. **Dynamic Topic Modeling (BERTopic):** Implement continuous dynamic topic modeling with c-TF-IDF over longitudinal time slices.
-5. **Temporal Viral Dynamics:** Measure the half-life decay function of Reels vs Carousels in urban vs rural Indonesian settings.
-6. **Hashtag Co-occurrence Network Analysis:** Build bipartite user-hashtag graph topologies to discover community hubs and viral bridges.
-7. **Multimodal Instagram Research:** Merge CLIP visual embeddings of video keyframes with textual representations.
-8. **Explainable Viral Prediction:** Surface actionable SHAP guidance for content creators and academic observers.
-9. **Early Trend Detection:** Design online changepoint algorithms to detect viral themes prior to algorithmic saturation.
-10. **Instagram Indonesia 2027 Forecasting:** Forecast Indonesian social commerce, AI-generated caption prevalence, and creator dynamics toward 2027.
-
----
-
-## 💻 Installation & Setup
-
-### Prerequisites
-* Python 3.10+
-* Virtual environment (recommended)
-
-### Installation
-```bash
-# Clone the repository
-git clone <YOUR_REPOSITORY_URL>
-cd instagramindonesia
-
-# Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### Reproducing the Pipeline
-Execute each stage independently or sequentially:
-```bash
-python3 src/01_cleaning.py
-python3 src/02_viral_score.py
-python3 src/03_indobert.py
-python3 src/04_feature_engineering.py
-python3 src/05_temporal_split.py
-python3 src/06_train_models.py
-python3 src/07_evaluate.py
-python3 src/08_trend_momentum.py
-python3 src/09_forecast_2027.py
-python3 src/10_explainability.py
-```
-
----
-
-## 📁 Repository Structure
-
-```
-├── dashboard/
-│   └── app.py                      # Interactive Streamlit Research Suite
+├── bit                        CLI terpadu (30+ perintah)
 ├── data/
-│   ├── Review Instagram.csv        # Ground truth raw dataset (1,000 rows)
-│   └── crawl_log.txt               # Ingestion audit log
-├── models/
-│   ├── best_model.joblib           # Trained best pipeline artifact
-│   ├── logistic_regression.joblib  # Trained Logistic Regression pipeline
-│   ├── random_forest.joblib        # Trained Random Forest pipeline
-│   ├── xgboost_model.joblib        # Trained XGBoost model dictionary
-│   ├── lightgbm_model.joblib       # Trained LightGBM model dictionary
-│   ├── tfidf_logistic_regression.joblib # TF-IDF baseline artifact
-│   ├── metrics.json                # Verified evaluation metrics
-│   ├── model_comparison.csv        # Linear benchmark table
-│   └── tree_model_comparison.csv   # Tree ensemble benchmark table
-├── network/
-│   └── metrics.json                # Relational network topology audit
-├── output/
-│   ├── clean_dataset.csv           # Cleaned dataset (1,000 rows)
-│   ├── topics_dataset.csv          # Dataset with assigned topic clusters
-│   ├── topics.csv                  # Discovered topic cluster summaries
-│   └── *.json                      # Stage audit reports
-├── shap/
-│   ├── global_importance.csv       # SHAP global feature importances (5,130 features)
-│   ├── local_explanations.csv      # Sample-level SHAP attributions
-│   ├── report.json                 # SHAP TreeExplainer verification report
-│   ├── shap_bar.png                # Global importance bar chart
-│   └── shap_summary.png            # Summary beeswarm distribution plot
-├── src/
-│   ├── 01_cleaning.py              # Step 1: Cleaning & Schema Audit
-│   ├── 02_viral_score.py           # Step 2: Viral Score Engine
-│   ├── 03_indobert.py              # Step 3: IndoBERT Interface
-│   ├── 04_feature_engineering.py   # Step 4: Linguistic & Lexicon Features
-│   ├── 05_temporal_split.py        # Step 5: Temporal Validation & Split
-│   ├── 06_train_models.py          # Step 6: ML Model Benchmark & Training
-│   ├── 07_evaluate.py              # Step 7: Model Evaluation & Error Analysis
-│   ├── 08_trend_momentum.py        # Step 8: Trend Momentum Analytics
-│   ├── 09_forecast_2027.py         # Step 9: 2027 Forecasting Specification
-│   └── 10_explainability.py        # Step 10: SHAP Attribution Suite
-├── requirements.txt                # Python package dependencies
-└── README.md                       # Comprehensive Platform Documentation
+│   ├── films_clean.csv        Master dataset terverifikasi (15 film)
+│   └── box_office_sources.csv Log sumber angka penonton ber-URL
+├── yt_soraya/ yt_md/ …        Komentar & metadata per set studio
+├── results/
+│   ├── sna_*/                 20 analisis SNA (PNG, CSV, GraphML)
+│   ├── correlation_*/         Spearman, bootstrap, BH
+│   └── model_*/               LOOCV MAPE
+├── dashboard/                 Web dashboard dark glassmorphism
+├── streamlit_app/app.py       Dashboard SNA interaktif (Streamlit)
+├── docs/
+│   ├── assets/santet_hero.svg Hero animasi SVG (ilustratif)
+│   ├── santet/index.html      Narasi 3D interaktif (six-act)
+│   └── DESIGN.md              Design system proyek
+├── annotation/                Lembar anotasi manual (2 anotator)
+├── AUDIT_REPORT.md            Audit metodologis & provenance data
+└── requirements.txt
 ```
 
 ---
 
-## 📜 License & Citation
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
-When utilizing this platform or its methodologies in academic research, please cite:
-```bibtex
-@software{instagram_indonesia_2027,
-  author = {Research Team},
-  title = {Instagram Indonesia 2027: Viral Intelligence & Research Platform},
-  year = {2026},
-  publisher = {GitHub},
-  howpublished = {\url{https://github.com/indri007/instagram-indonesia-2027}}
-}
-```
+<div align="center">
+<sub>Riset independen · Tidak berafiliasi dengan studio manapun · MIT License</sub>
+</div>
