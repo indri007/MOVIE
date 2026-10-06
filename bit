@@ -273,7 +273,8 @@ def cmd_check(args):
 def cmd_convert(args):
     salt = _salt()
     for name in _pick_sets(args):
-        run_cmd([PY, os.path.join(BASE_DIR, "ytdlp_to_csv.py"), f"yt_{name}", "--salt", salt])
+        os.environ["SORAYA_SALT"] = salt   # lewat lingkungan proses, BUKAN argumen: tidak tercetak di [CMD] / ps
+        run_cmd([PY, os.path.join(BASE_DIR, "ytdlp_to_csv.py"), f"yt_{name}"])
 
 
 def cmd_scrape(args):
