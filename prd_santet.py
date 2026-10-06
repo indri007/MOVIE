@@ -9,6 +9,7 @@ sehingga kolom "Status" dan "Baseline hari ini" selalu dihitung ulang dari data,
   ./bit prd --md            tulis juga docs/PRD_SANTET.md (versi dokumen, angka terbaru)
   ./bit prd --json          cetak JSON (untuk dashboard / CI)
   ./bit prd --gate          kode keluar 0 bila gerbang fase aktif lolos, 1 bila belum (untuk CI)
+  ./bit prd putuskan        jawab 6 keputusan terbuka lewat tanya-jawab; disimpan di docs/keputusan_prd.json
 
 Hanya pustaka standar Python.
 """
@@ -317,14 +318,47 @@ GATES = [
     ]),
 ]
 
-DECISIONS = [
-    "Setuju v1.0 diposisikan sebagai riset explanatory (n = 15) dan klaim prediktif ditunda ke v2.0?",
-    "Ganti salt pseudonim sekarang (semua ID berubah, results/ dibuat ulang) atau setelah ekspansi data?",
-    "Siapa anotator kedua untuk 100 baris label manusia, dan kapan selesai?",
-    "Repo GitHub: tetap prediksi-movie-2027 atau repo terpisah khusus SANTET?",
-    "Jurnal target pertama: jalur komunikasi atau jalur data?",
-    "Angka κ 0,8342 dan MAPE 1,55% di script proyek Instagram: ada sumbernya, atau dihapus?",
+DECISION_SPECS = [  # (kunci, pertanyaan, pilihan; [] = jawaban bebas)
+    ("framing", "Setuju v1.0 diposisikan sebagai riset explanatory (n = 15) dan klaim prediktif ditunda ke v2.0?",
+     ["Setuju", "Tidak, tetap prediktif di v1.0"]),
+    ("salt", "Ganti salt pseudonim kapan? (semua ID berubah, results/ dibuat ulang)",
+     ["Sekarang, sebelum rilis dataset", "Setelah ekspansi data v2.0"]),
+    ("anotator", "Siapa anotator kedua dan kapan 100 baris label selesai?", []),
+    ("repo", "Repo GitHub untuk SANTET?",
+     ["Tetap prediksi-movie-2027", "Repo terpisah khusus SANTET"]),
+    ("jurnal", "Jurnal target pertama?",
+     ["Jalur komunikasi (mis. Asian Journal of Communication)", "Jalur data (mis. Telematics and Informatics)"]),
+    ("kpi_instagram", "Angka κ 0,8342 dan MAPE 1,55% di script proyek Instagram?",
+     ["Ada sumber hitungannya (simpan & tautkan)", "Hapus dari kode"]),
 ]
+DECISIONS = [q for _, q, _ in DECISION_SPECS]
+DECISIONS_FILE = os.path.join(BASE, "docs", "keputusan_prd.json")
+
+
+def load_decisions() -> dict:
+    return read_json(DECISIONS_FILE)
+
+
+def decide():
+    """Tanya-jawab di terminal; jawaban disimpan ke docs/keputusan_prd.json (bisa diubah kapan saja)."""
+    saved = load_decisions()
+    print("Keputusan terbuka PRD SANTET · Enter = lewati / pertahankan jawaban lama\n")
+    for i, (key, q, opts) in enumerate(DECISION_SPECS, 1):
+        old = saved.get(key, {}).get("jawaban")
+        print(f"{i}. {q}" + (f"\n   (sekarang: {old})" if old else ""))
+        for j, o in enumerate(opts, 1):
+            print(f"   [{j}] {o}")
+        ans = input("   jawab" + (" nomor" if opts else "") + ": ").strip()
+        if not ans:
+            print()
+            continue
+        if opts and ans.isdigit() and 1 <= int(ans) <= len(opts):
+            ans = opts[int(ans) - 1]
+        saved[key] = {"pertanyaan": q, "jawaban": ans, "tanggal": f"{dt.datetime.now():%Y-%m-%d %H:%M}"}
+        print(f"   ✅ {ans}\n")
+    os.makedirs(os.path.dirname(DECISIONS_FILE), exist_ok=True)
+    json.dump(saved, open(DECISIONS_FILE, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    print(f"📄 {os.path.relpath(DECISIONS_FILE, BASE)} · {len(saved)}/{len(DECISION_SPECS)} keputusan terjawab")
 
 META = {
     "produk": "SANTET — Sentiment Analysis for Nusantara Theatrical Expectation Tracking",
@@ -364,12 +398,19 @@ def to_markdown(reqs, mets, gates, active) -> str:
         L.append(f"**{g.phase}** — " + " · ".join(g.items))
         L += [f"- [{'x' if ok else ' '}] {t}" for t, ok in res]
         L.append("")
-    L += ["## Keputusan terbuka", ""] + [f"- [ ] {d}" for d in DECISIONS]
+    dec = load_decisions()
+    L += ["## Keputusan", ""]
+    for key, q, _ in DECISION_SPECS:
+        a = dec.get(key, {})
+        L.append(f"- [x] {q} → **{a['jawaban']}** ({a['tanggal']})" if a.get("jawaban") else f"- [ ] {q}")
     return "\n".join(L) + "\n"
 
 
 def main(argv=None):
     argv = argv if argv is not None else sys.argv[1:]
+    if argv[:1] == ["putuskan"]:
+        decide()
+        return 0
     reqs, mets, gates, active = build()
     if "--json" in argv:
         print(json.dumps({"meta": META, "requirements": [{k: v for k, v in asdict(r).items() if k != "check"} for r in reqs],
@@ -393,6 +434,13 @@ def main(argv=None):
         print(f"  {mark} {g.phase}")
         for t, ok in res:
             print(f"      [{'x' if ok else ' '}] {t}")
+    print("\n— Keputusan")
+    dec = load_decisions()
+    for key, q, _ in DECISION_SPECS:
+        a = dec.get(key, {}).get("jawaban")
+        print(f"  [{'x' if a else ' '}] {q}" + (f" → {a}" if a else ""))
+    if len(dec) < len(DECISION_SPECS):
+        print("      jawab di terminal: ./bit prd putuskan")
     print(f"\nFase aktif: {active.phase if active else 'semua gerbang lolos'}")
     if "--md" in argv:
         out = p("docs", "PRD_SANTET.md")

@@ -66,6 +66,11 @@ Penggunaan:
   ./bit sna <nomor|nama> [...] | all         Contoh: ./bit sna 7  |  ./bit sna komunitas irisan  |  ./bit sna all
         [--set soraya,md] [--bin]            --bin: ringkasan juga dalam biner 8-bit (lossless)
                                              hasil: results/sna_<waktu>/ + nodexl/edges.csv & vertices.csv untuk NodeXL Pro
+  --- PRD hidup ---
+  ./bit prd [--md] [--json] [--gate]         PRD SANTET: status kebutuhan, metrik & gerbang rilis dihitung dari repo
+                                             --md: tulis docs/PRD_SANTET.md · --gate: keluar 1 bila fase aktif belum lolos
+  ./bit prd putuskan                         Jawab 6 keputusan terbuka PRD (tanya-jawab, tersimpan)
+
   --- Rahasia (token / API key) ---
   ./bit secret set YT_API_KEY                Simpan ke macOS Keychain (diketik tersembunyi, tidak masuk riwayat)
   ./bit secret list | scan | hook | history  Status (disamarkan) · cek kebocoran · pasang pengaman commit · bersihkan ~/.zsh_history
@@ -334,6 +339,10 @@ def cmd_sentiment(args):
         run_cmd([PY, os.path.join(BASE_DIR, "sentiment_indobert.py"), *args])
 
 
+def cmd_prd(args):
+    return run_cmd([PY, os.path.join(BASE_DIR, "prd_santet.py")] + list(args))
+
+
 def cmd_secret(args):
     return run_cmd([PY, os.path.join(BASE_DIR, "secrets_tool.py")] + list(args))
 
@@ -597,6 +606,8 @@ def main():
         cmd_correlate()
     elif cmd == "finish":
         cmd_finish()
+    elif cmd == "prd":
+        sys.exit(cmd_prd(sys.argv[2:]))
     elif cmd == "secret":
         sys.exit(cmd_secret(sys.argv[2:]))
     elif cmd == "audit":

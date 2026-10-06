@@ -1,6 +1,6 @@
 # PRD SANTET
 
-_06-10-2026 16:20 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
+_06-10-2026 23:24 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
 
 **SANTET — Sentiment Analysis for Nusantara Theatrical Expectation Tracking** — Membaca 'mantra' warganet sebelum film tayang · Fear is demand
 
@@ -29,7 +29,7 @@ Setiap film lahir dari kerja bertahun-tahun, tetapi nasibnya baru diketahui sete
 | F-09 | ./bit audit: git, Streamlit, klaim, angka, rahasia | Must | 0 kritis sebelum setiap rilis | ✅ Ada | audit terakhir: ⚠️  ADA PERINGATAN (0 kritis) |
 | F-10 | ./bit secret: Keychain + blokir commit berisi token | Must | scan bersih; hook aktif | ✅ Ada | pre-commit hook aktif |
 | F-11 | Dashboard Streamlit SANTET membaca results/ terbaru | Should | Angka dashboard = results/ | 🟡 Sebagian | streamlit_app/app.py ada · cek tampilan live & Reboot app |
-| F-12 | ./bit intro: draf Introduction dengan angka otomatis | Could | Angka ikut berubah saat pipeline diulang | ✅ Ada | diperbarui 06-10-2026 13:48 |
+| F-12 | ./bit intro: draf Introduction dengan angka otomatis | Could | Angka ikut berubah saat pipeline diulang | ✅ Ada | diperbarui 06-10-2026 20:48 |
 | F-13 | Kalkulator prediksi untuk produser | Won't (v1.0) | Setelah model mengalahkan baseline | ➖ Ditunda | dibuka hanya setelah gerbang v2.0 lolos |
 
 ## Metrik keberhasilan
@@ -61,11 +61,11 @@ Setiap film lahir dari kerja bertahun-tahun, tetapi nasibnya baru diketahui sete
 - [ ] MAPE model < baseline
 - [ ] CI MAPE model dan baseline tidak tumpang tindih
 
-## Keputusan terbuka
+## Keputusan
 
-- [ ] Setuju v1.0 diposisikan sebagai riset explanatory (n = 15) dan klaim prediktif ditunda ke v2.0?
-- [ ] Ganti salt pseudonim sekarang (semua ID berubah, results/ dibuat ulang) atau setelah ekspansi data?
-- [ ] Siapa anotator kedua untuk 100 baris label manusia, dan kapan selesai?
-- [ ] Repo GitHub: tetap prediksi-movie-2027 atau repo terpisah khusus SANTET?
-- [ ] Jurnal target pertama: jalur komunikasi atau jalur data?
-- [ ] Angka κ 0,8342 dan MAPE 1,55% di script proyek Instagram: ada sumbernya, atau dihapus?
+- [x] Setuju v1.0 diposisikan sebagai riset explanatory (n = 15) dan klaim prediktif ditunda ke v2.0? → **BAIKNYA** (2026-10-06 23:22)
+- [x] Ganti salt pseudonim kapan? (semua ID berubah, results/ dibuat ulang) → **BAIKNYA** (2026-10-06 23:23)
+- [x] Siapa anotator kedua dan kapan 100 baris label selesai? → **TIDAK TAU** (2026-10-06 23:23)
+- [x] Repo GitHub untuk SANTET? → **TETAP https://github.com/indri007/prediksi-movie-2027** (2026-10-06 23:23)
+- [x] Jurnal target pertama? → **Jalur data (mis. Telematics and Informatics)** (2026-10-06 23:24)
+- [x] Angka κ 0,8342 dan MAPE 1,55% di script proyek Instagram? → **Hapus dari kode** (2026-10-06 23:24)
