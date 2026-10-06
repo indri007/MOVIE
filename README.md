@@ -50,7 +50,7 @@ Film horor Indonesia dari studio yang sama bisa berbeda perolehan penonton hingg
 
 ```bash
 # 1. Pasang dependensi
-pip install -r requirements.txt        # atau: ./bit install
+pip install -r requirements-pipeline.txt   # atau: ./bit install  (requirements.txt = dependensi ringan Streamlit Cloud)
 
 # 2. Unduh komentar trailer (yt-dlp, tanpa API key)
 ./bit scrape all --max 500
@@ -153,7 +153,8 @@ Sumber: `data/films_clean.csv` · Verifikasi: `AUDIT_REPORT.md`
 │   └── DESIGN.md              Design system proyek
 ├── annotation/                Lembar anotasi manual (2 anotator)
 ├── AUDIT_REPORT.md            Audit metodologis & provenance data
-└── requirements.txt
+├── requirements.txt            # dependensi Streamlit Cloud
+└── requirements-pipeline.txt   # pipeline lengkap
 ```
 
 ---
