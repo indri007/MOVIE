@@ -12,7 +12,7 @@ Penggunaan:
   ./bit status                               Tampilkan tabel status film & box office
   ./bit export                               Ekspor dataset CSV & Kamus Data Markdown
   ./bit dashboard                            Tampilkan link visual dashboard interaktif
-  ./bit install                              Instal dependensi Python dari requirements-pipeline.txt
+  ./bit install                              Instal dependensi Python dari requirements.txt
   ./bit collect yt [--target N]              Jalankan pengumpul komentar & video YouTube (yt_collect.py)
   ./bit collect trends [--anchor KEYWORD]    Jalankan pengumpul Google Trends Indonesia (trends_collect.py)
   ./bit nodexl [--film TITLE] [--out FILE]   Konversi komentar jadi graf jaringan NodeXL (to_nodexl.py)
@@ -205,7 +205,7 @@ def cmd_dashboard(port=8080):
     print(f"Buka browser: http://localhost:{port}\n")
 
 def cmd_install():
-    req_file = os.path.join(BASE_DIR, "requirements-pipeline.txt")
+    req_file = os.path.join(BASE_DIR, "requirements.txt")
     print(f"[*] Menginstal dependensi dari: {req_file}")
     run_cmd([PY, "-m", "pip", "install", "-r", req_file])
 

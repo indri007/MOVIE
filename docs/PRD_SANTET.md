@@ -1,6 +1,6 @@
 # PRD SANTET
 
-_06-10-2026 23:32 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
+_06-10-2026 23:34 WIB · Indri Anjar Kartika Sari · dibuat otomatis oleh `./bit prd` — status & baseline dihitung dari repo_
 
 **SANTET — Sentiment Analysis for Nusantara Theatrical Expectation Tracking** — Membaca 'mantra' warganet sebelum film tayang · Fear is demand
 
@@ -24,8 +24,8 @@ Setiap film lahir dari kerja bertahun-tahun, tetapi nasibnya baru diketahui sete
 | F-04 | Watch Intent Index per komentar | Must | Tervalidasi label manusia, κ ≥ 0,80 | ⬜ Belum | hanya kategori kata kunci (sna 04_warna-niat), belum tervalidasi |
 | F-05 | ./bit correlate/robust: Spearman eksak, bootstrap, Bonferroni, BH, parsial | Must | Semua uji dilaporkan, termasuk yang tidak signifikan | ✅ Ada | results/robust_20261006_1252/robustness.csv · lolos BH 0/10 |
 | F-06 | ./bit model: LOOCV vs baseline naif dengan CI MAPE | Must | Laporan menyatakan model menang/kalah | 🟡 Sebagian | MAPE model 85.8% vs baseline 70.3% · belum mengalahkan baseline |
-| F-07 | ./bit sna: 20 analisis jaringan + ekspor NodeXL | Should | edges/vertices terbuka di NodeXL Pro | ✅ Ada | results/sna_20261006_2331/nodexl/edges.csv |
-| F-08 | ./bit package: paket rilis tanpa teks + MANIFEST SHA-256 | Must | Checksum cocok; tanpa kolom teks | ✅ Ada | release/paper_package_20261006_2331/MANIFEST.sha256 |
+| F-07 | ./bit sna: 20 analisis jaringan + ekspor NodeXL | Should | edges/vertices terbuka di NodeXL Pro | ✅ Ada | results/sna_20261006_2333/nodexl/edges.csv |
+| F-08 | ./bit package: paket rilis tanpa teks + MANIFEST SHA-256 | Must | Checksum cocok; tanpa kolom teks | ✅ Ada | release/paper_package_20261006_2334/MANIFEST.sha256 |
 | F-09 | ./bit audit: git, Streamlit, klaim, angka, rahasia | Must | 0 kritis sebelum setiap rilis | ✅ Ada | audit terakhir: ⚠️  ADA PERINGATAN (0 kritis) |
 | F-10 | ./bit secret: Keychain + blokir commit berisi token | Must | scan bersih; hook aktif | ✅ Ada | pre-commit hook aktif |
 | F-11 | Dashboard Streamlit SANTET membaca results/ terbaru | Should | Angka dashboard = results/ | 🟡 Sebagian | streamlit_app/app.py ada · cek tampilan live & Reboot app |

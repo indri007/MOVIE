@@ -168,7 +168,7 @@ def render_step(n, slug, title, kat):
     # PNG
     png = os.path.join(folder, f"{n:02d}_{slug}.png")
     if os.path.isfile(png):
-        st.image(png, use_column_width=True)
+        st.image(png, width="stretch")
     else:
         st.info(f"Tidak ada grafik PNG untuk analisis {n:02d}.")
 
@@ -180,7 +180,7 @@ def render_step(n, slug, title, kat):
             with tab:
                 try:
                     df = pd.read_csv(csv_path)
-                    st.dataframe(df, use_container_width=True, height=min(400, 40 + 35 * len(df)))
+                    st.dataframe(df, width="stretch", height=min(400, 40 + 35 * len(df)))
                     with open(csv_path, "rb") as f:
                         st.download_button(
                             f"⬇️ Unduh {os.path.basename(csv_path)}",
@@ -250,7 +250,7 @@ if os.path.isdir(nodexl_dir):
         df_e = pd.read_csv(edges_f)
         with c1:
             st.markdown(f"**edges.csv** ({len(df_e):,} sisi)")
-            st.dataframe(df_e.head(50), use_container_width=True)
+            st.dataframe(df_e.head(50), width="stretch")
             with open(edges_f, "rb") as f:
                 st.download_button("⬇️ Unduh edges.csv", f.read(),
                                    file_name="edges.csv", mime="text/csv", key="dl_edges")
@@ -258,7 +258,7 @@ if os.path.isdir(nodexl_dir):
         df_v = pd.read_csv(verts_f)
         with c2:
             st.markdown(f"**vertices.csv** ({len(df_v):,} simpul)")
-            st.dataframe(df_v.head(50), use_container_width=True)
+            st.dataframe(df_v.head(50), width="stretch")
             with open(verts_f, "rb") as f:
                 st.download_button("⬇️ Unduh vertices.csv", f.read(),
                                    file_name="vertices.csv", mime="text/csv", key="dl_verts")
