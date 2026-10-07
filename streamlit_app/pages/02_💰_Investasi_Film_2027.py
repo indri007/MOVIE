@@ -263,6 +263,41 @@ risk_eval = engine.assess_project_risk(
     lead_cast=lead_cast
 )
 
+# --- PANDUAN PENGGUNAAN & TUTORIAL (EXPANDER) ---
+with st.expander("📘 Panduan & Tutorial Penggunaan Simulator (Klik untuk Buka/Tutup)", expanded=False):
+    st.markdown("""
+    ### 🎯 Cara Menggunakan Simulator Investasi Film 2027
+    
+    Simulator ini membantu produser, komite investasi, dan investor perorangan/institusi mengevaluasi kelayakan finansial proyek film Indonesia secara empiris sebelum menyalurkan modal.
+    
+    #### 🧭 5 Langkah Praktis Penggunaan:
+    1. **Atur Parameter Proyek di Sidebar (Sebelah Kiri):**
+       - **Genre & Studio:** Pilih genre utama (*Horor*, *Komedi*, *Drama*, dll.) dan studio rumah produksi.
+       - **Kombinasi Tim Kreatif:** Pilih **Produser Film** (dari Top 50 Produser Kredibel), **Sutradara** (dari Top 50 Sutradara Terbaik), dan **Pemeran Utama** (dari Top 50 Artis Box Office).
+       - **Momen Rilis & IP:** Pilih jendela tayang (Lebaran, Libur Akhir Tahun, Libur Sekolah, Reguler) dan tipe intellectual property (Thread Viral, Adaptasi Novel, Remake, Orisinal).
+    2. **Tentukan Parameter Finansial:**
+       - Geser **Anggaran Produksi** (Bujet riil produksi, rata-rata Rp 5 Miliar – Rp 15 Miliar).
+       - Tentukan **Rasio Biaya Promosi (P&A)** (Standar industri 25% – 35% dari biaya produksi).
+       - Masukkan estimasi **Pre-Sale Hak Streaming/OTT** (Netflix/Prime/Vidio) jika sudah ada komitmen kontrak lisensi.
+       - Tentukan **Benchmark ATP** (Rata-rata harga tiket bioskop nasional, default: Rp 50.000).
+    3. **Evaluasi 4 Kartu Metrik Utama di Dashboard:**
+       - **🎯 BEP Penonton:** Target minimal tiket bioskop yang harus terjual agar seluruh biaya produksi + P&A impas.
+       - **📊 Proyeksi Penonton (Base Case):** Estimasi penonton realistis berbasis performa film-film dengan DNA setara.
+       - **💰 Estimasi Net ROI Produser:** Persentase laba bersih bagian produser terhadap total biaya proyek.
+       - **🛡️ Investment Risk Grade:** Peringkat keamanan modal (`AAA` = Sangat Aman s/d `C` = Berisiko Tinggi).
+    4. **Jelajahi 6 Tab Analisis Mendalam:**
+       - **💵 Skenario Air Terjun Finansial:** Rincian pembagian hasil tiket (Gross $\to$ Pajak Pemda 10% $\to$ Exhibitor 50% $\to$ Net Produser 42,5%) pada skenario Bear, Base, dan Bull.
+       - **🧬 DNA Film Pembanding:** 5 film historis (2020–2026) dengan DNA genre, tim, atau skala bujet paling relevan.
+       - **⚠️ Profil Risiko & Mitigasi:** Analisis sensitivitas BEP terhadap penurunan jumlah penonton.
+       - **📑 Checklist Kontrak & Term Sheet:** Klausul pengaman modal bagi investor (Pre-sale OTT, Joint Escrow, Overrun Cap 10%, Blueprint Kampanye TikTok H-30).
+       - **🏆 Database Box Office:** Data lengkap Top 50 Film Terlaris, Top 50 Sutradara, Top 50 Produser, Top 50 Artis, dan 10 Besar Genre beserta tombol unduh CSV.
+       - **🕸️ Graf 6 Faktor Profit (NodeXL):** Visualisasi graf jaringan keterhubungan 6 pilar keuntungan tinggi bioskop.
+    5. **Unduh Data untuk Pitch Deck:**
+       - Setiap tabel pada tab Database Box Office dan Graf NodeXL dilengkapi tombol unduh CSV dan file GraphML untuk kebutuhan presentasi ke investor.
+    """)
+
+st.markdown("<br/>", unsafe_allow_html=True)
+
 # --- RINGKASAN METRIK UTAMA (M3 LIGHT METRIC CARDS) ---
 col1, col2, col3, col4 = st.columns(4)
 

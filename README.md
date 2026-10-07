@@ -13,7 +13,7 @@
 <br/>
 
 ### 🚀 **[Buka Live Simulator di Streamlit Cloud: prediksi-movie-2027.streamlit.app](https://prediksi-movie-2027.streamlit.app)**
-*Konfigurasi Cloud: `prediksi-movie-2027 ∙ master ∙ streamlit_app.py`*
+*Konfigurasi Server Cloud: `prediksi-movie-2027 ∙ master ∙ streamlit_app.py`*
 
 <br/>
 
@@ -22,7 +22,7 @@
 </a>
 
 **"Membaca 'mantra' warganet & data historis industri sebelum layar bioskop menyala."**  
-*Empirical Data · Theatrical Waterfall · Comparable DNA · Risk Mitigation*
+*Empirical Data · Theatrical Waterfall · Comparable DNA · Risk Mitigation · NodeXL Network Graph*
 
 </div>
 
@@ -30,73 +30,186 @@
 
 ## 🌟 Apa yang Baru: Transformasi Platform Investasi Film 2027
 
-Repositori ini telah dievolusikan dari riset eksploratif 15 film menjadi **Platform Intelijen Investasi Perfilman Indonesia**:
-1. **Master Dataset Industri 2020–2026 ($N = 896$ Film):**
-   - Mengumpulkan seluruh film Indonesia dari 2020 hingga 2026 dengan **646 film bertiket bioskop resmi**.
-   - Menyelesaikan *sample constraint* sebelumnya dan mencakup seluruh studio besar (*MD Pictures, Falcon, Visinema, Starvision, Rapi, Imajinari, Soraya, Hitmaker, Dee Company, Screenplay, IDN Pictures*).
-2. **Simulator & Kalkulator Kelayakan Investasi Film 2027 ([Live Demo](https://prediksi-movie-2027.streamlit.app)):**
-   - **Comparable DNA Matcher:** Mencocokkan rencana proyek 2027 dengan 5 film historis 2020–2026 yang paling relevan.
-   - **Multi-Scenario Audience Forecaster:** Skenario penonton konservatif (**Bear** / P25), realistis (**Base** / Median), dan optimis (**Bull** / P75).
-   - **Theatrical Waterfall Model:** Model pembagian hasil bioskop nasional (Gross $\to$ Pajak Pemda 10% $\to$ Exhibitor Split 50% $\to$ Net Bagian Produser $\approx 42,5\%$).
-   - **BEP Admissions Sensitivity:** Menghitung jumlah minimal tiket yang harus terjual untuk menutup bujet produksi dan promosi (P&A).
+Platform ini menggabungkan **data historis empiris 896 film Indonesia (2020–2026)** dengan metodologi finansial industri perfilman nasional:
+1. **Master Database & Box Office Intelligence (2020–2026):**
+   - **896 Film Master Dataset:** Mencakup 646 film dengan data tiket bioskop resmi dari seluruh rumah produksi besar (*MD Pictures, Falcon, Visinema, Starvision, Rapi, Imajinari, Soraya, Hitmaker, Dee Company, Screenplay, IDN Pictures*).
+   - [**Top 50 Judul Film Revenue Tertinggi:**](data/top_50_highest_revenue_films_2020_2026.csv) 50 film berpendapatan kotor Rp 74,3 Miliar hingga Rp 522,5 Miliar.
+   - [**50 Sutradara Terbaik Indonesia:**](data/top_50_directors_indonesia_2020_2026.csv) Profil lengkap sutradara dengan akumulasi penonton tertinggi beserta daftar prestasi dan piala (FFI, FFB, MURI).
+   - [**Top 50 Produser Kredibel:**](data/top_50_producers_indonesia_2020_2026.csv) Peringkat produser dengan rekam jejak box office teruji.
+   - [**Top 50 Artis Box Office:**](data/top_50_actors_indonesia_2020_2026.csv) Pemetaan bintang film pencetak tiket bioskop terbanyak.
+   - [**10 Besar Genre & Market Fit:**](data/top_10_genres_market_fit.csv) Pangsa pasar bioskop (Horor 51,9%, Drama 36,2%, Komedi 7,2%, Animasi 3,4%).
+2. **Simulator & Kalkulator Kelayakan Investasi ([Live Demo](https://prediksi-movie-2027.streamlit.app)):**
+   - **Comparable DNA Matcher:** Mencocokkan rencana proyek 2027 dengan 5 film historis pembanding paling relevan.
+   - **Multi-Scenario Audience Forecaster:** Skenario konservatif (**Bear** / P25), realistis (**Base** / Median), dan optimis (**Bull** / P75).
+   - **Theatrical Waterfall Model:** Model bagi hasil bioskop nasional resmi (Gross $\to$ Pajak Pemda 10% $\to$ Exhibitor Split 50% $\to$ Net Produser $\approx 42,5\%$).
+   - **BEP Admissions Sensitivity:** Menghitung jumlah minimal penonton untuk menutup biaya produksi dan promosi (P&A).
    - **Investor Risk Grade:** Klasifikasi kelayakan proyek (`AAA`, `AA`, `A`, `B`, `C`) dengan rekomendasi mitigasi modal.
-3. **Modul Dasar Riset SANTET Tetap Utuh:**
-   - Analisis sentimen trailer YouTube sadar konteks budaya nusantara (*"merinding" & "serem" sebagai pujian/demand*).
-   - 20 fungsi Social Network Analysis (SNA / NodeXL) interaktif.
-   - Kepatuhan privasi penuh sesuai UU PDP No. 27/2022 (pseudonimisasi satu arah HMAC-SHA256).
+3. **Model Graf Jaringan 6 Faktor Profit (NodeXL Architecture):**
+   - Pemetaan hubungan terarah dan berbobot antara 6 pilar penentu profit: *Genre Fit*, *Cost Control*, *Distribution Timing*, *Initial Hook (IP & Cast)*, *Word-of-Mouth*, dan *Revenue Diversification* ([File NodeXL Graph](results/nodexl_profit_engine/)).
+4. **Desain UI/UX Google Material Design 3 (Warna Cerah):**
+   - Tampilan *light theme* modern, bersih, profesional, dan nyaman digunakan untuk presentasi komite investasi (*Investment Committee*).
 
 ---
 
-## 📊 Status Data & Pemodelan (Update Terbaru)
+## 📖 Petunjuk Penggunaan & Tutorial Guide (Step-by-Step)
 
-| Komponen | Status | Keterangan / Hasil Aktual |
+Panduan lengkap ini menjelaskan cara menggunakan simulator di Streamlit Cloud maupun secara lokal untuk mengevaluasi rencana produksi film.
+
+### 🧭 Alur Kerja 5 Langkah Simulasi Investasi Film
+
+```mermaid
+flowchart LR
+    A["1. Input Parameter<br/>(Genre, Tim, Momen, Bujet)"] --> B["2. Kalkulasi DNA & BEP<br/>(Comps 2020-2026)"]
+    B --> C["3. Evaluasi Waterfall<br/>(Bear, Base, Bull)"]
+    C --> D["4. Proteksi Modal<br/>(Term Sheet & OTT Pre-Sale)"]
+    D --> E["5. Verifikasi Graf<br/>(NodeXL 6 Faktor Profit)"]
+```
+
+#### Langkah 1: Akses Aplikasi di Streamlit Cloud
+1. Buka tautan resmi: **[prediksi-movie-2027.streamlit.app](https://prediksi-movie-2027.streamlit.app)**.
+2. Aplikasi akan langsung membuka halaman utama: **`02_💰_Investasi_Film_2027` (Simulator Investasi Film 2027)**.
+3. Jika menu navigasi tertutup, klik ikon panah di pojok kiri atas untuk membuka bilah samping (*Sidebar*).
+
+#### Langkah 2: Masukkan Parameter Proyek Film 2027 (Sidebar Kiri)
+Pada panel sebelah kiri, atur detail rencana proyek film Anda:
+- **Judul Rencana Proyek:** Masukkan judul sementara proyek film (misal: *Misteri Pabrik Kuno*).
+- **Genre Utama:** Pilih dari dropdown (rekomendasi komersial: *Horor*, *Komedi*, atau *Drama*).
+- **Rumah Produksi (Studio):** Pilih studio produksi penggarap (misal: *MD Pictures*, *Visinema*, *Imajinari*, *Rapi Films*).
+- **Produser Film:** Pilih dari **Top 50 Produser Kredibel** (misal: Manoj Punjabi, Ernest Prakasa, Dipa Andika).
+- **Sutradara:** Pilih dari **50 Sutradara Terbaik Indonesia** (misal: Joko Anwar, Muhadkly Acho, Awi Suryadi, Kimo Stamboel).
+- **Pemeran Utama (Lead Cast):** Pilih dari **Top 50 Artis Box Office** (misal: Vino G. Bastian, Reza Rahadian, Aghniny Haque, Indra Jegel).
+- **Momen Rilis Bioskop 2027:** Tentukan jendela rilis (*Lebaran*, *Libur Akhir Tahun*, *Libur Sekolah*, *Kemerdekaan*, atau *Reguler*).
+- **Tipe Cerita / Intellectual Property (IP):** Pilih asal mula materi cerita (*Thread Viral X/Twitter*, *Adaptasi Novel Bestseller*, *Sekuel/Waralaba*, atau *Ide Orisinal*).
+
+#### Langkah 3: Tentukan Struktur Anggaran & Finansial
+- **Anggaran Produksi (Miliar IDR):** Geser slider biaya produksi riil (standar film bioskop komersial berkisar antara **Rp 5 Miliar hingga Rp 15 Miliar**).
+- **Rasio Biaya Promosi (P&A %):** Tentukan alokasi pemasaran (standar industri: **25% – 35%** dari biaya produksi).
+- **Pre-Sale Hak OTT / Streaming (Miliar IDR):** Masukkan nominal komitmen awal lisensi streaming (*Netflix, Prime Video, Vidio*) jika sudah disepakati di muka.
+- **Benchmark Harga Tiket / ATP (IDR):** Pilih rata-rata harga tiket nasional (rekomendasi: **Rp 50.000**).
+
+#### Langkah 4: Evaluasi 4 Kartu Metrik Utama & Keputusan Kelayakan
+Setelah parameter diatur, dashboard langsung menghitung metrik berikut secara *real-time*:
+1. **🎯 BEP Penonton (Tiket Impas):** Berapa tiket bioskop yang wajib terjual agar seluruh pengeluaran (Produksi + P&A dikurangi Pre-Sale OTT) impas.
+2. **📊 Proyeksi Penonton (Base Case):** Estimasi penonton realistis berbasis median performa film historis dengan DNA setara.
+3. **💰 Estimasi Net ROI Produser:** Persentase imbal hasil bersih bagian produser terhadap total biaya proyek.
+4. **🛡️ Investment Risk Grade:** Peringkat risiko proyek (`AAA` = Sangat Aman, `AA` = Aman, `A` = Layak, `B` = Waspada, `C` = Spekulatif) dengan rasio cakupan BEP.
+
+#### Langkah 5: Eksplorasi 6 Tab Analisis Mendalam
+Di bagian bawah metrik utama, telusuri 6 tab analisis komprehensif:
+- **💵 Tab 1: Skenario Air Terjun Finansial (Theatrical Waterfall):**  
+  Menampilkan tabel perbandingan 3 skenario:
+  - **Bear Case (Konservatif / P25):** Skenario penonton minimal jika film mengalami persaingan ketat.
+  - **Base Case (Realistis / Median):** Skenario paling mungkin terjadi berdasarkan DNA setara.
+  - **Bull Case (Optimis / P75):** Skenario viralitas tinggi dan *word-of-mouth* masif.
+- **🧬 Tab 2: DNA Film Pembanding (2020–2026):**  
+  Melihat 5 film historis nyata yang paling mirip dengan rencana proyek Anda beserta tanggal rilis, genre, dan jumlah penonton aktual.
+- **⚠️ Tab 3: Profil Risiko & Mitigasi:**  
+  Menganalisis sensitivitas laba rugi jika terjadi penurunan penonton bioskop.
+- **📑 Tab 4: Checklist Kontrak & Term Sheet:**  
+  Panduan 4 klausul wajib pelindung modal investor (OTT Pre-Sale, Joint Escrow, Completion Bond Overrun Cap 10%, Blueprint Kampanye TikTok H-30).
+- **🏆 Tab 5: Database Box Office:**  
+  Database intelijen industri terlengkap dengan 5 sub-tab:
+  1. *Top 50 Film Revenue Tertinggi (2020–2026)*
+  2. *50 Sutradara Terbaik Indonesia & Prestasinya*
+  3. *Top 50 Produser Paling Kredibel*
+  4. *Top 50 Artis Box Office Terlaris*
+  5. *10 Besar Genre & Market Fit*  
+  *(Tersedia tombol unduh CSV di setiap sub-tab)*.
+- **🕸️ Tab 6: Graf 6 Faktor Profit (NodeXL):**  
+  Diagram interaktif dan tabel bobot keterhubungan antara 6 pilar profitabilitas tinggi (tersedia tombol unduh `vertices.csv`, `edges.csv`, dan `.graphml`).
+
+---
+
+## 🕸️ Graf Keterhubungan 6 Faktor Penentu Profit (Model NodeXL)
+
+Berdasarkan arsitektur jaringan pada [NodeXL Graph Gallery](https://www.nodexlgraphgallery.org/), keuntungan tinggi perfilman Indonesia dibentuk oleh interaksi terarah antar faktor:
+
+```mermaid
+graph TD
+    classDef factor fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef lever fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#e65100;
+    classDef goal fill:#e8f5e9,stroke:#2e7d32,stroke-width:3px,color:#1b5e20;
+
+    F1["F1: Genre & Market Fit<br/>(Horor/Komedi/Drama)"]:::factor
+    F2["F2: Cost Control<br/>(Bujet Produksi & P&A)"]:::factor
+    F3["F3: Timing & Distribusi<br/>(Lebaran/Holiday vs Reguler)"]:::factor
+    F4["F4: Hook (IP & Pemeran)<br/>(Viral IP / Ansambel Aktor)"]:::factor
+    F5["F5: Kualitas Cerita & WoM<br/>(Buzz Organik & Plot Twist)"]:::factor
+    F6["F6: Diversifikasi Revenue<br/>(OTT Pre-Sale, Brand, Int'l)"]:::factor
+
+    L1["L1: Opening Weekend D1-D4<br/>(Okupansi Hari 1-4)"]:::lever
+    L2["L2: Long-Tail Legs W2-W6<br/>(Daya Tahan Minggu 2-6)"]:::lever
+    L3["L3: Ambang Titik Impas (BEP)<br/>(Target Minimal Penonton)"]:::lever
+    L4["L4: Retensi Layar XXI/CGV<br/>(Showtime Preservation)"]:::lever
+    L5["L5: Non-Theatrical Income<br/>(Arus Kas Non-Tiket)"]:::lever
+    L6["L6: Net Producer Share<br/>(42.5% Box Office Bersih)"]:::lever
+
+    GOAL["🎯 GOAL: Keuntungan Bersih & ROI Maksimal"]:::goal
+
+    %% Hubungan Faktor -> Tuas Operasional (Edges)
+    F4 -->|Bobot: +0.45 (Drive Early Demand)| L1
+    F1 -->|Bobot: +0.30 (Market Depth Alignment)| L1
+    F3 -->|Bobot: +0.25 (High Holiday Footfall)| L1
+
+    F5 -->|Bobot: +0.60 (Organic Advocacy)| L2
+    F1 -->|Bobot: +0.20 (Sustained Genre Craving)| L2
+
+    F1 -->|Bobot: +0.25 (Screen Quota Priority)| L4
+    L1 -->|Bobot: +0.50 (High Occupancy Triggers Screens)| L4
+    L4 -->|Bobot: +0.40 (Enables Extended Run)| L2
+
+    F2 -->|Bobot: -0.55 (Lean Budget Lowers Target)| L3
+    F6 -->|Bobot: -0.35 (Pre-sale Offsets Budget)| L3
+
+    F6 -->|Bobot: +0.60 (Streaming Rights & Brands)| L5
+
+    L1 -->|Bobot: +0.35 (Volume Multiplier)| L6
+    L2 -->|Bobot: +0.55 (Cumulative Box Office)| L6
+
+    %% Muara Tuas -> Keuntungan Finansial
+    L6 -->|Bobot: +0.50 (Primary Theatrical Revenue)| GOAL
+    L5 -->|Bobot: +0.30 (Pure Margin Cushion)| GOAL
+    L3 -->|Bobot: -0.40 (Low BEP Ensures Quick Profit)| GOAL
+```
+
+### Penjelasan 3 Rantai Nilai Ekonomi Graf:
+1. **Rantai Nilai Traksi Awal:** $\text{F4 (Hook)} + \text{F1 (Genre)} + \text{F3 (Timing)} \to \text{L1 (Opening Weekend)} \to \text{L4 (Retensi Layar XXI)}$. Mengunci kuota jam tayang bioskop sebelum evaluasi Senin pertama.
+2. **Rantai Nilai Daya Tahan (The Long-Tail Engine):** $\text{F5 (Kualitas Cerita)} \to \text{L2 (Word-of-Mouth Minggu 2–6)} \to \text{L6 (Akumulasi Box Office)}$. Mencegah penurunan drastis okupansi di minggu kedua.
+3. **Rantai Perlindungan Modal (Capital Shield):** $\text{F2 (Cost Control)} + \text{F6 (OTT Pre-Sale)} \to \text{L3 (BEP Rendah)}$. Memastikan proyek sudah aman dan cepat mencapai titik untung bahkan pada skenario pasar moderat.
+
+---
+
+## 🛡️ 4 Pilar Perlindungan Modal Investor (Term Sheet Blueprint)
+
+Untuk memitigasi risiko kegagalan komersial perfilman, terapkan 4 klausul baku ini dalam perjanjian investasi:
+1. **Pre-Sale Hak OTT Streaming (25%–30% Biaya Proyek):**
+   - Kunci kontrak lisensi penayangan digital di muka dengan platform SVOD (*Netflix, Prime Video, Vidio*) sebelum syuting dimulai guna mengamankan arus kas penutup biaya dasar.
+2. **Klausul Completion Bond & Overrun Cap 10%:**
+   - Rumah produksi wajib menanggung sendiri segala pembengkakan biaya (*budget overrun*) yang melampaui 10% dari rencana anggaran awal.
+3. **Rekening Penampungan Bersama (Joint Escrow Account):**
+   - Dana investasi dicairkan bertahap berdasarkan pencapaian fase (*milestone*): 30% Pra-produksi, 40% Produksi/Syuting, 20% Pasca-produksi/CGI, 10% Rilis Bioskop.
+4. **Strategi Promosi Digital H-30 (TikTok & YouTube):**
+   - Fokuskan promosi digital organik 30 hari sebelum rilis (H-30) menggunakan materi adegan emosional berdurasi pendek, reaksi penonton, dan konten di balik layar untuk memicu viralitas organik.
+
+---
+
+## 📊 Ringkasan Data Industri (2020–2026)
+
+| Komponen Intelijen | Jumlah Rekor | Sumber & File Terkait |
 |---|:---:|---|
-| **Master Dataset Industri (2020–2026)** | ✅ | **896 film unik** ([`data/film_master_2020_2026.csv`](data/film_master_2020_2026.csv)), 646 dengan data penonton resmi |
-| **Top 50 Produser Kredibel (2020–2026)** | ✅ | **50 produser terverifikasi** ([`data/top_50_producers_indonesia_2020_2026.csv`](data/top_50_producers_indonesia_2020_2026.csv)) dengan rekam jejak box office |
-| **Top 50 Artis Box Office (2020–2026)** | ✅ | **50 pemeran teratas** ([`data/top_50_actors_indonesia_2020_2026.csv`](data/top_50_actors_indonesia_2020_2026.csv)) pencetak penonton bioskop tertinggi |
-| **Simulator Investasi 2027 (Streamlit)** | ✅ | Live di [`prediksi-movie-2027.streamlit.app`](https://prediksi-movie-2027.streamlit.app) |
-| **Model Air Terjun Finansial (Waterfall)** | ✅ | Standar industri bioskop Indonesia (Net Produser $\approx 42,5\%$ Gross) |
-| **Checklist Proteksi Modal & Term Sheet** | ✅ | Pre-sale OTT, Joint Escrow, Overrun Cap 10%, H-30 TikTok Blueprint |
-| **Analisis Faktor Komersial (EDA)** | ✅ | Laporan faktor di [`results/investment_factor_summary.md`](results/investment_factor_summary.md) |
-| **Sinyal YouTube Trailer Terverifikasi** | ✅ | 40 trailer resmi, 9.840 komentar terlabeli tanpa teks mentah |
-| **Korelasi Spearman Empiris** | ✅ | $\rho = 0,571$, $p = 0,026$ (*likes YouTube vs penonton bioskop*) |
-| **Analisis Graf SNA (NodeXL / Louvain)** | ✅ | 20 analisis jaringan, $Q = 0,810$ (13 komunitas) |
-| **Disiplin Data Tanpa Halusinasi** | ✅ | Variabel biaya tertutup ditandai strictly `NULL` (tidak dikarang model) |
+| **Master Dataset Film Indonesia** | 896 Judul (646 Berpenonton) | [`data/film_master_2020_2026.csv`](data/film_master_2020_2026.csv) |
+| **Top 50 Film Revenue Tertinggi** | 50 Judul (1,65M – 11,0M tiket) | [`data/top_50_highest_revenue_films_2020_2026.csv`](data/top_50_highest_revenue_films_2020_2026.csv) |
+| **50 Sutradara Terbaik & Prestasi** | 50 Sutradara Terverifikasi | [`data/top_50_directors_indonesia_2020_2026.csv`](data/top_50_directors_indonesia_2020_2026.csv) |
+| **Top 50 Produser Kredibel** | 50 Produser Terverifikasi | [`data/top_50_producers_indonesia_2020_2026.csv`](data/top_50_producers_indonesia_2020_2026.csv) |
+| **Top 50 Artis Box Office** | 50 Aktor/Aktris Terverifikasi | [`data/top_50_actors_indonesia_2020_2026.csv`](data/top_50_actors_indonesia_2020_2026.csv) |
+| **10 Besar Genre & Market Fit** | 10 Kategori Pasar | [`data/top_10_genres_market_fit.csv`](data/top_10_genres_market_fit.csv) |
+| **Paket Graf Jaringan NodeXL** | Vertices, Edges, GraphML | [`results/nodexl_profit_engine/`](results/nodexl_profit_engine/) |
 
 ---
 
-## 🏛️ Arsitektur Disiplin 3-Tier Data
+## ⚡ Panduan Instalasi & Eksekusi Lokal (Developer Guide)
 
-Untuk menjaga kredibilitas analisis di hadapan investor dan komite pembiayaan film:
-- **Tier A — Actual Data (Faktual Terverifikasi):**  
-  Data publik resmi yang dapat diverifikasi: Judul, Tanggal Rilis, Tahun, Genre, Sutradara, Cast, Studio (PH), dan Penonton Bioskop Resmi.
-- **Tier B — Derived Data (Metrik Terhitung):**  
-  Data turunan hasil kalkulasi objektif: *Estimated Gross Box Office (IDR)*, *Net Producer Ticket Share (IDR)*, *Commercial Tier* (Mega-Hit, Hit, Moderate, Underperformer), *Director Track Record*, dan *Studio Market Tier*.
-- **Tier C — Missing Data (Strictly NULL / NaN):**  
-  Variabel privat industri (*Production Budget*, *Marketing Spend*, *Actual Profit*, *OTT License Fee*). **Model ML dilarang mengarang angka kategori C**, melainkan disimulasikan secara transparan melalui *BEP Sensitivity Analysis*.
-
----
-
-## 🎬 Top 10 Film Terlaris Indonesia 2020–2026 dalam Dataset
-
-| Tahun | Judul Film | Genre | Sutradara | Production House | Penonton | Est. Gross Box Office (IDR) |
-|:---:|---|:---:|---|---|---:|---:|
-| 2025 | **Agak Laen: Menyala Pantiku** | Komedi | Muhadkly Acho | Imajinari | 11.000.866 | Rp 522,5 Miliar |
-| 2025 | **Jumbo** | Animasi Fantasi | Ryan Adriandhy | Visinema Studios | 10.182.536 | Rp 483,6 Miliar |
-| 2022 | **KKN di Desa Penari** | Horor | Awi Suryadi | MD Pictures | 9.233.847 | Rp 387,8 Miliar |
-| 2024 | **Agak Laen** | Horor, Komedi | Muhadkly Acho | Imajinari | 9.125.188 | Rp 410,6 Miliar |
-| 2022 | **Pengabdi Setan 2: Communion** | Horor | Joko Anwar | Rapi Films | 6.391.982 | Rp 268,4 Miliar |
-| 2022 | **Miracle in Cell No. 7** | Drama | Hanung Bramantyo | Falcon Pictures | 5.851.595 | Rp 245,7 Miliar |
-| 2024 | **Vina: Sebelum 7 Hari** | Horor | Anggy Umbara | Dee Company | 5.815.492 | Rp 261,6 Miliar |
-| 2023 | **Sewu Dino** | Horor | Kimo Stamboel | MD Pictures | 4.886.406 | Rp 219,8 Miliar |
-| 2025 | **Pabrik Gula** | Horor | Awi Suryadi | MD Pictures | 4.726.760 | Rp 224,5 Miliar |
-| 2024 | **Kang Mak from Pee Mak** | Horor, Komedi | Herwin Novianto | Falcon Pictures | 4.580.209 | Rp 206,1 Miliar |
-
----
-
-## ⚡ Quick Start
-
-### 1. Menjalankan Dashboard Simulator secara Lokal
+### 1. Kloning Repositori & Persiapan Environment
 ```bash
 # Clone repository
 git clone https://github.com/indri007/prediksi-movie-2027.git
@@ -104,57 +217,65 @@ cd prediksi-movie-2027
 
 # Pasang dependensi ringan
 pip install -r requirements.txt
-
-# Jalankan Streamlit
-streamlit run streamlit_app.py
 ```
 
-### 2. Memperbarui Master Dataset & Analisis
+### 2. Menjalankan Dashboard Streamlit
 ```bash
-# Update dataset 896 film 2020-2026
+streamlit run streamlit_app.py
+```
+Aplikasi akan otomatis terbuka pada peramban web di alamat: `http://localhost:8501`.
+
+### 3. Pembaruan Dataset & Eksekusi Pipeline (Opsional)
+```bash
+# Membangun ulang master dataset 2020-2026
 python scripts/build_film_master_2020_2026.py
 
-# Jalankan analisis faktor investasi
+# Menjalankan evaluasi faktor komersial & DNA matcher
 python scripts/analyze_investment_factors.py
 ```
 
 ---
 
-## 📁 Struktur Repositori
+## 📁 Struktur Direktori Repositori
 
 ```
-├── streamlit_app.py                            # Entrypoint Streamlit Cloud (Router Navigasi)
+prediksi-movie-2027/
+├── streamlit_app.py                            # Entrypoint Streamlit Community Cloud (Router)
 ├── streamlit_app/
 │   ├── pages/
-│   │   ├── 02_💰_Investasi_Film_2027.py        # SIMULATOR INVESTASI FILM 2027 (BARU)
-│   │   └── 01_📖_Cerita.py                    # Cerita Riset SANTET
+│   │   ├── 02_💰_Investasi_Film_2027.py        # SIMULATOR UTAMA & DATABASE BOX OFFICE
+│   │   └── 01_📖_Cerita.py                    # Cerita Riset SANTET & Metodologi Budaya
 │   └── app.py                                  # Dashboard Analisis Jaringan (SNA)
 ├── src/
-│   └── investment_engine_2027.py               # Core Investment & Comparable DNA Engine
+│   └── investment_engine_2027.py               # Core Investment Intelligence Engine
 ├── data/
 │   ├── film_master_2020_2026.csv               # Master Dataset 896 Film Indonesia (2020-2026)
-│   ├── films_clean.csv                         # Dataset Verifikasi 15 Film Riset Baseline
-│   └── box_office_sources.csv                  # Log Audit Sumber Penonton
-├── scripts/
-│   ├── build_film_master_2020_2026.py          # Ingestion Pipeline 2020-2026
-│   └── analyze_investment_factors.py           # Evaluasi Faktor Komersial
+│   ├── top_50_highest_revenue_films_2020_2026.csv # 50 Film Pendapatan Tertinggi (2020-2026)
+│   ├── top_50_directors_indonesia_2020_2026.csv   # 50 Sutradara Terbaik & Prestasinya
+│   ├── top_50_producers_indonesia_2020_2026.csv   # Top 50 Produser Kredibel
+│   ├── top_50_actors_indonesia_2020_2026.csv      # Top 50 Artis Box Office Terlaris
+│   ├── top_10_genres_market_fit.csv               # 10 Besar Genre & Market Fit Pasar
+│   └── films_clean.csv                         # Dataset Verifikasi 15 Film Riset Baseline
 ├── results/
-│   ├── investment_factor_summary.md            # Laporan Temuan Faktor Investasi
-│   ├── investment_factor_analysis.json         # Data JSON Agregat Faktor
-│   └── sna_*/                                  # Output 20 Analisis Graf SNA
+│   ├── nodexl_profit_engine/                   # Paket Graf Jaringan 6 Faktor Profit
+│   │   ├── vertices.csv                        # Node/Vertices (Faktor, Tuas, Goal)
+│   │   ├── edges.csv                           # Garis Relasi Terarah & Berbobot
+│   │   └── profit_factors_network.graphml      # File GraphML Siap Impor ke NodeXL Pro
+│   ├── investment_factor_summary.md            # Ringkasan Temuan Investasi
+│   └── sna_*/                                  # Data Analisis Graf Louvain
 ├── requirements.txt                            # Dependensi Ringan Streamlit Cloud
-└── requirements-pipeline.txt                   # Dependensi Lengkap Machine Learning
+└── requirements-pipeline.txt                   # Dependensi Penuh Machine Learning
 ```
 
 ---
 
 ## 📜 Kepatuhan Hukum, Privasi & Independensi
 
-- **Independensi Riset:** Riset ini independen dan tidak berafiliasi resmi dengan studio film komersial manapun. Seluruh data dikutip dari sumber publik terpublikasi untuk tujuan edukasi dan analitik.
-- **UU PDP No. 27/2022:** Seluruh identitas akun komentator YouTube dipseudonimkan satu arah (HMAC-SHA256). Teks mentah dan ID pengguna tidak disertakan dalam rilis publik.
+- **Independensi Riset:** Riset ini bersifat analitis independen dan tidak berafiliasi dengan studio film komersial manapun. Seluruh angka diolah dari data publik yang terpublikasi untuk keperluan studi, simulasi, dan edukasi perfilman.
+- **Kepatuhan Privasi (UU PDP No. 27/2022):** Seluruh data interaksi warganet dipseudonimkan satu arah menggunakan enkripsi HMAC-SHA256 tanpa menyimpan teks mentah atau identitas pengguna asli.
 
 ---
 
 <div align="center">
-<sub>Indonesian Film Investment Intelligence Platform · MIT License · 2026</sub>
+<sub>Indonesian Film Investment Intelligence Platform · Lisensi MIT · 2026</sub>
 </div>
