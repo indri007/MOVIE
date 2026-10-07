@@ -2,3 +2,4 @@
 # Pipeline lengkap (torch, transformers, yt-dlp, dst.): pip install -r requirements-pipeline.txt  atau  ./bit install
 streamlit>=1.50
 pandas>=2.0
+numpy>=1.24.0

@@ -1,0 +1,272 @@
+{
+  "genre_performance": [
+    {
+      "genre_clean": "Aksi",
+      "total_film": 3,
+      "total_penonton": 988121.0,
+      "mean_penonton": 329373.6666666667,
+      "median_penonton": 406632.0,
+      "max_penonton": 579889.0,
+      "hit_1m_count": 0,
+      "mega_hit_3m_count": 0,
+      "underperformer_count": 1,
+      "hit_rate_pct": 0.0,
+      "flop_rate_pct": 33.33333333333333
+    },
+    {
+      "genre_clean": "Horor",
+      "total_film": 258,
+      "total_penonton": 170266886.0,
+      "mean_penonton": 659949.1705426356,
+      "median_penonton": 203692.5,
+      "max_penonton": 9233847.0,
+      "hit_1m_count": 45,
+      "mega_hit_3m_count": 13,
+      "underperformer_count": 152,
+      "hit_rate_pct": 17.441860465116278,
+      "flop_rate_pct": 58.91472868217055
+    },
+    {
+      "genre_clean": "Komedi",
+      "total_film": 46,
+      "total_penonton": 23660943.0,
+      "mean_penonton": 514368.32608695654,
+      "median_penonton": 91629.0,
+      "max_penonton": 11000866.0,
+      "hit_1m_count": 4,
+      "mega_hit_3m_count": 1,
+      "underperformer_count": 32,
+      "hit_rate_pct": 8.695652173913043,
+      "flop_rate_pct": 69.56521739130434
+    },
+    {
+      "genre_clean": "Drama",
+      "total_film": 304,
+      "total_penonton": 113845301.0,
+      "mean_penonton": 374491.1217105263,
+      "median_penonton": 82635.0,
+      "max_penonton": 5851595.0,
+      "hit_1m_count": 36,
+      "mega_hit_3m_count": 9,
+      "underperformer_count": 229,
+      "hit_rate_pct": 11.842105263157894,
+      "flop_rate_pct": 75.32894736842105
+    },
+    {
+      "genre_clean": "Romansa",
+      "total_film": 6,
+      "total_penonton": 1364515.0,
+      "mean_penonton": 227419.16666666666,
+      "median_penonton": 78468.0,
+      "max_penonton": 919554.0,
+      "hit_1m_count": 0,
+      "mega_hit_3m_count": 0,
+      "underperformer_count": 5,
+      "hit_rate_pct": 0.0,
+      "flop_rate_pct": 83.33333333333334
+    },
+    {
+      "genre_clean": "Animasi",
+      "total_film": 9,
+      "total_penonton": 11178819.0,
+      "mean_penonton": 1242091.0,
+      "median_penonton": 36643.0,
+      "max_penonton": 10182536.0,
+      "hit_1m_count": 1,
+      "mega_hit_3m_count": 1,
+      "underperformer_count": 6,
+      "hit_rate_pct": 11.11111111111111,
+      "flop_rate_pct": 66.66666666666666
+    },
+    {
+      "genre_clean": "Lainnya",
+      "total_film": 20,
+      "total_penonton": 6900140.0,
+      "mean_penonton": 345007.0,
+      "median_penonton": 13889.0,
+      "max_penonton": 1665332.0,
+      "hit_1m_count": 4,
+      "mega_hit_3m_count": 0,
+      "underperformer_count": 14,
+      "hit_rate_pct": 20.0,
+      "flop_rate_pct": 70.0
+    }
+  ],
+  "release_window_performance": [
+    {
+      "release_window": "libur_akhir_tahun",
+      "total_film": 39,
+      "total_penonton": 20305975.0,
+      "mean_penonton": 520666.0256410256,
+      "median_penonton": 332786.0,
+      "hit_1m_count": 9,
+      "hit_rate_pct": 23.076923076923077
+    },
+    {
+      "release_window": "kemerdekaan",
+      "total_film": 58,
+      "total_penonton": 28333154.0,
+      "mean_penonton": 488502.6551724138,
+      "median_penonton": 145682.5,
+      "hit_1m_count": 5,
+      "hit_rate_pct": 8.620689655172415
+    },
+    {
+      "release_window": "libur_sekolah",
+      "total_film": 102,
+      "total_penonton": 41499285.0,
+      "mean_penonton": 406855.73529411765,
+      "median_penonton": 110260.5,
+      "hit_1m_count": 11,
+      "hit_rate_pct": 10.784313725490197
+    },
+    {
+      "release_window": "reguler",
+      "total_film": 363,
+      "total_penonton": 174304848.0,
+      "mean_penonton": 480178.64462809917,
+      "median_penonton": 108809.0,
+      "hit_1m_count": 46,
+      "hit_rate_pct": 12.672176308539946
+    },
+    {
+      "release_window": "lebaran",
+      "total_film": 84,
+      "total_penonton": 63761463.0,
+      "mean_penonton": 759065.0357142857,
+      "median_penonton": 100186.5,
+      "hit_1m_count": 19,
+      "hit_rate_pct": 22.61904761904762
+    }
+  ],
+  "studio_tier_performance": [
+    {
+      "ph_tier": "major_studio",
+      "total_film": 203,
+      "total_penonton": 215075829.0,
+      "mean_penonton": 1059486.842364532,
+      "median_penonton": 465939.0,
+      "hit_1m_count": 56,
+      "hit_rate_pct": 27.586206896551722
+    },
+    {
+      "ph_tier": "mid_or_indie",
+      "total_film": 387,
+      "total_penonton": 98578053.0,
+      "mean_penonton": 254723.6511627907,
+      "median_penonton": 61725.0,
+      "hit_1m_count": 29,
+      "hit_rate_pct": 7.493540051679587
+    },
+    {
+      "ph_tier": "indie_or_unknown",
+      "total_film": 56,
+      "total_penonton": 14550843.0,
+      "mean_penonton": 259836.48214285713,
+      "median_penonton": 44388.0,
+      "hit_1m_count": 5,
+      "hit_rate_pct": 8.928571428571429
+    }
+  ],
+  "ip_type_performance": [
+    {
+      "ip_type": "adaptation",
+      "total_film": 5,
+      "total_penonton": 6207423.0,
+      "mean_penonton": 1241484.6,
+      "median_penonton": 1155859.0,
+      "hit_1m_count": 4,
+      "hit_rate_pct": 80.0
+    },
+    {
+      "ip_type": "sequel_or_franchise",
+      "total_film": 55,
+      "total_penonton": 46071281.0,
+      "mean_penonton": 837659.6545454545,
+      "median_penonton": 302538.0,
+      "hit_1m_count": 15,
+      "hit_rate_pct": 27.27272727272727
+    },
+    {
+      "ip_type": "original",
+      "total_film": 586,
+      "total_penonton": 275926021.0,
+      "mean_penonton": 470863.5170648464,
+      "median_penonton": 105497.5,
+      "hit_1m_count": 71,
+      "hit_rate_pct": 12.1160409556314
+    }
+  ],
+  "top_production_houses": [
+    {
+      "production_house": "MD Pictures",
+      "total_film": 19,
+      "total_penonton": 19283090.0,
+      "mean_penonton": 1014899.4736842106,
+      "median_penonton": 291940.0
+    },
+    {
+      "production_house": "Falcon Pictures",
+      "total_film": 21,
+      "total_penonton": 16575303.0,
+      "mean_penonton": 789300.1428571428,
+      "median_penonton": 340218.0
+    },
+    {
+      "production_house": "MD Pictures, Pichouse Films",
+      "total_film": 7,
+      "total_penonton": 15690920.0,
+      "mean_penonton": 2241560.0,
+      "median_penonton": 827186.0
+    },
+    {
+      "production_house": "MVP Pictures",
+      "total_film": 15,
+      "total_penonton": 9267096.0,
+      "mean_penonton": 617806.4,
+      "median_penonton": 243143.0
+    },
+    {
+      "production_house": "Leo Pictures",
+      "total_film": 3,
+      "total_penonton": 8082425.0,
+      "mean_penonton": 2694141.6666666665,
+      "median_penonton": 3351616.0
+    },
+    {
+      "production_house": "Starvision Plus",
+      "total_film": 14,
+      "total_penonton": 6982253.0,
+      "mean_penonton": 498732.35714285716,
+      "median_penonton": 303070.0
+    },
+    {
+      "production_house": "Dee Company",
+      "total_film": 7,
+      "total_penonton": 6124579.0,
+      "mean_penonton": 874939.8571428572,
+      "median_penonton": 627695.0
+    },
+    {
+      "production_house": "MD Pictures, Dapur Film",
+      "total_film": 3,
+      "total_penonton": 5603724.0,
+      "mean_penonton": 1867908.0,
+      "median_penonton": 774125.0
+    },
+    {
+      "production_house": "Rapi Films",
+      "total_film": 6,
+      "total_penonton": 5106483.0,
+      "mean_penonton": 851080.5,
+      "median_penonton": 421532.0
+    },
+    {
+      "production_house": "Starvision",
+      "total_film": 6,
+      "total_penonton": 4747512.0,
+      "mean_penonton": 791252.0,
+      "median_penonton": 421163.5
+    }
+  ]
+}
