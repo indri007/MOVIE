@@ -1,0 +1,17 @@
+Vertex 1,Vertex 2,Relationship,Weight,Width,Color,Mechanism
+F4_HOOK_IP_CAST,L1_OPENING_WEEK,DRIVES_ADMISSIONS,9.5,4.0,#7C3AED,IP viral dan nama besar artis memicu antrean advance ticket sales (ATS) di hari pertama.
+F1_GENRE_FIT,L1_OPENING_WEEK,SUPPORTS_DEMAND,8.0,3.5,#C2410C,Genre horor dan komedi memiliki basis massa loyal yang langsung menonton di akhir pekan pertama.
+F3_RELEASE_TIMING,L1_OPENING_WEEK,MULTIPLIES_TRAFFIC,9.0,4.0,#1D4ED8,Momen libur Lebaran meningkatkan daya beli tiket dan okupansi bioskop hingga 2.1 kali lipat.
+F3_RELEASE_TIMING,L4_EXHIBITOR_SCREENS,SECURES_SHOWTIMES,8.5,3.5,#1D4ED8,Jadwal yang dikunci jauh hari mengamankan slot layar bioskop utama tanpa berebut mendadak.
+F5_STORY_WOM,L2_LONG_TAIL_LEGS,EXTENDS_RUN,10.0,5.0,#D97706,"Word-of-Mouth positif di TikTok & X mencegah drop penonton di minggu ke-2, menjaga film tetap tayang >30 hari."
+F1_GENRE_FIT,L2_LONG_TAIL_LEGS,SUSTAINS_AUDIENCE,7.5,3.0,#C2410C,Cerita yang sesuai selera pasar membuat penonton melakukan repeat viewing (nonton ulang).
+F2_COST_CONTROL,L3_LOW_BEP_THRESH,REDUCES_BREAKEVEN,10.0,5.0,#047857,Bujet terkontrol membuat titik impas tercapai hanya dengan 150k - 300k tiket.
+F6_REVENUE_DIVERSE,L5_OTT_PRESALE_MG,SECURES_CAPITAL,9.5,4.5,#0F766E,Pre-sale hak SVOD ke OTT mengunci 25-30% modal sebelum produksi dimulai.
+L5_OTT_PRESALE_MG,L3_LOW_BEP_THRESH,DRAMATICALLY_LOWERS_BEP,9.0,4.0,#14B8A6,"Sebagian biaya tertutup oleh OTT, sehingga target tiket bioskop untuk balik modal turun drastis."
+F4_HOOK_IP_CAST,F5_STORY_WOM,AMPLIFIES_BUZZ,7.5,3.0,#8B5CF6,Penonton awal dari penggemar IP menjadi corong pertama testimoni positif jika eksekusi naskah solid.
+F5_STORY_WOM,F6_REVENUE_DIVERSE,INCREASES_VALUATION,8.5,3.5,#D97706,Film yang viral dan sukses di bioskop melipatgandakan nilai jual lisensi penayangan OTT & TV global.
+L1_OPENING_WEEK,L4_EXHIBITOR_SCREENS,PREVENTS_SCREEN_DROP,9.0,4.0,#EA580C,Angka penonton tinggi di hari ke 1-3 memaksa ekshibitor (XXI/CGV) menambah layar bukan memotongnya.
+L1_OPENING_WEEK,L6_NET_PRODUCER_SHARE,GENERATES_BOX_OFFICE,8.5,3.5,#EA580C,Box office minggu pertama menyumbang 30-45% dari total penerimaan tiket produser.
+L2_LONG_TAIL_LEGS,L6_NET_PRODUCER_SHARE,EXPANDS_NET_GROSS,9.5,4.5,#EAB308,Daya tahan tayang panjang menyumbang 55-70% total omzet kotor film blockbuster.
+L6_NET_PRODUCER_SHARE,PROFIT_MAX,REALIZES_NET_CASH,10.0,5.0,#991B1B,Penerimaan bersih 42.5% tiket bioskop menjadi sumber likuiditas utama keuntungan investor.
+L3_LOW_BEP_THRESH,PROFIT_MAX,CREATES_HIGH_ROI,10.0,5.0,#10B981,"Semakin rendah tiket impas, setiap lembar tiket setelah BEP berubah murni menjadi profit margin (ROI >100%)."

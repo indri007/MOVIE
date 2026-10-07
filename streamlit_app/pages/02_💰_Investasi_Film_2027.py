@@ -311,12 +311,13 @@ st.markdown(f"""
 st.markdown("<br/>", unsafe_allow_html=True)
 
 # --- TABS ANALISIS MENDALAM ---
-tab_waterfall, tab_comps, tab_risk, tab_checklist, tab_talent = st.tabs([
+tab_waterfall, tab_comps, tab_risk, tab_checklist, tab_intelligence, tab_nodexl = st.tabs([
     "💵 Skenario Air Terjun Finansial",
     "🧬 DNA Film Pembanding (2020–2026)",
     "⚠️ Profil Risiko & Mitigasi",
     "📑 Checklist Kontrak & Term Sheet",
-    "🌟 Top 50 Produser & Artis (2020–2026)"
+    "🏆 Database Box Office (50 Film, 50 Sutradara, 50 Artis)",
+    "🕸️ Graf 6 Faktor Profit (NodeXL)"
 ])
 
 # --- TAB 1: WATERFALL & ROI ---
@@ -609,23 +610,84 @@ with tab_checklist:
         help="Klik untuk mengunduh dokumen term sheet lengkap berbasis parameter simulasi saat ini."
     )
 
-# --- TAB 5: TOP 50 PRODUSER & ARTIS (2020-2026) ---
-with tab_talent:
-    st.subheader("🌟 Direktori 50 Produser & 50 Artis Paling Kredibel Indonesia (2020–2026)")
+# --- TAB 5: DATABASE BOX OFFICE (50 FILM, 50 SUTRADARA, 50 PRODUSER, 50 ARTIS) ---
+with tab_intelligence:
+    st.subheader("🏆 Direktori Intelijen Box Office Indonesia (2020–2026)")
     st.markdown("""
-    Basis data pemeringkatan talenta perfilman nasional berbasis **data aktual penjualan tiket bioskop (admissions)** dan rekam jejak box office resmi 2020–2026.
+    Eksplorasi basis data komersial resmi perfilman Indonesia 2020–2026: **Top 50 Film Berpenjualan Tertinggi**, **Top 50 Sutradara Berprestasi**, **Top 50 Produser Kredibel**, **Top 50 Artis Box Office**, dan **Peta Market Fit Genre**.
     """)
 
-    subtab_producers, subtab_actors = st.tabs([
-        "🎬 Top 50 Produser Kredibel",
-        "🎭 Top 50 Artis Pencetak Penonton Tertinggi"
+    sub_films, sub_directors, sub_producers, sub_actors, sub_genres = st.tabs([
+        "🎬 Top 50 Film Terlaris (Revenue)",
+        "🎥 Top 50 Sutradara Terbaik",
+        "💼 Top 50 Produser Kredibel",
+        "🎭 Top 50 Artis Box Office",
+        "📊 10 Besar Market Fit Genre"
     ])
 
-    with subtab_producers:
-        st.markdown("### 🎬 50 Produser Film Indonesia Teratas (2020–2026)")
+    # 1. TOP 50 REVENUE FILMS
+    with sub_films:
+        st.markdown("### 🎬 50 Film Indonesia Pencetak Revenue & Penonton Tertinggi (2020–2026)")
+        st.markdown("Diurutkan berdasarkan total penjualan tiket bioskop (*admissions*) dan estimasi *Gross Box Office*:")
+
+        search_f = st.text_input("🔍 Cari Judul Film / Studio / Sutradara:", "", key="search_film_box")
+        df_f_show = engine.df_revenue_films.copy()
+        if search_f:
+            df_f_show = df_f_show[
+                df_f_show["title"].str.contains(search_f, case=False, na=False) |
+                df_f_show["production_house"].str.contains(search_f, case=False, na=False) |
+                df_f_show["director"].str.contains(search_f, case=False, na=False)
+            ]
+
+        df_f_disp = df_f_show.copy()
+        df_f_disp["Penonton"] = df_f_disp["admissions"].apply(lambda x: f"{int(x):,}")
+        df_f_disp["Gross Box Office"] = df_f_disp["est_gross_box_office_idr"].apply(lambda x: f"Rp {x:,.0f}")
+        df_f_disp["Net Produser (42.5%)"] = df_f_disp["est_producer_net_ticket_idr"].apply(lambda x: f"Rp {x:,.0f}")
+        df_f_disp = df_f_disp.rename(columns={
+            "rank": "Rank", "title": "Judul Film", "year": "Tahun", "genre": "Genre",
+            "director": "Sutradara", "production_house": "Rumah Produksi", "release_window": "Jendela Rilis"
+        })
+
+        st.dataframe(
+            df_f_disp[["Rank", "Judul Film", "Tahun", "Genre", "Sutradara", "Rumah Produksi", "Jendela Rilis", "Penonton", "Gross Box Office", "Net Produser (42.5%)"]],
+            use_container_width=True
+        )
+
+        csv_f = engine.df_revenue_films.to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Unduh Top 50 Film CSV", csv_f, "top_50_highest_revenue_films_2020_2026.csv", "text/csv", key="dl_f_csv")
+
+    # 2. TOP 50 DIRECTORS
+    with sub_directors:
+        st.markdown("### 🎥 50 Sutradara Terbaik Film Indonesia (2020–2026) & Prestasinya")
+        st.markdown("Diurutkan berdasarkan rekam jejak jumlah penonton bioskop kumulatif dan pencapaian penghargaan perfilman:")
+
+        search_d = st.text_input("🔍 Cari Sutradara:", "", key="search_dir_box")
+        df_d_show = engine.df_directors.copy()
+        if search_d:
+            df_d_show = df_d_show[df_d_show["director_name"].str.contains(search_d, case=False, na=False)]
+
+        df_d_disp = df_d_show.copy()
+        df_d_disp["Total Penonton"] = df_d_disp["total_admissions_2020_2026"].apply(lambda x: f"{int(x):,}")
+        df_d_disp["Rata-rata/Film"] = df_d_disp["avg_admissions"].apply(lambda x: f"{int(x):,}")
+        df_d_disp = df_d_disp.rename(columns={
+            "rank": "Rank", "director_name": "Nama Sutradara", "credibility_tier": "Tier",
+            "film_count": "Jumlah Film", "top_blockbuster": "Film Terlaris", "prestasi_dan_penghargaan": "Prestasi & Rekor Box Office"
+        })
+
+        st.dataframe(
+            df_d_disp[["Rank", "Nama Sutradara", "Tier", "Total Penonton", "Jumlah Film", "Rata-rata/Film", "Film Terlaris", "Prestasi & Rekor Box Office"]],
+            use_container_width=True
+        )
+
+        csv_d = engine.df_directors.to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Unduh Top 50 Sutradara CSV", csv_d, "top_50_directors_indonesia_2020_2026.csv", "text/csv", key="dl_d_csv")
+
+    # 3. TOP 50 PRODUCERS
+    with sub_producers:
+        st.markdown("### 💼 50 Produser Film Indonesia Paling Kredibel (2020–2026)")
         st.markdown("Diurutkan berdasarkan estimasi penonton bioskop kumulatif film yang diproduseri:")
 
-        prod_search = st.text_input("🔍 Cari Produser / PH:", "", key="search_prod")
+        prod_search = st.text_input("🔍 Cari Produser / PH:", "", key="search_prod_box")
         df_p_show = engine.df_producers.copy()
         if prod_search:
             df_p_show = df_p_show[
@@ -636,30 +698,25 @@ with tab_talent:
         df_p_disp = df_p_show.copy()
         df_p_disp["Estimasi Penonton Kumulatif"] = df_p_disp["total_admissions_estimate_2020_2026"].apply(lambda x: f"{x:,.0f}")
         df_p_disp = df_p_disp.rename(columns={
-            "rank": "Rank",
-            "producer_name": "Nama Produser",
-            "primary_production_house": "Studio / PH Utama",
-            "top_blockbuster": "Film Terlaris",
-            "film_count": "Jumlah Film",
-            "credibility_tier": "Tier Kredibilitas",
-            "primary_genre": "Spesialisasi Genre",
-            "notable_portfolio": "Portofolio Utama"
+            "rank": "Rank", "producer_name": "Nama Produser", "primary_production_house": "Studio / PH Utama",
+            "top_blockbuster": "Film Terlaris", "film_count": "Jumlah Film", "credibility_tier": "Tier",
+            "primary_genre": "Spesialisasi Genre", "notable_portfolio": "Portofolio Utama"
         })
 
         st.dataframe(
-            df_p_disp[[
-                "Rank", "Nama Produser", "Studio / PH Utama", "Estimasi Penonton Kumulatif",
-                "Tier Kredibilitas", "Film Terlaris", "Jumlah Film", "Spesialisasi Genre", "Portofolio Utama"
-            ]],
+            df_p_disp[["Rank", "Nama Produser", "Studio / PH Utama", "Tier", "Estimasi Penonton Kumulatif", "Film Terlaris", "Jumlah Film", "Spesialisasi Genre", "Portofolio Utama"]],
             use_container_width=True
         )
-        st.caption("Sumber: Agregasi box office film Indonesia 2020–2026 (FilmIndonesia, Cinepoint, Wikipedia, Laporan Emiten MD Pictures).")
 
-    with subtab_actors:
+        csv_p = engine.df_producers.to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Unduh Top 50 Produser CSV", csv_p, "top_50_producers_indonesia_2020_2026.csv", "text/csv", key="dl_p_csv")
+
+    # 4. TOP 50 ACTORS
+    with sub_actors:
         st.markdown("### 🎭 50 Artis Indonesia Pencetak Penonton Tertinggi (2020–2026)")
         st.markdown("Diurutkan berdasarkan total penonton bioskop kumulatif dari film yang dibintangi:")
 
-        actor_search = st.text_input("🔍 Cari Artis / Genre:", "", key="search_act")
+        actor_search = st.text_input("🔍 Cari Artis / Genre:", "", key="search_act_box")
         df_a_show = engine.df_actors.copy()
         if actor_search:
             df_a_show = df_a_show[
@@ -671,22 +728,107 @@ with tab_talent:
         df_a_disp["Total Penonton Kumulatif"] = df_a_disp["total_admissions_2020_2026"].apply(lambda x: f"{x:,.0f}")
         df_a_disp["Rata-rata per Film"] = df_a_disp["avg_admissions"].apply(lambda x: f"{x:,.0f}")
         df_a_disp = df_a_disp.rename(columns={
-            "rank": "Rank",
-            "actor_name": "Nama Artis",
-            "gender": "Kategori",
-            "film_count": "Jumlah Film",
-            "credibility_tier": "Tier Kredibilitas",
-            "biggest_hit": "Film Terlaris",
-            "primary_genre": "Genre Utama",
-            "notable_films": "Film Terkenal"
+            "rank": "Rank", "actor_name": "Nama Artis", "gender": "Kategori", "film_count": "Jumlah Film",
+            "credibility_tier": "Tier", "biggest_hit": "Film Terlaris", "primary_genre": "Genre Utama", "notable_films": "Film Terkenal"
         })
 
         st.dataframe(
-            df_a_disp[[
-                "Rank", "Nama Artis", "Kategori", "Total Penonton Kumulatif",
-                "Rata-rata per Film", "Tier Kredibilitas", "Film Terlaris", "Jumlah Film", "Genre Utama", "Film Terkenal"
-            ]],
+            df_a_disp[["Rank", "Nama Artis", "Kategori", "Tier", "Total Penonton Kumulatif", "Rata-rata per Film", "Film Terlaris", "Jumlah Film", "Genre Utama", "Film Terkenal"]],
             use_container_width=True
         )
-        st.caption("Sumber: Analisis pemeran utama/pendukung master dataset 896 film Indonesia 2020–2026.")
+
+        csv_a = engine.df_actors.to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Unduh Top 50 Artis CSV", csv_a, "top_50_actors_indonesia_2020_2026.csv", "text/csv", key="dl_a_csv")
+
+    # 5. TOP 10 GENRES MARKET FIT
+    with sub_genres:
+        st.markdown("### 📊 10 Besar Genre dan Market Fit Komersial di Indonesia (2020–2026)")
+        st.markdown("Pangsa pasar penonton bioskop dan profil risiko komersial berdasarkan 896 film terdata:")
+
+        df_g_disp = engine.df_genres_fit.copy()
+        df_g_disp["Pangsa Pasar"] = df_g_disp["market_share_pct"].apply(lambda x: f"{x:.1f}%")
+        df_g_disp["Total Penonton (2020-2026)"] = df_g_disp["total_admissions_2020_2026"].apply(lambda x: f"{int(x):,}")
+        df_g_disp = df_g_disp.rename(columns={
+            "rank": "Rank", "genre": "Genre", "total_films_2020_2026": "Jumlah Judul",
+            "market_fit_score": "Skor Market Fit", "risk_profile": "Profil Risiko",
+            "target_audience": "Segmen Target Penonton", "commercial_dna": "Karakter DNA Komersial"
+        })
+
+        st.dataframe(
+            df_g_disp[["Rank", "Genre", "Pangsa Pasar", "Skor Market Fit", "Total Penonton (2020-2026)", "Jumlah Judul", "Profil Risiko", "Segmen Target Penonton", "Karakter DNA Komersial"]],
+            use_container_width=True
+        )
+
+# --- TAB 6: GRAF 6 FAKTOR PROFIT (NODEXL ARCHITECTURE) ---
+with tab_nodexl:
+    st.subheader("🕸️ Arsitektur Graf: 6 Faktor Penentu Keuntungan Film Tertinggi (NodeXL Model)")
+    st.markdown("""
+    Model jaringan interkoneksi sistemik yang menghubungkan **6 Faktor Kunci Penentu Laba Bersih** menuju **Return on Investment (ROI) Maksimal**.
+    Didesain sesuai format topologi **NodeXL Pro Network Analysis** (*Vertices, Directed Weighted Edges, Centrality Levers*).
+    """)
+
+    st.markdown("""
+    <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:16px; padding:1.5rem; margin-bottom:1.5rem; box-shadow:0 2px 10px rgba(15,23,42,0.04);">
+      <h4 style="color:#C2410C; margin-top:0;">🌐 6 Pilar Penentu Keuntungan Film Indonesia:</h4>
+      <ol style="color:#334155; line-height:1.8; margin-bottom:0; font-size:0.95rem;">
+        <li><b>Genre & Market Fit Kuat:</b> Memilih genre dengan basis massa likuid (Horor 51.9% atau Komedi 7.2%).</li>
+        <li><b>Cost Control & BEP Efisien:</b> Batasi bujet fisik (< Rp 10M) agar tiket impas tercapai sebelum 300.000 penonton.</li>
+        <li><b>Strategi Distribusi & Timing:</b> Rebut momentum hari libur (Lebaran multiplier 2.1x) dan slot layar bioskop utama.</li>
+        <li><b>Hook (IP & Artis Jangkar):</b> Amankan penonton Opening Weekend (D1-D4) lewat IP viral (Thread X / Novel) dan Top 50 Artis.</li>
+        <li><b>Kualitas Cerita & Word-of-Mouth:</b> Memicu mantra organik warganet & FYP TikTok agar film bertahan (long-tail legs) >30 hari.</li>
+        <li><b>Diversifikasi Revenue Streams:</b> Kunci Pre-Sale OTT (25-30% MG), sponsor brand placement, dan lisensi TV internasional.</li>
+      </ol>
+    </div>
+    """, unsafe_allow_html=True)
+
+    c_g1, c_g2 = st.columns([3, 2])
+
+    with c_g1:
+        st.markdown("#### 🗺️ Peta Relasi Jaringan Antar-Faktor (Directed Graph Topology)")
+        st.markdown("""
+```
+               [F4: Hook IP & Artis] ────(9.5)────┐
+                         │ (7.5)                   │
+                         ▼                         ▼
+  [F1: Genre Fit] ──(8.0)──► [L1: Opening Week] ──────(8.5)──────┐
+                         ▲                         ▲             │
+                         │ (9.0)                   │             │
+  [F3: Timing Lebaran] ──┴────(8.5)──► [L4: Kuota Layar]         ▼
+                                                   │      [L6: Net Produser (42.5%)]
+  [F5: Cerita & WoM] ───────(10.0)──► [L2: Long-Tail Legs] ──────(9.5)──▲    │ (10.0)
+                         │ (8.5)                                        │    ▼
+                         ▼                                              ├──► [🎯 ROI & Laba Maksimal]
+  [F6: Diversifikasi] ──(9.5)──► [L5: Pre-Sale OTT]                     │    ▲
+                         │ (9.0)                   │                    │    │ (10.0)
+                         ▼                         ▼                    │    │
+  [F2: Cost Control] ──────────(10.0)─────────► [L3: BEP Rendah] ───────┴────┘
+```
+        """)
+
+    with c_g2:
+        st.markdown("#### 📥 Unduh Paket Data NodeXL Pro")
+        st.markdown("Paket berkas jaringan ini siap diimpor ke **NodeXL Pro**, **Gephi**, atau **Cytoscape**:")
+
+        # Baca file nodexl
+        nodexl_path = REPO_ROOT / "results" / "nodexl_profit_engine"
+        v_file = nodexl_path / "vertices.csv"
+        e_file = nodexl_path / "edges.csv"
+        g_file = nodexl_path / "profit_factors_network.graphml"
+
+        if v_file.exists():
+            with open(v_file, "rb") as f:
+                st.download_button("⬇️ Unduh vertices.csv (Simpul)", f.read(), "nodexl_profit_vertices.csv", "text/csv", key="dl_nx_v")
+        if e_file.exists():
+            with open(e_file, "rb") as f:
+                st.download_button("⬇️ Unduh edges.csv (Sisi Relasi & Bobot)", f.read(), "nodexl_profit_edges.csv", "text/csv", key="dl_nx_e")
+        if g_file.exists():
+            with open(g_file, "rb") as f:
+                st.download_button("⬇️ Unduh profit_factors_network.graphml", f.read(), "profit_factors_network.graphml", "application/xml", key="dl_nx_g")
+
+    st.markdown("---")
+    st.markdown("#### 📊 Tabel Matriks Relasi Sisi & Mekanisme Pengaruh (NodeXL Edges Table)")
+    if e_file.exists():
+        df_edges = pd.read_csv(e_file)
+        st.dataframe(df_edges[["Vertex 1", "Vertex 2", "Relationship", "Weight", "Mechanism"]], use_container_width=True)
+
 

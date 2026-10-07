@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="category" for="node" attr.name="category" attr.type="string"/>
+  <key id="color" for="node" attr.name="color" attr.type="string"/>
+  <key id="size" for="node" attr.name="size" attr.type="double"/>
+  <key id="rel" for="edge" attr.name="relation" attr.type="string"/>
+  <key id="weight" for="edge" attr.name="weight" attr.type="double"/>
+  <graph id="FilmProfitEngine" edgedefault="directed">
+    <node id="PROFIT_MAX"><data key="label">🎯 High Net Profit & ROI Max</data><data key="category">Core Objective</data><data key="color">#B91C1C</data><data key="size">35</data></node>
+    <node id="F1_GENRE_FIT"><data key="label">1. 🎭 Genre & Market Fit Kuat</data><data key="category">Strategic Factor</data><data key="color">#C2410C</data><data key="size">28</data></node>
+    <node id="F2_COST_CONTROL"><data key="label">2. 💰 Cost Control & BEP Efisien</data><data key="category">Strategic Factor</data><data key="color">#047857</data><data key="size">28</data></node>
+    <node id="F3_RELEASE_TIMING"><data key="label">3. 📅 Timing Rilis & Libur Lebaran</data><data key="category">Strategic Factor</data><data key="color">#1D4ED8</data><data key="size">28</data></node>
+    <node id="F4_HOOK_IP_CAST"><data key="label">4. 🪝 Hook: IP Kuat & Bintang Jangkar</data><data key="category">Strategic Factor</data><data key="color">#7C3AED</data><data key="size">28</data></node>
+    <node id="F5_STORY_WOM"><data key="label">5. 🗣️ Cerita Solid & Word-of-Mouth</data><data key="category">Strategic Factor</data><data key="color">#D97706</data><data key="size">28</data></node>
+    <node id="F6_REVENUE_DIVERSE"><data key="label">6. 📺 Diversifikasi Aliran Pendapatan</data><data key="category">Strategic Factor</data><data key="color">#0F766E</data><data key="size">28</data></node>
+    <node id="L1_OPENING_WEEK"><data key="label">⚡ Opening Weekend (D1-D4)</data><data key="category">Operational Lever</data><data key="color">#EA580C</data><data key="size">22</data></node>
+    <node id="L2_LONG_TAIL_LEGS"><data key="label">📈 Theatrical Long-Tail Legs</data><data key="category">Operational Lever</data><data key="color">#EAB308</data><data key="size">22</data></node>
+    <node id="L3_LOW_BEP_THRESH"><data key="label">🎯 Titik Impas (BEP Rendah)</data><data key="category">Financial Lever</data><data key="color">#10B981</data><data key="size">22</data></node>
+    <node id="L4_EXHIBITOR_SCREENS"><data key="label">🏢 Alokasi Layar Bioskop (XXI/CGV)</data><data key="category">Operational Lever</data><data key="color">#3B82F6</data><data key="size">20</data></node>
+    <node id="L5_OTT_PRESALE_MG"><data key="label">🛡️ Minimum Guarantee (MG) OTT</data><data key="category">Financial Lever</data><data key="color">#14B8A6</data><data key="size">22</data></node>
+    <node id="L6_NET_PRODUCER_SHARE"><data key="label">💵 Net Bagian Produser (42.5%)</data><data key="category">Financial Lever</data><data key="color">#991B1B</data><data key="size">24</data></node>
+    <edge id="e0" source="F4_HOOK_IP_CAST" target="L1_OPENING_WEEK"><data key="rel">DRIVES_ADMISSIONS</data><data key="weight">9.5</data></edge>
+    <edge id="e1" source="F1_GENRE_FIT" target="L1_OPENING_WEEK"><data key="rel">SUPPORTS_DEMAND</data><data key="weight">8.0</data></edge>
+    <edge id="e2" source="F3_RELEASE_TIMING" target="L1_OPENING_WEEK"><data key="rel">MULTIPLIES_TRAFFIC</data><data key="weight">9.0</data></edge>
+    <edge id="e3" source="F3_RELEASE_TIMING" target="L4_EXHIBITOR_SCREENS"><data key="rel">SECURES_SHOWTIMES</data><data key="weight">8.5</data></edge>
+    <edge id="e4" source="F5_STORY_WOM" target="L2_LONG_TAIL_LEGS"><data key="rel">EXTENDS_RUN</data><data key="weight">10.0</data></edge>
+    <edge id="e5" source="F1_GENRE_FIT" target="L2_LONG_TAIL_LEGS"><data key="rel">SUSTAINS_AUDIENCE</data><data key="weight">7.5</data></edge>
+    <edge id="e6" source="F2_COST_CONTROL" target="L3_LOW_BEP_THRESH"><data key="rel">REDUCES_BREAKEVEN</data><data key="weight">10.0</data></edge>
+    <edge id="e7" source="F6_REVENUE_DIVERSE" target="L5_OTT_PRESALE_MG"><data key="rel">SECURES_CAPITAL</data><data key="weight">9.5</data></edge>
+    <edge id="e8" source="L5_OTT_PRESALE_MG" target="L3_LOW_BEP_THRESH"><data key="rel">DRAMATICALLY_LOWERS_BEP</data><data key="weight">9.0</data></edge>
+    <edge id="e9" source="F4_HOOK_IP_CAST" target="F5_STORY_WOM"><data key="rel">AMPLIFIES_BUZZ</data><data key="weight">7.5</data></edge>
+    <edge id="e10" source="F5_STORY_WOM" target="F6_REVENUE_DIVERSE"><data key="rel">INCREASES_VALUATION</data><data key="weight">8.5</data></edge>
+    <edge id="e11" source="L1_OPENING_WEEK" target="L4_EXHIBITOR_SCREENS"><data key="rel">PREVENTS_SCREEN_DROP</data><data key="weight">9.0</data></edge>
+    <edge id="e12" source="L1_OPENING_WEEK" target="L6_NET_PRODUCER_SHARE"><data key="rel">GENERATES_BOX_OFFICE</data><data key="weight">8.5</data></edge>
+    <edge id="e13" source="L2_LONG_TAIL_LEGS" target="L6_NET_PRODUCER_SHARE"><data key="rel">EXPANDS_NET_GROSS</data><data key="weight">9.5</data></edge>
+    <edge id="e14" source="L6_NET_PRODUCER_SHARE" target="PROFIT_MAX"><data key="rel">REALIZES_NET_CASH</data><data key="weight">10.0</data></edge>
+    <edge id="e15" source="L3_LOW_BEP_THRESH" target="PROFIT_MAX"><data key="rel">CREATES_HIGH_ROI</data><data key="weight">10.0</data></edge>
+  </graph>
+</graphml>

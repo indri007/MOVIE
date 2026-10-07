@@ -1,0 +1,14 @@
+Vertex,Vertex Label,Category,Color,Shape,Size,Description
+PROFIT_MAX,🎯 High Net Profit & ROI Max,Core Objective,#B91C1C,Diamond,35,Tujuan Akhir: Keuntungan bersih maksimal produser & investor setelah seluruh biaya tercover penuh.
+F1_GENRE_FIT,1. 🎭 Genre & Market Fit Kuat,Strategic Factor,#C2410C,Circle,28,"Pilihan genre loyal terbukti komersial (Horor 52% market share, Komedi 7.2%, Drama 36.2%)."
+F2_COST_CONTROL,2. 💰 Cost Control & BEP Efisien,Strategic Factor,#047857,Circle,28,Pengendalian bujet produksi ketat (<Rp 10M) dan rasio P&A efisien agar BEP rendah (<300k tiket).
+F3_RELEASE_TIMING,3. 📅 Timing Rilis & Libur Lebaran,Strategic Factor,#1D4ED8,Circle,28,"Penempatan jadwal tayang di jendela puncak (Lebaran multiplier 2.1x, Nataru, Libur Sekolah)."
+F4_HOOK_IP_CAST,4. 🪝 Hook: IP Kuat & Bintang Jangkar,Strategic Factor,#7C3AED,Circle,28,"Daya tarik minggu pertama melalui IP viral (Thread X, Novel Wattpad) & Top 50 Artis Box Office."
+F5_STORY_WOM,5. 🗣️ Cerita Solid & Word-of-Mouth,Strategic Factor,#D97706,Circle,28,"Kualitas penceritaan yang memicu 'Mantra' warganet, viralitas organik TikTok, dan review positif."
+F6_REVENUE_DIVERSE,6. 📺 Diversifikasi Aliran Pendapatan,Strategic Factor,#0F766E,Circle,28,"Pemasukan non-bioskop: Pre-Sale OTT (25-30% MG), sponsor brand placement, dan lisensi global."
+L1_OPENING_WEEK,⚡ Opening Weekend (D1-D4),Operational Lever,#EA580C,Square,22,Penjualan tiket 4 hari pertama bioskop untuk mengamankan jumlah layar tayang dari exhibitor.
+L2_LONG_TAIL_LEGS,📈 Theatrical Long-Tail Legs,Operational Lever,#EAB308,Square,22,Daya tahan tayang di minggu 2 hingga minggu 6 berkat rekomendasi organik penonton.
+L3_LOW_BEP_THRESH,🎯 Titik Impas (BEP Rendah),Financial Lever,#10B981,Square,22,Jumlah tiket bioskop minimal yang harus terjual agar seluruh modal investasi balik modal.
+L4_EXHIBITOR_SCREENS,🏢 Alokasi Layar Bioskop (XXI/CGV),Operational Lever,#3B82F6,Square,20,Dukungan kuota layar dan showtimes bioskop dari jaringan ekshibitor nasional.
+L5_OTT_PRESALE_MG,🛡️ Minimum Guarantee (MG) OTT,Financial Lever,#14B8A6,Square,22,Modal tunai yang terkunci di depan dari platform streaming (Vidio/Netflix/Prime Video).
+L6_NET_PRODUCER_SHARE,💵 Net Bagian Produser (42.5%),Financial Lever,#991B1B,Square,24,Porsi bersih penerimaan dari gross box office setelah pajak hiburan 10% dan split bioskop 50%.

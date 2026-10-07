@@ -18,6 +18,10 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = REPO_ROOT / "data" / "film_master_2020_2026.csv"
 PRODUCERS_FILE = REPO_ROOT / "data" / "top_50_producers_indonesia_2020_2026.csv"
 ACTORS_FILE = REPO_ROOT / "data" / "top_50_actors_indonesia_2020_2026.csv"
+REVENUE_FILMS_FILE = REPO_ROOT / "data" / "top_50_highest_revenue_films_2020_2026.csv"
+DIRECTORS_FILE = REPO_ROOT / "data" / "top_50_directors_indonesia_2020_2026.csv"
+GENRES_FIT_FILE = REPO_ROOT / "data" / "top_10_genres_market_fit.csv"
+NODEXL_DIR = REPO_ROOT / "results" / "nodexl_profit_engine"
 
 MAJOR_STUDIOS = [
     "md pictures", "falcon pictures", "visinema", "starvision", "rapi films",
@@ -35,6 +39,9 @@ class FilmInvestmentEngine:
         self.valid_df = self.df[self.df["admissions"].notna()].copy()
         self.df_producers = pd.read_csv(PRODUCERS_FILE) if PRODUCERS_FILE.exists() else pd.DataFrame()
         self.df_actors = pd.read_csv(ACTORS_FILE) if ACTORS_FILE.exists() else pd.DataFrame()
+        self.df_revenue_films = pd.read_csv(REVENUE_FILMS_FILE) if REVENUE_FILMS_FILE.exists() else pd.DataFrame()
+        self.df_directors = pd.read_csv(DIRECTORS_FILE) if DIRECTORS_FILE.exists() else pd.DataFrame()
+        self.df_genres_fit = pd.read_csv(GENRES_FIT_FILE) if GENRES_FIT_FILE.exists() else pd.DataFrame()
 
     def _load_data(self) -> pd.DataFrame:
         if not self.data_path.exists():
@@ -66,10 +73,12 @@ class FilmInvestmentEngine:
         windows = ["Lebaran", "Libur_akhir_tahun", "Libur_sekolah", "Kemerdekaan", "Reguler"]
         ip_types = ["Original", "Adaptation (Novel/Wattpad/X)", "Sequel Or Franchise"]
 
-        # Ambil sutradara aktif dengan minimal 2 film
-        dir_counts = self.valid_df["director"].value_counts()
-        directors = sorted(dir_counts[dir_counts >= 2].index.tolist())
-        directors = ["Sutradara Baru / Debut"] + directors
+        # Ambil daftar 50 sutradara terbaik
+        if not self.df_directors.empty:
+            directors = ["Sutradara Baru / Debut"] + self.df_directors["director_name"].tolist()
+        else:
+            dir_counts = self.valid_df["director"].value_counts()
+            directors = ["Sutradara Baru / Debut"] + sorted(dir_counts[dir_counts >= 2].index.tolist())
 
         producers = ["Produser Baru / Independen"]
         if not self.df_producers.empty:
