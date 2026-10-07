@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="cluster" for="node" attr.name="cluster" attr.type="string"/>
+  <key id="score" for="node" attr.name="score" attr.type="double"/>
+  <key id="rel" for="edge" attr.name="relation" attr.type="string"/>
+  <key id="weight" for="edge" attr.name="weight" attr.type="double"/>
+  <graph id="FFI_Strategy_Network" edgedefault="directed">
+    <node id="V1">
+      <data key="label">Asosiasi Profesi Perfilman</data>
+      <data key="cluster">Penjurian</data>
+      <data key="score">0.88</data>
+    </node>
+    <node id="V2">
+      <data key="label">Akademi Citra (Voting Body)</data>
+      <data key="cluster">Penjurian</data>
+      <data key="score">0.96</data>
+    </node>
+    <node id="V3">
+      <data key="label">Audit Independen (PwC/Deloitte)</data>
+      <data key="cluster">Penjurian</data>
+      <data key="score">0.72</data>
+    </node>
+    <node id="V4">
+      <data key="label">Skenario Orisinal / Adaptasi</data>
+      <data key="cluster">The Craft</data>
+      <data key="score">0.94</data>
+    </node>
+    <node id="V5">
+      <data key="label">Sinematografi & Pencahayaan</data>
+      <data key="cluster">The Craft</data>
+      <data key="score">0.86</data>
+    </node>
+    <node id="V6">
+      <data key="label">Tata Suara & Scoring Musik</data>
+      <data key="cluster">The Craft</data>
+      <data key="score">0.84</data>
+    </node>
+    <node id="V7">
+      <data key="label">Penyuntingan & Tata Artistik</data>
+      <data key="cluster">The Craft</data>
+      <data key="score">0.8</data>
+    </node>
+    <node id="V8">
+      <data key="label">Keaktoran (Ensemble & Lead)</data>
+      <data key="cluster">The Craft</data>
+      <data key="score">0.9</data>
+    </node>
+    <node id="V9">
+      <data key="label">Jendela Eligibility Resmi</data>
+      <data key="cluster">Eligibility & Timing</data>
+      <data key="score">0.76</data>
+    </node>
+    <node id="V10">
+      <data key="label">Timing Rilis Kuartal 3 (Q3)</data>
+      <data key="cluster">Eligibility & Timing</data>
+      <data key="score">0.82</data>
+    </node>
+    <node id="V11">
+      <data key="label">FYC Special Screenings</data>
+      <data key="cluster">Kampanye FYC</data>
+      <data key="score">0.89</data>
+    </node>
+    <node id="V12">
+      <data key="label">Digital Screener Portal</data>
+      <data key="cluster">Kampanye FYC</data>
+      <data key="score">0.81</data>
+    </node>
+    <node id="V13">
+      <data key="label">Booklet & Production Notes</data>
+      <data key="cluster">Kampanye FYC</data>
+      <data key="score">0.74</data>
+    </node>
+    <node id="V14">
+      <data key="label">Isu Kemanusiaan & Ketimpangan</data>
+      <data key="cluster">Kedalaman Budaya</data>
+      <data key="score">0.92</data>
+    </node>
+    <node id="V15">
+      <data key="label">Akar Budaya & Hyper-Localism</data>
+      <data key="cluster">Kedalaman Budaya</data>
+      <data key="score">0.87</data>
+    </node>
+    <node id="V16">
+      <data key="label">Sapu Nominasi Teknis (10+)</data>
+      <data key="cluster">Piala Citra Apex</data>
+      <data key="score">0.88</data>
+    </node>
+    <node id="V17">
+      <data key="label">Piala Citra Kategori Utama</data>
+      <data key="cluster">Piala Citra Apex</data>
+      <data key="score">0.99</data>
+    </node>
+    <node id="V18">
+      <data key="label">Legasi Sinema & Re-release BO</data>
+      <data key="cluster">Piala Citra Apex</data>
+      <data key="score">0.95</data>
+    </node>
+    <edge source="V1" target="V16">
+      <data key="rel">nominates_craft</data>
+      <data key="weight">0.9</data>
+    </edge>
+    <edge source="V1" target="V2">
+      <data key="rel">submits_shortlist</data>
+      <data key="weight">0.85</data>
+    </edge>
+    <edge source="V2" target="V17">
+      <data key="rel">elects_winners</data>
+      <data key="weight">0.98</data>
+    </edge>
+    <edge source="V3" target="V2">
+      <data key="rel">audits_ballots</data>
+      <data key="weight">0.8</data>
+    </edge>
+    <edge source="V4" target="V17">
+      <data key="rel">secures_best_picture</data>
+      <data key="weight">0.95</data>
+    </edge>
+    <edge source="V5" target="V16">
+      <data key="rel">anchors_visual_clout</data>
+      <data key="weight">0.88</data>
+    </edge>
+    <edge source="V6" target="V16">
+      <data key="rel">anchors_audio_clout</data>
+      <data key="weight">0.85</data>
+    </edge>
+    <edge source="V7" target="V16">
+      <data key="rel">builds_technical_sweep</data>
+      <data key="weight">0.82</data>
+    </edge>
+    <edge source="V8" target="V17">
+      <data key="rel">secures_acting_sweep</data>
+      <data key="weight">0.92</data>
+    </edge>
+    <edge source="V9" target="V1">
+      <data key="rel">satisfies_compliance</data>
+      <data key="weight">0.75</data>
+    </edge>
+    <edge source="V10" target="V11">
+      <data key="rel">maximizes_recency</data>
+      <data key="weight">0.85</data>
+    </edge>
+    <edge source="V11" target="V2">
+      <data key="rel">mobilizes_voter_turnout</data>
+      <data key="weight">0.92</data>
+    </edge>
+    <edge source="V12" target="V2">
+      <data key="rel">closes_viewing_gap</data>
+      <data key="weight">0.84</data>
+    </edge>
+    <edge source="V13" target="V2">
+      <data key="rel">articulates_craftsmanship</data>
+      <data key="weight">0.78</data>
+    </edge>
+    <edge source="V14" target="V4">
+      <data key="rel">enriches_subtext</data>
+      <data key="weight">0.9</data>
+    </edge>
+    <edge source="V15" target="V5">
+      <data key="rel">inspires_visual_authenticity</data>
+      <data key="weight">0.85</data>
+    </edge>
+    <edge source="V14" target="V17">
+      <data key="rel">touches_voter_conscience</data>
+      <data key="weight">0.88</data>
+    </edge>
+    <edge source="V16" target="V17">
+      <data key="rel">creates_frontrunner_halo</data>
+      <data key="weight">0.89</data>
+    </edge>
+    <edge source="V17" target="V18">
+      <data key="rel">elevates_commercial_value</data>
+      <data key="weight">0.96</data>
+    </edge>
+  </graph>
+</graphml>

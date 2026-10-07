@@ -1,0 +1,20 @@
+source,target,relationship_type,weight,mechanism_description
+V1,V16,nominates_craft,0.9,"Asosiasi profesi (IFI, SATU, INAFED) memfilter dan menetapkan 5 nominasi teknis terbaik"
+V1,V2,submits_shortlist,0.85,Daftar nominasi resmi diserahkan ke Akademi Citra untuk pemungutan suara tahap akhir
+V2,V17,elects_winners,0.98,Voting rahasia anggota Akademi Citra secara mutlak menentukan pemenang Piala Citra
+V3,V2,audits_ballots,0.8,Akuntan publik menjamin integritas dan validitas suara pemilih Akademi Citra
+V4,V17,secures_best_picture,0.95,Skenario terbaik adalah prediktor statistik terkuat (90%+) untuk memenangkan Film Terbaik FFI
+V5,V16,anchors_visual_clout,0.88,"Kualitas sinematografi memimpin raihan nominasi visual (Batara Goempar, Joseph Fofid)"
+V6,V16,anchors_audio_clout,0.85,Penataan suara imersif menjamin poin tinggi di mata kurator asosiasi suara
+V7,V16,builds_technical_sweep,0.82,Editing yang presisi dan art direction otentik melengkapi sapu bersih nominasi teknis
+V8,V17,secures_acting_sweep,0.92,Penghargaan 4 kategori akting (JESEDEF) menjadi pendorong utama kemenangan Best Picture
+V9,V1,satisfies_compliance,0.75,Surat lulus sensor dan kepatuhan tayang bioskop mengamankan kelayakan administratif seleksi
+V10,V11,maximizes_recency,0.85,Rilis Q3/festival memastikan film masih hangat dalam ingatan pemilih saat voting dibuka
+V11,V2,mobilizes_voter_turnout,0.92,Special screening tatap muka memastikan minimal 60% pemilih Akademi Citra menonton di bioskop
+V12,V2,closes_viewing_gap,0.84,Digital screener menjamin anggota juri yang sedang syuting di luar kota tetap dapat menonton
+V13,V2,articulates_craftsmanship,0.78,Buku catatan produksi memperjelas tingkat kesulitan teknis kepada para pemilih FFI
+V14,V4,enriches_subtext,0.9,Isu sosial nyata memperkaya kedalaman naskah dan mengangkat bobot moral narasi
+V15,V5,inspires_visual_authenticity,0.85,Lokalitas Nusantara otentik menghasilkan komposisi visual sinematografi yang khas dan memukau
+V14,V17,touches_voter_conscience,0.88,Keberanian menyuarakan isu kemanusiaan memberikan nilai urgensi tinggi bagi juri Akademi Citra
+V16,V17,creates_frontrunner_halo,0.89,Dominasi 10+ nominasi teknis menciptakan efek psikologis 'film wajib menang' di dewan juri
+V17,V18,elevates_commercial_value,0.96,Piala Citra Film Terbaik mendongkrak valuasi OTT internasional dan daya tawar proyek berikutnya

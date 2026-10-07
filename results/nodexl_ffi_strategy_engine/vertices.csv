@@ -1,0 +1,19 @@
+vertex_id,vertex_label,cluster_group,category_type,description,centrality_score,color,shape
+V1,Asosiasi Profesi Perfilman,Penjurian,Tahap 1 Kurasi,"IFDC, APROFI, IFI, SATU, INAFED, FSK (Menyeleksi Longlist & Nominasi)",0.88,#1E88E5,circle
+V2,Akademi Citra (Voting Body),Penjurian,Tahap 2 Final,80-100+ praktisi peraih piala/nomine FFI yang menentukan pemenang akhir,0.96,#1E88E5,diamond
+V3,Audit Independen (PwC/Deloitte),Penjurian,Integritas,Tabulasi suara tertutup dan audit kerahasiaan hasil voting FFI,0.72,#1E88E5,square
+V4,Skenario Orisinal / Adaptasi,The Craft,Fondasi Narasi,"Struktur 3 babak solid, subteks mendalam, karakter berdimensi (Bobot 25%)",0.94,#43A047,circle
+V5,Sinematografi & Pencahayaan,The Craft,Estetika Visual,"Framing visual puitis, blocking kamera bermakna, tone color grade khas",0.86,#43A047,circle
+V6,Tata Suara & Scoring Musik,The Craft,Imersi Audio,"Foley organik, dynamic range Dolby Atmos, musik tematik pemicu katarsis",0.84,#43A047,circle
+V7,Penyuntingan & Tata Artistik,The Craft,Ritme & Dunia,"Editing ritmis menjaga emosi, set desain otentik merefleksikan latar zaman",0.8,#43A047,circle
+V8,Keaktoran (Ensemble & Lead),The Craft,Penghayatan Karakter,"Akting natural tanpa teatrikal berlebih, pendalaman dialek, kimiawi ansambel",0.9,#43A047,circle
+V9,Jendela Eligibility Resmi,Eligibility & Timing,Regulasi,Lolos sensor LSF dan tayang bioskop komersial 1 Okt (T-1) s/d 30 Sept (T),0.76,#FB8C00,square
+V10,Timing Rilis Kuartal 3 (Q3),Eligibility & Timing,Strategi Kalender,Rilis Agustus-September atau festival run JAFF untuk efek Recency Bias juri,0.82,#FB8C00,triangle
+V11,FYC Special Screenings,Kampanye FYC,Engagement,Pemutaran khusus eksklusif untuk anggota Akademi Citra di bioskop terpilih,0.89,#8E24AA,diamond
+V12,Digital Screener Portal,Kampanye FYC,Aksesibilitas,Portal streaming terenkripsi watermarked agar juri sibuk dapat menonton penuh,0.81,#8E24AA,square
+V13,Booklet & Production Notes,Kampanye FYC,Edukasi Juri,Buku proses kreatif teknis di balik layar yang dibagikan kepada dewan juri,0.74,#8E24AA,circle
+V14,Isu Kemanusiaan & Ketimpangan,Kedalaman Budaya,Urgensi Isu,"Menyorot kekerasan seksual, patriarki, represi, marjinalisasi, trauma sosial",0.92,#E53935,circle
+V15,Akar Budaya & Hyper-Localism,Kedalaman Budaya,Otentisitas,"Lokalitas spesifik (NTT, Jawa priyayi, pedalaman Riau) yang membumi",0.87,#E53935,circle
+V16,Sapu Nominasi Teknis (10+),Piala Citra Apex,Milestone FFI,"Dominasi nominasi di sound, kamera, artistik yang membangun aura calon juara",0.88,#00ACC1,star
+V17,Piala Citra Kategori Utama,Piala Citra Apex,Puncak Nasional,"Piala Film Cerita Panjang Terbaik, Sutradara Terbaik, Skenario Terbaik",0.99,#D81B60,star
+V18,Legasi Sinema & Re-release BO,Piala Citra Apex,Dampak Jangka Panjang,"Lonjakan penayangan OTT global, re-release bioskop, pendanaan studio berikutnya",0.95,#D81B60,hexagon
