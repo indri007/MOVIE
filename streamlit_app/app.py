@@ -190,7 +190,26 @@ def render_step(n, slug, title, kat):
     if os.path.isfile(png):
         st.image(png, width="stretch")
     else:
-        st.info(f"Tidak ada grafik PNG untuk analisis {n:02d}.")
+        # Fallback grafik interaktif dinamis langsung dari data CSV
+        csvs_for_chart = sorted(glob.glob(os.path.join(folder, f"{n:02d}_*.csv")))
+        if csvs_for_chart:
+            try:
+                df_chart = pd.read_csv(csvs_for_chart[0])
+                num_cols = df_chart.select_dtypes(include=['number']).columns.tolist()
+                cat_cols = df_chart.select_dtypes(include=['object']).columns.tolist()
+                if num_cols and cat_cols:
+                    st.caption("📊 *Visualisasi Interaktif Dinamis (Dihasilkan Otomatis dari Data CSV)*")
+                    chart_data = df_chart.head(15).set_index(cat_cols[0])[num_cols[0]]
+                    st.bar_chart(chart_data)
+                elif num_cols:
+                    st.caption("📊 *Visualisasi Interaktif Dinamis (Dihasilkan Otomatis dari Data CSV)*")
+                    st.line_chart(df_chart[num_cols[0]].head(20))
+                else:
+                    st.info(f"Grafik PNG belum digenerate untuk analisis {n:02d}.")
+            except Exception:
+                st.info(f"Grafik PNG belum digenerate untuk analisis {n:02d}.")
+        else:
+            st.info(f"Tidak ada grafik PNG untuk analisis {n:02d}.")
 
     # CSV(s) — mungkin ada lebih dari satu (misal 18_pasangan-kata*.csv)
     csvs = sorted(glob.glob(os.path.join(folder, f"{n:02d}_*.csv")))
