@@ -294,10 +294,11 @@ st.markdown(f"""
 st.markdown("<br/>", unsafe_allow_html=True)
 
 # --- TABS ANALISIS MENDALAM ---
-tab_waterfall, tab_comps, tab_risk = st.tabs([
+tab_waterfall, tab_comps, tab_risk, tab_checklist = st.tabs([
     "💵 Skenario Air Terjun Finansial",
     "🧬 DNA Film Pembanding (2020–2026)",
-    "⚠️ Profil Risiko & Rekomendasi Mitigasi"
+    "⚠️ Profil Risiko & Mitigasi",
+    "📑 Checklist Kontrak & Term Sheet"
 ])
 
 # --- TAB 1: WATERFALL & ROI ---
@@ -391,3 +392,197 @@ with tab_risk:
     > **Catatan Tata Kelola Riset & Etika Investasi:**  
     > Model ini mematuhi standar objektivitas data tanpa fabrikasi variabel biaya tertutup. Angka-angka finansial disajikan dalam bentuk kalkulasi air terjun standar industri bioskop Indonesia, memberikan proyeksi berbasis skenario yang dapat dipertanggungjawabkan di hadapan komite investasi.
     """)
+
+# --- TAB 4: CHECKLIST KONTRAK & TERM SHEET INVESTOR ---
+with tab_checklist:
+    st.subheader("📑 Checklist Proteksi Modal & Term Sheet Investor Film 2027")
+    st.markdown("""
+    Gunakan instrumen ini sebagai panduan negosiasi formal antara **Investor / Executive Producer** dan **Production House (PH)** untuk memastikan modal terproteksi sebelum syuting dimulai.
+    """)
+
+    # Hitung dampak finansial mitigasi
+    ott_min_idr = budget_miliar * 0.25
+    ott_max_idr = budget_miliar * 0.30
+    contingency_idr = budget_miliar * 0.10
+    total_capital_idr = total_cost_miliar * 1e9
+    producer_share_per_ticket = atp_idr * 0.425
+    adjusted_bep_ott = max(0, int((total_capital_idr - (ott_min_idr * 1e9)) / producer_share_per_ticket))
+    bep_reduction = waterfall_base['bep_admissions'] - adjusted_bep_ott
+
+    st.markdown(f"""
+    <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-left:4px solid #16A34A; border-radius:12px; padding:1.1rem 1.4rem; margin-bottom:1.5rem;">
+      <h4 style="color:#166534; margin:0 0 0.5rem 0;">💡 Dampak Finansial Proteksi Modal</h4>
+      <p style="color:#15803D; margin:0; font-size:0.95rem; line-height:1.6;">
+        Dengan mengunci <b>Pre-Sale OTT (25%) sebesar Rp {ott_min_idr:.2f} Miliar</b> di muka, target BEP tiket bioskop Anda berkurang sebesar <b>{bep_reduction:,} tiket</b> (dari <b>{waterfall_base['bep_admissions']:,}</b> menjadi hanya <b>{adjusted_bep_ott:,} tiket</b>). Hal ini memangkas risiko penurunan modal (<i>downside risk</i>) secara drastis!
+      </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_chk1, col_chk2 = st.columns(2)
+
+    with col_chk1:
+        st.markdown("#### 1. 🛡️ Proteksi Hak Lisensi OTT (Pre-Buy)")
+        st.checkbox(
+            f"Pre-Sale OTT Minimum Guarantee (MG) Rp {ott_min_idr:.2f} – {ott_max_idr:.2f} Miliar (25–30% bujet) terkunci sebelum produksi",
+            value=True,
+            key="chk_ott_mg"
+        )
+        st.checkbox(
+            "Termin pembayaran bertahap OTT: 20% Sign, 30% Wrap syuting, 50% Master delivery",
+            value=True,
+            key="chk_ott_tranche"
+        )
+        st.checkbox(
+            "Klausul Theatrical Holdback: Jendela eksklusif bioskop 45–60 hari sebelum tayang streaming",
+            value=True,
+            key="chk_ott_holdback"
+        )
+
+        st.markdown("#### 2. 🏛️ Tata Kelola Rekening & Overrun Bond")
+        st.checkbox(
+            "Rekening Bersama (Joint Escrow Account) dengan otorisasi ganda (Kuasa Investor + Produser)",
+            value=True,
+            key="chk_escrow"
+        )
+        st.checkbox(
+            f"Batas kontinjensi darurat maksimal 10% (Rp {contingency_idr:.2f} Miliar)",
+            value=True,
+            key="chk_contingency"
+        )
+        st.checkbox(
+            "Klausul 100% Tanggung Jawab PH atas pembengkakan biaya di atas 10% (tanpa dilusi ekuitas investor)",
+            value=True,
+            key="chk_overrun_liability"
+        )
+        st.checkbox(
+            "Hak Intervensi Investor (Step-In Rights) jika jadwal syuting terlambat >3 hari",
+            value=True,
+            key="chk_stepin"
+        )
+
+    with col_chk2:
+        st.markdown("#### 3. 📣 Mesin Pemasaran Organik H-30")
+        st.checkbox(
+            "Peluncuran Trailer Resmi YouTube H-30 dengan pemantauan sentimen warganet (SANTET engine)",
+            value=True,
+            key="chk_trailer_h30"
+        )
+        st.checkbox(
+            "Ekstraksi 15 detik audio soundtrack/skor untuk template sound viral TikTok & Reels",
+            value=True,
+            key="chk_sound_tiktok"
+        )
+        st.checkbox(
+            "Kemitraan 10–20 mikro-kreator niche TikTok untuk UGC reaksi/POV di H-21 s/d H-14",
+            value=True,
+            key="chk_ugc_tiktok"
+        )
+        st.checkbox(
+            "Advance Ticket Sales (ATS) di M-Tix/CGV/Cinepolis H-7 dengan gimmick tiket khusus",
+            value=True,
+            key="chk_ats_presale"
+        )
+        st.checkbox(
+            "Amplifikasi status bioskop 'SOLD OUT' di hari pertama rilis untuk menciptakan efek FOMO",
+            value=True,
+            key="chk_soldout_fomo"
+        )
+
+        st.markdown("#### 4. ⚖️ Kepatuhan Legal & Audit")
+        st.checkbox(
+            "Verifikasi Hak Cipta Naskah (Chain of Title) bersih tanpa sengketa",
+            value=True,
+            key="chk_chain_title"
+        )
+        st.checkbox(
+            "Letter of Intent (LoI) / Kontrak Eksklusif terikat untuk Sutradara & Cast Utama",
+            value=True,
+            key="chk_loi_cast"
+        )
+        st.checkbox(
+            "Audit Laporan Keuangan Produksi oleh Kantor Akuntan Publik (KAP) independen sebelum pencairan sisa fee",
+            value=True,
+            key="chk_audit_kap"
+        )
+
+    st.markdown("---")
+    st.subheader("📥 Ekspor Draf Term Sheet & Nota Kesepakatan (MoA)")
+    st.markdown("Unduh ringkasan kesepakatan investasi berbasis klausul mitigasi di atas:")
+
+    # Buat Dokumen Term Sheet Markdown
+    term_sheet_content = f"""# TERM SHEET & REKOMENDASI PERLINDUNGAN INVESTASI FILM
+## Proyek: {film_title} (Rilis 2027)
+
+---
+
+### I. PROFIL PROYEK FILM
+- **Judul Proyek**: {film_title}
+- **Genre Utama**: {genre}
+- **Rumah Produksi (PH)**: {ph}
+- **Sutradara**: {director}
+- **Jendela Rilis**: {release_window}
+- **Karakter IP / Sumber Cerita**: {ip_type}
+- **Investment Risk Grade**: {risk_eval['rating']} ({risk_eval['verdict']})
+
+---
+
+### II. STRUKTUR PERMODALAN & PARAMETER KEUANGAN
+- **Bujet Produksi Fisik**: Rp {budget_miliar:,.2f} Miliar
+- **Bujet Promosi & Distribusi (P&A)**: Rp {pa_miliar:,.2f} Miliar
+- **Total Investasi Proyek**: Rp {total_cost_miliar:,.2f} Miliar
+- **Asumsi Harga Tiket Rata-rata (ATP)**: Rp {atp_idr:,.0f}
+- **Bagi Hasil Bersih Produser/Investor Bioskop**: 42.5% dari Gross Box Office
+
+---
+
+### III. TARGET KELAYAKAN BIOSKOP & SKENARIO PENONTON
+- **BEP Tiket Standar (Tanpa Pre-Sale)**: {waterfall_base['bep_admissions']:,} penonton (Gross Box Office: Rp {waterfall_base['bep_gross_box_office_idr']:,.0f})
+- **BEP Tiket Terproteksi (Dengan Pre-Sale OTT 25%)**: {adjusted_bep_ott:,} penonton (Penghematan: {bep_reduction:,} tiket)
+- **Proyeksi Skenario Penonton**:
+  * Bear Case (P25) : {waterfall_bear['admissions']:,} penonton | ROI: {waterfall_bear['roi_pct']:+.1f}%
+  * Base Case (P50) : {waterfall_base['admissions']:,} penonton | ROI: {waterfall_base['roi_pct']:+.1f}%
+  * Bull Case (P75) : {waterfall_bull['admissions']:,} penonton | ROI: {waterfall_bull['roi_pct']:+.1f}%
+
+---
+
+### IV. KLAUSUL PERLINDUNGAN MODAL INVESTOR (DOWNSIDE MITIGATION)
+
+#### 1. Pre-Sale Hak Lisensi OTT (Streaming Pre-Buy)
+- **Target Minimum Guarantee (MG)**: Rp {ott_min_idr:.2f} – {ott_max_idr:.2f} Miliar (25% – 30% biaya produksi).
+- **Termin Pembayaran**:
+  * 20% saat penandatanganan perjanjian & bukti keterikatan cast utama.
+  * 30% saat penyelesaian syuting (wrap principal photography).
+  * 50% saat penyerahan master film setelah jendela bioskop berakhir.
+- **Theatrical Holdback**: Eksklusivitas bioskop selama 45–60 hari kalender sebelum penayangan SVOD.
+
+#### 2. Tata Kelola Rekening Bersama & Batas Overrun (Completion Bond Equivalent)
+- **Rekening Bersama (Joint Escrow)**: Rekening bank khusus proyek yang memerlukan tanda tangan ganda (Kuasa Investor + Produser Pelaksana).
+- **Pencairan Bertahap**: Pra-produksi (30%), Produksi (40%), Pasca-produksi (20%), LSF & Delivery (10%).
+- **Cadangan Kontinjensi**: Dibatasi maksimal 10% (Rp {contingency_idr:.2f} Miliar).
+- **Tanggung Jawab Pembengkakan (Overrun Liability)**: Setiap biaya melebihi kontinjensi 10% menjadi tanggung jawab penuh Production House tanpa mengurangi kepemilikan/porsi bagi hasil investor.
+- **Hak Intervensi (Step-In Rights)**: Investor berhak menunjuk Line Producer independen atau membekukan pencairan jika jadwal syuting terlambat lebih dari 3 hari kerja tanpa justifikasi sah.
+
+#### 3. Cetak Biru Pemasaran Digital Organik H-30
+- **H-30**: Peluncuran trailer resmi YouTube ber-hooking kuat; pemotongan 15 detik audio soundtrack untuk audio template resmi TikTok/Reels.
+- **H-21 s/d H-14**: Kampanye User-Generated Content (UGC) melibatkan 10–20 mikro-kreator TikTok bertema premis film; pemantauan sentimen respons penonton melalui sistem analitik SANTET.
+- **H-7**: Pembukaan Advance Ticket Sales (ATS) di jaringan bioskop (XXI M-Tix, CGV, Cinepolis) dengan merchandise/tiket koleksi khusus.
+- **Hari-H s/d H+3**: Amplifikasi status bioskop "SOLD OUT" di media sosial guna memicu efek psikologis FOMO (Fear of Missing Out).
+
+#### 4. Kepatuhan & Audit
+- Verifikasi keabsahan rantai hak cipta naskah (*Chain of Title*).
+- Audit pengeluaran produksi oleh Kantor Akuntan Publik (KAP) independen sebelum pelunasan fee produser.
+
+---
+*Dihasilkan secara otomatis oleh Platform Indonesian Film Investment Intelligence 2027*
+*Tanggal Dokumen: {pd.Timestamp.now().strftime('%d %B %Y')}*
+"""
+
+    slug_title = "".join(c if c.isalnum() else "_" for c in film_title.lower())[:30]
+    st.download_button(
+        label="📄 Unduh Draf Term Sheet & MoA Proteksi Modal (.md)",
+        data=term_sheet_content,
+        file_name=f"term_sheet_investasi_{slug_title}_2027.md",
+        mime="text/markdown",
+        help="Klik untuk mengunduh dokumen term sheet lengkap berbasis parameter simulasi saat ini."
+    )
+
