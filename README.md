@@ -206,6 +206,7 @@ Untuk memitigasi risiko kegagalan komersial perfilman, terapkan 4 klausul baku i
 | **Top 100 Investor Film Indonesia** | 100 Entitas & Tesis Investasi | [`data/top_100_film_investors_indonesia.csv`](data/top_100_film_investors_indonesia.csv) |
 | **Paket Graf 6 Faktor Profit (NodeXL)** | Vertices, Edges, GraphML | [`results/nodexl_profit_engine/`](results/nodexl_profit_engine/) |
 | **Paket Graf Festival & FFI (NodeXL)** | Vertices, Edges, GraphML | [`results/nodexl_festival_awards_engine/`](results/nodexl_festival_awards_engine/) |
+| **Paket Graf Prediksi 2027 (NodeXL)** | Top 10 Film & 10 Aktor 2027 | [`results/nodexl_2027_prediction_engine/`](results/nodexl_2027_prediction_engine/) |
 
 ---
 
@@ -268,6 +269,10 @@ prediksi-movie-2027/
 │   │   ├── vertices.csv                        # Node Ekosistem Global & Nasional
 │   │   ├── edges.csv                           # Garis Lobi, Lab, dan Akademi Citra
 │   │   └── festival_awards_network.graphml     # File GraphML Siap Impor ke NodeXL Pro
+│   ├── nodexl_2027_prediction_engine/          # Paket Graf Jaringan Prediksi 10 Film & Aktor 2027
+│   │   ├── vertices.csv                        # Node Film, Aktor, Rilis, Goal
+│   │   ├── edges.csv                           # Garis Bobot Casting & Transmisi Finansial
+│   │   └── prediction_2027_network.graphml     # File GraphML Siap Impor ke NodeXL Pro
 │   ├── investment_factor_summary.md            # Ringkasan Temuan Investasi
 │   └── sna_*/                                  # Data Analisis Graf Louvain
 ├── requirements.txt                            # Dependensi Ringan Streamlit Cloud
