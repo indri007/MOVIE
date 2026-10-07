@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="type" for="node" attr.name="type" attr.type="string"/>
+  <key id="val" for="node" attr.name="value" attr.type="string"/>
+  <key id="color" for="node" attr.name="color" attr.type="string"/>
+  <key id="rel" for="edge" attr.name="relationship" attr.type="string"/>
+  <key id="weight" for="edge" attr.name="weight" attr.type="double"/>
+
+  <graph id="Top10_2027_Prediction_Network" edgedefault="directed">
+    <!-- Movie Nodes -->
+    <node id="M1"><data key="label">Agak Laen 3: Pensiun Dini</data><data key="type">Movie</data><data key="val">11.5M</data><data key="color">#C2410C</data></node>
+    <node id="M2"><data key="label">Jumbo 2: Pulau Misteri</data><data key="type">Movie</data><data key="val">9.8M</data><data key="color">#C2410C</data></node>
+    <node id="M3"><data key="label">Pengabdi Setan 3</data><data key="type">Movie</data><data key="val">8.0M</data><data key="color">#C2410C</data></node>
+    <node id="M4"><data key="label">KKN di Desa Penari: Jagat Lemah</data><data key="type">Movie</data><data key="val">7.2M</data><data key="color">#C2410C</data></node>
+    <node id="M5"><data key="label">Miracle in Cell No. 7: Reunion</data><data key="type">Movie</data><data key="val">6.0M</data><data key="color">#C2410C</data></node>
+    <node id="M6"><data key="label">Mencuri Raden Saleh 2</data><data key="type">Movie</data><data key="val">5.2M</data><data key="color">#C2410C</data></node>
+    <node id="M7"><data key="label">Sewu Dino: Perang Trah Pitu</data><data key="type">Movie</data><data key="val">4.8M</data><data key="color">#C2410C</data></node>
+    <node id="M8"><data key="label">Kang Mak 2</data><data key="type">Movie</data><data key="val">4.5M</data><data key="color">#C2410C</data></node>
+    <node id="M9"><data key="label">Ipar Adalah Maut 2</data><data key="type">Movie</data><data key="val">4.2M</data><data key="color">#C2410C</data></node>
+    <node id="M10"><data key="label">Sekawan Limo 3</data><data key="type">Movie</data><data key="val">3.5M</data><data key="color">#C2410C</data></node>
+
+    <!-- Actor Nodes -->
+    <node id="A1"><data key="label">Vino G. Bastian</data><data key="type">Actor</data><data key="val">24.7M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A2"><data key="label">Indra Jegel</data><data key="type">Actor</data><data key="val">22.8M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A3"><data key="label">Boris Bokir</data><data key="type">Actor</data><data key="val">20.3M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A4"><data key="label">Reza Rahadian</data><data key="type">Actor</data><data key="val">13.7M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A5"><data key="label">Mawar de Jongh</data><data key="type">Actor</data><data key="val">11.2M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A6"><data key="label">Aghniny Haque</data><data key="type">Actor</data><data key="val">10.9M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A7"><data key="label">Iqbaal Ramadhan</data><data key="type">Actor</data><data key="val">9.8M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A8"><data key="label">Deva Mahenra</data><data key="type">Actor</data><data key="val">7.2M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A9"><data key="label">Bayu Skak</data><data key="type">Actor</data><data key="val">6.8M Hist</data><data key="color">#1E88E5</data></node>
+    <node id="A10"><data key="label">Tara Basro</data><data key="type">Actor</data><data key="val">6.5M Hist</data><data key="color">#1E88E5</data></node>
+
+    <!-- Release Nodes -->
+    <node id="R1"><data key="label">Lebaran 2027</data><data key="type">Release</data><data key="val">2.1x</data><data key="color">#FB8C00</data></node>
+    <node id="R2"><data key="label">Libur Sekolah Juni 2027</data><data key="type">Release</data><data key="val">1.6x</data><data key="color">#FB8C00</data></node>
+    <node id="R3"><data key="label">Kemerdekaan Agustus 2027</data><data key="type">Release</data><data key="val">1.4x</data><data key="color">#FB8C00</data></node>
+    <node id="R4"><data key="label">Libur Akhir Tahun 2027</data><data key="type">Release</data><data key="val">1.8x</data><data key="color">#FB8C00</data></node>
+
+    <!-- Goal Node -->
+    <node id="G1"><data key="label">Box Office Gross > Rp 200M+</data><data key="type">Goal</data><data key="val">Net 42.5%</data><data key="color">#43A047</data></node>
+
+    <!-- Edges -->
+    <edge source="A2" target="M1"><data key="rel">star_anchor</data><data key="weight">0.95</data></edge>
+    <edge source="A3" target="M1"><data key="rel">ensemble_core</data><data key="weight">0.92</data></edge>
+    <edge source="A2" target="M8"><data key="rel">comedy_engine</data><data key="weight">0.85</data></edge>
+    <edge source="A1" target="M8"><data key="rel">lead_star</data><data key="weight">0.90</data></edge>
+    <edge source="A1" target="M5"><data key="rel">lead_prestige</data><data key="weight">0.95</data></edge>
+    <edge source="A5" target="M5"><data key="rel">emotional_counterpart</data><data key="weight">0.88</data></edge>
+    <edge source="A10" target="M3"><data key="rel">horror_anchor</data><data key="weight">0.94</data></edge>
+    <edge source="A4" target="M3"><data key="rel">antagonist_catalyst</data><data key="weight">0.90</data></edge>
+    <edge source="A6" target="M4"><data key="rel">action_horror_star</data><data key="weight">0.92</data></edge>
+    <edge source="A5" target="M7"><data key="rel">dark_drama_lead</data><data key="weight">0.86</data></edge>
+    <edge source="A7" target="M6"><data key="rel">youth_heist_icon</data><data key="weight">0.92</data></edge>
+    <edge source="A6" target="M6"><data key="rel">action_anchor</data><data key="weight">0.88</data></edge>
+    <edge source="A8" target="M9"><data key="rel">conflict_anchor</data><data key="weight">0.89</data></edge>
+    <edge source="A9" target="M10"><data key="rel">regional_grassroots</data><data key="weight">0.93</data></edge>
+    <edge source="M1" target="R1"><data key="rel">golden_timing</data><data key="weight">0.95</data></edge>
+    <edge source="M4" target="R1"><data key="rel">holiday_clash</data><data key="weight">0.90</data></edge>
+    <edge source="M2" target="R2"><data key="rel">school_holiday</data><data key="weight">0.94</data></edge>
+    <edge source="M6" target="R2"><data key="rel">youth_vacation</data><data key="weight">0.88</data></edge>
+    <edge source="M3" target="R3"><data key="rel">independence_run</data><data key="weight">0.89</data></edge>
+    <edge source="M5" target="R4"><data key="rel">year_end_tearjerker</data><data key="weight">0.92</data></edge>
+    <edge source="M7" target="R4"><data key="rel">holiday_chills</data><data key="weight">0.87</data></edge>
+    <edge source="M1" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.98</data></edge>
+    <edge source="M2" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.95</data></edge>
+    <edge source="M3" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.92</data></edge>
+    <edge source="M4" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.90</data></edge>
+    <edge source="M5" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.88</data></edge>
+    <edge source="M6" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.85</data></edge>
+    <edge source="M7" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.82</data></edge>
+    <edge source="M8" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.80</data></edge>
+    <edge source="M9" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.78</data></edge>
+    <edge source="M10" target="G1"><data key="rel">revenue_driver</data><data key="weight">0.75</data></edge>
+  </graph>
+</graphml>

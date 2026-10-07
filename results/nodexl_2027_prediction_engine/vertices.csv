@@ -1,0 +1,26 @@
+vertex_id,vertex_label,node_type,projected_value,primary_genre_or_tier,centrality_score,color,shape
+M1,"Agak Laen 3: Pensiun Dini",Movie_Title,"11,500,000 Penonton",Komedi Ansambel,0.96,#C2410C,square
+M2,"Jumbo 2: Pulau Misteri",Movie_Title,"9,800,000 Penonton",Animasi Fantasi,0.92,#C2410C,square
+M3,"Pengabdi Setan 3: Babak Terakhir",Movie_Title,"8,000,000 Penonton",Horor Supranatural,0.90,#C2410C,square
+M4,"KKN di Desa Penari: Jagat Lemah",Movie_Title,"7,200,000 Penonton",Horor Folklor,0.88,#C2410C,square
+M5,"Miracle in Cell No. 7: Reunion",Movie_Title,"6,000,000 Penonton",Drama Keluarga,0.85,#C2410C,square
+M6,"Mencuri Raden Saleh 2: Heist",Movie_Title,"5,200,000 Penonton",Aksi Heist,0.82,#C2410C,square
+M7,"Sewu Dino: Perang Trah Pitu",Movie_Title,"4,800,000 Penonton",Horor Santet,0.80,#C2410C,square
+M8,"Kang Mak 2: Pasukan Hantu",Movie_Title,"4,500,000 Penonton",Horor Komedi,0.78,#C2410C,square
+M9,"Ipar Adalah Maut 2",Movie_Title,"4,200,000 Penonton",Drama Religi,0.76,#C2410C,square
+M10,"Sekawan Limo 3",Movie_Title,"3,500,000 Penonton",Horor Komedi,0.72,#C2410C,square
+A1,"Vino G. Bastian",Actor_Lead,"24.7M Hist. Admissions",Tier AAA - Family/Drama,0.95,#1E88E5,circle
+A2,"Indra Jegel",Actor_Lead,"22.8M Hist. Admissions",Tier AAA - Comedy/Podcast,0.94,#1E88E5,circle
+A3,"Boris Bokir",Actor_Lead,"20.3M Hist. Admissions",Tier AAA - Comedy/Ensemble,0.91,#1E88E5,circle
+A4,"Reza Rahadian",Actor_Lead,"13.7M Hist. Admissions",Tier AAA - Prestige Drama,0.89,#1E88E5,circle
+A5,"Mawar de Jongh",Actor_Lead,"11.2M Hist. Admissions",Tier AAA - Drama/Horor,0.86,#1E88E5,circle
+A6,"Aghniny Haque",Actor_Lead,"10.9M Hist. Admissions",Tier AAA - Action/Horor,0.84,#1E88E5,circle
+A7,"Iqbaal Ramadhan",Actor_Lead,"9.8M Hist. Admissions",Tier AAA - Gen-Z Urban,0.83,#1E88E5,circle
+A8,"Deva Mahenra",Actor_Lead,"7.2M Hist. Admissions",Tier AA - Drama Religi,0.79,#1E88E5,circle
+A9,"Bayu Skak",Actor_Lead,"6.8M Hist. Admissions",Tier AA - Regional Comedy,0.77,#1E88E5,circle
+A10,"Tara Basro",Actor_Lead,"6.5M Hist. Admissions",Tier AA - Auteur Horror,0.75,#1E88E5,circle
+R1,"Slot Rilis Lebaran 2027",Release_Window,"Multiplier 2.1x",Golden Window,0.95,#FB8C00,diamond
+R2,"Slot Libur Sekolah Juni-Juli 2027",Release_Window,"Multiplier 1.6x",Family Window,0.88,#FB8C00,diamond
+R3,"Slot Kemerdekaan Agustus 2027",Release_Window,"Multiplier 1.4x",Patriotic Window,0.80,#FB8C00,diamond
+R4,"Slot Libur Akhir Tahun 2027",Release_Window,"Multiplier 1.8x",Holiday Window,0.89,#FB8C00,diamond
+G1,"Box Office Gross > Rp 200M+",Financial_Goal,"Top 10 National",Net Take 42.5%,0.98,#43A047,star
