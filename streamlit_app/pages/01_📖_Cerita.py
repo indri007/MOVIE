@@ -14,87 +14,126 @@ st.set_page_config(
 # ── CSS ─────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --m3-primary: #C2410C;
+  --m3-on-primary: #FFFFFF;
+  --m3-primary-container: #FFDBCF;
+  --m3-surface: #FFFFFF;
+  --m3-surface-container: #F8FAFC;
+  --m3-on-surface: #0F172A;
+  --m3-on-surface-var: #475569;
+  --m3-outline: #E2E8F0;
+}
+
+html, body, [class*="css"] {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  color: #0F172A;
+}
+
+.stApp {
+  background-color: #F8FAFC;
+  color: #0F172A;
+}
+
+section[data-testid="stSidebar"] {
+  background-color: #FFFFFF !important;
+  border-right: 1px solid #E2E8F0;
+}
 
 .hero {
   text-align: center;
-  padding: 3.5rem 1rem 2rem;
-  background: linear-gradient(160deg, #0a0a14 0%, #1a0c04 100%);
-  border-radius: 16px;
+  padding: 3.5rem 1.5rem 2.5rem;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF7ED 50%, #F0FDFA 100%);
+  border: 1px solid #FED7AA;
+  border-radius: 20px;
   margin-bottom: 2rem;
+  box-shadow: 0 4px 20px -2px rgba(194, 65, 12, 0.06);
 }
 .hero-title {
-  font-size: 3rem; font-weight: 700; letter-spacing: -1px;
-  background: linear-gradient(90deg, #C2410C, #F97316, #C2410C);
+  font-size: 3.2rem; font-weight: 800; letter-spacing: -1.5px;
+  background: linear-gradient(90deg, #9A3412, #EA580C, #C2410C);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   margin: 0; line-height: 1.1;
 }
 .hero-sub {
-  font-size: 1rem; color: #A8A29E; margin: 0.5rem 0 0;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 0.95rem; color: #64748B; margin: 0.5rem 0 0;
+  letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
 }
 .hero-tagline {
-  font-size: 1.25rem; color: #E7E5E4; font-style: italic;
+  font-size: 1.25rem; color: #334155; font-style: italic;
   margin: 1.5rem 0 0.25rem;
 }
 .act {
-  background: #12121e; border-left: 3px solid #C2410C;
-  border-radius: 0 12px 12px 0; padding: 1.4rem 1.8rem;
+  background: #FFFFFF; border-left: 4px solid #C2410C;
+  border-radius: 0 16px 16px 0; padding: 1.5rem 2rem;
   margin: 1.5rem 0;
+  border-top: 1px solid #E2E8F0;
+  border-right: 1px solid #E2E8F0;
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
 }
 .act-label {
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
   text-transform: uppercase; color: #C2410C; margin-bottom: 0.4rem;
 }
-.act-title { font-size: 1.2rem; font-weight: 700; color: #E7E5E4; margin: 0 0 1rem; }
-.act-body  { color: #D6D3D1; line-height: 1.8; font-size: 0.97rem; }
+.act-title { font-size: 1.3rem; font-weight: 700; color: #0F172A; margin: 0 0 1rem; }
+.act-body  { color: #334155; line-height: 1.85; font-size: 0.98rem; }
 .quote {
-  border-left: 3px solid #0F766E; padding: 0.8rem 1.4rem;
-  background: #0d1f1e; border-radius: 0 8px 8px 0;
-  color: #99F6E4; font-style: italic; margin: 1rem 0;
+  border-left: 4px solid #0F766E; padding: 1rem 1.4rem;
+  background: #F0FDFA; border-radius: 0 12px 12px 0;
+  border-top: 1px solid #CCFBF1;
+  border-right: 1px solid #CCFBF1;
+  border-bottom: 1px solid #CCFBF1;
+  color: #0F766E; font-style: italic; margin: 1rem 0; font-weight: 500;
 }
 .akronim-row {
   display: grid; grid-template-columns: 3rem 7rem 1fr 2fr;
   gap: 0.5rem 1.2rem; align-items: start;
-  border-bottom: 1px solid #2a2a3e; padding: 0.55rem 0;
+  border-bottom: 1px solid #E2E8F0; padding: 0.75rem 0;
 }
-.akronim-letter { font-size: 1.3rem; font-weight: 700; color: #C2410C; }
-.akronim-kata   { font-weight: 600; color: #E7E5E4; }
-.akronim-makna  { color: #0F766E; font-weight: 600; }
-.akronim-janji  { color: #A8A29E; font-size: 0.88rem; }
+.akronim-letter { font-size: 1.4rem; font-weight: 800; color: #C2410C; }
+.akronim-kata   { font-weight: 700; color: #0F172A; }
+.akronim-makna  { color: #0F766E; font-weight: 700; }
+.akronim-janji  { color: #475569; font-size: 0.9rem; }
 .epilog {
-  background: #12121e; border-radius: 12px; padding: 2rem 2.4rem;
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF7ED 100%);
+  border: 1px solid #FED7AA;
+  border-radius: 18px; padding: 2.2rem 2.5rem;
   text-align: center; margin: 2rem 0;
+  box-shadow: 0 4px 15px rgba(194, 65, 12, 0.05);
 }
-.epilog-list { list-style: none; padding: 0; margin: 1rem 0; }
-.epilog-list li { color: #D6D3D1; padding: 0.3rem 0; font-size: 0.97rem; }
-.epilog-list li::before { content: "▸ "; color: #C2410C; }
+.epilog-list { list-style: none; padding: 0; margin: 1.2rem 0; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto; }
+.epilog-list li { color: #334155; padding: 0.4rem 0; font-size: 1rem; }
+.epilog-list li::before { content: "▸ "; color: #C2410C; font-weight: 800; }
 .closing-quote {
-  font-size: 1.1rem; color: #E7E5E4; font-style: italic;
-  line-height: 1.7; margin-top: 1.5rem;
+  font-size: 1.15rem; color: #0F172A; font-style: italic;
+  line-height: 1.7; margin-top: 1.5rem; font-weight: 600;
 }
 .pitch-card {
-  background: #1e1e2e; border: 1px solid #2a2a3e; border-radius: 12px;
-  padding: 1.4rem 1.8rem; margin: 1.2rem 0;
+  background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 16px;
+  padding: 1.5rem 1.8rem; margin: 1.2rem 0;
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
 }
 .pitch-label {
-  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.15em;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em;
   text-transform: uppercase; color: #7C3AED; margin-bottom: 0.8rem;
 }
-.pitch-body { color: #D6D3D1; line-height: 1.8; font-size: 0.95rem; }
+.pitch-body { color: #334155; line-height: 1.8; font-size: 0.98rem; }
 .tagline-pill {
-  display: inline-block; background: #1a0c04; border: 1px solid #C2410C44;
-  border-radius: 20px; padding: 0.35rem 1rem; margin: 0.3rem;
-  color: #F97316; font-size: 0.88rem; font-style: italic;
+  display: inline-block; background: #FFF7ED; border: 1px solid #FDBA74;
+  border-radius: 20px; padding: 0.4rem 1.1rem; margin: 0.3rem;
+  color: #C2410C; font-size: 0.9rem; font-style: italic; font-weight: 500;
 }
 .stat-trio { display: flex; gap: 1rem; margin: 1.2rem 0; flex-wrap: wrap; }
 .stat-box {
-  background: #0a0a14; border: 1px solid #2a2a3e; border-radius: 10px;
-  padding: 0.8rem 1.2rem; flex: 1; min-width: 140px; text-align: center;
+  background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px;
+  padding: 1rem 1.2rem; flex: 1; min-width: 140px; text-align: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
-.stat-val { font-size: 1.5rem; font-weight: 700; color: #C2410C; }
-.stat-lbl { font-size: 0.72rem; color: #A8A29E; margin-top: 2px; }
+.stat-val { font-size: 1.6rem; font-weight: 800; color: #C2410C; }
+.stat-lbl { font-size: 0.75rem; color: #64748B; margin-top: 4px; font-weight: 600; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -156,7 +195,7 @@ with col3:
     """, unsafe_allow_html=True)
 
 st.markdown("""
-<p style="color:#A8A29E;font-size:0.92rem;padding:0 0.5rem;">
+<p style="color:#64748B;font-size:0.95rem;padding:0 0.5rem;font-weight:500;">
   Itulah mantranya. Bukan kutukan, tapi doa dari penonton yang sudah tidak sabar.
   Masalahnya, belum ada yang bisa membacanya.
 </p>
@@ -227,8 +266,8 @@ st.markdown("""
   <div class="act-title">Lahirnya SANTET</div>
   <div class="act-body">
     <p>SANTET lahir dari satu keyakinan sederhana:</p>
-    <blockquote style="font-size:1.1rem;font-weight:600;color:#E7E5E4;
-      border-left:3px solid #7C3AED;padding-left:1rem;margin:1rem 0;">
+    <blockquote style="font-size:1.15rem;font-weight:700;color:#581C87;
+      background:#FAF5FF;border:1px solid #E9D5FF;border-left:4px solid #7C3AED;border-radius:12px;padding:1.1rem 1.4rem;margin:1.2rem 0;">
       Penonton Indonesia sudah berbicara. Kita hanya perlu belajar mendengar.
     </blockquote>
     <p>Setiap huruf dalam namanya adalah janji:</p>
@@ -254,14 +293,14 @@ cols[3].markdown("**Janji**")
 st.divider()
 for letter, word, value, promise in AKRONIM:
     c0, c1, c2, c3 = st.columns([1, 3, 2, 4])
-    c0.markdown(f"<span style='font-size:1.5rem;font-weight:700;color:#C2410C;'>{letter}</span>",
+    c0.markdown(f"<span style='font-size:1.5rem;font-weight:800;color:#C2410C;'>{letter}</span>",
                 unsafe_allow_html=True)
     c1.markdown(f"**{word}**")
-    c2.markdown(f"<span style='color:#0F766E;font-weight:600;'>{value}</span>", unsafe_allow_html=True)
-    c3.markdown(f"<span style='color:#A8A29E;font-size:0.88rem;'>{promise}</span>", unsafe_allow_html=True)
+    c2.markdown(f"<span style='color:#0F766E;font-weight:700;'>{value}</span>", unsafe_allow_html=True)
+    c3.markdown(f"<span style='color:#475569;font-size:0.92rem;font-weight:500;'>{promise}</span>", unsafe_allow_html=True)
 
 st.markdown("""
-<p style="color:#D6D3D1;line-height:1.8;margin-top:1.5rem;padding:0 0.5rem;">
+<p style="color:#334155;line-height:1.8;margin-top:1.5rem;padding:0 0.5rem;font-size:1rem;">
   Kalau santet dalam cerita rakyat adalah kekuatan tak terlihat yang bekerja dari jauh,
   <strong>SANTET ini adalah kebalikannya: kekuatan tak terlihat yang akhirnya dibuat terlihat.</strong>
   Bukan untuk mencelakai, tetapi untuk menyelamatkan karya.
@@ -272,7 +311,7 @@ st.markdown("""
 st.markdown("""
 <div class="epilog">
   <div class="act-label" style="text-align:center;margin-bottom:1rem;">Epilog</div>
-  <p style="font-size:1.1rem;font-weight:600;color:#E7E5E4;">Untuk siapa SANTET dibuat</p>
+  <p style="font-size:1.25rem;font-weight:800;color:#0F172A;">Untuk siapa SANTET dibuat</p>
   <ul class="epilog-list">
     <li>Untuk <strong>produser</strong> yang tidak ingin lagi bertaruh dalam gelap.</li>
     <li>Untuk <strong>sineas</strong> agar karyanya punya kesempatan menemukan penonton.</li>

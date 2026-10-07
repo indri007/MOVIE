@@ -51,36 +51,56 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── custom CSS (Material-3-inspired dark theme) ───────────────────────────
+# ── custom CSS (Material Design 3 Light Theme) ───────────────────────────
 st.markdown("""
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-  html, body, [class*="css"] { font-family: 'Inter', sans-serif; }
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+  
+  :root {
+    --m3-primary: #C2410C;
+    --m3-surface: #FFFFFF;
+    --m3-background: #F8FAFC;
+    --m3-outline: #E2E8F0;
+  }
+  html, body, [class*="css"] {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+    color: #0F172A;
+  }
+  .stApp {
+    background-color: #F8FAFC;
+    color: #0F172A;
+  }
+  section[data-testid="stSidebar"] {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0;
+  }
   .block-container { padding-top: 1.5rem; }
-  h1 { font-size: 1.8rem; font-weight: 700; }
-  h2 { font-size: 1.25rem; font-weight: 600; border-bottom: 2px solid #C2410C; padding-bottom: 4px; margin-top: 2rem; }
-  h3 { font-size: 1.05rem; font-weight: 600; color: #C2410C; }
+  h1 { font-size: 2rem; font-weight: 800; color: #0F172A; letter-spacing: -0.02em; }
+  h2 { font-size: 1.3rem; font-weight: 700; border-bottom: 2px solid #FED7AA; padding-bottom: 6px; margin-top: 2rem; color: #0F172A; }
+  h3 { font-size: 1.1rem; font-weight: 700; color: #C2410C; }
   .step-card {
-    background: #1e1e2e; border-radius: 12px; padding: 1.2rem 1.4rem;
-    margin-bottom: 2rem; border: 1px solid #2a2a3e;
+    background: #FFFFFF; border-radius: 16px; padding: 1.4rem 1.6rem;
+    margin-bottom: 2rem; border: 1px solid #E2E8F0;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
   }
   .badge {
-    display:inline-block; padding: 2px 10px; border-radius: 20px;
-    font-size: 0.75rem; font-weight: 600; margin-right: 4px;
+    display:inline-block; padding: 4px 12px; border-radius: 20px;
+    font-size: 0.78rem; font-weight: 700; margin-right: 6px; margin-bottom: 8px;
   }
-  .badge-graf  { background:#C2410C22; color:#C2410C; border:1px solid #C2410C55; }
-  .badge-hub   { background:#0F766E22; color:#0F766E; border:1px solid #0F766E55; }
-  .badge-aktor { background:#7C3AED22; color:#7C3AED; border:1px solid #7C3AED55; }
-  .badge-isi   { background:#B4530922; color:#B45309; border:1px solid #B4530955; }
-  .badge-waktu { background:#1D4ED822; color:#1D4ED8; border:1px solid #1D4ED855; }
+  .badge-graf  { background:#FFF7ED; color:#C2410C; border:1px solid #FDBA74; }
+  .badge-hub   { background:#F0FDFA; color:#0F766E; border:1px solid #99F6E4; }
+  .badge-aktor { background:#FAF5FF; color:#7C3AED; border:1px solid #DDD6FE; }
+  .badge-isi   { background:#FEF3C7; color:#B45309; border:1px solid #FDE68A; }
+  .badge-waktu { background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; }
   .stat-row { display: flex; gap: 1rem; flex-wrap: wrap; margin: 0.5rem 0 1rem; }
   .stat-box {
-    background: #12121e; border-radius: 8px; padding: 0.6rem 1.2rem;
-    border: 1px solid #2a2a3e; flex: 1; min-width: 120px;
+    background: #FFFFFF; border-radius: 12px; padding: 0.8rem 1.2rem;
+    border: 1px solid #E2E8F0; flex: 1; min-width: 120px;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
   }
-  .stat-val { font-size: 1.4rem; font-weight: 700; color: #C2410C; }
-  .stat-lbl { font-size: 0.7rem; color: #aaa; margin-top: 2px; }
-  div[data-testid="stDataFrame"] { border-radius: 8px; overflow: hidden; }
+  .stat-val { font-size: 1.5rem; font-weight: 800; color: #C2410C; }
+  .stat-lbl { font-size: 0.75rem; color: #64748B; margin-top: 2px; font-weight: 600; }
+  div[data-testid="stDataFrame"] { border-radius: 10px; overflow: hidden; border: 1px solid #E2E8F0; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -268,5 +288,5 @@ st.markdown("---")
 st.caption(
     "🕯️ **SANTET** · Sentiment Analysis for Nusantara Theatrical Expectation Tracking  \n"
     "Riset independen — tidak berafiliasi dengan Soraya Intercine Films, Hitmaker Studios, atau MD Pictures.  \n"
-    "GitHub: [indri007/soraya-film-explorer](https://github.com/indri007/soraya-film-explorer)"
+    "GitHub: [indri007/prediksi-movie-2027](https://github.com/indri007/prediksi-movie-2027)"
 )

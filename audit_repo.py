@@ -21,7 +21,7 @@ Hanya pustaka standar Python (tanpa pandas), agar bisa jalan di mana saja.
 import argparse, csv, datetime as dt, glob, json, os, re, subprocess, sys, urllib.request
 
 BASE = os.path.dirname(os.path.realpath(__file__))
-DEFAULT_URL = "https://santet-soraya-film-explorer-vw6emk9y9yavz2cxuaghkj.streamlit.app/"
+DEFAULT_URL = "https://prediksi-movie-2027.streamlit.app/"
 SCAN_EXT = (".md", ".py", ".html", ".svg", ".txt", ".toml", ".json", ".js")
 SKIP_DIRS = ("_backup", ".venv", ".git", "node_modules", "release", "__pycache__", "_to_delete", "downloads", "output", "results")
 

@@ -2,7 +2,7 @@
 streamlit_app/pages/02_💰_Investasi_Film_2027.py
 ================================================
 Simulator & Intelijen Investasi Film Indonesia 2027
-Bagian dari Platform Prediksi Film & Investment Intelligence
+UI/UX: Google Material Design 3 — Light Theme (Warna Cerah Modern)
 """
 
 import sys
@@ -21,8 +21,143 @@ from src.investment_engine_2027 import FilmInvestmentEngine
 st.set_page_config(
     page_title="Film Investment Intelligence 2027",
     page_icon="🎬",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
+
+# ── MATERIAL DESIGN 3 LIGHT THEME (WARNA CERAH) ─────────────────────────────
+st.markdown("""
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --m3-primary: #C2410C;
+    --m3-on-primary: #FFFFFF;
+    --m3-primary-container: #FFDBCF;
+    --m3-surface: #FFFFFF;
+    --m3-surface-container: #F8FAFC;
+    --m3-on-surface: #0F172A;
+    --m3-on-surface-var: #475569;
+    --m3-outline: #E2E8F0;
+  }
+
+  html, body, [class*="css"] {
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+    color: #0F172A;
+  }
+
+  .stApp {
+    background-color: #F8FAFC;
+    color: #0F172A;
+  }
+
+  section[data-testid="stSidebar"] {
+    background-color: #FFFFFF !important;
+    border-right: 1px solid #E2E8F0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.02);
+  }
+
+  h1 {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.25rem;
+  }
+
+  h2, h3, h4 {
+    font-weight: 700;
+    color: #0F172A;
+    letter-spacing: -0.02em;
+  }
+
+  /* M3 Card Container */
+  .m3-hero {
+    background: linear-gradient(135deg, #FFFFFF 0%, #FFF7ED 50%, #F0FDFA 100%);
+    border: 1px solid #FED7AA;
+    border-radius: 20px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px -2px rgba(194, 65, 12, 0.06);
+  }
+
+  .m3-hero-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #9A3412;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .m3-hero-sub {
+    font-size: 1.02rem;
+    color: #475569;
+    margin-top: 0.5rem;
+    line-height: 1.6;
+  }
+
+  /* Metric Card Styling */
+  div[data-testid="stMetric"] {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 16px !important;
+    padding: 1.1rem 1.35rem !important;
+    box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.05) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  div[data-testid="stMetric"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  div[data-testid="stMetricLabel"] {
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: #64748B !important;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  div[data-testid="stMetricValue"] {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-size: 1.85rem !important;
+    font-weight: 800 !important;
+    color: #0F172A !important;
+  }
+
+  /* Material Tabs */
+  button[data-baseweb="tab"] {
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    color: #64748B !important;
+    padding: 0.75rem 1.25rem !important;
+    border-radius: 10px 10px 0 0 !important;
+  }
+  button[data-baseweb="tab"][aria-selected="true"] {
+    color: #C2410C !important;
+    border-bottom-color: #C2410C !important;
+    font-weight: 700 !important;
+  }
+
+  /* Tables & Dataframes */
+  div[data-testid="stDataFrame"], div[data-testid="stTable"] {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+  }
+
+  .m3-alert {
+    background: #FFFFFF;
+    border-left: 4px solid #C2410C;
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    margin: 1rem 0;
+  }
+</style>
+""", unsafe_allow_html=True)
 
 # Inisialisasi engine
 @st.cache_resource
@@ -36,17 +171,18 @@ except Exception as e:
     st.error(f"Gagal memuat dataset film master: {e}")
     st.stop()
 
-# --- HEADER ---
-st.title("🎬 Indonesian Film Investment Intelligence 2027")
+# --- HERO BANNER (MATERIAL 3 LIGHT) ---
 st.markdown("""
-**Simulasi Kelayakan Bisnis, Proyeksi Penonton & Sensitivitas ROI Proyek Film Indonesia**  
-*Didukung oleh basis data historis 896 film Indonesia (2020–2026) dengan metodologi empirical comparable DNA.*
-""")
-
-st.divider()
+<div class="m3-hero">
+  <div class="m3-hero-title">🎬 Indonesian Film Investment Intelligence 2027</div>
+  <div class="m3-hero-sub">
+    <b>Simulator Bisnis & Sensitivitas ROI Proyek Film Indonesia</b> — Didukung basis data historis <b>896 film Indonesia (2020–2026)</b> dengan total <b>328,2 Juta penonton bioskop</b> dan metodologi <i>comparable DNA matching</i>.
+  </div>
+</div>
+""", unsafe_allow_html=True)
 
 # --- SIDEBAR INPUTS ---
-st.sidebar.header("📋 Parameter Proyek Film 2027")
+st.sidebar.markdown("### 📋 Parameter Proyek Film 2027")
 
 film_title = st.sidebar.text_input("Judul Rencana Proyek", value="Proyek Film Horor Nusantara 2027")
 genre = st.sidebar.selectbox("Genre Utama", options["genres"], index=options["genres"].index("Horor") if "Horor" in options["genres"] else 0)
@@ -60,8 +196,8 @@ director = st.sidebar.selectbox("Sutradara", options["directors"], index=directo
 release_window = st.sidebar.selectbox("Momen Rilis Bioskop 2027", options["release_windows"], index=0)
 ip_type = st.sidebar.selectbox("Tipe Cerita / Intellectual Property (IP)", options["ip_types"], index=0)
 
-st.sidebar.divider()
-st.sidebar.subheader("💰 Parameter Keuangan")
+st.sidebar.markdown("---")
+st.sidebar.markdown("### 💰 Parameter Keuangan")
 
 budget_miliar = st.sidebar.slider(
     "Anggaran Produksi (Miliar IDR)",
@@ -110,7 +246,7 @@ risk_eval = engine.assess_project_risk(
     director=director
 )
 
-# --- RINGKASAN METRIK UTAMA ---
+# --- RINGKASAN METRIK UTAMA (M3 LIGHT METRIC CARDS) ---
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
@@ -133,25 +269,29 @@ with col2:
 with col3:
     base_roi = waterfall_base["roi_pct"]
     st.metric(
-        label="📈 Estimasi ROI Produser (Base Case)",
+        label="📈 Estimasi ROI Produser",
         value=f"{base_roi:+.1f}%",
         delta=f"Rp {waterfall_base['net_profit_loss_idr']:+,.0f}",
         delta_color="normal" if base_roi >= 0 else "inverse"
     )
 
 with col4:
-    badge_color = {
+    badge_symbol = {
         "AAA": "🟢", "AA": "🔵", "A": "🟡", "B": "🟠", "C": "🔴"
     }.get(risk_eval["rating"], "⚪")
     st.metric(
         label="🛡️ Investment Risk Grade",
-        value=f"{badge_color} {risk_eval['rating']}",
+        value=f"{badge_symbol} {risk_eval['rating']}",
         delta=f"BEP Coverage {risk_eval['bep_coverage_ratio']}x"
     )
 
-st.caption(f"**Keputusan Kelayakan:** {risk_eval['verdict']} — *{risk_eval['risk_description']}*")
+st.markdown(f"""
+<div class="m3-alert">
+  <b>Keputusan Kelayakan Proyek:</b> <span style="color:#C2410C; font-weight:700;">{risk_eval['verdict']}</span> — <i>{risk_eval['risk_description']}</i>
+</div>
+""", unsafe_allow_html=True)
 
-st.divider()
+st.markdown("<br/>", unsafe_allow_html=True)
 
 # --- TABS ANALISIS MENDALAM ---
 tab_waterfall, tab_comps, tab_risk = st.tabs([
