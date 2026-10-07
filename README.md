@@ -147,29 +147,29 @@ graph TD
     GOAL["🎯 GOAL: Keuntungan Bersih & ROI Maksimal"]:::goal
 
     %% Hubungan Faktor -> Tuas Operasional (Edges)
-    F4 -->|Bobot: +0.45 (Drive Early Demand)| L1
-    F1 -->|Bobot: +0.30 (Market Depth Alignment)| L1
-    F3 -->|Bobot: +0.25 (High Holiday Footfall)| L1
+    F4 -->|"Bobot: +0.45 - Drive Early Demand"| L1
+    F1 -->|"Bobot: +0.30 - Market Depth Alignment"| L1
+    F3 -->|"Bobot: +0.25 - High Holiday Footfall"| L1
 
-    F5 -->|Bobot: +0.60 (Organic Advocacy)| L2
-    F1 -->|Bobot: +0.20 (Sustained Genre Craving)| L2
+    F5 -->|"Bobot: +0.60 - Organic Advocacy"| L2
+    F1 -->|"Bobot: +0.20 - Sustained Genre Craving"| L2
 
-    F1 -->|Bobot: +0.25 (Screen Quota Priority)| L4
-    L1 -->|Bobot: +0.50 (High Occupancy Triggers Screens)| L4
-    L4 -->|Bobot: +0.40 (Enables Extended Run)| L2
+    F1 -->|"Bobot: +0.25 - Screen Quota Priority"| L4
+    L1 -->|"Bobot: +0.50 - High Occupancy Triggers Screens"| L4
+    L4 -->|"Bobot: +0.40 - Enables Extended Run"| L2
 
-    F2 -->|Bobot: -0.55 (Lean Budget Lowers Target)| L3
-    F6 -->|Bobot: -0.35 (Pre-sale Offsets Budget)| L3
+    F2 -->|"Bobot: -0.55 - Lean Budget Lowers Target"| L3
+    F6 -->|"Bobot: -0.35 - Pre-sale Offsets Budget"| L3
 
-    F6 -->|Bobot: +0.60 (Streaming Rights & Brands)| L5
+    F6 -->|"Bobot: +0.60 - Streaming Rights & Brands"| L5
 
-    L1 -->|Bobot: +0.35 (Volume Multiplier)| L6
-    L2 -->|Bobot: +0.55 (Cumulative Box Office)| L6
+    L1 -->|"Bobot: +0.35 - Volume Multiplier"| L6
+    L2 -->|"Bobot: +0.55 - Cumulative Box Office"| L6
 
     %% Muara Tuas -> Keuntungan Finansial
-    L6 -->|Bobot: +0.50 (Primary Theatrical Revenue)| GOAL
-    L5 -->|Bobot: +0.30 (Pure Margin Cushion)| GOAL
-    L3 -->|Bobot: -0.40 (Low BEP Ensures Quick Profit)| GOAL
+    L6 -->|"Bobot: +0.50 - Primary Theatrical Revenue"| GOAL
+    L5 -->|"Bobot: +0.30 - Pure Margin Cushion"| GOAL
+    L3 -->|"Bobot: -0.40 - Low BEP Ensures Quick Profit"| GOAL
 ```
 
 ### Penjelasan 3 Rantai Nilai Ekonomi Graf:
