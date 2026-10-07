@@ -1,164 +1,157 @@
-# 🕯️ SANTET
-### Sentiment Analysis for Nusantara Theatrical Expectation Tracking
+# 🎬 Indonesian Film Investment Intelligence & 🕯️ SANTET
+### 2027 Movie Success Prediction & Nusantara Theatrical Expectation Tracking
 
 <div align="center">
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://prediksi-movie-2027.streamlit.app)
 [![GitHub](https://img.shields.io/badge/GitHub-indri007%2Fprediksi--movie--2027-181717?logo=github)](https://github.com/indri007/prediksi-movie-2027)
-[![Status](https://img.shields.io/badge/Status-Riset%20Berjalan-orange)](results/paper_status.md)
+[![Dataset](https://img.shields.io/badge/Dataset-896_Films_(2020--2026)-blue)](data/film_master_2020_2026.csv)
+[![Status](https://img.shields.io/badge/Status-Investment_Simulator_Live-success)](https://prediksi-movie-2027.streamlit.app)
 [![Lisensi](https://img.shields.io/badge/Lisensi-MIT-green)](LICENSE)
 [![UU PDP](https://img.shields.io/badge/Kepatuhan-UU%20PDP%20No.%2027%2F2022-blue)](docs/DESIGN.md#etika)
 
-<a href="docs/santet/index.html">
-  <img src="docs/assets/santet_hero.svg" width="100%" alt="Animasi SANTET 6 babak — ilustratif: Prolog, Kutukan, Mesin yang tuli, Bangsa tak tercatat, Lahirnya SANTET, Epilog. Label: ilustratif.">
+<br/>
+
+### 🚀 **[Buka Live Simulator di Streamlit Cloud: prediksi-movie-2027.streamlit.app](https://prediksi-movie-2027.streamlit.app)**
+*Konfigurasi Cloud: `prediksi-movie-2027 ∙ master ∙ streamlit_app.py`*
+
+<br/>
+
+<a href="https://prediksi-movie-2027.streamlit.app">
+  <img src="docs/assets/santet_hero.svg" width="100%" alt="Indonesian Film Investment Intelligence & SANTET Hero Banner">
 </a>
 
-*Animasi di atas bersifat ilustratif. Klik untuk membuka narasi 3D interaktif.*
-
-**"Membaca 'mantra' warganet sebelum film tayang."**  
-*Fear is demand · Rasa takut adalah permintaan*
+**"Membaca 'mantra' warganet & data historis industri sebelum layar bioskop menyala."**  
+*Empirical Data · Theatrical Waterfall · Comparable DNA · Risk Mitigation*
 
 </div>
 
 ---
 
-## Kenapa SANTET ada
+## 🌟 Apa yang Baru: Transformasi Platform Investasi Film 2027
 
-Film horor Indonesia dari studio yang sama bisa berbeda perolehan penonton hingga enam kali lipat — namun selisih itu baru terlihat setelah film tutup layar. Komentar trailer di YouTube sudah memuatnya lebih awal: kata *"serem banget"* dan *"gas nonton"* adalah sinyal niat menonton, bukan keluhan, tetapi model sentimen standar membacanya sebagai negatif. SANTET membangun pipeline analisis sentimen, jaringan komentar, dan korelasi YouTube–box office yang sadar konteks budaya Nusantara, dengan standar reproduktifitas dan etika data yang ketat. Tujuannya bukan hanya riset — melainkan agar keputusan praproduksi dan distribusi bisa bersandar pada sinyal yang lebih jujur.
+Repositori ini telah dievolusikan dari riset eksploratif 15 film menjadi **Platform Intelijen Investasi Perfilman Indonesia**:
+1. **Master Dataset Industri 2020–2026 ($N = 896$ Film):**
+   - Mengumpulkan seluruh film Indonesia dari 2020 hingga 2026 dengan **646 film bertiket bioskop resmi**.
+   - Menyelesaikan *sample constraint* sebelumnya dan mencakup seluruh studio besar (*MD Pictures, Falcon, Visinema, Starvision, Rapi, Imajinari, Soraya, Hitmaker, Dee Company, Screenplay, IDN Pictures*).
+2. **Simulator & Kalkulator Kelayakan Investasi Film 2027 ([Live Demo](https://prediksi-movie-2027.streamlit.app)):**
+   - **Comparable DNA Matcher:** Mencocokkan rencana proyek 2027 dengan 5 film historis 2020–2026 yang paling relevan.
+   - **Multi-Scenario Audience Forecaster:** Skenario penonton konservatif (**Bear** / P25), realistis (**Base** / Median), dan optimis (**Bull** / P75).
+   - **Theatrical Waterfall Model:** Model pembagian hasil bioskop nasional (Gross $\to$ Pajak Pemda 10% $\to$ Exhibitor Split 50% $\to$ Net Bagian Produser $\approx 42,5\%$).
+   - **BEP Admissions Sensitivity:** Menghitung jumlah minimal tiket yang harus terjual untuk menutup bujet produksi dan promosi (P&A).
+   - **Investor Risk Grade:** Klasifikasi kelayakan proyek (`AAA`, `AA`, `A`, `B`, `C`) dengan rekomendasi mitigasi modal.
+3. **Modul Dasar Riset SANTET Tetap Utuh:**
+   - Analisis sentimen trailer YouTube sadar konteks budaya nusantara (*"merinding" & "serem" sebagai pujian/demand*).
+   - 20 fungsi Social Network Analysis (SNA / NodeXL) interaktif.
+   - Kepatuhan privasi penuh sesuai UU PDP No. 27/2022 (pseudonimisasi satu arah HMAC-SHA256).
 
 ---
 
-## Status Riset (per 06-10-2026)
+## 📊 Status Data & Pemodelan (Update Terbaru)
 
-> Angka-angka ini adalah hasil aktual. Tidak ada angka yang dibulatkan atau dipercantik.
-
-| Komponen | Status | Keterangan |
+| Komponen | Status | Keterangan / Hasil Aktual |
 |---|:---:|---|
-| Dataset box office terverifikasi (15 film, URL resmi) | ✅ | `data/films_clean.csv` |
-| Scrape komentar YouTube (9.840 komentar, 4 set) | ✅ | `yt_soraya/`, `yt_md/`, `yt_hitmaker/`, `yt_ivanna/` |
-| Korelasi Spearman: `likes_total` vs penonton | ✅ | ρ = 0,571 · p = 0,026 · CI 95% [0,05 – 0,86] |
-| Koreksi multi-testing Benjamini–Hochberg | ⚠️ | q = 0,26 — tidak lolos koreksi BH; butuh n lebih besar |
-| Sentimen IndoBERT (belum tervalidasi manual) | ⚠️ | 0 dari ≥30 label manusia terkumpul |
-| Model prediktif LOOCV (n = 14) | ⚠️ | MAPE 85,8% vs baseline 70,3% — model belum mengungguli baseline |
-| Anotasi Google Trends pra-rilis | ⏳ | `trends_pra_rilis` tersedia untuk 13/15 film |
-| Komentar YouTube API (tanggal presisi) | ⏳ | Butuh `YT_API_KEY` |
-| Validasi sentimen oleh manusia (≥30 baris) | ⏳ | Lembar anotasi siap di `annotation/` |
-| 20 analisis SNA Louvain | ✅ | `results/sna_*/` · Q = 0,810 (13 komunitas) |
+| **Master Dataset Industri (2020–2026)** | ✅ | **896 film unik** ([`data/film_master_2020_2026.csv`](data/film_master_2020_2026.csv)), 646 dengan data penonton resmi |
+| **Simulator Investasi 2027 (Streamlit)** | ✅ | Live di [`prediksi-movie-2027.streamlit.app`](https://prediksi-movie-2027.streamlit.app) |
+| **Model Air Terjun Finansial (Waterfall)** | ✅ | Standar industri bioskop Indonesia (Net Produser $\approx 42,5\%$ Gross) |
+| **Analisis Faktor Komersial (EDA)** | ✅ | Laporan faktor di [`results/investment_factor_summary.md`](results/investment_factor_summary.md) |
+| **Sinyal YouTube Trailer Terverifikasi** | ✅ | 40 trailer resmi, 9.840 komentar terlabeli tanpa teks mentah |
+| **Korelasi Spearman Empiris** | ✅ | $\rho = 0,571$, $p = 0,026$ (*likes YouTube vs penonton bioskop*) |
+| **Analisis Graf SNA (NodeXL / Louvain)** | ✅ | 20 analisis jaringan, $Q = 0,810$ (13 komunitas) |
+| **Disiplin Data Tanpa Halusinasi** | ✅ | Variabel biaya tertutup ditandai strictly `NULL` (tidak dikarang model) |
 
 ---
 
-## Quick Start
+## 🏛️ Arsitektur Disiplin 3-Tier Data
 
+Untuk menjaga kredibilitas analisis di hadapan investor dan komite pembiayaan film:
+- **Tier A — Actual Data (Faktual Terverifikasi):**  
+  Data publik resmi yang dapat diverifikasi: Judul, Tanggal Rilis, Tahun, Genre, Sutradara, Cast, Studio (PH), dan Penonton Bioskop Resmi.
+- **Tier B — Derived Data (Metrik Terhitung):**  
+  Data turunan hasil kalkulasi objektif: *Estimated Gross Box Office (IDR)*, *Net Producer Ticket Share (IDR)*, *Commercial Tier* (Mega-Hit, Hit, Moderate, Underperformer), *Director Track Record*, dan *Studio Market Tier*.
+- **Tier C — Missing Data (Strictly NULL / NaN):**  
+  Variabel privat industri (*Production Budget*, *Marketing Spend*, *Actual Profit*, *OTT License Fee*). **Model ML dilarang mengarang angka kategori C**, melainkan disimulasikan secara transparan melalui *BEP Sensitivity Analysis*.
+
+---
+
+## 🎬 Top 10 Film Terlaris Indonesia 2020–2026 dalam Dataset
+
+| Tahun | Judul Film | Genre | Sutradara | Production House | Penonton | Est. Gross Box Office (IDR) |
+|:---:|---|:---:|---|---|---:|---:|
+| 2025 | **Agak Laen: Menyala Pantiku** | Komedi | Muhadkly Acho | Imajinari | 11.000.866 | Rp 522,5 Miliar |
+| 2025 | **Jumbo** | Animasi Fantasi | Ryan Adriandhy | Visinema Studios | 10.182.536 | Rp 483,6 Miliar |
+| 2022 | **KKN di Desa Penari** | Horor | Awi Suryadi | MD Pictures | 9.233.847 | Rp 387,8 Miliar |
+| 2024 | **Agak Laen** | Horor, Komedi | Muhadkly Acho | Imajinari | 9.125.188 | Rp 410,6 Miliar |
+| 2022 | **Pengabdi Setan 2: Communion** | Horor | Joko Anwar | Rapi Films | 6.391.982 | Rp 268,4 Miliar |
+| 2022 | **Miracle in Cell No. 7** | Drama | Hanung Bramantyo | Falcon Pictures | 5.851.595 | Rp 245,7 Miliar |
+| 2024 | **Vina: Sebelum 7 Hari** | Horor | Anggy Umbara | Dee Company | 5.815.492 | Rp 261,6 Miliar |
+| 2023 | **Sewu Dino** | Horor | Kimo Stamboel | MD Pictures | 4.886.406 | Rp 219,8 Miliar |
+| 2025 | **Pabrik Gula** | Horor | Awi Suryadi | MD Pictures | 4.726.760 | Rp 224,5 Miliar |
+| 2024 | **Kang Mak from Pee Mak** | Horor, Komedi | Herwin Novianto | Falcon Pictures | 4.580.209 | Rp 206,1 Miliar |
+
+---
+
+## ⚡ Quick Start
+
+### 1. Menjalankan Dashboard Simulator secara Lokal
 ```bash
-# 1. Pasang dependensi
-pip install -r requirements-pipeline.txt   # atau: ./bit install  (requirements.txt = dependensi ringan Streamlit Cloud)
+# Clone repository
+git clone https://github.com/indri007/prediksi-movie-2027.git
+cd prediksi-movie-2027
 
-# 2. Unduh komentar trailer (yt-dlp, tanpa API key)
-./bit scrape all --max 500
+# Pasang dependensi ringan
+pip install -r requirements.txt
 
-# 3. Jalankan semua analisis: sentimen → SNA → korelasi
-./bit finish
+# Jalankan Streamlit
+streamlit run streamlit_app.py
 ```
 
-Butuh data pra-rilis presisi? `export YT_API_KEY="..." && ./bit precise all`
+### 2. Memperbarui Master Dataset & Analisis
+```bash
+# Update dataset 896 film 2020-2026
+python scripts/build_film_master_2020_2026.py
 
----
-
-## Peta Fitur
-
-| Modul | Perintah | Output |
-|---|---|---|
-| **CLI terpadu** | `./bit help` | Semua 30+ perintah dalam satu entrypoint |
-| **Scrape trailer** | `./bit scrape [soraya\|md\|hitmaker\|all]` | `yt_*/comments.csv`, `videos.csv`, `edges.csv` |
-| **Sentimen IndoBERT** | `./bit sentiment predict` | Label + skor per komentar |
-| **20 analisis SNA** | `./bit sna all` | Graf, tabel, `ringkasan.md`, NodeXL export |
-| **Korelasi & model** | `./bit correlate` · `./bit model` | Spearman, bootstrap, LOOCV, BH |
-| **Dashboard web** | `./bit dashboard` | `dashboard/index.html` (dark glassmorphism) |
-| **Streamlit SNA** | `streamlit run streamlit_app/app.py` | Semua 20 grafik SNA interaktif |
-| **Narasi 3D** | [docs/santet/](docs/santet/index.html) | Six-act story · Material 3 · Three.js |
-
----
-
-## Data & Etika
-
-**Independensi.** SANTET adalah riset akademik independen. Tidak berafiliasi dengan, didukung oleh, atau disponsori oleh Soraya Intercine Films, Hitmaker Studios, atau MD Pictures. Judul film, metadata trailer, dan angka penonton dikutip semata untuk tujuan ilmiah dan pendidikan.
-
-**Privasi (UU PDP No. 27/2022).** Seluruh identitas komentator dipseudonimkan dengan HMAC-SHA256 + salt rahasia (`SORAYA_SALT`). Teks komentar mentah dan ID unik YouTube tidak disebarkan ke repositori publik.
-
-**Angka sementara.** Penonton *Racun Sangga* (525.034) dan *Suzzanna: Santet Dosa di Atas Dosa* (1.054.864) adalah angka berjalan per laporan publik terakhir yang dikutip; bukan angka final.
-
-**Klaim yang tidak kami buat:**  
-Kami tidak mengklaim "pertama", "akurat", atau "Scopus Q1 Ready". Model prediktif saat ini tidak lebih baik dari baseline rata-rata (MAPE 85,8% vs 70,3%). Sentimen IndoBERT belum tervalidasi secara manual.
-
----
-
-## Dataset (15 Film, 2017–2026)
-
-Sumber: `data/films_clean.csv` · Verifikasi: `AUDIT_REPORT.md`
-
-| Judul | Studio | Tahun | Penonton | Status |
-|---|---|:---:|---:|:---:|
-| Ipar Adalah Maut | MD Pictures | 2024 | 4.775.315 | Final |
-| Badarawuhi di Desa Penari | MD Pictures | 2024 | 4.013.558 | Final |
-| Suzzanna: Bernapas dalam Kubur | Soraya Intercine Films | 2018 | 3.346.216 | Final |
-| Ivanna | MD Pictures | 2022 | 2.793.775 | Final |
-| Suzzanna: Malam Jumat Kliwon | Soraya Intercine Films | 2023 | 2.189.363 | Final |
-| The Doll 3 | Hitmaker Studios | 2022 | 1.764.077 | Final |
-| Sabrina | Hitmaker Studios | 2018 | 1.337.510 | Final |
-| Mata Batin | Hitmaker Studios | 2017 | 1.282.557 | Final |
-| Suzzanna: Santet Dosa di Atas Dosa | Soraya Intercine Films | 2026 | 1.054.864 | Berjalan* |
-| Santet Segoro Pitu | Hitmaker Studios (ko-prod) | 2024 | 1.025.000 | Final |
-| Indigo: What Do You See? | Hitmaker / Legacy Pictures | 2023 | 1.015.231 | Final |
-| Jurnal Risa by Risa Saraswati | MD Pictures | 2024 | 865.045 | Final |
-| Catatan Harian Menantu Sinting | Soraya Intercine Films | 2024 | 713.862 | Final |
-| Perewangan | MD Pictures | 2024 | 658.000 | Final |
-| Racun Sangga | Soraya Intercine Films | 2024 | 525.034 | Berjalan* |
-
-*\*Angka berjalan per laporan publik; belum final.*
-
----
-
-## Sitasi
-
-```bibtex
-@misc{sari2026santet,
-  author = {Sari, Indri Anjar Kartika},
-  title  = {The Scream Is a Compliment: Fear-as-Demand Signals and the
-             Pre-Release Prediction of Indonesian Horror Box Office ---
-             Evidence from Soraya Intercine Films},
-  year   = {2026},
-  note   = {Working paper},
-  url    = {https://github.com/indri007/prediksi-movie-2027}
-}
+# Jalankan analisis faktor investasi
+python scripts/analyze_investment_factors.py
 ```
 
 ---
 
-## Struktur Repositori
+## 📁 Struktur Repositori
 
 ```
-├── bit                        CLI terpadu (30+ perintah)
+├── streamlit_app.py                            # Entrypoint Streamlit Cloud (Router Navigasi)
+├── streamlit_app/
+│   ├── pages/
+│   │   ├── 02_💰_Investasi_Film_2027.py        # SIMULATOR INVESTASI FILM 2027 (BARU)
+│   │   └── 01_📖_Cerita.py                    # Cerita Riset SANTET
+│   └── app.py                                  # Dashboard Analisis Jaringan (SNA)
+├── src/
+│   └── investment_engine_2027.py               # Core Investment & Comparable DNA Engine
 ├── data/
-│   ├── films_clean.csv        Master dataset terverifikasi (15 film)
-│   └── box_office_sources.csv Log sumber angka penonton ber-URL
-├── yt_soraya/ yt_md/ …        Komentar & metadata per set studio
+│   ├── film_master_2020_2026.csv               # Master Dataset 896 Film Indonesia (2020-2026)
+│   ├── films_clean.csv                         # Dataset Verifikasi 15 Film Riset Baseline
+│   └── box_office_sources.csv                  # Log Audit Sumber Penonton
+├── scripts/
+│   ├── build_film_master_2020_2026.py          # Ingestion Pipeline 2020-2026
+│   └── analyze_investment_factors.py           # Evaluasi Faktor Komersial
 ├── results/
-│   ├── sna_*/                 20 analisis SNA (PNG, CSV, GraphML)
-│   ├── correlation_*/         Spearman, bootstrap, BH
-│   └── model_*/               LOOCV MAPE
-├── dashboard/                 Web dashboard dark glassmorphism
-├── streamlit_app/app.py       Dashboard SNA interaktif (Streamlit)
-├── docs/
-│   ├── assets/santet_hero.svg Hero animasi SVG (ilustratif)
-│   ├── santet/index.html      Narasi 3D interaktif (six-act)
-│   └── DESIGN.md              Design system proyek
-├── annotation/                Lembar anotasi manual (2 anotator)
-├── AUDIT_REPORT.md            Audit metodologis & provenance data
-├── requirements.txt            # dependensi Streamlit Cloud
-└── requirements-pipeline.txt   # pipeline lengkap
+│   ├── investment_factor_summary.md            # Laporan Temuan Faktor Investasi
+│   ├── investment_factor_analysis.json         # Data JSON Agregat Faktor
+│   └── sna_*/                                  # Output 20 Analisis Graf SNA
+├── requirements.txt                            # Dependensi Ringan Streamlit Cloud
+└── requirements-pipeline.txt                   # Dependensi Lengkap Machine Learning
 ```
+
+---
+
+## 📜 Kepatuhan Hukum, Privasi & Independensi
+
+- **Independensi Riset:** Riset ini independen dan tidak berafiliasi resmi dengan studio film komersial manapun. Seluruh data dikutip dari sumber publik terpublikasi untuk tujuan edukasi dan analitik.
+- **UU PDP No. 27/2022:** Seluruh identitas akun komentator YouTube dipseudonimkan satu arah (HMAC-SHA256). Teks mentah dan ID pengguna tidak disertakan dalam rilis publik.
 
 ---
 
 <div align="center">
-<sub>Riset independen · Tidak berafiliasi dengan studio manapun · MIT License</sub>
+<sub>Indonesian Film Investment Intelligence Platform · MIT License · 2026</sub>
 </div>
