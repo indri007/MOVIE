@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <!-- Node Attributes -->
+  <key id="label" for="node" attr.name="label" attr.type="string"/>
+  <key id="cluster" for="node" attr.name="cluster" attr.type="string"/>
+  <key id="category" for="node" attr.name="category" attr.type="string"/>
+  <key id="centrality" for="node" attr.name="centrality" attr.type="double"/>
+  <key id="color" for="node" attr.name="color" attr.type="string"/>
+  <!-- Edge Attributes -->
+  <key id="rel" for="edge" attr.name="relationship" attr.type="string"/>
+  <key id="weight" for="edge" attr.name="weight" attr.type="double"/>
+  <key id="desc" for="edge" attr.name="description" attr.type="string"/>
+
+  <graph id="Festival_and_FFI_Strategy_Network" edgedefault="directed">
+    <!-- Nodes -->
+    <node id="V1">
+      <data key="label">Suara Otentik &amp; Tema Universal</data>
+      <data key="cluster">Creative DNA</data>
+      <data key="category">Strategic Enabler</data>
+      <data key="centrality">0.88</data>
+      <data key="color">#1E88E5</data>
+    </node>
+    <node id="V2">
+      <data key="label">Standar Teknis &amp; Estetika Tinggi</data>
+      <data key="cluster">Creative DNA</data>
+      <data key="category">Technical Enabler</data>
+      <data key="centrality">0.82</data>
+      <data key="color">#1E88E5</data>
+    </node>
+    <node id="V3">
+      <data key="label">Relevansi Sosial &amp; Isu Kontemporer</data>
+      <data key="cluster">Creative DNA</data>
+      <data key="category">Narrative Enabler</data>
+      <data key="centrality">0.75</data>
+      <data key="color">#1E88E5</data>
+    </node>
+    <node id="V4">
+      <data key="label">Lab Inkubasi &amp; Hibah Internasional</data>
+      <data key="cluster">Global Track</data>
+      <data key="category">Pipeline Bridge</data>
+      <data key="centrality">0.85</data>
+      <data key="color">#43A047</data>
+    </node>
+    <node id="V5">
+      <data key="label">Sales Agent &amp; Co-Producer Asing</data>
+      <data key="cluster">Global Track</data>
+      <data key="category">Lobbying Bridge</data>
+      <data key="centrality">0.92</data>
+      <data key="color">#43A047</data>
+    </node>
+    <node id="V6">
+      <data key="label">Rekam Jejak Film Pendek / Tiering</data>
+      <data key="cluster">Global Track</data>
+      <data key="category">Talent Pipeline</data>
+      <data key="centrality">0.70</data>
+      <data key="color">#43A047</data>
+    </node>
+    <node id="V7">
+      <data key="label">Kampanye FYC &amp; Special Screening</data>
+      <data key="cluster">National Track</data>
+      <data key="category">Campaign Enabler</data>
+      <data key="centrality">0.78</data>
+      <data key="color">#FB8C00</data>
+    </node>
+    <node id="V8">
+      <data key="label">Akademi Citra (Pemilih FFI)</data>
+      <data key="cluster">National Track</data>
+      <data key="category">Voting Gatekeeper</data>
+      <data key="centrality">0.89</data>
+      <data key="color">#FB8C00</data>
+    </node>
+    <node id="V9">
+      <data key="label">Festival Tier-2 / Regional</data>
+      <data key="cluster">Global Festivals</data>
+      <data key="category">Festival Milestone</data>
+      <data key="centrality">0.74</data>
+      <data key="color">#8E24AA</data>
+    </node>
+    <node id="V10">
+      <data key="label">Festival Kelas A Dunia (A-List)</data>
+      <data key="cluster">Global Festivals</data>
+      <data key="category">Global Apex</data>
+      <data key="centrality">0.96</data>
+      <data key="color">#8E24AA</data>
+    </node>
+    <node id="V11">
+      <data key="label">Festival Genre Fantastik Khusus</data>
+      <data key="cluster">Global Festivals</data>
+      <data key="category">Genre Apex</data>
+      <data key="centrality">0.68</data>
+      <data key="color">#8E24AA</data>
+    </node>
+    <node id="V12">
+      <data key="label">Nominasi Teknis FFI (17 Kategori)</data>
+      <data key="cluster">FFI Apex</data>
+      <data key="category">Award Milestone</data>
+      <data key="centrality">0.80</data>
+      <data key="color">#E53935</data>
+    </node>
+    <node id="V13">
+      <data key="label">Piala Citra Kategori Utama</data>
+      <data key="cluster">FFI Apex</data>
+      <data key="category">National Apex</data>
+      <data key="centrality">0.94</data>
+      <data key="color">#E53935</data>
+    </node>
+    <node id="V14">
+      <data key="label">Puncak Prestise Global &amp; Oscar Submission</data>
+      <data key="cluster">Ultimate Clout</data>
+      <data key="category">Global Goal</data>
+      <data key="centrality">0.98</data>
+      <data key="color">#00ACC1</data>
+    </node>
+    <node id="V15">
+      <data key="label">Legasi Nasional &amp; Daya Tawar Industri</data>
+      <data key="cluster">Ultimate Clout</data>
+      <data key="category">Domestic Goal</data>
+      <data key="centrality">0.95</data>
+      <data key="color">#00ACC1</data>
+    </node>
+
+    <!-- Directed Weighted Edges -->
+    <edge id="e1" source="V1" target="V4"><data key="rel">unlocks_funding</data><data key="weight">0.85</data><data key="desc">Syarat hibah Hubert Bals/Torino</data></edge>
+    <edge id="e2" source="V6" target="V4"><data key="rel">strengthens_application</data><data key="weight">0.75</data><data key="desc">Rekam jejak film pendek memvalidasi proposal</data></edge>
+    <edge id="e3" source="V1" target="V9"><data key="rel">curation_appeal</data><data key="weight">0.80</data><data key="desc">Kurator Busan/Rotterdam memprioritaskan narasi otentik</data></edge>
+    <edge id="e4" source="V4" target="V5"><data key="rel">attracts_partners</data><data key="weight">0.90</data><data key="desc">Alumni lab diminati sales agent papan atas</data></edge>
+    <edge id="e5" source="V6" target="V9"><data key="rel">director_tiering</data><data key="weight">0.70</data><data key="desc">Lompatan ke New Currents / Tiger Competition</data></edge>
+    <edge id="e6" source="V5" target="V10"><data key="rel">festival_lobbying</data><data key="weight">0.85</data><data key="desc">Lobi langsung ke programmer Cannes/Venice/Berlinale</data></edge>
+    <edge id="e7" source="V9" target="V10"><data key="rel">prestige_escalation</data><data key="weight">0.80</data><data key="desc">Kemenangan di Locarno/Busan membuka jalan ke A-list</data></edge>
+    <edge id="e8" source="V10" target="V14"><data key="rel">secures_global_apex</data><data key="weight">0.95</data><data key="desc">Penghargaan A-list mengamankan tiket seleksi Oscar</data></edge>
+    <edge id="e9" source="V1" target="V11"><data key="rel">genre_market_fit</data><data key="weight">0.65</data><data key="desc">Folklor horor lolos Sitges/BIFAN</data></edge>
+    <edge id="e10" source="V2" target="V12"><data key="rel">drives_technical_sweep</data><data key="weight">0.90</data><data key="desc">Kualitas teknis menyapu nominasi FFI</data></edge>
+    <edge id="e11" source="V3" target="V13"><data key="rel">sways_voter_hearts</data><data key="weight">0.85</data><data key="desc">Isu sosial menyentuh nurani pemilih Citra utama</data></edge>
+    <edge id="e12" source="V7" target="V8"><data key="rel">activates_voting_body</data><data key="weight">0.80</data><data key="desc">Kampanye FYC menjamin karya ditonton Akademi Citra</data></edge>
+    <edge id="e13" source="V8" target="V12"><data key="rel">determines_nominations</data><data key="weight">0.85</data><data key="desc">Voting asosiasi menyaring nominasi teknis</data></edge>
+    <edge id="e14" source="V8" target="V13"><data key="rel">determines_winners</data><data key="weight">0.90</data><data key="desc">Pemungutan suara final penentu Piala Citra utama</data></edge>
+    <edge id="e15" source="V10" target="V7"><data key="rel">boosts_domestic_credibility</data><data key="weight">0.75</data><data key="desc">Prestise internasional menciptakan momentum FFI</data></edge>
+    <edge id="e16" source="V12" target="V13"><data key="rel">creates_winning_momentum</data><data key="weight">0.70</data><data key="desc">Dominasi teknis memicu kemenangan Film Terbaik</data></edge>
+    <edge id="e17" source="V13" target="V15"><data key="rel">secures_national_stature</data><data key="weight">0.90</data><data key="desc">Kemenangan Citra mengukuhkan legasi sutradara</data></edge>
+    <edge id="e18" source="V14" target="V15"><data key="rel">elevates_industry_power</data><data key="weight">0.85</data><data key="desc">Pengakuan global menaikkan daya tawar di industri</data></edge>
+  </graph>
+</graphml>

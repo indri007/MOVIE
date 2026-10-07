@@ -1,0 +1,16 @@
+vertex_id,vertex_label,cluster_group,category_type,description,centrality_score,color,shape
+V1,"Suara Otentik & Tema Universal","Creative DNA","Strategic Enabler","Cerita hyper-local dengan tema kemanusiaan universal",0.88,#1E88E5,circle
+V2,"Standar Teknis & Estetika Tinggi","Creative DNA","Technical Enabler","Kualitas sound design, sinematografi, editing, dan artistik prima",0.82,#1E88E5,circle
+V3,"Relevansi Sosial & Isu Kontemporer","Creative DNA","Narrative Enabler","Tema sosial, politik, ketimpangan, atau dinamika budaya relevan",0.75,#1E88E5,circle
+V4,"Lab Inkubasi & Hibah Internasional","Global Track","Pipeline Bridge","TorinoFilmLab, Hubert Bals Fund, Purin Pictures, SEAFIC, WCF",0.85,#43A047,square
+V5,"Sales Agent & Co-Producer Asing","Global Track","Lobbying Bridge","Alpha Violet, The Match Factory, Films Boutique, Wild Bunch",0.92,#43A047,diamond
+V6,"Rekam Jejak Film Pendek / Tiering","Global Track","Talent Pipeline","Pengembangan bertahap dari festival film pendek dan debut",0.70,#43A047,square
+V7,"Kampanye FYC & Special Screening","National Track","Campaign Enabler","Pemutaran khusus dan lobi etis bagi anggota Akademi Citra",0.78,#FB8C00,triangle
+V8,"Akademi Citra (Pemilih FFI)","National Track","Voting Gatekeeper","Juri profesional asosiasi industri perfilman nasional",0.89,#FB8C00,diamond
+V9,"Festival Tier-2 / Regional","Global Festivals","Festival Milestone","Busan (BIFF), Rotterdam (IFFR), Locarno, JAFF",0.74,#8E24AA,triangle
+V10,"Festival Kelas A Dunia (A-List)","Global Festivals","Global Apex","Cannes, Venice, Berlinale, Toronto (TIFF)",0.96,#8E24AA,star
+V11,"Festival Genre Fantastik Khusus","Global Festivals","Genre Apex","Sitges Film Festival, Bucheon (BIFAN), Annecy Animation",0.68,#8E24AA,triangle
+V12,"Nominasi Teknis FFI (17 Kategori)","FFI Apex","Award Milestone","Tata Suara, Sinematografi, Artistik, Editing, Musik",0.80,#E53935,circle
+V13,"Piala Citra Kategori Utama","FFI Apex","National Apex","Film Cerita Panjang Terbaik, Sutradara, Skenario, 4 Aktor",0.94,#E53935,star
+V14,"Puncak Prestise Global & Oscar Submission","Ultimate Clout","Global Goal","Piala Festival A-List & Perwakilan Resmi Academy Awards",0.98,#00ACC1,hexagon
+V15,"Legasi Nasional & Daya Tawar Industri","Ultimate Clout","Domestic Goal","Sapu bersih FFI, lonjakan penonton, pendanaan proyek masa depan",0.95,#00ACC1,hexagon
