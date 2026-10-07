@@ -647,17 +647,18 @@ with tab_checklist:
 
 # --- TAB 5: DATABASE BOX OFFICE (50 FILM, 50 SUTRADARA, 50 PRODUSER, 50 ARTIS) ---
 with tab_intelligence:
-    st.subheader("🏆 Direktori Intelijen Box Office Indonesia (2020–2026)")
+    st.subheader("🏆 Direktori Intelijen Box Office & Investor Indonesia (2020–2026)")
     st.markdown("""
-    Eksplorasi basis data komersial resmi perfilman Indonesia 2020–2026: **Top 50 Film Berpenjualan Tertinggi**, **Top 50 Sutradara Berprestasi**, **Top 50 Produser Kredibel**, **Top 50 Artis Box Office**, dan **Peta Market Fit Genre**.
+    Eksplorasi basis data komersial resmi perfilman Indonesia 2020–2026: **Top 50 Film Berpenjualan Tertinggi**, **Top 50 Sutradara Berprestasi**, **Top 50 Produser Kredibel**, **Top 50 Artis Box Office**, **Peta Market Fit Genre**, dan **100 Investor Film Indonesia Beserta Tesis Investasinya**.
     """)
 
-    sub_films, sub_directors, sub_producers, sub_actors, sub_genres = st.tabs([
+    sub_films, sub_directors, sub_producers, sub_actors, sub_genres, sub_investors = st.tabs([
         "🎬 Top 50 Film Terlaris (Revenue)",
         "🎥 Top 50 Sutradara Terbaik",
         "💼 Top 50 Produser Kredibel",
         "🎭 Top 50 Artis Box Office",
-        "📊 10 Besar Market Fit Genre"
+        "📊 10 Besar Market Fit Genre",
+        "💰 100 Investor Film & Tesis ROI"
     ])
 
     # 1. TOP 50 REVENUE FILMS
@@ -793,6 +794,36 @@ with tab_intelligence:
             df_g_disp[["Rank", "Genre", "Pangsa Pasar", "Skor Market Fit", "Total Penonton (2020-2026)", "Jumlah Judul", "Profil Risiko", "Segmen Target Penonton", "Karakter DNA Komersial"]],
             use_container_width=True
         )
+
+    # 6. TOP 100 FILM INVESTORS & THESES
+    with sub_investors:
+        st.markdown("### 💰 100 Investor Film Indonesia & Alasan Tesis Investasinya")
+        st.markdown("""
+        Direktori lengkap 100 entitas investor perfilman di Indonesia (Studio Konglomerasi, Platform OTT SVOD, Venture Capital & Private Equity, FinTech Equity Crowdfunding, Brand FMCG/Perbankan, Celebrity Angels, Hibah Pemerintah/BUMN, dan Co-Producer Asing) beserta motif pengembalian investasinya:
+        """)
+
+        inv_search = st.text_input("🔍 Cari Investor / Tipe / Tesis Investasi:", "", key="search_inv_box")
+        df_inv_show = engine.df_investors.copy()
+        if inv_search:
+            df_inv_show = df_inv_show[
+                df_inv_show["investor_name"].str.contains(inv_search, case=False, na=False) |
+                df_inv_show["investor_type"].str.contains(inv_search, case=False, na=False) |
+                df_inv_show["investment_thesis"].str.contains(inv_search, case=False, na=False)
+            ]
+
+        df_inv_disp = df_inv_show.copy().rename(columns={
+            "id": "No", "investor_name": "Nama Investor / Institusi", "investor_type": "Tipe Investor",
+            "key_portfolio_films": "Portofolio / Film Terkait", "typical_ticket_size": "Rentang Alokasi Dana (Ticket Size)",
+            "investment_thesis": "Tesis Investasi & Alasan Menaruh Modal"
+        })
+
+        st.dataframe(
+            df_inv_disp[["No", "Nama Investor / Institusi", "Tipe Investor", "Rentang Alokasi Dana (Ticket Size)", "Portofolio / Film Terkait", "Tesis Investasi & Alasan Menaruh Modal"]],
+            use_container_width=True
+        )
+
+        csv_inv = engine.df_investors.to_csv(index=False).encode('utf-8')
+        st.download_button("⬇️ Unduh 100 Investor Film Indonesia CSV", csv_inv, "top_100_film_investors_indonesia.csv", "text/csv", key="dl_inv_csv")
 
 # --- TAB 6: GRAF 6 FAKTOR PROFIT (NODEXL ARCHITECTURE) ---
 with tab_nodexl:

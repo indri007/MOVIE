@@ -203,7 +203,9 @@ Untuk memitigasi risiko kegagalan komersial perfilman, terapkan 4 klausul baku i
 | **Top 50 Produser Kredibel** | 50 Produser Terverifikasi | [`data/top_50_producers_indonesia_2020_2026.csv`](data/top_50_producers_indonesia_2020_2026.csv) |
 | **Top 50 Artis Box Office** | 50 Aktor/Aktris Terverifikasi | [`data/top_50_actors_indonesia_2020_2026.csv`](data/top_50_actors_indonesia_2020_2026.csv) |
 | **10 Besar Genre & Market Fit** | 10 Kategori Pasar | [`data/top_10_genres_market_fit.csv`](data/top_10_genres_market_fit.csv) |
-| **Paket Graf Jaringan NodeXL** | Vertices, Edges, GraphML | [`results/nodexl_profit_engine/`](results/nodexl_profit_engine/) |
+| **Top 100 Investor Film Indonesia** | 100 Entitas & Tesis Investasi | [`data/top_100_film_investors_indonesia.csv`](data/top_100_film_investors_indonesia.csv) |
+| **Paket Graf 6 Faktor Profit (NodeXL)** | Vertices, Edges, GraphML | [`results/nodexl_profit_engine/`](results/nodexl_profit_engine/) |
+| **Paket Graf Festival & FFI (NodeXL)** | Vertices, Edges, GraphML | [`results/nodexl_festival_awards_engine/`](results/nodexl_festival_awards_engine/) |
 
 ---
 
@@ -255,12 +257,17 @@ prediksi-movie-2027/
 │   ├── top_50_producers_indonesia_2020_2026.csv   # Top 50 Produser Kredibel
 │   ├── top_50_actors_indonesia_2020_2026.csv      # Top 50 Artis Box Office Terlaris
 │   ├── top_10_genres_market_fit.csv               # 10 Besar Genre & Market Fit Pasar
+│   ├── top_100_film_investors_indonesia.csv       # 100 Investor Film Indonesia & Tesis ROI
 │   └── films_clean.csv                         # Dataset Verifikasi 15 Film Riset Baseline
 ├── results/
 │   ├── nodexl_profit_engine/                   # Paket Graf Jaringan 6 Faktor Profit
 │   │   ├── vertices.csv                        # Node/Vertices (Faktor, Tuas, Goal)
 │   │   ├── edges.csv                           # Garis Relasi Terarah & Berbobot
 │   │   └── profit_factors_network.graphml      # File GraphML Siap Impor ke NodeXL Pro
+│   ├── nodexl_festival_awards_engine/          # Paket Graf Jaringan Festival & FFI Strategy
+│   │   ├── vertices.csv                        # Node Ekosistem Global & Nasional
+│   │   ├── edges.csv                           # Garis Lobi, Lab, dan Akademi Citra
+│   │   └── festival_awards_network.graphml     # File GraphML Siap Impor ke NodeXL Pro
 │   ├── investment_factor_summary.md            # Ringkasan Temuan Investasi
 │   └── sna_*/                                  # Data Analisis Graf Louvain
 ├── requirements.txt                            # Dependensi Ringan Streamlit Cloud

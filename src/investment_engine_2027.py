@@ -21,6 +21,7 @@ ACTORS_FILE = REPO_ROOT / "data" / "top_50_actors_indonesia_2020_2026.csv"
 REVENUE_FILMS_FILE = REPO_ROOT / "data" / "top_50_highest_revenue_films_2020_2026.csv"
 DIRECTORS_FILE = REPO_ROOT / "data" / "top_50_directors_indonesia_2020_2026.csv"
 GENRES_FIT_FILE = REPO_ROOT / "data" / "top_10_genres_market_fit.csv"
+INVESTORS_FILE = REPO_ROOT / "data" / "top_100_film_investors_indonesia.csv"
 NODEXL_DIR = REPO_ROOT / "results" / "nodexl_profit_engine"
 
 MAJOR_STUDIOS = [
@@ -42,6 +43,7 @@ class FilmInvestmentEngine:
         self.df_revenue_films = pd.read_csv(REVENUE_FILMS_FILE) if REVENUE_FILMS_FILE.exists() else pd.DataFrame()
         self.df_directors = pd.read_csv(DIRECTORS_FILE) if DIRECTORS_FILE.exists() else pd.DataFrame()
         self.df_genres_fit = pd.read_csv(GENRES_FIT_FILE) if GENRES_FIT_FILE.exists() else pd.DataFrame()
+        self.df_investors = pd.read_csv(INVESTORS_FILE) if INVESTORS_FILE.exists() else pd.DataFrame()
 
     def _load_data(self) -> pd.DataFrame:
         if not self.data_path.exists():
