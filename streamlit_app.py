@@ -25,6 +25,7 @@ PAGES = ROOT / "streamlit_app"
 
 nav = st.navigation([
     st.Page(PAGES / "pages" / "02_💰_Investasi_Film_2027.py", title="Simulator Investasi Film 2027", icon="🎬", default=True),
+    st.Page(PAGES / "pages" / "03_🌐_Benchmark_Global_TMDB.py", title="Benchmark Global & NLP (TMDB)", icon="🌐"),
     st.Page(PAGES / "pages" / "01_📖_Cerita.py", title="Cerita Riset SANTET", icon="🕯️"),
     st.Page(PAGES / "app.py", title="Dashboard Jaringan (SNA)", icon="🕸️"),
 ])
