@@ -11,8 +11,14 @@ Streamlit Cloud → Main file path: streamlit_app.py (default, tidak perlu diuba
 Dependensi cloud ringan: requirements.txt di root (pipeline berat ada di requirements-pipeline.txt).
 """
 from pathlib import Path
-
+import os
 import streamlit as st
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 ROOT = Path(__file__).resolve().parent
 PAGES = ROOT / "streamlit_app"

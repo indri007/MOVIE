@@ -1,4 +1,4 @@
-import re, time, random, json, logging
+import os, re, time, random, json, logging
 from datetime import datetime, timezone
 from pathlib import Path
 import pandas as pd, networkx as nx, instaloader
@@ -6,8 +6,8 @@ import pandas as pd, networkx as nx, instaloader
 logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(message)s", datefmt="%H:%M:%S")
 log = logging.getLogger(__name__)
 
-# === KONFIGURASI ===
-IG_USERNAME = "indrikartika444"
+# === KONFIGURASI (DIBACA DARI ENVIRONMENT / .env) ===
+IG_USERNAME = os.getenv("IG_USERNAME", "")
 HASHTAGS = [
     "indonesia", "viral", "trending", "fyp", "beranda",
     "exploreindonesia", "indonesiaku", "nusantara",

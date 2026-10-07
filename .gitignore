@@ -25,6 +25,7 @@ annotation/_model_labels_hidden.csv
 # Secrets & Sessions
 .env
 .env.*
+!.env.example
 *.session
 *.session-*
 session-*
