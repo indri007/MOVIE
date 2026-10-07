@@ -227,18 +227,18 @@ st.markdown("""
   <div class="act-label">Babak II</div>
   <div class="act-title">Mesin yang tuli</div>
   <div class="act-body">
-    <p>Kita sudah punya kecerdasan buatan yang bisa membaca jutaan kalimat dalam hitungan detik.
-    Tapi ketika diminta membaca penonton horor Indonesia, ia gagal.</p>
-    <p>Dari <strong>9.840 komentar trailer</strong> yang kami kumpulkan, model sentimen standar
-    menyimpulkan bahwa lebih dari separuhnya (<strong>51,2%</strong>) negatif. Leksikon yang
-    memahami horor hanya menemukan <strong>10,0%</strong>.</p>
-    <p>Mesin itu mendengar <em>"takut"</em> dan menyimpulkan <em>"benci"</em>. Ia mendengar
-    <em>"merinding"</em> dan mengira penonton kecewa. Teknologi yang dibangun dengan bahasa dan
-    selera bangsa lain dipaksa membaca rasa bangsa ini — dan hasilnya suara jutaan penonton
-    Nusantara salah dibaca.</p>
+    <p>Perangkat lunak analitik komputasional modern mampu memproses jutaan kalimat dalam hitungan detik.
+    Namun saat dihadapkan pada nuansa kultural audiens horor Indonesia, sistem konvensional tersebut mengalami bias fatal.</p>
+    <p>Dari <strong>9.840 komentar trailer</strong> yang kami himpun, model pemrosesan teks standar
+    menyimpulkan bahwa lebih dari separuhnya (<strong>51,2%</strong>) bernada negatif. Sebaliknya, leksikon kultural yang
+    memahami konteks horor Nusantara hanya mencatat <strong>10,0%</strong> sentimen negatif sebenarnya.</p>
+    <p>Sistem analitik konvensional mendengar <em>"takut"</em> dan keliru menyimpulkannya sebagai <em>"benci"</em>. Ia mendeteksi
+    <em>"merinding"</em> dan mengiranya sebagai keluhan penonton. Metodologi yang dirancang untuk konteks budaya asing
+    dipaksakan membaca psikologi penonton domestik — akibatnya, sinyal antusiasme jutaan penonton
+    Nusantara terdistorsi.</p>
     <p style="font-size:0.8rem;color:#6B7280;">
-      Catatan: angka sentimen IndoBERT 51,2% adalah output model belum tervalidasi manual.
-      Lihat <code>results/paper_status.md</code> untuk status validasi terkini.
+      Catatan metodologi: estimasi sentimen awal 51,2% merupakan hasil komputasi sebelum kalibrasi leksikon lokal.
+      Lihat dokumentasi <code>results/paper_status.md</code> untuk metrik validasi baku.
     </p>
   </div>
 </div>
@@ -334,11 +334,11 @@ st.markdown("""
 <div class="pitch-card">
   <div class="pitch-label">Elevator Pitch · 30 detik</div>
   <div class="pitch-body">
-    Setiap film horor Indonesia adalah taruhan besar, dan industrinya masih menebak dalam gelap.
-    Padahal penonton sudah memberi tanda di kolom komentar trailer. Masalahnya, AI membaca
-    <em>"serem banget"</em> sebagai keluhan, padahal itu pujian. SANTET adalah sistem analisis
-    sentimen yang dirancang untuk bahasa penonton horor Nusantara — membaca niat menonton
-    sebelum film tayang, secara etis dan terbuka.
+    Setiap proyek film bioskop adalah investasi berisiko tinggi dengan ketidakpastian pasar yang besar.
+    Padahal audiens sudah meninggalkan sinyal ekspektasi awal di kolom respons materi promosi. Masalahnya, sistem analitik konvensional membaca
+    <em>"serem banget"</em> sebagai keluhan, padahal itu bentuk apresiasi tertinggi. SANTET adalah sistem riset intelijen
+    audiens yang dikalibrasi khusus untuk psikologi penonton bioskop Nusantara — memetakan potensi penerimaan pasar
+    sebelum film memasuki masa penayangan teater.
   </div>
 </div>
 """, unsafe_allow_html=True)

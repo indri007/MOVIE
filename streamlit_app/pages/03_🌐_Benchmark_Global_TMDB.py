@@ -120,10 +120,10 @@ stats = engine.get_summary_stats()
 # ── HERO BANNER ─────────────────────────────────────────────────────────────
 st.markdown("""
 <div class="hero-banner">
-  <div class="hero-title">🌐 Benchmark Global & NLP Movie Recommendation</div>
+  <div class="hero-title">🌐 Benchmark Industri Global & Analisis Kesamaan Narasi</div>
   <div class="hero-subtitle">
-    Mengaplikasikan kecerdasan data global (TMDB 5000, MovieLens, Netflix, IMDb) 
-    dan algoritma Cosine Similarity NLP untuk memvalidasi formula proyek film bioskop 2027.
+    Studi Komparatif Data Perfilman Dunia (TMDB 5000, MovieLens, Netflix, IMDb) 
+    dan Pemodelan Kedekatan Naratif untuk Validasi Portofolio Proyek Bioskop 2027.
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -166,9 +166,9 @@ with k4:
 # ── TABS UTAMA ──────────────────────────────────────────────────────────────
 tab1, tab2, tab3, tab4 = st.tabs([
     "📊 1. Finansial & ROI per Genre",
-    "🔍 2. Rekomendasi NLP (Cosine Similarity)",
-    "🎭 3. Analisis Sentimen Ulasan",
-    "📁 4. Katalog Dataset Eksternal"
+    "🔍 2. Pemodelan Kesamaan Narasi",
+    "🎭 3. Evaluasi Sentimen Audiens",
+    "📁 4. Katalog Basis Data Eksternal"
 ])
 
 # ── TAB 1: FINANSIAL & ROI GENRE ────────────────────────────────────────────
@@ -205,9 +205,9 @@ with tab1:
             width="stretch"
         )
 
-# ── TAB 2: NLP RECOMMENDER ──────────────────────────────────────────────────
+# ── TAB 2: CONTENT-BASED MATCHING ───────────────────────────────────────────
 with tab2:
-    st.markdown("### 🔍 Mesin Rekomendasi Narasi Serupa (Content-Based NLP)")
+    st.markdown("### 🔍 Analisis Kedekatan Formula Cerita & DNA Narasi")
     st.caption("Menghitung kedekatan formula cerita, genre, dan kata kunci plot menggunakan representasi TF-IDF & Cosine Similarity.")
 
     preset_movies = [
@@ -245,10 +245,10 @@ with tab2:
         else:
             st.warning("Tidak ditemukan kemiripan yang cukup signifikan. Coba gunakan kata kunci bahasa Inggris atau sinopsis yang lebih mendalam.")
 
-# ── TAB 3: SENTIMENT ANALYZER ───────────────────────────────────────────────
+# ── TAB 3: AUDIENCE SENTIMENT EVALUATION ────────────────────────────────────
 with tab3:
-    st.markdown("### 🎭 Analisis Sentimen Ulasan & Respon Penonton")
-    st.caption("Menguji polaritas sentimen ulasan warganet untuk mengukur ekspektasi dan kepuasan penonton.")
+    st.markdown("### 🎭 Evaluasi Sentimen Audiens & Persepsi Publik")
+    st.caption("Menguji polaritas sentimen ulasan audiens untuk mengukur ekspektasi dan kepuasan penonton bioskop.")
 
     contoh_ulasan = [
         "Ketik ulasan sendiri...",

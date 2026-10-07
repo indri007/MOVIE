@@ -401,7 +401,7 @@ with tab_waterfall:
 # --- TAB 2: COMPARABLES DNA ---
 with tab_comps:
     st.subheader("Top 5 Film Historis 2020–2026 Paling Mirip (Comparable Match)")
-    st.markdown("Algoritma mencocokkan kemiripan genre, rekam jejak studio, momen rilis kalender, tipe IP, produser, dan pemeran utama:")
+    st.markdown("Sistem komparasi mencocokkan kemiripan profil genre, rekam jejak studio, momen rilis kalender, tipe IP, produser, dan pemeran utama:")
 
     comps_df = engine.find_comparables(
         genre=genre,
