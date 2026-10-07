@@ -188,10 +188,23 @@ film_title = st.sidebar.text_input("Judul Rencana Proyek", value="Proyek Film Ho
 genre = st.sidebar.selectbox("Genre Utama", options["genres"], index=options["genres"].index("Horor") if "Horor" in options["genres"] else 0)
 ph = st.sidebar.selectbox("Rumah Produksi (Studio)", options["production_houses"], index=0)
 
+# Produser Kredibel
+producer_idx = 0
+if "Manoj Punjabi" in options["producers"]:
+    producer_idx = options["producers"].index("Manoj Punjabi")
+producer = st.sidebar.selectbox("Produser Film", options["producers"], index=producer_idx)
+
+# Sutradara
 director_idx = 0
 if "Kimo Stamboel" in options["directors"]:
     director_idx = options["directors"].index("Kimo Stamboel")
 director = st.sidebar.selectbox("Sutradara", options["directors"], index=director_idx)
+
+# Pemeran Utama (Lead Cast)
+lead_cast_idx = 0
+if "Indra Jegel" in options["actors"]:
+    lead_cast_idx = options["actors"].index("Indra Jegel")
+lead_cast = st.sidebar.selectbox("Pemeran Utama (Lead Cast)", options["actors"], index=lead_cast_idx)
 
 release_window = st.sidebar.selectbox("Momen Rilis Bioskop 2027", options["release_windows"], index=0)
 ip_type = st.sidebar.selectbox("Tipe Cerita / Intellectual Property (IP)", options["ip_types"], index=0)
@@ -232,7 +245,9 @@ scenarios = engine.predict_audience_scenarios(
     ph=ph,
     release_window=release_window,
     ip_type=ip_type,
-    director=director
+    director=director,
+    producer=producer,
+    lead_cast=lead_cast
 )
 
 waterfall_bear = engine.simulate_financial_waterfall(budget_idr, scenarios["bear_admissions"], atp_idr, pa_ratio)
@@ -243,7 +258,9 @@ risk_eval = engine.assess_project_risk(
     bep_admissions=waterfall_base["bep_admissions"],
     scenarios=scenarios,
     ph=ph,
-    director=director
+    director=director,
+    producer=producer,
+    lead_cast=lead_cast
 )
 
 # --- RINGKASAN METRIK UTAMA (M3 LIGHT METRIC CARDS) ---
@@ -294,11 +311,12 @@ st.markdown(f"""
 st.markdown("<br/>", unsafe_allow_html=True)
 
 # --- TABS ANALISIS MENDALAM ---
-tab_waterfall, tab_comps, tab_risk, tab_checklist = st.tabs([
+tab_waterfall, tab_comps, tab_risk, tab_checklist, tab_talent = st.tabs([
     "💵 Skenario Air Terjun Finansial",
     "🧬 DNA Film Pembanding (2020–2026)",
     "⚠️ Profil Risiko & Mitigasi",
-    "📑 Checklist Kontrak & Term Sheet"
+    "📑 Checklist Kontrak & Term Sheet",
+    "🌟 Top 50 Produser & Artis (2020–2026)"
 ])
 
 # --- TAB 1: WATERFALL & ROI ---
@@ -347,7 +365,7 @@ with tab_waterfall:
 # --- TAB 2: COMPARABLES DNA ---
 with tab_comps:
     st.subheader("Top 5 Film Historis 2020–2026 Paling Mirip (Comparable Match)")
-    st.markdown("Algoritma mencocokkan kemiripan genre, rekam jejak studio, momen rilis kalender, dan tipe IP:")
+    st.markdown("Algoritma mencocokkan kemiripan genre, rekam jejak studio, momen rilis kalender, tipe IP, produser, dan pemeran utama:")
 
     comps_df = engine.find_comparables(
         genre=genre,
@@ -355,6 +373,8 @@ with tab_comps:
         release_window=release_window,
         ip_type=ip_type,
         director=director,
+        producer=producer,
+        lead_cast=lead_cast,
         top_k=5
     )
 
@@ -519,7 +539,9 @@ with tab_checklist:
 - **Judul Proyek**: {film_title}
 - **Genre Utama**: {genre}
 - **Rumah Produksi (PH)**: {ph}
+- **Produser**: {producer}
 - **Sutradara**: {director}
+- **Pemeran Utama (Lead Cast)**: {lead_cast}
 - **Jendela Rilis**: {release_window}
 - **Karakter IP / Sumber Cerita**: {ip_type}
 - **Investment Risk Grade**: {risk_eval['rating']} ({risk_eval['verdict']})
@@ -570,6 +592,7 @@ with tab_checklist:
 
 #### 4. Kepatuhan & Audit
 - Verifikasi keabsahan rantai hak cipta naskah (*Chain of Title*).
+- Keterikatan hukum sutradara ({director}) dan aktor utama ({lead_cast}).
 - Audit pengeluaran produksi oleh Kantor Akuntan Publik (KAP) independen sebelum pelunasan fee produser.
 
 ---
@@ -585,4 +608,85 @@ with tab_checklist:
         mime="text/markdown",
         help="Klik untuk mengunduh dokumen term sheet lengkap berbasis parameter simulasi saat ini."
     )
+
+# --- TAB 5: TOP 50 PRODUSER & ARTIS (2020-2026) ---
+with tab_talent:
+    st.subheader("🌟 Direktori 50 Produser & 50 Artis Paling Kredibel Indonesia (2020–2026)")
+    st.markdown("""
+    Basis data pemeringkatan talenta perfilman nasional berbasis **data aktual penjualan tiket bioskop (admissions)** dan rekam jejak box office resmi 2020–2026.
+    """)
+
+    subtab_producers, subtab_actors = st.tabs([
+        "🎬 Top 50 Produser Kredibel",
+        "🎭 Top 50 Artis Pencetak Penonton Tertinggi"
+    ])
+
+    with subtab_producers:
+        st.markdown("### 🎬 50 Produser Film Indonesia Teratas (2020–2026)")
+        st.markdown("Diurutkan berdasarkan estimasi penonton bioskop kumulatif film yang diproduseri:")
+
+        prod_search = st.text_input("🔍 Cari Produser / PH:", "", key="search_prod")
+        df_p_show = engine.df_producers.copy()
+        if prod_search:
+            df_p_show = df_p_show[
+                df_p_show["producer_name"].str.contains(prod_search, case=False, na=False) |
+                df_p_show["primary_production_house"].str.contains(prod_search, case=False, na=False)
+            ]
+
+        df_p_disp = df_p_show.copy()
+        df_p_disp["Estimasi Penonton Kumulatif"] = df_p_disp["total_admissions_estimate_2020_2026"].apply(lambda x: f"{x:,.0f}")
+        df_p_disp = df_p_disp.rename(columns={
+            "rank": "Rank",
+            "producer_name": "Nama Produser",
+            "primary_production_house": "Studio / PH Utama",
+            "top_blockbuster": "Film Terlaris",
+            "film_count": "Jumlah Film",
+            "credibility_tier": "Tier Kredibilitas",
+            "primary_genre": "Spesialisasi Genre",
+            "notable_portfolio": "Portofolio Utama"
+        })
+
+        st.dataframe(
+            df_p_disp[[
+                "Rank", "Nama Produser", "Studio / PH Utama", "Estimasi Penonton Kumulatif",
+                "Tier Kredibilitas", "Film Terlaris", "Jumlah Film", "Spesialisasi Genre", "Portofolio Utama"
+            ]],
+            use_container_width=True
+        )
+        st.caption("Sumber: Agregasi box office film Indonesia 2020–2026 (FilmIndonesia, Cinepoint, Wikipedia, Laporan Emiten MD Pictures).")
+
+    with subtab_actors:
+        st.markdown("### 🎭 50 Artis Indonesia Pencetak Penonton Tertinggi (2020–2026)")
+        st.markdown("Diurutkan berdasarkan total penonton bioskop kumulatif dari film yang dibintangi:")
+
+        actor_search = st.text_input("🔍 Cari Artis / Genre:", "", key="search_act")
+        df_a_show = engine.df_actors.copy()
+        if actor_search:
+            df_a_show = df_a_show[
+                df_a_show["actor_name"].str.contains(actor_search, case=False, na=False) |
+                df_a_show["primary_genre"].str.contains(actor_search, case=False, na=False)
+            ]
+
+        df_a_disp = df_a_show.copy()
+        df_a_disp["Total Penonton Kumulatif"] = df_a_disp["total_admissions_2020_2026"].apply(lambda x: f"{x:,.0f}")
+        df_a_disp["Rata-rata per Film"] = df_a_disp["avg_admissions"].apply(lambda x: f"{x:,.0f}")
+        df_a_disp = df_a_disp.rename(columns={
+            "rank": "Rank",
+            "actor_name": "Nama Artis",
+            "gender": "Kategori",
+            "film_count": "Jumlah Film",
+            "credibility_tier": "Tier Kredibilitas",
+            "biggest_hit": "Film Terlaris",
+            "primary_genre": "Genre Utama",
+            "notable_films": "Film Terkenal"
+        })
+
+        st.dataframe(
+            df_a_disp[[
+                "Rank", "Nama Artis", "Kategori", "Total Penonton Kumulatif",
+                "Rata-rata per Film", "Tier Kredibilitas", "Film Terlaris", "Jumlah Film", "Genre Utama", "Film Terkenal"
+            ]],
+            use_container_width=True
+        )
+        st.caption("Sumber: Analisis pemeran utama/pendukung master dataset 896 film Indonesia 2020–2026.")
 

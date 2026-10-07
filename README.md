@@ -52,8 +52,11 @@ Repositori ini telah dievolusikan dari riset eksploratif 15 film menjadi **Platf
 | Komponen | Status | Keterangan / Hasil Aktual |
 |---|:---:|---|
 | **Master Dataset Industri (2020–2026)** | ✅ | **896 film unik** ([`data/film_master_2020_2026.csv`](data/film_master_2020_2026.csv)), 646 dengan data penonton resmi |
+| **Top 50 Produser Kredibel (2020–2026)** | ✅ | **50 produser terverifikasi** ([`data/top_50_producers_indonesia_2020_2026.csv`](data/top_50_producers_indonesia_2020_2026.csv)) dengan rekam jejak box office |
+| **Top 50 Artis Box Office (2020–2026)** | ✅ | **50 pemeran teratas** ([`data/top_50_actors_indonesia_2020_2026.csv`](data/top_50_actors_indonesia_2020_2026.csv)) pencetak penonton bioskop tertinggi |
 | **Simulator Investasi 2027 (Streamlit)** | ✅ | Live di [`prediksi-movie-2027.streamlit.app`](https://prediksi-movie-2027.streamlit.app) |
 | **Model Air Terjun Finansial (Waterfall)** | ✅ | Standar industri bioskop Indonesia (Net Produser $\approx 42,5\%$ Gross) |
+| **Checklist Proteksi Modal & Term Sheet** | ✅ | Pre-sale OTT, Joint Escrow, Overrun Cap 10%, H-30 TikTok Blueprint |
 | **Analisis Faktor Komersial (EDA)** | ✅ | Laporan faktor di [`results/investment_factor_summary.md`](results/investment_factor_summary.md) |
 | **Sinyal YouTube Trailer Terverifikasi** | ✅ | 40 trailer resmi, 9.840 komentar terlabeli tanpa teks mentah |
 | **Korelasi Spearman Empiris** | ✅ | $\rho = 0,571$, $p = 0,026$ (*likes YouTube vs penonton bioskop*) |
