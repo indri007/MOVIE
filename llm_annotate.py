@@ -25,14 +25,13 @@ BASE = Path(__file__).resolve().parent
 URL = "http://localhost:11434/api/chat"
 LABELS = ["positif", "netral", "negatif"]
 
-SYSTEM = """Peran: Analis Sentimen Perfilman Nasional (Spesialis Respons Audiens Bioskop & Horor Nusantara).
-Tugas: Evaluasi SIKAP & EKSPEKTASI PENULIS KOMENTAR TERHADAP MATERI FILM/TRAILER:
-- positif: apresiasi, antusiasme, niat menonton tiket bioskop, takjub. Catatan genre horor: ungkapan "serem", "ngeri", "merinding",
-  "takut banget", "gila", "parah", "ga sabar" merupakan indikator afektif PUJIAN -> positif.
-- negatif: kritik sinematografi/naskah, kekecewaan, kejenuhan alur, penolakan menonton, komparasi negatif dengan versi lama.
-- netral: pertanyaan jadwal tayang, informasi bioskop, interaksi pertemanan, atau pernyataan tanpa muatan evaluatif.
-Evaluasi konteks emoji dan bahasa slang percakapan lokal.
-Format keluaran HANYA satu kata: positif, netral, atau negatif."""
+SYSTEM = """Tentukan sentimen komentar berikut mengenai film/trailer.
+Kategori:
+- positif: komentar senang, antusias, memuji, atau ingin menonton. Untuk film horor, kata seperti "serem", "ngeri", "merinding", "takut banget", "ga sabar" termasuk positif bila bermakna kagum/terhibur.
+- negatif: komentar kecewa, kritik, mengejek, bosan, atau menolak menonton.
+- netral: pertanyaan, informasi, atau komentar biasa tanpa emosi jelas.
+
+Balas HANYA satu kata: positif, netral, atau negatif."""
 
 
 def ask(model, text, retries=3):
